@@ -39,3 +39,7 @@ Artwork is presently original procedural CSS plus an Unsplash photograph (see `A
 - Test production build, lint, screenshot differences, device widths and motion preferences.
 - Add backend, domain services, auth, PostgreSQL and image CDN only when user/accounts/community needs are approved and priced.
 - Budget and hosting unknown: no paid service dependency is added at this phase.
+
+## Dependency audit note (2026-10-17)
+
+`npm audit --omit=dev` found **0 production dependency advisories**. The unfiltered audit reported **5 high advisories** in the ESLint / `eslint-config-next` development-tool dependency tree. At this snapshot, npm's only suggested remediation would downgrade the Next ESLint config across a major version, so the project retains the framework-matched version and will recheck when safe upstream fixes exist. Do not treat this as production-runtime exposure, or as a reason to disable linting without an alternative.

@@ -53,6 +53,7 @@ This is currently a **static-export Next.js** app (see `next.config.ts`), so the
 - `content/watch-order.md`: human-readable watch sequence.
 - `content/excluded.md`: exclusions tracked separately from the main journey.
 - `docs/PRODUCT_SPEC.md`: behavior and long-term product vision.
+- `docs/DECISIONS.md`: accepted decisions and unresolved choices.
 - `docs/ROADMAP.md`: milestones.
 - `docs/DESIGN_EXPLORATIONS.md`: design concepts and review criteria.
 - `CONTRIBUTING.md`: proposal and PR guidance.

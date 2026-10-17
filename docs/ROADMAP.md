@@ -8,7 +8,7 @@ This is a maintained product backlog, not a promise that all features ship at on
 - [x] Separate exclusions from canonical journey.
 - [x] EN / PT-BR UI scaffold and locally persistent progress.
 - [x] Technical and product documentation; static-hostable Next.js foundation.
-- [ ] Public GitHub repository and explicit ignore verification.
+- [x] Public GitHub repository and explicit ignore verification.
 
 ## M1 — Visual exploration (currently active)
 - [x] Build three runnable experiences: Cinematic Archive, Sacred Timeline, Multiverse Explorer.
