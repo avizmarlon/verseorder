@@ -25,8 +25,8 @@ const entries = collection.entries as Entry[];
 const COPY = {
   en: {
     eyebrow: "THE ULTIMATE MARVEL MULTIVERSE WATCH ORDER",
-    archive: "Cinematic archive", timeline: "Sacred timeline", multiverse: "Multiverse explorer",
-    liveLab: "DESIGN EXPLORATIONS", journey: "YOUR JOURNEY, REIMAGINED",
+    archive: "Discover", timeline: "Watch order", multiverse: "Universes",
+    liveLab: "STORIES ACROSS THE MULTIVERSE", journey: "YOUR JOURNEY, REIMAGINED",
     exploreOrder: "Explore the watch order", browse: "Browse the collection",
     subtitle: "One carefully crafted order. Countless unforgettable worlds.",
     blurb: "Not just when the stories happen. The order that makes every connection, revelation, and reunion hit harder.",
@@ -58,8 +58,8 @@ const COPY = {
   },
   "pt-BR": {
     eyebrow: "A ORDEM DEFINITIVA PARA ASSISTIR AO MULTIVERSO MARVEL",
-    archive: "Arquivo cinematográfico", timeline: "Linha do tempo", multiverse: "Explorador multiversal",
-    liveLab: "EXPLORAÇÕES VISUAIS", journey: "SUA JORNADA, REIMAGINADA",
+    archive: "Descobrir", timeline: "Ordem para assistir", multiverse: "Universos",
+    liveLab: "HISTÓRIAS ATRAVÉS DO MULTIVERSO", journey: "SUA JORNADA, REIMAGINADA",
     exploreOrder: "Explorar a ordem", browse: "Explorar a coleção",
     subtitle: "Uma ordem cuidadosamente construída. Infinitos mundos inesquecíveis.",
     blurb: "Não é só quando cada história acontece. É a ordem que dá mais impacto a cada conexão, revelação e reencontro.",
@@ -168,7 +168,7 @@ function TitleCard({
 
 function ArrowUpRightIcon() { return <ArrowDownRight size={17} style={{ transform: "rotate(-90deg)" }} />; }
 
-export default function DesignStudio() {
+export default function VerseOrderExperience() {
   const [concept, setConcept] = useState<Concept>("archive");
   const [lang, setLang] = useState<Language>("en");
   const [filter, setFilter] = useState<Filter>("all");
@@ -260,10 +260,10 @@ export default function DesignStudio() {
         <button className="brand" onClick={() => switchConcept("archive")} aria-label="VerseOrder — home">
           <Emblem /><span className="brand-word">VERSE<span>ORDER</span></span>
         </button>
-        <nav className={`concept-nav ${menuOpen ? "nav-open" : ""}`} aria-label="Design directions">
-          {(["archive", "timeline", "multiverse"] as Concept[]).map((target, index) => (
+        <nav className={`concept-nav ${menuOpen ? "nav-open" : ""}`} aria-label={lang === "en" ? "Explore the stories" : "Explorar histórias"}>
+          {(["archive", "timeline", "multiverse"] as Concept[]).map((target) => (
             <button key={target} onClick={() => switchConcept(target)} className={concept === target ? "nav-active" : ""}>
-              <small>0{index + 1}</small>{text[target]}
+              {text[target]}
               {concept === target && <motion.span layoutId="concept-indicator" className="nav-marker" />}
             </button>
           ))}
@@ -278,7 +278,7 @@ export default function DesignStudio() {
       </header>
 
       <div className="concept-topline">
-        <span className="eyebrow-dot" /> {text.liveLab} <span className="topline-rule" /> <span>V / 01</span>
+        <span className="eyebrow-dot" /> {text.liveLab} <span className="topline-rule" /> <span>{entries.length} {lang === "en" ? "STORIES" : "HISTÓRIAS"}</span>
       </div>
 
       <AnimatePresence mode="wait">
@@ -297,7 +297,7 @@ export default function DesignStudio() {
                 </div>
               </div>
               <div className="hero-side-note"><span>EARTH — 616</span><span>{text.archiveAside} {entries.length}</span></div>
-              <div className="hero-bottom"><span><Sparkles size={15}/> {entries.length} STORIES IN ONE JOURNEY</span><span>01 / 03 — CINEMATIC ARCHIVE</span><ArrowDownRight size={19}/></div>
+              <div className="hero-bottom"><span><Sparkles size={15}/> {entries.length} STORIES IN ONE JOURNEY</span><ArrowDownRight size={19}/></div>
             </section>
             <section className="marquee-strip" aria-hidden="true"><div>THE INFINITY SAGA <span>✦</span> THE MULTIVERSE SAGA <span>✦</span> BEYOND THE SACRED TIMELINE <span>✦</span> EVERY STORY MATTERS <span>✦</span> THE INFINITY SAGA <span>✦</span></div></section>
             <section className="content-section" id="watch-order">

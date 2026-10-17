@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("the three directions render and can be compared", async ({ page }) => {
+test("browsing experience navigation and content", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   const errors: string[] = [];
   page.on("pageerror", err => errors.push(err.message));
@@ -10,12 +10,12 @@ test("the three directions render and can be compared", async ({ page }) => {
   await page.waitForTimeout(850);
   await page.screenshot({ path: "docs/previews/archive-desktop.png", fullPage: false });
 
-  await page.getByRole("button", { name: /02 Sacred timeline/i }).click();
+  await page.getByRole("button", { name: "Watch order", exact: true }).click();
   await expect(page.locator(".scene-timeline")).toBeVisible();
   await page.waitForTimeout(850);
   await page.screenshot({ path: "docs/previews/timeline-desktop.png", fullPage: false });
 
-  await page.getByRole("button", { name: /03 Multiverse explorer/i }).click();
+  await page.getByRole("button", { name: "Universes", exact: true }).click();
   await expect(page.locator(".scene-multiverse")).toBeVisible();
   await page.waitForTimeout(850);
   await page.screenshot({ path: "docs/previews/multiverse-desktop.png", fullPage: false });
@@ -51,12 +51,12 @@ test("mobile navigation and layout are usable", async ({ page }) => {
   await page.waitForTimeout(850);
   await page.screenshot({ path: "docs/previews/archive-mobile.png", fullPage: false });
   await page.getByRole("button", { name: "Toggle navigation" }).click();
-  await page.getByRole("button", { name: /Sacred timeline/i }).click();
+  await page.getByRole("button", { name: "Watch order", exact: true }).click();
   await expect(page.locator(".scene-timeline")).toBeVisible();
   await page.waitForTimeout(850);
   await page.screenshot({ path: "docs/previews/timeline-mobile.png", fullPage: false });
   await page.getByRole("button", { name: "Toggle navigation" }).click();
-  await page.getByRole("button", { name: /Multiverse explorer/i }).click();
+  await page.getByRole("button", { name: "Universes", exact: true }).click();
   await expect(page.locator(".scene-multiverse")).toBeVisible();
   await page.waitForTimeout(850);
   await page.screenshot({ path: "docs/previews/multiverse-mobile.png", fullPage: false });

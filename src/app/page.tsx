@@ -1,5 +1,5 @@
-import DesignStudio from "@/components/DesignStudio";
+import VerseOrderExperience from "@/components/VerseOrderExperience";
 
 export default function Home() {
-  return <DesignStudio />;
+  return <VerseOrderExperience />;
 }

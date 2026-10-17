@@ -2,50 +2,35 @@
 
 **The Ultimate Marvel Multiverse Watch Order**
 
-An independent open-source guide to watching Marvel films, shows, shorts and select connected universes in a **deliberate, story-first order** — tuned for narrative payoff and continuity, not simply in-universe dates.
+There are a lot of ways to watch Marvel. VerseOrder helps you discover a **story-first viewing order** across the MCU, selected legacy films, series, specials, and alternate universes—so the connections, reveals, and character journeys land at the right time.
 
-The current sequence contains **112 entries**, updated on October 17, 2026. Newly added releases have sources; the original 110-entry baseline is still undergoing editorial verification. The order is independent fan curation, not Marvel's official chronology.
+The goal isn't to arrange every story by fictional date. It's to make the **whole journey more rewarding**, whether you're watching for the first time or revisiting your favorites.
 
-## Explore three interactive design concepts
+## Start the journey
 
-These are real, navigable design prototypes. They're a starting point for an ambitious cinematic experience with motion, lighting, atmosphere, and rich interactions — not the final design.
+**[Explore the watch order](content/watch-order.md)** · **[Get the printable PDF](public/verseorder-watch-order.pdf)**
 
-| Cinematic Archive | Sacred Timeline | Multiverse Explorer |
-| --- | --- | --- |
-| ![Cinematic Archive](docs/previews/archive-desktop.png) | ![Sacred Timeline](docs/previews/timeline-desktop.png) | ![Multiverse Explorer](docs/previews/multiverse-desktop.png) |
+The curated sequence currently features **112 entries**, updated October 17, 2026. It includes selected cross-universe stories that enrich later Marvel films and marks optional detours for those who want to explore further.
 
-The prototypes include EN/PT-BR interface switching, search, filters, title details, selective trailers and watched progress saved locally. The watch-order data is in `src/data/watch-order.json`; the readable list is in `content/watch-order.md`. Titles deliberately excluded from this sequence are documented separately in `content/excluded.md`.
+The order is continuously reviewed as new titles arrive. Some entries, including *VisionQuest*, may still be releasing episodes.
 
-**Editorial note:** `VisionQuest` is included while episodes are still releasing. Watching the full season must wait until the remaining episodes are available.
+## What to expect
 
-## Run locally
+- One clear watch order spanning movies, series, shorts, specials, and selected multiverse stories.
+- Context about where each story belongs, with consideration for first-time viewers and spoilers.
+- Optional recommendations alongside the main viewing journey.
+- A growing interactive experience to discover stories and track your progress.
 
-Requires Node.js and npm:
+**The website is in development.** Until its public launch, the watch order and printable PDF are available right here.
 
-```bash
-npm ci
-npm run dev
-```
+## Help shape the watch order
 
-Open [localhost:3000](http://localhost:3000) to try the prototypes.
+Think a title is missing, or that another placement would make the experience better? [Share a suggestion](https://github.com/avizmarlon/verseorder/issues/new). Movie and series recommendations, corrections, and thoughtful alternatives are welcome.
 
-```bash
-npm run lint
-npm run build
-npm run test:e2e
-```
-
-The site currently builds as a static Next.js export to `out/`. Public web hosting has not yet been configured. No backend or paid service is required to preview it.
-
-## Watch-order maintenance
-
-- Stable IDs are preserved when positions change.
-- `src/data/watch-order.json` is the canonical sequence.
-- `python scripts/render_watch_order_markdown.py` regenerates the readable timeline.
-- `python scripts/render_watch_order_pdf.py` regenerates the printable timeline PDF (requires ReportLab).
-- Dates, continuity assertions and narrative decisions should be backed by sources where possible.
-- Contributions and evidence-based correction proposals are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+You can also read [what's currently outside the curated journey](content/excluded.md).
 
 ## Independent fan project
 
-VerseOrder is not affiliated with or endorsed by Marvel, Disney or Sony. Related titles, trademarks, characters and media remain the property of their respective rights holders. The app's CSS visuals are original experiments; third-party assets remain governed by their respective terms and licenses. The MIT license applies to the project code, not third-party artwork.
+VerseOrder is an independent, open-source fan project. It is not affiliated with, sponsored by, or endorsed by Marvel, Disney, Sony, or other rights holders. All associated titles, characters, imagery, and trademarks belong to their respective owners.
+
+The viewing order reflects editorial judgment and is **not an official Marvel chronology**.

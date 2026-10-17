@@ -69,3 +69,5 @@ screenshots/
 # This does not ignore public README, CONTRIBUTING or editorial content/.
 docs/*.md
 docs/**/*.md
+
+docs/previews/
