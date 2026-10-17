@@ -30,7 +30,9 @@ Não entram em nenhuma das duas listas.
 - Legion (2017-2019)
 - The Gifted (2017-2019)
 - X-Men: The Animated Series (1992-1997)
-- X-Men '97 (2024-, excelente mas Terra-92131, sem impacto MCU)
+- X-Men '97 — T1 (2024) e T2 (2026, estreou em 01/07/2026; continuidade animada distinta, fora da ordem principal por decisão editorial)
 - Blade: The Series (2006)
 
 ---
+
+- Your Friendly Neighborhood Spider-Man — T1 (2025; universo alternativo, não necessário para a maratona narrativa principal). T2 prevista para 13/01/2027.

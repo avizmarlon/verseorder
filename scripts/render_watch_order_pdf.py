@@ -5,7 +5,6 @@ Run: python scripts/render_watch_order_pdf.py
 from __future__ import annotations
 import json
 from pathlib import Path
-from xml.sax.saxutils import escape
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import HexColor
@@ -60,11 +59,11 @@ def main() -> None:
             y -= 53
             c.setFont(regular, 10)
             c.setFillColor(HexColor("#ABB0C1"))
-            c.drawString(42, y, "Uma jornada. 110 entradas. Curadoria narrativa, não cronologia absoluta.")
+            c.drawString(42, y, f"Uma jornada. {len(DATA['entries'])} entradas. Curadoria narrativa, não cronologia absoluta.")
             y -= 22
             c.setFont(regular, 8.3)
             c.setFillColor(HexColor("#9BA1B0"))
-            c.drawString(42, y, "Base: julho de 2026. Em revisão editorial para novos lançamentos.")
+            c.drawString(42, y, "Revisada em 17/10/2026. O acervo original segue em revisão editorial.")
             y -= 27
             c.setFillColor(HexColor("#DBB7B8"))
             c.setFont(regular, 8)
@@ -101,6 +100,9 @@ def main() -> None:
         if row["optional"]: flags.append("OPCIONAL")
         if row["external"]: flags.append("EXTERNO")
         if row["alternateUniverse"]: flags.append("ALTERNATIVO")
+        if row.get("releaseStatus")=="releasing":
+            progress=row.get("releaseProgress",{})
+            flags.append(f"EM EXIBICAO ({progress.get('episodesAvailable','?')}/{progress.get('episodesTotal','?')} EP.)")
         chunks = simpleSplit(title, bold, 10.5, W - 125)
         height = max(29, len(chunks) * 15 + (13 if flags else 6))
         ensure(height)

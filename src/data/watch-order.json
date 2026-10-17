@@ -3,10 +3,10 @@
   "subtitle": "The Ultimate Marvel Multiverse Watch Order",
   "sourceDate": "2026-07-07",
   "importedDate": "2026-10-17",
-  "editorialStatus": "baseline-unreviewed",
+  "editorialStatus": "partially-reviewed-2026-10-17",
   "editorialNotice": {
-    "en": "Initial curated order imported from a July 2026 snapshot. New releases and story placements still require editorial verification.",
-    "pt-BR": "Ordem inicial importada de uma curadoria de julho de 2026. Lançamentos e posicionamentos ainda precisam de revisão editorial."
+    "en": "112-entry narrative watch order updated through October 17, 2026. New additions are source-checked; the older 110-entry baseline still awaits a comprehensive editorial audit.",
+    "pt-BR": "Sequência narrativa com 112 entradas, atualizada até 17/10/2026. Novas obras conferidas; as 110 entradas anteriores ainda precisam de auditoria editorial completa."
   },
   "entries": [
     {
@@ -1783,6 +1783,83 @@
       "trailerYouTubeId": null,
       "posterPath": null,
       "verification": "original-curation-unreviewed"
+    },
+    {
+      "id": "visionquest-t1",
+      "title": "VisionQuest T1",
+      "kind": "series",
+      "era": "What Comes Next / O que vem depois",
+      "universe": "MCU",
+      "optional": false,
+      "external": false,
+      "alternateUniverse": false,
+      "note": "Streaming weekly; only the first 2 of 8 episodes had premiered as of 2026-10-17.",
+      "whyHere": {
+        "en": "A continuation of the WandaVision and Agatha All Along storyline. Placed in the late-MCU section to preserve the character arc without separating it from the next chapter.",
+        "pt-BR": "Continua a história de WandaVision e Agatha All Along. Entra na fase mais recente para preservar o arco dos personagens antes da próxima etapa."
+      },
+      "trailerYouTubeId": null,
+      "posterPath": null,
+      "verification": "release-and-placement-reviewed-2026-10-17",
+      "releaseDate": "2026-10-13",
+      "releaseStatus": "releasing",
+      "releaseProgress": {
+        "episodesAvailable": 2,
+        "episodesTotal": 8,
+        "asOf": "2026-10-17"
+      },
+      "sources": [
+        "https://thewaltdisneycompany.com/news/marvel-television-visionquest-disney-plus/",
+        "https://www.techradar.com/streaming/disney-plus/visionquest-marvel-timeline"
+      ],
+      "position": 111
+    },
+    {
+      "id": "spider-man-brand-new-day",
+      "title": "Spider-Man: Brand New Day",
+      "kind": "movie",
+      "era": "What Comes Next / O que vem depois",
+      "universe": "MCU",
+      "optional": false,
+      "external": false,
+      "alternateUniverse": false,
+      "note": "Released July 31, 2026; follows the story of No Way Home.",
+      "whyHere": {
+        "en": "Continues Peter Parker's story after No Way Home. Its urban-MCU connections benefit from watching the later Daredevil and Punisher stories first.",
+        "pt-BR": "Continua a história de Peter Parker após No Way Home. Suas conexões com o núcleo urbano do MCU ganham mais contexto depois das histórias recentes de Daredevil e do Justiceiro."
+      },
+      "trailerYouTubeId": null,
+      "posterPath": null,
+      "verification": "release-and-placement-reviewed-2026-10-17",
+      "releaseDate": "2026-07-31",
+      "releaseStatus": "released",
+      "sources": [
+        "https://www.marvel.com/characters/spider-man-peter-parker/",
+        "https://www.reuters.com/business/media-telecom/spider-man-brand-new-day-keeps-fans-guessing-with-mystery-roles-marvel-cameos-2026-07-21/"
+      ],
+      "position": 112
+    }
+  ],
+  "lastReviewedDate": "2026-10-17",
+  "curationVersion": "2026-10-17",
+  "upcoming": [
+    {
+      "title": "Avengers: Doomsday",
+      "targetReleaseDate": "2026-12-18",
+      "status": "announced",
+      "excludedFromOrderUntilRelease": true
+    },
+    {
+      "title": "Avengers: Secret Wars",
+      "targetReleaseDate": "2027-12-17",
+      "status": "announced",
+      "excludedFromOrderUntilRelease": true
+    },
+    {
+      "title": "Your Friendly Neighborhood Spider-Man T2",
+      "targetReleaseDate": "2027-01-13",
+      "status": "upcoming-alternate-universe",
+      "excludedFromOrderUntilRelease": true
     }
   ]
 }

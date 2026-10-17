@@ -16,6 +16,8 @@ type Entry = {
   id: string; position: number; title: string; kind: string; era: string;
   universe: string; optional: boolean; external: boolean; alternateUniverse: boolean;
   note: string; whyHere: Record<Language, string> | null;
+  releaseStatus?: "released" | "releasing";
+  releaseProgress?: { episodesAvailable: number; episodesTotal: number; asOf: string };
   trailerYouTubeId: string | null; posterPath: string | null;
 };
 const entries = collection.entries as Entry[];
@@ -28,7 +30,7 @@ const COPY = {
     exploreOrder: "Explore the watch order", browse: "Browse the collection",
     subtitle: "One carefully crafted order. Countless unforgettable worlds.",
     blurb: "Not just when the stories happen. The order that makes every connection, revelation, and reunion hit harder.",
-    baseline: "Editorial preview · July 2026 baseline under review",
+    baseline: "October 2026 update · earlier entries under editorial review",
     titles: "CURATED CHAPTERS", worlds: "INTERCONNECTED WORLDS", progress: "YOUR JOURNEY",
     completed: "watched", watch: "Mark as watched", unwatch: "Mark as unwatched",
     details: "Explore chapter", next: "UP NEXT", why: "WHY THIS CHAPTER HERE",
@@ -39,7 +41,7 @@ const COPY = {
     search: "Find a title, universe, or chapter...", nothing: "No titles match your filters.",
     loadMore: "Reveal more chapters", showTimeline: "Explore timeline",
     archiveLead: "Every story.\nIn its perfect place.",
-    archiveAside: "ENTER THE STORY / 001 — 110", discover: "DISCOVER YOUR NEXT CHAPTER",
+    archiveAside: "ENTER THE STORY / 001 —", discover: "DISCOVER YOUR NEXT CHAPTER",
     timelineLead: "Every moment\nleads somewhere.",
     timelineDesc: "A single thread through many eras. Follow the path, discover the context, and make this journey yours.",
     selected: "SELECTED CHAPTER", of: "OF", origins: "CHAPTERS ACROSS TIME",
@@ -61,7 +63,7 @@ const COPY = {
     exploreOrder: "Explorar a ordem", browse: "Explorar a coleção",
     subtitle: "Uma ordem cuidadosamente construída. Infinitos mundos inesquecíveis.",
     blurb: "Não é só quando cada história acontece. É a ordem que dá mais impacto a cada conexão, revelação e reencontro.",
-    baseline: "Prévia editorial · Curadoria de julho/2026 em revisão",
+    baseline: "Atualização outubro/2026 · parte da curadoria ainda em revisão",
     titles: "CAPÍTULOS SELECIONADOS", worlds: "MUNDOS CONECTADOS", progress: "SUA JORNADA",
     completed: "assistidos", watch: "Marcar como assistido", unwatch: "Desmarcar como assistido",
     details: "Explorar capítulo", next: "A SEGUIR", why: "POR QUE ASSISTIR AQUI?",
@@ -72,7 +74,7 @@ const COPY = {
     search: "Buscar título, universo ou capítulo...", nothing: "Nenhum título com estes filtros.",
     loadMore: "Revelar mais capítulos", showTimeline: "Explorar timeline",
     archiveLead: "Toda história.\nNo momento certo.",
-    archiveAside: "ENTRE NA HISTÓRIA / 001 — 110", discover: "DESCUBRA SEU PRÓXIMO CAPÍTULO",
+    archiveAside: "ENTRE NA HISTÓRIA / 001 —", discover: "DESCUBRA SEU PRÓXIMO CAPÍTULO",
     timelineLead: "Todo momento\nleva a algum lugar.",
     timelineDesc: "Um único fio atravessando várias eras. Siga o caminho, descubra o contexto e faça essa jornada sua.",
     selected: "CAPÍTULO SELECIONADO", of: "DE", origins: "CAPÍTULOS AO LONGO DO TEMPO",
@@ -147,8 +149,8 @@ function TitleCard({
     >
       <button className="card-hit" onClick={() => onSelect(entry)} aria-label={`${text.details}: ${entry.title}`}>
         <Art entry={entry} />
-        <span className="card-caption"><span className="card-no">{num(entry.position)} / 110</span>
-          <span className="card-meta">{entry.optional ? "OPTIONAL" : entry.external ? "LEGACY" : "MAIN PATH"}</span></span>
+        <span className="card-caption"><span className="card-no">{num(entry.position)} / {entries.length}</span>
+          <span className="card-meta">{entry.releaseStatus === "releasing" ? "AIRING" : entry.optional ? "OPTIONAL" : entry.external ? "LEGACY" : "MAIN PATH"}</span></span>
         <span className="card-title">{entry.title}</span>
         <span className="card-reveal">
           <span>{text.details}</span><ArrowUpRightIcon />
@@ -294,8 +296,8 @@ export default function DesignStudio() {
                   <span className="round-ghost-label">{text.video}</span>
                 </div>
               </div>
-              <div className="hero-side-note"><span>EARTH — 616</span><span>{text.archiveAside}</span></div>
-              <div className="hero-bottom"><span><Sparkles size={15}/> 110 STORIES IN ONE JOURNEY</span><span>01 / 03 — CINEMATIC ARCHIVE</span><ArrowDownRight size={19}/></div>
+              <div className="hero-side-note"><span>EARTH — 616</span><span>{text.archiveAside} {entries.length}</span></div>
+              <div className="hero-bottom"><span><Sparkles size={15}/> {entries.length} STORIES IN ONE JOURNEY</span><span>01 / 03 — CINEMATIC ARCHIVE</span><ArrowDownRight size={19}/></div>
             </section>
             <section className="marquee-strip" aria-hidden="true"><div>THE INFINITY SAGA <span>✦</span> THE MULTIVERSE SAGA <span>✦</span> BEYOND THE SACRED TIMELINE <span>✦</span> EVERY STORY MATTERS <span>✦</span> THE INFINITY SAGA <span>✦</span></div></section>
             <section className="content-section" id="watch-order">
@@ -313,10 +315,10 @@ export default function DesignStudio() {
           <motion.main key="timeline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .42 }}>
             <section className="timeline-hero">
               <span className="timeline-sun" aria-hidden="true" /><span className="timeline-arc" aria-hidden="true" />
-              <div className="eyebrow azure">A JOURNEY THROUGH TIME / 001 — 110</div>
+              <div className="eyebrow azure">A JOURNEY THROUGH TIME / 001 — {entries.length}</div>
               <h1>{text.timelineLead.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
               <p>{text.timelineDesc}</p>
-              <div className="timeline-stats"><div><strong>110</strong><span>{text.titles}</span></div><div><strong>15</strong><span>STORY ERAS</span></div><div><strong>{watched.size}</strong><span>{text.completed.toUpperCase()}</span></div></div>
+              <div className="timeline-stats"><div><strong>{entries.length}</strong><span>{text.titles}</span></div><div><strong>15</strong><span>STORY ERAS</span></div><div><strong>{watched.size}</strong><span>{text.completed.toUpperCase()}</span></div></div>
               <button className="scroll-invite" onClick={() => document.querySelector("#timeline-track")?.scrollIntoView({ behavior: "smooth" })}><span>{text.showTimeline}</span><ChevronDown size={18}/></button>
             </section>
             <section id="timeline-track" className="timeline-section">
@@ -329,7 +331,7 @@ export default function DesignStudio() {
                     {newEra && <span className="timeline-era-label">{item.era}</span>}
                     <button className={`timeline-entry ${watched.has(item.id) ? "timeline-done" : ""}`} onClick={() => setSelected(item)}>
                       <div className="timeline-entry-art"><Art entry={item} /></div>
-                      <div className="timeline-entry-info"><span className="entry-index">{num(item.position)} / {text.of} 110</span><h3>{item.title}</h3><div className="entry-tags"><span>{item.kind}</span><span>{item.universe}</span>{item.optional && <span>OPTIONAL</span>}</div></div>
+                      <div className="timeline-entry-info"><span className="entry-index">{num(item.position)} / {text.of} {entries.length}</span><h3>{item.title}</h3><div className="entry-tags"><span>{item.kind}</span><span>{item.universe}</span>{item.optional && <span>OPTIONAL</span>}{item.releaseStatus === "releasing" && <span>{lang === "en" ? "AIRING" : "EM EXIBIÇÃO"}</span>}</div></div>
                       <span className="timeline-entry-arrow"><ArrowUpRightIcon/></span>
                     </button>
                     <button title={watched.has(item.id) ? text.unwatch : text.watch} className={`timeline-mark ${watched.has(item.id) ? "timeline-mark-active" : ""}`} onClick={() => toggle(item.id)} aria-label={watched.has(item.id) ? text.unwatch : text.watch}><Check size={15}/></button>
@@ -343,7 +345,7 @@ export default function DesignStudio() {
         {concept === "multiverse" && (
           <motion.main key="multiverse" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .42 }}>
             <section className="multiverse-hero">
-              <div className="multiverse-intro"><span className="eyebrow violet"><span className="eyebrow-line"/> THE MULTIVERSE IS CALLING</span><h1>{text.multiverseLead.split("\n").map(line => <span key={line}>{line}</span>)}</h1><p>{text.multiverseDesc}</p><div className="multiverse-status"><span className="status-pulse"/>{text.curated}<span className="status-separator"/> 110 CHAPTERS</div></div>
+              <div className="multiverse-intro"><span className="eyebrow violet"><span className="eyebrow-line"/> THE MULTIVERSE IS CALLING</span><h1>{text.multiverseLead.split("\n").map(line => <span key={line}>{line}</span>)}</h1><p>{text.multiverseDesc}</p><div className="multiverse-status"><span className="status-pulse"/>{text.curated}<span className="status-separator"/> {entries.length} CHAPTERS</div></div>
               <div className="universe-stage">
                 <div className="stage-outer-ring" /><div className="stage-inner-ring" /><div className="stage-center-glow" />
                 <svg viewBox="0 0 600 570" preserveAspectRatio="none" className="universe-connections" aria-hidden="true"><path d="M300 270 Q120 100 105 390 M300 270 Q485 112 483 257 M300 270 Q390 480 485 401" fill="none" stroke="url(#thread)" strokeWidth="1.2" strokeDasharray="4 8"/><defs><linearGradient id="thread" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#8dbaff"/><stop offset="1" stopColor="#b49aff"/></linearGradient></defs></svg>
@@ -367,8 +369,8 @@ export default function DesignStudio() {
           <motion.section role="dialog" aria-modal="true" aria-labelledby="detail-name" className="detail-dialog" initial={{ opacity: 0, y: 30, scale: .96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 18, scale: .98 }} transition={{ type: "spring", damping: 24, stiffness: 260 }}>
             <button className="modal-close" onClick={() => setSelected(null)} aria-label={text.close}><X size={21}/></button>
             <div className="detail-art"><Art entry={selected} variant="detail-art-cover" /><div className="detail-big-no">{num(selected.position)}</div></div>
-            <div className="detail-content"><span className="eyebrow crimson">{text.selected} / {num(selected.position)} {text.of} 110</span><h2 id="detail-name">{selected.title}</h2>
-              <div className="detail-tags"><span>{selected.kind.toUpperCase()}</span><span>{selected.universe.toUpperCase()}</span>{selected.optional && <span>OPTIONAL</span>}</div>
+            <div className="detail-content"><span className="eyebrow crimson">{text.selected} / {num(selected.position)} {text.of} {entries.length}</span><h2 id="detail-name">{selected.title}</h2>
+              <div className="detail-tags"><span>{selected.kind.toUpperCase()}</span><span>{selected.universe.toUpperCase()}</span>{selected.optional && <span>OPTIONAL</span>}{selected.releaseStatus === "releasing" && <span>{selected.releaseProgress?.episodesAvailable} / {selected.releaseProgress?.episodesTotal} EPISODES RELEASED</span>}</div>
               <p className="editorial-tag"><CheckCircle2 size={16}/> {text.spoilerSafe}</p>
               <h3>{text.why}</h3><p>{selected.whyHere?.[lang] || (lang === "en" ? "Part of the curated narrative sequence. The detailed editorial explanation is being researched." : "Parte da sequência narrativa selecionada. A justificativa editorial detalhada está sendo pesquisada.")}</p>
               <div className="detail-actions"><button className="primary-button" onClick={() => toggle(selected.id)}>{watched.has(selected.id) ? <Check size={16}/> : <CheckCircle2 size={16}/>} {watched.has(selected.id) ? text.unwatch : text.watch}</button><button className="secondary-button" onClick={() => openTrailer(selected)}><Play size={16}/> {text.video}</button></div>
