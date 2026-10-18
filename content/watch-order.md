@@ -1,100 +1,100 @@
 # VerseOrder — The Ultimate Marvel Multiverse Watch Order
 
-> Ordem de experiência narrativa, não cronologia absoluta. Atualizada em 17/10/2026; parte do acervo anterior ainda aguarda revisão editorial.
+> A narrative viewing order, not an absolute chronology. Updated October 17, 2026; part of the earlier collection still awaits editorial review.
 
-**Legenda:** [Opcional] = obra complementar; [Externo] = universo cinematográfico legado; [Universo alternativo] = obra MCU fora da linha principal; [Em exibição] = temporada ainda não concluída.
+**Key:** [Optional] = companion title; [External] = legacy film universe; [Alternate universe] = MCU title outside the main timeline; [Currently airing] = season not yet complete.
 
-## Ordem única para assistir
+## The Watch Order
 
 
-### Origins / Origens
+### Origins
 
 1. Eyes of Wakanda
 2. Captain America: The First Avenger
-3. Marvel One-Shot: Agent Carter — [Opcional]
+3. Marvel One-Shot: Agent Carter — [Optional]
 4. Captain Marvel
 
-### The Avengers Initiative / Iniciativa Vingadores
+### The Avengers Initiative
 
 5. Iron Man
 6. Iron Man 2
 7. The Incredible Hulk
-8. Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer — [Opcional]
+8. Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer — [Optional]
 9. Thor
-10. Marvel One-Shot: The Consultant — [Opcional]
+10. Marvel One-Shot: The Consultant — [Optional]
 11. The Avengers
-12. Marvel One-Shot: Item 47 — [Opcional]
+12. Marvel One-Shot: Item 47 — [Optional]
 13. Thor: The Dark World
 14. Iron Man 3
-15. Marvel One-Shot: All Hail the King — [Opcional]
+15. Marvel One-Shot: All Hail the King — [Optional]
 
-### The World Expands / Um mundo em expansão
+### The World Expands
 
 16. Captain America: The Winter Soldier
 17. Guardians of the Galaxy
 18. Guardians of the Galaxy Vol. 2
-19. I Am Groot T1 — [Opcional]
-20. I Am Groot T2 — [Opcional]
-21. Daredevil (Netflix) T1
-22. Jessica Jones T1
+19. I Am Groot S1 — [Optional]
+20. I Am Groot S2 — [Optional]
+21. Daredevil (Netflix) S1
+22. Jessica Jones S1
 23. Avengers: Age of Ultron
 24. Ant-Man
 
-### Road to Infinity / Rumo ao Infinito
+### Road to Infinity
 
-25. Daredevil T2
-26. Luke Cage T1
-27. Iron Fist T1
+25. Daredevil S2
+26. Luke Cage S1
+27. Iron Fist S1
 28. The Defenders
 29. Captain America: Civil War
 30. Black Widow
 31. Black Panther
 32. Spider-Man: Homecoming
-33. The Punisher T1
+33. The Punisher S1
 34. Doctor Strange
-35. Jessica Jones T2
-36. Luke Cage T2
-37. Iron Fist T2
-38. Daredevil T3
+35. Jessica Jones S2
+36. Luke Cage S2
+37. Iron Fist S2
+38. Daredevil S3
 39. Thor: Ragnarok
-40. The Punisher T2
-41. Jessica Jones T3
+40. The Punisher S2
+41. Jessica Jones S3
 42. Ant-Man and the Wasp
 43. Avengers: Infinity War
 44. Avengers: Endgame
 
-### A Fractured Reality / Realidades fragmentadas
+### A Fractured Reality
 
-45. Loki T1
-46. What If...? T1 — [Opcional]
-47. Marvel Zombies — [Opcional]
+45. Loki S1
+46. What If...? S1 — [Optional]
+47. Marvel Zombies — [Optional]
 48. WandaVision
 49. Shang-Chi and the Legend of the Ten Rings
 50. The Falcon and the Winter Soldier
 51. Spider-Man: Far From Home
 52. Eternals
 
-### The Spider-Man Legacy / Legado do Homem-Aranha
+### The Spider-Man Legacy
 
-53. Spider-Man (2002, Sam Raimi) — [Externo]
-54. Spider-Man 2 (2004) — [Externo]
-55. Spider-Man 3 (2007) — [Externo]
-56. The Amazing Spider-Man (2012) — [Externo]
-57. The Amazing Spider-Man 2 (2014) — [Externo]
-58. Venom (2018) — [Externo]
-59. Venom: Let There Be Carnage (2021) — [Externo]
+53. Spider-Man (2002, Sam Raimi) — [External]
+54. Spider-Man 2 (2004) — [External]
+55. Spider-Man 3 (2007) — [External]
+56. The Amazing Spider-Man (2012) — [External]
+57. The Amazing Spider-Man 2 (2014) — [External]
+58. Venom (2018) — [External]
+59. Venom: Let There Be Carnage (2021) — [External]
 
-### Converging Worlds / Mundos convergentes
+### Converging Worlds
 
 60. Spider-Man: No Way Home
-61. Venom: The Last Dance (2024) — [Externo]
+61. Venom: The Last Dance (2024) — [External]
 
-### Beyond the Spider-Verse / Além do Aranhaverso
+### Beyond the Spider-Verse
 
-62. Spider-Man: Into the Spider-Verse — [Opcional · Externo]
-63. Spider-Man: Across the Spider-Verse — [Opcional · Externo]
+62. Spider-Man: Into the Spider-Verse — [Optional · External]
+63. Spider-Man: Across the Spider-Verse — [Optional · External]
 
-### After the Rift / Depois da ruptura
+### After the Rift
 
 64. Doctor Strange in the Multiverse of Madness
 65. Hawkeye
@@ -108,57 +108,57 @@
 73. Werewolf by Night
 74. The Guardians of the Galaxy Holiday Special
 
-### A New Era / Nova era
+### A New Era
 
 75. Ant-Man and the Wasp: Quantumania
 76. Guardians of the Galaxy Vol. 3
 77. Secret Invasion
 78. The Marvels
-79. Loki T2
-80. What If...? T2 — [Opcional]
+79. Loki S2
+80. What If...? S2 — [Optional]
 
-### Legacy Heroes / Heróis de outras eras
+### Legacy Heroes
 
-81. Blade (1998) — [Externo]
-82. Blade II (2002) — [Externo]
-83. Daredevil (2003, Ben Affleck) — [Externo]
-84. Blade: Trinity (2004) — [Externo]
-85. Elektra (2005) — [Externo]
-86. Fantastic Four (2005, Chris Evans como Johnny Storm) — [Externo]
-87. Fantastic Four: Rise of the Silver Surfer (2007) — [Externo]
+81. Blade (1998) — [External]
+82. Blade II (2002) — [External]
+83. Daredevil (2003, Ben Affleck) — [External]
+84. Blade: Trinity (2004) — [External]
+85. Elektra (2005) — [External]
+86. Fantastic Four (2005, Chris Evans as Johnny Storm) — [External]
+87. Fantastic Four: Rise of the Silver Surfer (2007) — [External]
 
-### The Mutant Legacy / Legado mutante
+### The Mutant Legacy
 
-88. X-Men: First Class — [Externo]
-89. X-Men Origins: Wolverine — [Externo]
-90. X-Men (2000) — [Externo]
-91. X2: X-Men United — [Externo]
-92. X-Men: The Last Stand — [Externo]
-93. The Wolverine — [Externo]
-94. X-Men: Days of Future Past — [Externo]
-95. X-Men: Apocalypse — [Externo]
-96. Dark Phoenix — [Externo]
-97. Deadpool — [Externo]
-98. Deadpool 2 — [Externo]
-99. The New Mutants — [Opcional · Externo]
-100. Logan — [Externo]
+88. X-Men: First Class — [External]
+89. X-Men Origins: Wolverine — [External]
+90. X-Men (2000) — [External]
+91. X2: X-Men United — [External]
+92. X-Men: The Last Stand — [External]
+93. The Wolverine — [External]
+94. X-Men: Days of Future Past — [External]
+95. X-Men: Apocalypse — [External]
+96. Dark Phoenix — [External]
+97. Deadpool — [External]
+98. Deadpool 2 — [External]
+99. The New Mutants — [Optional · External]
+100. Logan — [External]
 
-### The Multiverse Collides / Colisão de universos
+### The Multiverse Collides
 
 101. Deadpool & Wolverine
 102. Agatha All Along
-103. What If...? T3 — [Opcional]
-104. Daredevil: Born Again T1
+103. What If...? S3 — [Optional]
+104. Daredevil: Born Again S1
 105. Captain America: Brave New World
 
-### What Comes Next / O que vem depois
+### What Comes Next
 
 106. Thunderbolts*
-107. The Fantastic Four: First Steps — [Universo alternativo]
+107. The Fantastic Four: First Steps — [Alternate universe]
 108. Wonder Man
-109. Daredevil: Born Again T2
+109. Daredevil: Born Again S2
 110. The Punisher: One Last Kill
-111. VisionQuest T1 — [Em exibição: 2/8 episódios em 2026-10-17]
+111. VisionQuest S1 — [Currently airing: 2/8 episodes as of 2026-10-17]
 112. Spider-Man: Brand New Day
 
-Total: 112 obras/temporadas/especiais. Outras produções não selecionadas estão registradas separadamente em content/excluded.md.
+Total: 112 films, seasons, shorts, and specials. Other titles not selected are listed separately in content/excluded.md.

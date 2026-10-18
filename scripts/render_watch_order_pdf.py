@@ -59,15 +59,15 @@ def main() -> None:
             y -= 53
             c.setFont(regular, 10)
             c.setFillColor(HexColor("#ABB0C1"))
-            c.drawString(42, y, f"Uma jornada. {len(DATA['entries'])} entradas. Curadoria narrativa, não cronologia absoluta.")
+            c.drawString(42, y, f"One journey. {len(DATA['entries'])} entries. Narrative curation, not an absolute chronology.")
             y -= 22
             c.setFont(regular, 8.3)
             c.setFillColor(HexColor("#9BA1B0"))
-            c.drawString(42, y, "Revisada em 17/10/2026. O acervo original segue em revisão editorial.")
+            c.drawString(42, y, "Reviewed October 17, 2026. Earlier entries remain under editorial review.")
             y -= 27
             c.setFillColor(HexColor("#DBB7B8"))
             c.setFont(regular, 8)
-            c.drawString(42, y, "OPCIONAL = enriquecimento · EXTERNO = legado · ALTERNATIVO = outra realidade MCU")
+            c.drawString(42, y, "OPTIONAL = companion story · LEGACY = external continuity · ALTERNATE = another MCU reality")
             y -= 35
 
     def finish_page() -> None:
@@ -97,12 +97,12 @@ def main() -> None:
         nonlocal y
         title = str(row["title"])
         flags = []
-        if row["optional"]: flags.append("OPCIONAL")
-        if row["external"]: flags.append("EXTERNO")
-        if row["alternateUniverse"]: flags.append("ALTERNATIVO")
+        if row["optional"]: flags.append("OPTIONAL")
+        if row["external"]: flags.append("LEGACY")
+        if row["alternateUniverse"]: flags.append("ALTERNATE")
         if row.get("releaseStatus")=="releasing":
             progress=row.get("releaseProgress",{})
-            flags.append(f"EM EXIBICAO ({progress.get('episodesAvailable','?')}/{progress.get('episodesTotal','?')} EP.)")
+            flags.append(f"STILL AIRING ({progress.get('episodesAvailable','?')}/{progress.get('episodesTotal','?')} EP.)")
         chunks = simpleSplit(title, bold, 10.5, W - 125)
         height = max(29, len(chunks) * 15 + (13 if flags else 6))
         ensure(height)

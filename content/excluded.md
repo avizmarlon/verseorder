@@ -1,12 +1,12 @@
-# Produções fora da curadoria principal
+# Titles Outside the Main Curation
 
-Estas obras não entram na ordem principal nesta versão; exclusão não é julgamento de qualidade. A lista pode mudar com novas conexões narrativas ou propostas da comunidade.
+These titles are not part of the main order in this edition; exclusion is not a judgment of quality. The list may change as new narrative connections or community suggestions emerge.
 
-(Sem Ressalva)
+(Without reservation)
 
-Não entram em nenhuma das duas listas.
+These titles are not included in either list.
 
-**Filmes:**
+**Films:**
 - Hulk (2003, Ang Lee)
 - The Punisher (1989, Dolph Lundgren)
 - The Punisher (2004, Thomas Jane)
@@ -15,24 +15,24 @@ Não entram em nenhuma das duas listas.
 - Ghost Rider: Spirit of Vengeance (2012)
 - Howard the Duck (1986)
 - Man-Thing (2005)
-- Fantastic Four (1994, Roger Corman, nunca lançado)
+- Fantastic Four (1994, Roger Corman, never released)
 - Fantastic Four (2015, "Fant4stic")
 - Morbius (2022)
 - Madame Web (2024)
 - Kraven the Hunter (2024)
 
-**Séries:**
-- Marvel's Agent Carter (série TV, 2015-2016)
-- Agents of S.H.I.E.L.D. (2013-2020)
+**Series:**
+- Marvel's Agent Carter (TV series, 2015–2016)
+- Agents of S.H.I.E.L.D. (2013–2020)
 - Inhumans (2017)
-- Cloak & Dagger (2018-2019)
-- Runaways (2017-2019)
-- Legion (2017-2019)
-- The Gifted (2017-2019)
-- X-Men: The Animated Series (1992-1997)
-- X-Men '97 — T1 (2024) e T2 (2026, estreou em 01/07/2026; continuidade animada distinta, fora da ordem principal por decisão editorial)
+- Cloak & Dagger (2018–2019)
+- Runaways (2017–2019)
+- Legion (2017–2019)
+- The Gifted (2017–2019)
+- X-Men: The Animated Series (1992–1997)
+- X-Men '97 — S1 (2024) and S2 (2026, premiered July 1, 2026; a distinct animated continuity, excluded from the main order by editorial decision)
 - Blade: The Series (2006)
 
 ---
 
-- Your Friendly Neighborhood Spider-Man — T1 (2025; universo alternativo, não necessário para a maratona narrativa principal). T2 prevista para 13/01/2027.
+- Your Friendly Neighborhood Spider-Man — S1 (2025; an alternate universe, not required for the main narrative marathon). S2 expected January 13, 2027.

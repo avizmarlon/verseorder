@@ -2,20 +2,15 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ArrowDownRight, ArrowRight, Check, CheckCircle2, ChevronDown,
-  Clapperboard, Compass, ExternalLink, Globe2,
-  Menu, Play, Search, Sparkles, X,
-} from "lucide-react";
+import { ArrowDownRight, ArrowRight, Check, CheckCircle2, ChevronDown, Clapperboard, Compass, ExternalLink, Menu, Play, Search, Sparkles, X } from "lucide-react";
 import collection from "@/data/watch-order.json";
 
-type Language = "en" | "pt-BR";
 type Concept = "archive" | "timeline" | "multiverse";
 type Filter = "all" | "mcu" | "external" | "optional";
 type Entry = {
   id: string; position: number; title: string; kind: string; era: string;
   universe: string; optional: boolean; external: boolean; alternateUniverse: boolean;
-  note: string; whyHere: Record<Language, string> | null;
+  note: string; whyHere: string | null;
   releaseStatus?: "released" | "releasing";
   releaseProgress?: { episodesAvailable: number; episodesTotal: number; asOf: string };
   trailerYouTubeId: string | null; posterPath: string | null;
@@ -23,72 +18,37 @@ type Entry = {
 const entries = collection.entries as Entry[];
 
 const COPY = {
-  en: {
-    eyebrow: "THE ULTIMATE MARVEL MULTIVERSE WATCH ORDER",
-    archive: "Discover", timeline: "Watch order", multiverse: "Universes",
-    liveLab: "STORIES ACROSS THE MULTIVERSE", journey: "YOUR JOURNEY, REIMAGINED",
-    exploreOrder: "Explore the watch order", browse: "Browse the collection",
-    subtitle: "One carefully crafted order. Countless unforgettable worlds.",
-    blurb: "Not just when the stories happen. The order that makes every connection, revelation, and reunion hit harder.",
-    baseline: "October 2026 update · earlier entries under editorial review",
-    titles: "CURATED CHAPTERS", worlds: "INTERCONNECTED WORLDS", progress: "YOUR JOURNEY",
-    completed: "watched", watch: "Mark as watched", unwatch: "Mark as unwatched",
-    details: "Explore chapter", next: "UP NEXT", why: "WHY THIS CHAPTER HERE",
-    spoilerSafe: "SPOILER-CONSCIOUS",
-    video: "Watch official trailer", searchTrailer: "Find an official trailer",
-    trailerUnavailable: "Direct trailer verification is pending for this title.",
-    all: "All entries", mcu: "MCU", external: "Legacy", optional: "Optional",
-    search: "Find a title, universe, or chapter...", nothing: "No titles match your filters.",
-    loadMore: "Reveal more chapters", showTimeline: "Explore timeline",
-    archiveLead: "Every story.\nIn its perfect place.",
-    archiveAside: "ENTER THE STORY / 001 —", discover: "DISCOVER YOUR NEXT CHAPTER",
-    timelineLead: "Every moment\nleads somewhere.",
-    timelineDesc: "A single thread through many eras. Follow the path, discover the context, and make this journey yours.",
-    selected: "SELECTED CHAPTER", of: "OF", origins: "CHAPTERS ACROSS TIME",
-    multiverseLead: "There is more than\none way through.",
-    multiverseDesc: "Different worlds. Shared echoes. A watch order designed around connections, not arbitrary dates.",
-    diveIn: "Choose a reality", universeMcu: "MAIN TIMELINE", universeLegacy: "LEGACY WORLDS",
-    universeSpider: "SPIDER-VERSE", universeAlt: "ALTERNATE MCU",
-    curated: "A deliberate selection", order: "WATCH ORDER",
-    close: "Close", preview: "TRAILER PREVIEW", open: "Open on YouTube",
-    previewHover: "HOVER TO REVEAL", more: "View the sequence",
-    foot: "An independent fan-curated viewing guide. Not affiliated with Marvel, Disney or Sony.",
-    footerNote: "Watch-order decisions reflect narrative preference, not an official universal chronology.",
-    status: "Selection under editorial review",
-  },
-  "pt-BR": {
-    eyebrow: "A ORDEM DEFINITIVA PARA ASSISTIR AO MULTIVERSO MARVEL",
-    archive: "Descobrir", timeline: "Ordem para assistir", multiverse: "Universos",
-    liveLab: "HISTÓRIAS ATRAVÉS DO MULTIVERSO", journey: "SUA JORNADA, REIMAGINADA",
-    exploreOrder: "Explorar a ordem", browse: "Explorar a coleção",
-    subtitle: "Uma ordem cuidadosamente construída. Infinitos mundos inesquecíveis.",
-    blurb: "Não é só quando cada história acontece. É a ordem que dá mais impacto a cada conexão, revelação e reencontro.",
-    baseline: "Atualização outubro/2026 · parte da curadoria ainda em revisão",
-    titles: "CAPÍTULOS SELECIONADOS", worlds: "MUNDOS CONECTADOS", progress: "SUA JORNADA",
-    completed: "assistidos", watch: "Marcar como assistido", unwatch: "Desmarcar como assistido",
-    details: "Explorar capítulo", next: "A SEGUIR", why: "POR QUE ASSISTIR AQUI?",
-    spoilerSafe: "SEM SPOILERS REVELADOS",
-    video: "Assistir trailer oficial", searchTrailer: "Encontrar trailer oficial",
-    trailerUnavailable: "A verificação do trailer deste título ainda está pendente.",
-    all: "Todos", mcu: "MCU", external: "Legado", optional: "Opcionais",
-    search: "Buscar título, universo ou capítulo...", nothing: "Nenhum título com estes filtros.",
-    loadMore: "Revelar mais capítulos", showTimeline: "Explorar timeline",
-    archiveLead: "Toda história.\nNo momento certo.",
-    archiveAside: "ENTRE NA HISTÓRIA / 001 —", discover: "DESCUBRA SEU PRÓXIMO CAPÍTULO",
-    timelineLead: "Todo momento\nleva a algum lugar.",
-    timelineDesc: "Um único fio atravessando várias eras. Siga o caminho, descubra o contexto e faça essa jornada sua.",
-    selected: "CAPÍTULO SELECIONADO", of: "DE", origins: "CAPÍTULOS AO LONGO DO TEMPO",
-    multiverseLead: "Existem infinitos\ncaminhos possíveis.",
-    multiverseDesc: "Mundos diferentes. Ecos compartilhados. Uma ordem criada por conexões narrativas, não por datas arbitrárias.",
-    diveIn: "Escolha uma realidade", universeMcu: "LINHA PRINCIPAL", universeLegacy: "MUNDOS CLÁSSICOS",
-    universeSpider: "ARANHAVERSO", universeAlt: "MCU ALTERNATIVO",
-    curated: "Uma seleção com propósito", order: "ORDEM PARA ASSISTIR",
-    close: "Fechar", preview: "PRÉVIA DO TRAILER", open: "Abrir no YouTube",
-    previewHover: "PASSE O MOUSE", more: "Ver a sequência",
-    foot: "Guia independente de fãs. Sem vínculo com Marvel, Disney ou Sony.",
-    footerNote: "As escolhas da curadoria priorizam experiência narrativa, não uma cronologia oficial absoluta.",
-    status: "Seleção em revisão editorial",
-  },
+  eyebrow: "THE ULTIMATE MARVEL MULTIVERSE WATCH ORDER",
+  archive: "Discover", timeline: "Watch order", multiverse: "Universes",
+  liveLab: "STORIES ACROSS THE MULTIVERSE", journey: "YOUR JOURNEY, REIMAGINED",
+  exploreOrder: "Explore the watch order", browse: "Browse the collection",
+  subtitle: "One carefully crafted order. Countless unforgettable worlds.",
+  blurb: "Not just when the stories happen. The order that makes every connection, revelation, and reunion hit harder.",
+  baseline: "October 2026 update · earlier entries under editorial review",
+  titles: "CURATED CHAPTERS", worlds: "INTERCONNECTED WORLDS", progress: "YOUR JOURNEY",
+  completed: "watched", watch: "Mark as watched", unwatch: "Mark as unwatched",
+  details: "Explore chapter", next: "UP NEXT", why: "WHY THIS CHAPTER HERE",
+  spoilerSafe: "SPOILER-CONSCIOUS",
+  video: "Watch official trailer", searchTrailer: "Find an official trailer",
+  trailerUnavailable: "Direct trailer verification is pending for this title.",
+  all: "All entries", mcu: "MCU", external: "Legacy", optional: "Optional",
+  search: "Find a title, universe, or chapter...", nothing: "No titles match your filters.",
+  loadMore: "Reveal more chapters", showTimeline: "Explore timeline",
+  archiveLead: "Every story.\nIn its perfect place.",
+  archiveAside: "ENTER THE STORY / 001 —", discover: "DISCOVER YOUR NEXT CHAPTER",
+  timelineLead: "Every moment\nleads somewhere.",
+  timelineDesc: "A single thread through many eras. Follow the path, discover the context, and make this journey yours.",
+  selected: "SELECTED CHAPTER", of: "OF", origins: "CHAPTERS ACROSS TIME",
+  multiverseLead: "There is more than\none way through.",
+  multiverseDesc: "Different worlds. Shared echoes. A watch order designed around connections, not arbitrary dates.",
+  diveIn: "Choose a reality", universeMcu: "MAIN TIMELINE", universeLegacy: "LEGACY WORLDS",
+  universeSpider: "SPIDER-VERSE", universeAlt: "ALTERNATE MCU",
+  curated: "A deliberate selection", order: "WATCH ORDER",
+  close: "Close", preview: "TRAILER PREVIEW", open: "Open on YouTube",
+  previewHover: "HOVER TO REVEAL", more: "View the sequence",
+  foot: "An independent fan-curated viewing guide. Not affiliated with Marvel, Disney or Sony.",
+  footerNote: "Watch-order decisions reflect narrative preference, not an official universal chronology.",
+  status: "Selection under editorial review",
 } as const;
 
 const TRAILERS: Record<string, string> = {
@@ -132,12 +92,12 @@ function ProgressRing({ progress }: { progress: number }) {
 }
 
 function TitleCard({
-  entry, watched, onSelect, onToggle, index, layout = "standard", lang,
+  entry, watched, onSelect, onToggle, index, layout = "standard",
 }: {
   entry: Entry; watched: boolean; onSelect: (entry: Entry) => void;
-  onToggle: (id: string) => void; index: number; layout?: "standard" | "wide"; lang: Language;
+  onToggle: (id: string) => void; index: number; layout?: "standard" | "wide";
 }) {
-  const text = COPY[lang];
+  const text = COPY;
   return (
     <motion.article
       layout
@@ -170,7 +130,6 @@ function ArrowUpRightIcon() { return <ArrowDownRight size={17} style={{ transfor
 
 export default function VerseOrderExperience() {
   const [concept, setConcept] = useState<Concept>("archive");
-  const [lang, setLang] = useState<Language>("en");
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(24);
@@ -182,15 +141,13 @@ export default function VerseOrderExperience() {
   const [menuOpen, setMenuOpen] = useState(false);
   const visualRef = useRef<HTMLDivElement | null>(null);
   const reduceMotion = useReducedMotion();
-  const text = COPY[lang];
+  const text = COPY;
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       try {
         const saved = JSON.parse(window.localStorage.getItem("verseorder:watched:v1") || "[]");
         if (Array.isArray(saved)) setWatched(new Set(saved.filter((id): id is string => typeof id === "string")));
-        const savedLang = window.localStorage.getItem("verseorder:locale:v1");
-        if (savedLang === "en" || savedLang === "pt-BR") setLang(savedLang);
       } catch { /* no storage available */ }
       setReady(true);
     });
@@ -201,9 +158,8 @@ export default function VerseOrderExperience() {
     if (!ready) return;
     try {
       window.localStorage.setItem("verseorder:watched:v1", JSON.stringify([...watched]));
-      window.localStorage.setItem("verseorder:locale:v1", lang);
     } catch { /* storage is optional */ }
-  }, [watched, lang, ready]);
+  }, [watched, ready]);
 
   useEffect(() => {
     const down = (event: KeyboardEvent) => {
@@ -254,13 +210,13 @@ export default function VerseOrderExperience() {
   }
 
   return (
-    <div className={`site-shell scene-${concept}`} lang={lang}>
+    <div className={`site-shell scene-${concept}`} lang="en">
       <div className="ambient-background" aria-hidden="true"><span className="ambient-starfield" /><span className="ambient-noise" /><span className="ambient-radiance" /></div>
       <header className="site-header">
         <button className="brand" onClick={() => switchConcept("archive")} aria-label="VerseOrder — home">
           <Emblem /><span className="brand-word">VERSE<span>ORDER</span></span>
         </button>
-        <nav className={`concept-nav ${menuOpen ? "nav-open" : ""}`} aria-label={lang === "en" ? "Explore the stories" : "Explorar histórias"}>
+        <nav className={`concept-nav ${menuOpen ? "nav-open" : ""}`} aria-label={"Explore the stories"}>
           {(["archive", "timeline", "multiverse"] as Concept[]).map((target) => (
             <button key={target} onClick={() => switchConcept(target)} className={concept === target ? "nav-active" : ""}>
               {text[target]}
@@ -269,16 +225,13 @@ export default function VerseOrderExperience() {
           ))}
         </nav>
         <div className="header-actions">
-          <button className="language-select" onClick={() => setLang(prev => prev === "en" ? "pt-BR" : "en")} aria-label="Toggle site language">
-            <Globe2 size={15} /><span>{lang === "en" ? "EN" : "PT-BR"}</span>
-          </button>
           <div className="header-progress" title={`${watched.size} / ${entries.length} ${text.completed}`}><span className="header-progress-bar" style={{ width: `${percentage}%` }} /><span>{watched.size}<i> / </i>{entries.length}</span></div>
           <button className="mobile-menu" onClick={() => setMenuOpen(v => !v)} aria-label="Toggle navigation"><Menu size={23} /></button>
         </div>
       </header>
 
       <div className="concept-topline">
-        <span className="eyebrow-dot" /> {text.liveLab} <span className="topline-rule" /> <span>{entries.length} {lang === "en" ? "STORIES" : "HISTÓRIAS"}</span>
+        <span className="eyebrow-dot" /> {text.liveLab} <span className="topline-rule" /> <span>{entries.length} {"STORIES"}</span>
       </div>
 
       <AnimatePresence mode="wait">
@@ -306,7 +259,7 @@ export default function VerseOrderExperience() {
                 <div className="progress-summary"><ProgressRing progress={percentage}/><span><strong>{watched.size} / {entries.length}</strong><small>{text.completed}</small></span></div>
               </div>
               <WatchOrderControls filter={filter} setFilter={setFilter} search={search} setSearch={setSearch} text={text}/>
-              <div className="cards-grid">{visible.slice(0, limit).map((item, index) => <TitleCard key={item.id} entry={item} index={index} watched={watched.has(item.id)} onSelect={setSelected} onToggle={toggle} lang={lang}/>)}</div>
+              <div className="cards-grid">{visible.slice(0, limit).map((item, index) => <TitleCard key={item.id} entry={item} index={index} watched={watched.has(item.id)} onSelect={setSelected} onToggle={toggle}/>)}</div>
               <ListEnd visible={visible.length} count={limit} onMore={() => setLimit(c => c + 24)} text={text}/>
             </section>
           </motion.main>
@@ -331,7 +284,7 @@ export default function VerseOrderExperience() {
                     {newEra && <span className="timeline-era-label">{item.era}</span>}
                     <button className={`timeline-entry ${watched.has(item.id) ? "timeline-done" : ""}`} onClick={() => setSelected(item)}>
                       <div className="timeline-entry-art"><Art entry={item} /></div>
-                      <div className="timeline-entry-info"><span className="entry-index">{num(item.position)} / {text.of} {entries.length}</span><h3>{item.title}</h3><div className="entry-tags"><span>{item.kind}</span><span>{item.universe}</span>{item.optional && <span>OPTIONAL</span>}{item.releaseStatus === "releasing" && <span>{lang === "en" ? "AIRING" : "EM EXIBIÇÃO"}</span>}</div></div>
+                      <div className="timeline-entry-info"><span className="entry-index">{num(item.position)} / {text.of} {entries.length}</span><h3>{item.title}</h3><div className="entry-tags"><span>{item.kind}</span><span>{item.universe}</span>{item.optional && <span>OPTIONAL</span>}{item.releaseStatus === "releasing" && <span>AIRING</span>}</div></div>
                       <span className="timeline-entry-arrow"><ArrowUpRightIcon/></span>
                     </button>
                     <button title={watched.has(item.id) ? text.unwatch : text.watch} className={`timeline-mark ${watched.has(item.id) ? "timeline-mark-active" : ""}`} onClick={() => toggle(item.id)} aria-label={watched.has(item.id) ? text.unwatch : text.watch}><Check size={15}/></button>
@@ -349,14 +302,14 @@ export default function VerseOrderExperience() {
               <div className="universe-stage">
                 <div className="stage-outer-ring" /><div className="stage-inner-ring" /><div className="stage-center-glow" />
                 <svg viewBox="0 0 600 570" preserveAspectRatio="none" className="universe-connections" aria-hidden="true"><path d="M300 270 Q120 100 105 390 M300 270 Q485 112 483 257 M300 270 Q390 480 485 401" fill="none" stroke="url(#thread)" strokeWidth="1.2" strokeDasharray="4 8"/><defs><linearGradient id="thread" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#8dbaff"/><stop offset="1" stopColor="#b49aff"/></linearGradient></defs></svg>
-                {universeOptions.map((u,i) => <button key={u.id} onClick={() => setUniverse(u.id)} aria-label={COPY[lang][u.key]} className={`universe-orb universe-orb-${i} ${universe === u.id ? "orb-selected" : ""}`} style={{ "--orb-accent": u.accent, "--orb-top": u.top, "--orb-left": u.left } as React.CSSProperties}><span className="universe-orb-inside"><span>{u.number}</span><b>{COPY[lang][u.key]}</b></span></button>)}
+                {universeOptions.map((u,i) => <button key={u.id} onClick={() => setUniverse(u.id)} aria-label={COPY[u.key]} className={`universe-orb universe-orb-${i} ${universe === u.id ? "orb-selected" : ""}`} style={{ "--orb-accent": u.accent, "--orb-top": u.top, "--orb-left": u.left } as React.CSSProperties}><span className="universe-orb-inside"><span>{u.number}</span><b>{COPY[u.key]}</b></span></button>)}
                 <span className="orbit-cross cross-one">✦</span><span className="orbit-cross cross-two">✧</span>
               </div>
               <span className="universe-caption">SELECT A REALITY TO REVEAL ITS STORIES <Compass size={15}/></span>
             </section>
             <section className="multiverse-library" id="multiverse-library">
-              <div className="universe-library-head"><div><span className="eyebrow violet">02 / {text.diveIn}</span><h2>{universeOptions.find(item => item.id === universe)?.key ? COPY[lang][universeOptions.find(item => item.id === universe)!.key] : universe}</h2><p>{entries.filter(e => e.universe === universe).length} {text.titles.toLowerCase()}</p></div><div className="universe-tabs">{universeOptions.map(opt => <button key={opt.id} className={universe === opt.id ? "tab-active" : ""} onClick={() => setUniverse(opt.id)}>{COPY[lang][opt.key]}</button>)}</div></div>
-              <div className="universe-cards">{entries.filter(e => e.universe === universe).slice(0, limit).map((item, index) => <TitleCard key={item.id} entry={item} index={index} watched={watched.has(item.id)} onSelect={setSelected} onToggle={toggle} layout="wide" lang={lang}/>)}</div>
+              <div className="universe-library-head"><div><span className="eyebrow violet">02 / {text.diveIn}</span><h2>{universeOptions.find(item => item.id === universe)?.key ? COPY[universeOptions.find(item => item.id === universe)!.key] : universe}</h2><p>{entries.filter(e => e.universe === universe).length} {text.titles.toLowerCase()}</p></div><div className="universe-tabs">{universeOptions.map(opt => <button key={opt.id} className={universe === opt.id ? "tab-active" : ""} onClick={() => setUniverse(opt.id)}>{COPY[opt.key]}</button>)}</div></div>
+              <div className="universe-cards">{entries.filter(e => e.universe === universe).slice(0, limit).map((item, index) => <TitleCard key={item.id} entry={item} index={index} watched={watched.has(item.id)} onSelect={setSelected} onToggle={toggle} layout="wide"/>)}</div>
               <ListEnd visible={entries.filter(e => e.universe === universe).length} count={limit} onMore={() => setLimit(c => c + 24)} text={text}/>
             </section>
           </motion.main>
@@ -372,7 +325,7 @@ export default function VerseOrderExperience() {
             <div className="detail-content"><span className="eyebrow crimson">{text.selected} / {num(selected.position)} {text.of} {entries.length}</span><h2 id="detail-name">{selected.title}</h2>
               <div className="detail-tags"><span>{selected.kind.toUpperCase()}</span><span>{selected.universe.toUpperCase()}</span>{selected.optional && <span>OPTIONAL</span>}{selected.releaseStatus === "releasing" && <span>{selected.releaseProgress?.episodesAvailable} / {selected.releaseProgress?.episodesTotal} EPISODES RELEASED</span>}</div>
               <p className="editorial-tag"><CheckCircle2 size={16}/> {text.spoilerSafe}</p>
-              <h3>{text.why}</h3><p>{selected.whyHere?.[lang] || (lang === "en" ? "Part of the curated narrative sequence. The detailed editorial explanation is being researched." : "Parte da sequência narrativa selecionada. A justificativa editorial detalhada está sendo pesquisada.")}</p>
+              <h3>{text.why}</h3><p>{selected.whyHere || "Part of the curated narrative sequence. The detailed editorial explanation is being researched."}</p>
               <div className="detail-actions"><button className="primary-button" onClick={() => toggle(selected.id)}>{watched.has(selected.id) ? <Check size={16}/> : <CheckCircle2 size={16}/>} {watched.has(selected.id) ? text.unwatch : text.watch}</button><button className="secondary-button" onClick={() => openTrailer(selected)}><Play size={16}/> {text.video}</button></div>
               <small className="editorial-disclaimer">{text.status}</small>
             </div>
@@ -391,11 +344,11 @@ export default function VerseOrderExperience() {
 }
 
 function WatchOrderControls({ filter, setFilter, search, setSearch, text }: {
-  filter: Filter; setFilter: (f: Filter) => void; search: string; setSearch: (s: string) => void; text: typeof COPY[Language];
+  filter: Filter; setFilter: (f: Filter) => void; search: string; setSearch: (s: string) => void; text: typeof COPY;
 }) {
   return <div className="watch-controls"><div className="filter-tabs">{(["all", "mcu", "external", "optional"] as Filter[]).map(f => <button key={f} className={filter === f ? "filter-active" : ""} onClick={() => setFilter(f)}>{text[f]}</button>)}</div><label className="search-box"><Search size={17}/><input type="search" value={search} placeholder={text.search} onChange={e => setSearch(e.target.value)} /></label></div>;
 }
-function ListEnd({ visible, count, onMore, text }: { visible: number; count: number; onMore: () => void; text: typeof COPY[Language] }) {
+function ListEnd({ visible, count, onMore, text }: { visible: number; count: number; onMore: () => void; text: typeof COPY }) {
   if (!visible) return <div className="list-end"><p>{text.nothing}</p></div>;
   return <div className="list-end">{visible > count ? <button className="secondary-button" onClick={onMore}>{text.loadMore}<ArrowDownRight size={16}/></button> : <span>✦ &nbsp; {Math.min(visible, count)} / {visible} &nbsp; ✦</span>}</div>;
 }

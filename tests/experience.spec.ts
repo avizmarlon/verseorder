@@ -25,7 +25,11 @@ test("browsing experience navigation and content", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
-test("search, progress persistence, details, locale and trailer modal", async ({ page }) => {
+test("search, progress persistence, details, English-only copy and trailer modal", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("verseorder:locale:v1", "pt-BR"));
+  await page.route("https://www.youtube-nocookie.com/**", route => route.fulfill({
+    contentType: "text/html", body: "<title>Trailer lifecycle fixture</title>",
+  }));
   await page.goto("/");
   await page.locator(".search-box input").fill("Spider-Man: No Way Home");
   await expect(page.locator(".cards-grid .title-card")).toHaveCount(1);
@@ -39,9 +43,8 @@ test("search, progress persistence, details, locale and trailer modal", async ({
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.reload();
   await expect(page.locator(".header-progress")).toContainText("1");
-  await page.getByRole("button", { name: "Toggle site language" }).click();
-  await expect(page.locator("html .site-shell")).toHaveAttribute("lang", "pt-BR");
-  await expect(page.getByText("Toda história.")).toBeVisible();
+  await expect(page.locator("html .site-shell")).toHaveAttribute("lang", "en");
+  await expect(page.getByRole("button", { name: "Toggle site language" })).toHaveCount(0);
 });
 
 test("mobile navigation and layout are usable", async ({ page }) => {
