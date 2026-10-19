@@ -10,11 +10,28 @@ import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
 import "./globals.css";
 
+const siteUrl = "https://avizmarlon.github.io/verseorder/";
+const siteTitle = "VerseOrder — The Ultimate Marvel Multiverse Watch Order";
+const siteDescription =
+  "Explore a carefully curated narrative watch order connecting the MCU, legacy Marvel films, series and the multiverse. An independent fan project.";
+
 export const metadata: Metadata = {
-  title: "VerseOrder — The Ultimate Marvel Multiverse Watch Order",
-  description: "Explore a carefully curated narrative watch order connecting the MCU, legacy Marvel films, series and the multiverse. An independent fan project.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
   applicationName: "VerseOrder",
   keywords: ["Marvel", "MCU", "watch order", "multiverse", "timeline", "movies", "series"],
+  alternates: { canonical: siteUrl },
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "VerseOrder",
+    title: siteTitle,
+    description: siteDescription,
+    locale: "en_US",
+  },
+  twitter: { card: "summary", title: siteTitle, description: siteDescription },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
