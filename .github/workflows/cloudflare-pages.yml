@@ -24,9 +24,4 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - name: Check Cloudflare Pages limits (25 MiB per file, 20,000 files)
-        run: |
-          big=$(find out -type f -size +25M)
-          if [ -n "$big" ]; then echo "::error::Files over 25 MiB: $big"; exit 1; fi
-          count=$(find out -type f | wc -l)
-          echo "Files in out/: $count"
-          if [ "$count" -gt 20000 ]; then echo "::error::Too many files for Cloudflare Pages: $count"; exit 1; fi
+        run: node scripts/prepare-cloudflare.mjs
