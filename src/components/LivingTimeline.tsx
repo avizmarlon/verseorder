@@ -9,6 +9,7 @@ import {
   colorOf,
   entries,
   kindLabel,
+  lastReviewedDate,
   softOf,
   trailerIds,
   typeOf,
@@ -18,7 +19,24 @@ import Poster from "./Poster";
 import { useWatchProgress } from "./watch-progress";
 
 const repo = "https://github.com/avizmarlon/verseorder";
-const assetBase = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+] as const;
+const updatedLabel = (() => {
+  const [year, month, day] = lastReviewedDate.split("-").map(Number);
+  return `Updated ${months[month - 1]} ${day}, ${year}`;
+})();
 const filters = [
   { id: "all", label: "All" },
   { id: "film", label: "Films" },
@@ -660,9 +678,6 @@ export default function LivingTimeline() {
             {next ? "Continue the journey" : "Back to the beginning"}
           </button>
           <div className="b-footer-links">
-            <a href={`${assetBase}/verseorder-watch-order.pdf`}>
-              Printable watch order
-            </a>
             <a
               href={`${repo}/issues/new`}
               target="_blank"
@@ -674,42 +689,22 @@ export default function LivingTimeline() {
               Source code
             </a>
           </div>
+          <p>{updatedLabel}</p>
           <p>
-            112 curated entries · Updated October 17, 2026.
-            <br />
-            Earlier entries are under editorial review. Not an official Marvel
-            chronology.
-          </p>
-          <p>
-            An independent fan project. Not affiliated with Marvel, Disney, or
-            Sony. All titles, characters, cover art, and trademarks belong to
-            their respective owners. Cover art is shown for identification
-            only, sourced from{" "}
+            Fan project made by{" "}
             <a
-              href="https://en.wikipedia.org/"
+              href="https://github.com/avizmarlon"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Wikipedia
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://www.tvmaze.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              TVMaze
+              Marlon
             </a>
-            .
+            , not affiliated with Marvel, Disney or Sony. All titles,
+            characters, cover art, and trademarks belong to their respective
+            owners.
           </p>
-          <p>Anonymous, cookie-free visit stats via Cloudflare Web Analytics.</p>
           <p>
-            © 2026 <a href="https://github.com/avizmarlon">Marlon Aviz</a> ·{" "}
-            <a href={`${repo}/blob/main/LICENSE`}>MIT License</a> (source code
-            only)
-            <br />
-            You may use, copy, and modify the code. Keep the copyright and
-            license notice.
+            <a href={`${repo}/blob/main/LICENSE`}>MIT License</a>
           </p>
         </footer>
       </main>

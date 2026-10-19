@@ -2,6 +2,7 @@ import collection from "@/data/watch-order.json";
 
 export type Entry = (typeof collection.entries)[number];
 export const entries = collection.entries;
+export const lastReviewedDate = collection.lastReviewedDate;
 export const chapters = [
   {
     id: 1,
