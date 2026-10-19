@@ -16,7 +16,6 @@ import {
 } from "./timeline-data";
 import Poster from "./Poster";
 import TimelineCell from "./TimelineCell";
-import FxPanel, { useFx } from "./FxPanel";
 import { useWatchProgress } from "./watch-progress";
 
 const repo = "https://github.com/avizmarlon/verseorder";
@@ -175,7 +174,7 @@ function TitleDialog({
           {embed && video ? (
             <div className="b-video">
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${video}?rel=0`}
+                src={`https://www.youtube-nocookie.com/embed/${video}?rel=0&cc_load_policy=0`}
                 title={`${entry.title} official trailer`}
                 allow="encrypted-media; picture-in-picture; fullscreen"
                 allowFullScreen
@@ -248,7 +247,6 @@ export default function LivingTimeline() {
   const [active, setActive] = useState(0);
   const [selection, setSelection] = useState<Selection | null>(null);
   const resumeTarget = useRef<string | null>(null);
-  const { fx, setFx, showPanel } = useFx();
   useEffect(() => {
     // Prototype helper: ?focus=<entry id> centres a card on load (used by the lab phone frame).
     const id = new URLSearchParams(window.location.search).get("focus");
@@ -618,7 +616,6 @@ export default function LivingTimeline() {
                   >
                     <TimelineCell
                       entry={entry}
-                      fx={fx}
                       onDetails={() => setSelection({ entry, mode: "details" })}
                       onTrailer={() => setSelection({ entry, mode: "trailer" })}
                     />
@@ -740,7 +737,6 @@ export default function LivingTimeline() {
           </p>
         </footer>
       </main>
-      {showPanel && <FxPanel fx={fx} setFx={setFx} />}
       {selection && (
         <TitleDialog
           selection={selection}
