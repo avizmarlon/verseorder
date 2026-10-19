@@ -34,10 +34,12 @@ npm run build      # static export in out/
 npm run test:e2e   # Playwright tests against the build
 ```
 
-Cover art links live in `src/data/watch-order.json`. Run `node scripts/resolve-posters.mjs` to refresh them.
+Cover art links live in `src/data/watch-order.json`. Run `node scripts/resolve-posters.mjs` to refresh them. Banners and card previews come from `scripts/media/` (see [public/clips/README.md](public/clips/README.md)).
 
 ## The fine print
 
-This is a fan project. It's not affiliated with or endorsed by Marvel, Disney, Sony or any other rights holder, and it's not an official Marvel chronology. All titles, characters, posters and logos belong to their owners. Cover art is linked from [Wikipedia](https://en.wikipedia.org/) and [TVMaze](https://www.tvmaze.com/), not stored here, and isn't covered by this project's license.
+This is a fan project. It's not affiliated with or endorsed by Marvel, Disney, Sony or any other rights holder, and it's not an official Marvel chronology. All titles, characters, posters and logos belong to their owners. Cover art and banner images are linked from [Wikipedia](https://en.wikipedia.org/), [TVMaze](https://www.tvmaze.com/) and [TMDB](https://www.themoviedb.org/), not stored here, and aren't covered by this project's license. The previews on the cards are muted copies of the official trailers (or an official clip when a title never got a trailer). They're hosted with the site, not in this repo.
+
+This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 Made by [Marlon](https://github.com/avizmarlon). The code is [MIT licensed](LICENSE).

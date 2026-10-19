@@ -138,16 +138,18 @@
         "id": 1724
       },
       "trailer": {
-        "source": "youtube",
-        "id": "dz6eBeW19Lg",
-        "label": "The Incredible Hulk - Trailer",
-        "channel": "Universal Pictures At Home"
+        "source": "brightcove",
+        "account": "5359769168001",
+        "player": "BJemW31x6g",
+        "id": "5786823800001",
+        "label": "The Incredible Hulk | Official Trailer #1 (marvel.com)",
+        "channel": "marvel.com"
       },
       "drawerYouTubeId": "dz6eBeW19Lg",
       "trim": {
-        "start": 2.044
+        "start": 7.341
       },
-      "crop": "1916:800:0:140",
+      "crop": "1280:544:0:2",
       "backdrop": "/xfBnQ4mgf1jYZsscJGJjr6ce0Ar.jpg",
       "bannerFocus": "50% 26%"
     },
@@ -164,7 +166,6 @@
         "label": "A Funny Thing Happened on the Way to Thor's Hammer - Commentary - MCU: Phase 2 Collection (no trailer was released)",
         "channel": "Marvel Entertainment"
       },
-      "drawerYouTubeId": "AqcnUD468no",
       "trim": {
         "start": 0.125,
         "end": 53.2
@@ -172,7 +173,8 @@
       "crop": "1920:800:0:100",
       "backdrop": "/yuIsNfHZTn3nkSsatzM0298wA67.jpg",
       "bannerFocus": "62% 28%",
-      "poster": "/njrOqsmFH4pxBrhcoslqLfw2OGk.jpg"
+      "poster": "/njrOqsmFH4pxBrhcoslqLfw2OGk.jpg",
+      "$note": "The source upload is a commentary featurette: fine as a muted card preview, but not offered as the drawer trailer (its audio is commentary)."
     },
     {
       "id": "thor",
