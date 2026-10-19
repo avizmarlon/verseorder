@@ -702,6 +702,7 @@ export default function LivingTimeline() {
             </a>
             .
           </p>
+          <p>Anonymous, cookie-free visit stats via Cloudflare Web Analytics.</p>
           <p>
             © 2026 <a href="https://github.com/avizmarlon">Marlon Aviz</a> ·{" "}
             <a href={`${repo}/blob/main/LICENSE`}>MIT License</a> (source code

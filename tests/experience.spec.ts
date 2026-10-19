@@ -321,3 +321,18 @@ test("a cover that fails to load falls back to the medallion art", async ({
   await row.getByRole("button", { name: `Details: ${first.title}` }).click();
   await expect(page.locator("#detail-name")).toHaveText(first.title);
 });
+
+test("visit stats load only on the real domain", async ({ page }) => {
+  const beacons: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().startsWith("https://static.cloudflareinsights.com/")) beacons.push(request.url());
+  });
+  await home(page);
+  await page.waitForLoadState("load");
+  const onRealDomain = await page.evaluate(() => location.hostname === "verseorder.watch");
+  if (onRealDomain) await expect.poll(() => beacons.length).toBe(1);
+  else {
+    await page.waitForTimeout(1500);
+    expect(beacons).toEqual([]);
+  }
+});

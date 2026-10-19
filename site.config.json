@@ -1,4 +1,5 @@
 {
   "url": "https://verseorder.watch/",
-  "githubPagesBasePath": "/verseorder"
+  "githubPagesBasePath": "/verseorder",
+  "cloudflareAnalyticsToken": "9ca93b55be174298b546e4d572610055"
 }
