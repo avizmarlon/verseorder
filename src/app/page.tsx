@@ -1,6 +1,5 @@
 import LivingTimeline from "@/components/LivingTimeline";
-
-const siteUrl = "https://avizmarlon.github.io/verseorder/";
+import { siteUrl } from "@/site";
 
 const jsonLd = {
   "@context": "https://schema.org",

@@ -9,8 +9,8 @@ import "@fontsource/dm-sans/400.css";
 import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
 import "./globals.css";
+import { siteUrl } from "@/site";
 
-const siteUrl = "https://avizmarlon.github.io/verseorder/";
 const siteTitle = "VerseOrder — The Ultimate Marvel Multiverse Watch Order";
 const siteDescription =
   "Explore a carefully curated narrative watch order connecting the MCU, legacy Marvel films, series and the multiverse. An independent fan project.";
