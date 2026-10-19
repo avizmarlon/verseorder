@@ -4,7 +4,7 @@ The Ultimate Marvel Multiverse Watch Order.
 
 Want to watch all of Marvel but have no idea where to start? Same. VerseOrder is one list that puts the MCU, some older Marvel movies, series, specials and a few multiverse stories in an order that makes the story click. It's not strict in-universe chronology. It's the order where the callbacks, cameos and reveals hit hardest.
 
-**[Open the watch order](https://avizmarlon.github.io/verseorder/)** or [read it as a plain list](content/watch-order.md).
+**[Open the watch order](https://verseorder.watch/)** or [read it as a plain list](content/watch-order.md).
 
 Right now it has 112 entries (last updated October 17, 2026). Some are marked optional, so you can skip them or take the detour. A few shows, like *VisionQuest*, are still airing.
 
