@@ -8,7 +8,7 @@ The goal isn't to arrange every story by fictional date. It's to make the **whol
 
 ## Start the journey
 
-**[Start watching with VerseOrder](https://avizmarlon.github.io/verseorder/)** · **[Read the watch order](content/watch-order.md)** · **[Get the printable PDF](public/verseorder-watch-order.pdf)**
+**[Start watching with VerseOrder](https://verseorder.watch/)** · **[Read the watch order](content/watch-order.md)** · **[Get the printable PDF](public/verseorder-watch-order.pdf)**
 
 The curated sequence currently features **112 entries**, updated October 17, 2026. It includes selected cross-universe stories that enrich later Marvel films and marks optional detours for those who want to explore further.
 
