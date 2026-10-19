@@ -1,4 +1,8 @@
-name: Build and deploy site
+name: GitHub Pages
+# avizmarlon.github.io/verseorder/ is being retired in favour of https://verseorder.watch.
+# Set the repository variable PAGES_REDIRECT=true once the new domain is live: every path
+# then becomes a small redirect stub to the same path on the new domain. Until then this keeps
+# publishing the full site under /verseorder so nothing breaks during the move.
 on:
   push:
     branches: [main]
@@ -18,18 +22,24 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run lint
-      - run: npm run build
+      - name: Build redirect stubs
+        if: vars.PAGES_REDIRECT == 'true'
+        run: |
+          npm run build
+          node scripts/build-redirect.mjs --from out --to site
+      - name: Build legacy project-page site
+        if: vars.PAGES_REDIRECT != 'true'
         env:
           GITHUB_PAGES: "true"
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
-        env:
-          GITHUB_PAGES: "true"
+          # Keep canonical URLs on github.io until the new domain is live.
+          SITE_URL: https://avizmarlon.github.io/verseorder/
+        run: |
+          npm run build
+          mv out site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: out
+          path: site
   deploy:
     needs: build
     runs-on: ubuntu-latest

@@ -1,12 +1,8 @@
-# Titles Outside the Main Curation
+# What's not on the list (for now)
 
-These titles are not part of the main order in this edition; exclusion is not a judgment of quality. The list may change as new narrative connections or community suggestions emerge.
+These titles aren't in the main watch order right now. That doesn't mean they're bad. They just didn't fit the story path this time. The list can change as new connections show up or people suggest stuff, so if you think one of these deserves a spot, [open an issue](https://github.com/avizmarlon/verseorder/issues/new).
 
-(Without reservation)
-
-These titles are not included in either list.
-
-**Films:**
+**Movies:**
 - Hulk (2003, Ang Lee)
 - The Punisher (1989, Dolph Lundgren)
 - The Punisher (2004, Thomas Jane)
@@ -21,7 +17,7 @@ These titles are not included in either list.
 - Madame Web (2024)
 - Kraven the Hunter (2024)
 
-**Series:**
+**Shows:**
 - Marvel's Agent Carter (TV series, 2015–2016)
 - Agents of S.H.I.E.L.D. (2013–2020)
 - Inhumans (2017)
@@ -30,9 +26,8 @@ These titles are not included in either list.
 - Legion (2017–2019)
 - The Gifted (2017–2019)
 - X-Men: The Animated Series (1992–1997)
-- X-Men '97 — S1 (2024) and S2 (2026, premiered July 1, 2026; a distinct animated continuity, excluded from the main order by editorial decision)
+- X-Men '97, S1 (2024) and S2 (2026, premiered July 1, 2026). It's its own animated continuity, so I left it out of the main order.
 - Blade: The Series (2006)
 
----
-
-- Your Friendly Neighborhood Spider-Man — S1 (2025; an alternate universe, not required for the main narrative marathon). S2 expected January 13, 2027.
+**Also left out:**
+- Your Friendly Neighborhood Spider-Man, S1 (2025). It's set in an alternate universe and you don't need it for the main marathon. S2 is expected January 13, 2027.

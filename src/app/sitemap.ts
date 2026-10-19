@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/site";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: "https://avizmarlon.github.io/verseorder/", changeFrequency: "weekly", priority: 1 }];
+  return [{ url: siteUrl, changeFrequency: "weekly", priority: 1 }];
 }
