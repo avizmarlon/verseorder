@@ -137,7 +137,9 @@ export default function TimelineCell({
           } as CSSProperties
         }
       >
-        {!imageFailed && (
+        {/* Rendered only when the card is near (900px): the browser's own lazy-load margin is
+            much wider and would fetch all the backdrops of the first screens on load. */}
+        {near && !imageFailed && (
           // eslint-disable-next-line @next/next/no-img-element -- static export, hotlinked backdrop
           <img
             className="b-bimg"

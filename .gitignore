@@ -76,3 +76,6 @@ docs/previews/
 # separate static media host (NEXT_PUBLIC_MEDIA_BASE). See public/clips/README.md.
 public/clips/*.mp4
 public/clips/*.webm
+
+# scripts/media work files (downloads, contact sheets)
+/.media-work/

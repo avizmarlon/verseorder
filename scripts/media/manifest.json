@@ -1,0 +1,224 @@
+{
+  "$comment": "Per-title media for the card banner (TMDB backdrop + self-hosted muted official trailer). See build_media.py. trailer.source: youtube | brightcove (marvel.com player). trim.start/crop: 'auto' or explicit values after checking the analyze contact sheet. Values below were detected by `analyze` and then checked by eye on the contact sheets (end trims drop home-video promo end cards).",
+  "titles": [
+    {
+      "id": "eyes-of-wakanda",
+      "clip": "eyes-of-wakanda",
+      "tmdb": {
+        "type": "tv",
+        "id": 241388,
+        "season": 1
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "ODHh6oe4MlE",
+        "label": "Eyes of Wakanda | Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "ODHh6oe4MlE",
+      "trim": {
+        "start": 0.0
+      },
+      "crop": "1920:816:0:132",
+      "backdrop": "/3vD7swDFYkctqAHbK7NeQaVnEBI.jpg",
+      "bannerFocus": "50% 28%"
+    },
+    {
+      "id": "captain-america-the-first-avenger",
+      "clip": "captain-america-the-first-avenger",
+      "tmdb": {
+        "type": "movie",
+        "id": 1771
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "JerVrbLldXw",
+        "label": "Captain America: The First Avenger - Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "JerVrbLldXw",
+      "trim": {
+        "start": 6.25
+      },
+      "crop": "1920:800:0:140",
+      "backdrop": "/9EXAJgW1Q5gr8vE2jmkaIxcMsdZ.jpg",
+      "bannerFocus": "50% 22%"
+    },
+    {
+      "id": "marvel-one-shot-agent-carter",
+      "clip": "marvel-one-shot-agent-carter",
+      "tmdb": {
+        "type": "movie",
+        "id": 211387
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "Sxw2PCdqN1U",
+        "label": "Marvel One-Shot 'Agent Carter' clip - OFFICIAL (no trailer was released)",
+        "channel": "Marvel UK"
+      },
+      "drawerYouTubeId": "Sxw2PCdqN1U",
+      "trim": {
+        "start": 1.251
+      },
+      "crop": "1920:800:0:140",
+      "backdrop": "/kv8KDbi2I4F4MNBbBMCR4LDqP6H.jpg",
+      "bannerFocus": "62% 30%"
+    },
+    {
+      "id": "captain-marvel",
+      "clip": "captain-marvel",
+      "tmdb": {
+        "type": "movie",
+        "id": 299537
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "Z1BCujX3pw8",
+        "label": "Marvel Studios' Captain Marvel - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "Z1BCujX3pw8",
+      "trim": {
+        "start": 0.0
+      },
+      "crop": "1920:802:0:140",
+      "backdrop": "/nBS1vONGYrsL2C68C2oDQ3eKJR1.jpg",
+      "bannerFocus": "50% 24%"
+    },
+    {
+      "id": "iron-man",
+      "clip": "iron-man",
+      "tmdb": {
+        "type": "movie",
+        "id": 1726
+      },
+      "trailer": {
+        "source": "brightcove",
+        "account": "5359769168001",
+        "player": "BJemW31x6g",
+        "id": "5786306590001",
+        "label": "Marvel Studios' Iron Man | Official Trailer (marvel.com)",
+        "channel": "marvel.com"
+      },
+      "trim": {
+        "start": 6.406
+      },
+      "crop": "1920:816:0:0",
+      "backdrop": "/35zMyj13eAXn1X7B27mr9jQSQQb.jpg",
+      "bannerFocus": "50% 30%"
+    },
+    {
+      "id": "iron-man-2",
+      "clip": "iron-man-2",
+      "tmdb": {
+        "type": "movie",
+        "id": 10138
+      },
+      "trailer": {
+        "source": "brightcove",
+        "account": "5359769168001",
+        "player": "BJemW31x6g",
+        "id": "5786616628001",
+        "label": "Marvel Studios' Iron Man 2 | Official Trailer (marvel.com)",
+        "channel": "marvel.com"
+      },
+      "trim": {
+        "start": 7.508
+      },
+      "crop": "1280:552:0:84",
+      "backdrop": "/hCVQPB77eXBGh9abVdrWtKpKgkN.jpg",
+      "bannerFocus": "55% 22%"
+    },
+    {
+      "id": "the-incredible-hulk",
+      "clip": "the-incredible-hulk",
+      "tmdb": {
+        "type": "movie",
+        "id": 1724
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "dz6eBeW19Lg",
+        "label": "The Incredible Hulk - Trailer",
+        "channel": "Universal Pictures At Home"
+      },
+      "drawerYouTubeId": "dz6eBeW19Lg",
+      "trim": {
+        "start": 2.044
+      },
+      "crop": "1916:800:0:140",
+      "backdrop": "/xfBnQ4mgf1jYZsscJGJjr6ce0Ar.jpg",
+      "bannerFocus": "50% 26%"
+    },
+    {
+      "id": "marvel-one-shot-a-funny-thing-happened-on-the-way-to-thor-s-hammer",
+      "clip": "marvel-one-shot-a-funny-thing",
+      "tmdb": {
+        "type": "movie",
+        "id": 76535
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "AqcnUD468no",
+        "label": "A Funny Thing Happened on the Way to Thor's Hammer - Commentary - MCU: Phase 2 Collection (no trailer was released)",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "AqcnUD468no",
+      "trim": {
+        "start": 0.125,
+        "end": 53.2
+      },
+      "crop": "1920:800:0:100",
+      "backdrop": "/yuIsNfHZTn3nkSsatzM0298wA67.jpg",
+      "bannerFocus": "62% 28%",
+      "poster": "/njrOqsmFH4pxBrhcoslqLfw2OGk.jpg"
+    },
+    {
+      "id": "thor",
+      "clip": "thor",
+      "tmdb": {
+        "type": "movie",
+        "id": 10195
+      },
+      "trailer": {
+        "source": "brightcove",
+        "account": "5359769168001",
+        "player": "BJemW31x6g",
+        "id": "5806334270001",
+        "label": "Marvel Studios' Thor | Official Trailer #1 (marvel.com)",
+        "channel": "marvel.com"
+      },
+      "drawerYouTubeId": "JOddp-nlNvQ",
+      "trim": {
+        "start": 6.506
+      },
+      "crop": "1280:544:0:88",
+      "backdrop": "/1wOu8rdvPxU1ObHi20VcRhfNpbo.jpg",
+      "bannerFocus": "50% 30%"
+    },
+    {
+      "id": "marvel-one-shot-the-consultant",
+      "clip": "marvel-one-shot-the-consultant",
+      "tmdb": {
+        "type": "movie",
+        "id": 76122
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "TBJMq-isHU4",
+        "label": "Marvel One-Shot: The Consultant - Clip 1 (no trailer was released)",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "TBJMq-isHU4",
+      "trim": {
+        "start": 5.881,
+        "end": 43.0
+      },
+      "crop": "1920:820:0:130",
+      "backdrop": "/mWZvcmpIQ1qQeHCWc1jIO8qlHKJ.jpg",
+      "bannerFocus": "50% 40%",
+      "poster": "/xqNLXUUvBnfVk6m3QFGGU0Grgs7.jpg"
+    }
+  ]
+}

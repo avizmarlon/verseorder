@@ -716,7 +716,7 @@ export default function LivingTimeline() {
             .
           </p>
           <p>
-            Banner images come from{" "}
+            Banner images and some cover art come from{" "}
             <a
               href="https://www.themoviedb.org/"
               target="_blank"
@@ -725,7 +725,8 @@ export default function LivingTimeline() {
               TMDB
             </a>
             . This product uses the TMDB API but is not endorsed or certified
-            by TMDB. Trailers are embedded from YouTube.
+            by TMDB. Card previews are muted copies of the official trailers
+            (or official clips); full trailers are embedded from YouTube.
           </p>
           <p>
             © 2026 <a href="https://github.com/avizmarlon">Marlon Aviz</a> ·{" "}

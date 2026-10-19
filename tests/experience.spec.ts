@@ -155,7 +155,7 @@ test("trailer is opt-in and unverified titles offer search", async ({
   await expect.poll(() => requests.length).toBe(1);
   await page.keyboard.press("Escape");
   await expect(page.locator("iframe")).toHaveCount(0);
-  await page.getByRole("searchbox").fill("Eyes of Wakanda");
+  await page.getByRole("searchbox").fill("Item 47");
   await page.locator(".b-hit").click();
   await page
     .getByRole("dialog")
@@ -268,7 +268,7 @@ test("malformed progress is ignored and stale IDs cannot inflate progress", asyn
   await expect(page.locator(".b-ring span")).toHaveText("0");
 });
 
-const coverHosts = /^https:\/\/(upload\.wikimedia\.org|static\.tvmaze\.com)\//;
+const coverHosts = /^https:\/\/(upload\.wikimedia\.org|static\.tvmaze\.com|image\.tmdb\.org)\//;
 const pixel = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
   "base64",

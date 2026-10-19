@@ -4,10 +4,13 @@
  * embed, so the first hover starts in a few tens of milliseconds.
  *
  * - Nothing is fetched until the card approaches the viewport. Then the nearest MAX_PRELOAD cards
- *   get preload="metadata" (Chrome buffers the first few seconds, ~0.2-0.4 MB; preload="auto"
- *   would pull most of the 4-6 MB file). Save-Data / 2g / 3g: no preload, load on hover only.
+ *   get preload="metadata" (Chrome buffers the first few seconds, ~0.1-0.4 MB; preload="auto"
+ *   would pull most of the file). It is a hard cap: a card that drops out of the nearest few
+ *   gives its buffer back. Save-Data / 2g / 3g: no preload, load on hover only.
  * - Hover / keyboard focus (pointer devices) or the timeline dot on the node (touch) plays it; the
  *   flip-tiles reveal starts on the first presented frame. Leaving reverses the tiles and pauses.
+ * - One video decodes at a time: starting a card pauses any other. A card that leaves the
+ *   approach zone drops its sources (buffers and decoder freed) and re-arms when it comes back.
  * - prefers-reduced-motion: never attached (static banner). Hidden tab: paused.
  * Imperative on purpose: no React renders while hovering, only attribute flips.
  */
@@ -24,8 +27,13 @@ type Card = {
   key: string;
   cell: HTMLElement;
   video: HTMLVideoElement;
-  tiles: HTMLElement;
+  banner: HTMLElement;
+  /** built on the first preview, dropped on release: idle cards carry no extra DOM */
+  tiles: HTMLElement | null;
   pos: number | null;
+  sources: ClipSource[];
+  /** <source> children present (network / decoder may be in use) */
+  armed: boolean;
   wants: { hover: boolean; focus: boolean; dot: 0 | 1 | 2 };
   approaching: boolean;
   preloaded: boolean;
@@ -42,14 +50,17 @@ let dotPos: number | null = null;
 let approachObserver: IntersectionObserver | null = null;
 let scheduled = false;
 
-const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reducedMotion = () =>
+  matchMedia("(prefers-reduced-motion: reduce)").matches;
 type NetInfo = { saveData?: boolean; effectiveType?: string };
-const net = () => (navigator as Navigator & { connection?: NetInfo }).connection;
+const net = () =>
+  (navigator as Navigator & { connection?: NetInfo }).connection;
 /** Save-Data or a slow connection: fetch only when the user actually asks for the preview. */
 const lean = () => {
   const connection = net();
   return Boolean(
-    connection?.saveData || /^(slow-2g|2g|3g)$/.test(connection?.effectiveType ?? ""),
+    connection?.saveData ||
+    /^(slow-2g|2g|3g)$/.test(connection?.effectiveType ?? ""),
   );
 };
 
@@ -69,11 +80,65 @@ function reveal(card: Card) {
   setMode(card, "playing");
 }
 
+/** Put the sources in (idempotent). Kept out until needed so idle cards cost nothing. */
+function arm(card: Card) {
+  if (card.armed || card.broken) return;
+  card.armed = true;
+  for (const source of card.sources) {
+    const element = document.createElement("source");
+    element.src = source.src;
+    element.type = source.type;
+    card.video.appendChild(element);
+  }
+  // the last <source> failing means no playable source at all
+  card.video.lastElementChild?.addEventListener("error", () =>
+    markBroken(card),
+  );
+}
+
+/** Drop the sources: frees the buffered data and the decoder of a card that is far away. */
+function release(card: Card) {
+  if (!card.armed) return;
+  card.armed = false;
+  card.preloaded = false;
+  card.video.cancelVideoFrameCallback?.(card.frameHandle);
+  card.video.pause();
+  card.video.preload = "none";
+  card.video.removeAttribute("src");
+  card.video.replaceChildren();
+  card.video.load();
+  card.tiles?.remove();
+  card.tiles = null;
+  delete card.cell.dataset.tiles;
+  if (!card.broken) card.cell.dataset.clip = "none";
+}
+
+/** Only one preview decodes at a time. */
+function pauseOthers(card: Card) {
+  for (const other of cards.values()) {
+    if (other === card || (other.video.paused && other.mode === "idle"))
+      continue;
+    clearTimeout(other.pauseTimer);
+    other.pauseTimer = undefined;
+    other.video.cancelVideoFrameCallback?.(other.frameHandle);
+    setMode(other, "idle");
+    other.video.pause();
+  }
+}
+
 function start(card: Card) {
   clearTimeout(card.pauseTimer);
   card.pauseTimer = undefined;
   const video = card.video;
-  if (video.preload !== "auto") video.preload = "auto"; // now that it plays, buffer normally
+  if (!card.armed) {
+    arm(card);
+    video.load();
+  }
+  card.tiles ??= buildTiles(card.cell, card.banner);
+  pauseOthers(card);
+  // Stay on preload="metadata" while playing: Chrome then buffers a short window ahead of the
+  // playhead and stops fetching once paused, instead of pulling the whole trailer ("auto").
+  if (video.preload === "none") video.preload = "metadata";
   const playing = !video.paused && video.readyState >= 3;
   if (playing) return reveal(card);
   setMode(card, "loading");
@@ -97,6 +162,7 @@ function stop(card: Card) {
   card.pauseTimer = setTimeout(() => {
     card.pauseTimer = undefined;
     if (!isActive(card)) card.video.pause();
+    schedule(); // may be releasable now
   }, PAUSE_AFTER_MS);
 }
 
@@ -104,6 +170,7 @@ function markBroken(card: Card) {
   card.broken = true;
   card.cell.dataset.clip = "error";
   setMode(card, "idle");
+  card.armed = false;
   card.video.removeAttribute("src");
   card.video.replaceChildren();
 }
@@ -121,10 +188,22 @@ function preloadNearest() {
     })
     .sort((a, b) => a.score - b.score)
     .slice(0, MAX_PRELOAD);
+  const keep = new Set(ranked.map(({ card }) => card));
+  // a hard cap: a preloaded card that dropped out of the nearest few gives its buffer back
+  for (const card of cards.values())
+    if (
+      card.armed &&
+      !keep.has(card) &&
+      !isActive(card) &&
+      card.mode === "idle" &&
+      card.pauseTimer === undefined
+    )
+      release(card);
   for (const { card } of ranked) {
     if (card.preloaded) continue;
     card.preloaded = true;
     card.video.preload = "metadata";
+    arm(card);
     card.video.load();
     card.cell.dataset.clip = "loading";
   }
@@ -135,7 +214,12 @@ function evaluate() {
   preloadNearest();
   for (const card of cards.values()) {
     if (isActive(card)) start(card);
-    else stop(card);
+    else {
+      stop(card);
+      // far away and done: give the memory back
+      if (!card.approaching && !card.wants.dot && card.pauseTimer === undefined)
+        release(card);
+    }
   }
 }
 
@@ -177,7 +261,8 @@ function ensureGlobals() {
     (records) => {
       for (const record of records)
         for (const card of cards.values())
-          if (card.cell === record.target) card.approaching = record.isIntersecting;
+          if (card.cell === record.target)
+            card.approaching = record.isIntersecting;
       schedule();
     },
     { rootMargin: APPROACH_MARGIN },
@@ -187,7 +272,8 @@ function ensureGlobals() {
 }
 
 function buildTiles(cell: HTMLElement, banner: HTMLElement) {
-  const src = banner.querySelector<HTMLImageElement>(".b-bimg")?.currentSrc;
+  const image = banner.querySelector<HTMLImageElement>(".b-bimg");
+  const src = image?.currentSrc || image?.src;
   const wrap = document.createElement("div");
   wrap.className = "b-tiles";
   for (let i = 0; i < TILE_COLS * TILE_ROWS; i++) {
@@ -243,19 +329,16 @@ export function attach(options: {
   video.setAttribute("playsinline", "");
   video.setAttribute("aria-hidden", "true");
   video.tabIndex = -1;
-  for (const source of options.sources) {
-    const element = document.createElement("source");
-    element.src = source.src;
-    element.type = source.type;
-    video.appendChild(element);
-  }
   slot.appendChild(video);
   const card: Card = {
     key: options.key,
     cell,
     video,
-    tiles: buildTiles(cell, banner),
+    banner,
+    tiles: null,
     pos: options.pos,
+    sources: options.sources,
+    armed: false,
     wants: { hover: false, focus: false, dot: 0 },
     approaching: false,
     preloaded: false,
@@ -266,8 +349,6 @@ export function attach(options: {
   };
   cards.set(card.key, card);
   cell.dataset.clip = "none";
-  // the last <source> failing means no playable source at all
-  video.lastElementChild?.addEventListener("error", () => markBroken(card));
   video.addEventListener("error", () => markBroken(card));
   video.addEventListener("loadeddata", () => {
     if (!card.broken) cell.dataset.clip = "ready";
@@ -318,7 +399,7 @@ export function attach(options: {
     video.replaceChildren();
     video.load();
     video.remove();
-    card.tiles.remove();
+    card.tiles?.remove();
     delete cell.dataset.tiles;
     cards.delete(card.key);
     cell.dataset.trailer = "idle";

@@ -18,9 +18,12 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
+      "trailerYouTubeId": "ODHh6oe4MlE",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/580/1451968.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/3vD7swDFYkctqAHbK7NeQaVnEBI.jpg",
+      "bannerFocus": "50% 28%",
+      "clip": "eyes-of-wakanda"
     },
     {
       "id": "captain-america-the-first-avenger",
@@ -53,9 +56,12 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
+      "trailerYouTubeId": "Sxw2PCdqN1U",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/a/a7/Agent_Carter_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/kv8KDbi2I4F4MNBbBMCR4LDqP6H.jpg",
+      "bannerFocus": "62% 30%",
+      "clip": "marvel-one-shot-agent-carter"
     },
     {
       "id": "captain-marvel",
@@ -69,9 +75,12 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
+      "trailerYouTubeId": "Z1BCujX3pw8",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/4/4e/Captain_Marvel_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/nBS1vONGYrsL2C68C2oDQ3eKJR1.jpg",
+      "bannerFocus": "50% 24%",
+      "clip": "captain-marvel"
     },
     {
       "id": "iron-man",
@@ -87,7 +96,10 @@
       "whyHere": null,
       "trailerYouTubeId": null,
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/02/Iron_Man_%282008_film%29_poster.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/35zMyj13eAXn1X7B27mr9jQSQQb.jpg",
+      "bannerFocus": "50% 30%",
+      "clip": "iron-man"
     },
     {
       "id": "iron-man-2",
@@ -103,7 +115,10 @@
       "whyHere": null,
       "trailerYouTubeId": null,
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/e/ed/Iron_Man_2_poster.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/hCVQPB77eXBGh9abVdrWtKpKgkN.jpg",
+      "bannerFocus": "55% 22%",
+      "clip": "iron-man-2"
     },
     {
       "id": "the-incredible-hulk",
@@ -117,9 +132,12 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
+      "trailerYouTubeId": "dz6eBeW19Lg",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/f/f0/The_Incredible_Hulk_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/xfBnQ4mgf1jYZsscJGJjr6ce0Ar.jpg",
+      "bannerFocus": "50% 26%",
+      "clip": "the-incredible-hulk"
     },
     {
       "id": "marvel-one-shot-a-funny-thing-happened-on-the-way-to-thor-s-hammer",
@@ -133,9 +151,12 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
-      "posterPath": null,
-      "verification": "original-curation-unreviewed"
+      "trailerYouTubeId": "AqcnUD468no",
+      "posterPath": "https://image.tmdb.org/t/p/w342/njrOqsmFH4pxBrhcoslqLfw2OGk.jpg",
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/yuIsNfHZTn3nkSsatzM0298wA67.jpg",
+      "bannerFocus": "62% 28%",
+      "clip": "marvel-one-shot-a-funny-thing"
     },
     {
       "id": "thor",
@@ -149,9 +170,12 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
+      "trailerYouTubeId": "JOddp-nlNvQ",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/95/Thor_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/1wOu8rdvPxU1ObHi20VcRhfNpbo.jpg",
+      "bannerFocus": "50% 30%",
+      "clip": "thor"
     },
     {
       "id": "marvel-one-shot-the-consultant",
@@ -165,9 +189,12 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
-      "posterPath": null,
-      "verification": "original-curation-unreviewed"
+      "trailerYouTubeId": "TBJMq-isHU4",
+      "posterPath": "https://image.tmdb.org/t/p/w342/xqNLXUUvBnfVk6m3QFGGU0Grgs7.jpg",
+      "verification": "original-curation-unreviewed",
+      "bannerUrl": "https://image.tmdb.org/t/p/w780/mWZvcmpIQ1qQeHCWc1jIO8qlHKJ.jpg",
+      "bannerFocus": "50% 40%",
+      "clip": "marvel-one-shot-the-consultant"
     },
     {
       "id": "the-avengers",
