@@ -1673,33 +1673,21 @@ body {
 
 /* ====================================================================== */
 /* Card banner + trailer (PROTOTYPE: Captain America: The First Avenger)  */
+/* Everything below animates transform / opacity / clip-path / mask only. */
 /* ====================================================================== */
 @property --s {
   syntax: "<length>";
   inherits: false;
   initial-value: 0px;
 }
-.b-cell {
-  --pdir: -1; /* which way the poster leaves: -1 = left, 1 = right */
-  --wipe-from: inset(0 100% 0 0);
-  --ox: 14%;
-}
-.b-l .b-cell {
-  --pdir: 1;
-  --wipe-from: inset(0 0 0 100%);
-  --ox: 86%;
-}
-@media (max-width: 760px) {
-  .b-l .b-cell {
-    --pdir: -1;
-    --wipe-from: inset(0 100% 0 0);
-    --ox: 14%;
-  }
-}
 .b-cell[data-banner] {
-  /* the glass blur would also soften the banner image/video */
+  /* no glass blur on banner cards: it would soften the image/video and costs GPU time */
   backdrop-filter: none;
   background: #0b0e1c;
+  min-height: 176px;
+}
+.b-row.seen .b-cell[data-banner]:hover {
+  transform: translateY(-3px);
 }
 .b-banner {
   position: absolute;
@@ -1719,104 +1707,124 @@ body {
   object-fit: cover;
   object-position: var(--bpos, 50% 50%);
   transform: scale(1.06);
-  transition: transform 7s ease-out;
-}
-.b-cell[data-banner]:hover .b-bimg {
-  transform: scale(1.12);
-}
-.b-cell[data-fx="tiles"]:hover .b-bimg {
-  transform: scale(1.06);
 }
 .b-vid {
   position: absolute;
   inset: 0;
   overflow: hidden;
   opacity: 0;
-  transition: opacity 0.9s ease;
 }
 .b-vid iframe {
   position: absolute;
   left: 50%;
   top: 50%;
   border: 0;
-  /* object-fit: cover for an iframe: oversize the 16:9 player, then crop; extra 1.24x hides
-     YouTube chrome and the trailer's own letterbox bars */
+  /* object-fit: cover for an iframe: oversize the 16:9 player and crop. The extra 1.3x (shifted slightly down in the card, i.e. up in the video) pushes
+     YouTube's title bar / bottom strip and the trailer's own letterbox bars out of the card. */
   width: max(100cqw, 177.78cqh);
   height: max(100cqh, 56.25cqw);
-  transform: translate(-50%, -50%) scale(1.24);
+  transform: translate(-50%, -47%) scale(1.3);
   pointer-events: none;
 }
+/* contrast scrim: strong while static (text sits on a bright backdrop) ... */
 .b-bscrim {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(0deg, rgba(5, 7, 15, 0.78), rgba(5, 7, 15, 0) 62%),
     linear-gradient(90deg, rgba(5, 7, 15, 0.7), rgba(5, 7, 15, 0.4) 50%, rgba(5, 7, 15, 0.66));
-  transition: opacity 0.8s;
+  transition: opacity 0.55s ease;
+}
+/* ... and only a light bottom gradient (for the compact caption) while the trailer plays */
+.b-bfade {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(0deg, rgba(5, 7, 15, 0.7), rgba(5, 7, 15, 0) 42%);
+  transition: opacity 0.55s ease;
 }
 .b-cell[data-trailer="playing"] .b-bscrim {
-  opacity: 0.8;
+  opacity: 0;
+}
+.b-cell[data-trailer="playing"] .b-bfade {
+  opacity: 1;
 }
 .b-cell[data-banner] .b-ct {
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
+  transition: opacity 0.5s ease;
 }
-.b-cell[data-banner] .b-more p {
+.b-cell[data-banner] .b-era {
+  margin: 8px 0 0;
+  font-size: 13px;
   color: #e6e9fb;
 }
 .b-cell[data-banner] .b-med {
   transition:
-    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 0.8s ease,
-    filter 0.8s ease,
-    box-shadow 0.8s ease;
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.6s ease;
 }
-
-/* 1 · crossfade */
-.b-cell[data-fx="crossfade"][data-trailer="playing"] .b-vid {
-  opacity: 1;
-}
-.b-cell[data-fx="crossfade"][data-trailer="playing"] .b-med {
+/* while playing: poster and the full title block leave, a compact caption stays bottom-left */
+.b-cell[data-banner][data-trailer="playing"] .b-med {
   opacity: 0;
-  transform: scale(0.9);
+  transform: scale(0.92);
 }
-
-/* 2 · slide + wipe: poster folds into its edge, video wipes in from that side */
-.b-cell[data-fx="slide-wipe"] .b-vid {
-  opacity: 1;
-  clip-path: var(--wipe-from);
-  transition: clip-path 1s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.b-cell[data-fx="slide-wipe"][data-trailer="playing"] .b-vid {
-  clip-path: inset(0 0 0 0);
-}
-.b-cell[data-fx="slide-wipe"] .b-med {
-  transform-origin: calc(50% + var(--pdir) * 50%) 50%;
-}
-.b-cell[data-fx="slide-wipe"][data-trailer="playing"] .b-med {
-  transform: scaleX(0.04) skewY(calc(var(--pdir) * -8deg));
+.b-cell[data-banner][data-trailer="playing"] .b-ct {
   opacity: 0;
-  transition-duration: 0.8s, 0.5s;
-  transition-delay: 0s, 0.35s;
 }
-
-/* 3 · comic shutter: diagonal slats open */
-.b-cell[data-fx="shutter"] .b-vid {
-  opacity: 1;
-  --s: 0px;
-  -webkit-mask-image: repeating-linear-gradient(115deg, #000 0 var(--s), transparent var(--s) 26px);
-  mask-image: repeating-linear-gradient(115deg, #000 0 var(--s), transparent var(--s) 26px);
-  transition: --s 0.95s cubic-bezier(0.5, 0, 0.2, 1);
-}
-.b-cell[data-fx="shutter"][data-trailer="playing"] .b-vid {
-  --s: 26px;
-}
-.b-cell[data-fx="shutter"][data-trailer="playing"] .b-med {
-  transform: skewX(-14deg) translateX(calc(var(--pdir) * 26px)) scale(0.96);
+.b-cap {
+  position: absolute;
+  left: 30px;
+  bottom: 12px;
+  right: 30px;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
   opacity: 0;
-  filter: brightness(1.7);
+  transform: translateY(6px);
+  pointer-events: none;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.b-l .b-cap {
+  left: 22px;
+  right: 30px;
+}
+.b-cap b {
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.b-cell[data-trailer="playing"] .b-cap {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.25s;
+}
+/* quiet shimmer while a cold card buffers (hover before it was warmed) */
+.b-cell[data-trailer="loading"] .b-bscrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 38%, rgba(255, 255, 255, 0.12) 50%, transparent 62%);
+  animation: b-load 1.7s ease-in-out infinite;
+}
+@keyframes b-load {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
-/* 4 · flip tiles: 6x3 panels flip over (staggered diagonal) to reveal the video */
+/* ---- tiles: 6x3 panels flip left→right on enter, right→left on exit ---- */
 .b-cell[data-fx="tiles"] .b-vid {
   opacity: 1;
 }
@@ -1832,8 +1840,9 @@ body {
   position: relative;
   display: block;
   transform-style: preserve-3d;
-  transition: transform 0.75s cubic-bezier(0.45, 0, 0.2, 1)
-    calc((var(--c) + var(--r)) * 75ms);
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.3, 0.7, 0.3, 1)
+    calc((7 - var(--c) - var(--r)) * 55ms);
 }
 .b-tface {
   position: absolute;
@@ -1842,7 +1851,7 @@ body {
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
 }
 .b-timg {
   position: absolute;
@@ -1857,172 +1866,45 @@ body {
 }
 .b-cell[data-fx="tiles"][data-trailer="playing"] .b-tile {
   transform: rotateY(180deg);
+  transition-delay: calc((var(--c) + var(--r)) * 55ms);
 }
-.b-cell[data-fx="tiles"][data-trailer="playing"] .b-med {
-  opacity: 0;
-  transform: scale(0.94);
-  transition-delay: 0.15s;
-}
+/* the tile layer carries the scrim look, so keep it above the video but under the scrims */
 
-/* 5 · corner badge: poster shrinks into the corner while the video fills the card */
-.b-cell[data-fx="badge"][data-trailer="playing"] .b-vid {
+/* ---- shutter: diagonal slats open (and close again) ---- */
+.b-cell[data-fx="shutter"] .b-vid {
   opacity: 1;
+  --s: 0px;
+  -webkit-mask-image: repeating-linear-gradient(115deg, #000 0 var(--s), transparent var(--s) 26px);
+  mask-image: repeating-linear-gradient(115deg, #000 0 var(--s), transparent var(--s) 26px);
+  transition: --s 0.8s cubic-bezier(0.2, 0.75, 0.25, 1);
 }
-.b-cell[data-fx="badge"][data-trailer="playing"] .b-med {
-  transform: translate(var(--bx, 0px), var(--by, 0px)) scale(0.42);
-  box-shadow:
-    0 0 0 3px var(--gold),
-    0 8px 26px rgba(0, 0, 0, 0.7);
-  z-index: 3;
-}
-
-/* 6 · zoom + shine: poster blows up and dissolves under a light sweep */
-.b-cell[data-fx="shine"] .b-vid {
-  filter: brightness(2) saturate(1.4);
-  transition:
-    opacity 0.9s ease 0.15s,
-    filter 1.4s ease 0.1s;
-}
-.b-cell[data-fx="shine"][data-trailer="playing"] .b-vid {
-  opacity: 1;
-  filter: none;
-}
-.b-cell[data-fx="shine"][data-trailer="playing"] .b-med {
-  transform: scale(2) rotate(calc(var(--pdir) * -3deg));
-  filter: blur(8px) brightness(1.6);
-  opacity: 0;
-  transition-timing-function: ease-in;
-}
-.b-shine {
-  position: absolute;
-  inset: -30% -10%;
-  background: linear-gradient(
-    105deg,
-    transparent 38%,
-    rgba(255, 255, 255, 0.75) 50%,
-    transparent 62%
-  );
-  mix-blend-mode: screen;
-  opacity: 0;
-  transform: translateX(-120%);
-}
-.b-cell[data-fx="shine"][data-trailer="playing"] .b-shine {
-  animation: b-sweep 1.1s ease-out 0.1s forwards;
-}
-@keyframes b-sweep {
-  0% {
-    opacity: 1;
-    transform: translateX(-120%);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(120%);
-  }
+.b-cell[data-fx="shutter"][data-trailer="playing"] .b-vid {
+  --s: 26px;
 }
 
-/* 7 · cinematic bars: bars slam shut, then open on a widescreen frame */
+/* ---- letterbox: bars + video fade are driven by Web Animations (reversible mid-flight) ---- */
 .b-bar {
   position: absolute;
   left: 0;
   right: 0;
-  height: 0;
+  height: 50.5%;
   background: #000;
   z-index: 1;
+  transform: scaleY(0);
+  will-change: transform;
 }
 .b-bar-t {
   top: 0;
+  transform-origin: top;
 }
 .b-bar-b {
   bottom: 0;
+  transform-origin: bottom;
 }
-.b-cell[data-fx="letterbox"] .b-vid {
-  transition: opacity 0.5s ease;
-}
-.b-cell[data-fx="letterbox"][data-trailer="playing"] .b-vid {
-  opacity: 1;
-  transition: opacity 0s linear 0.45s;
-}
-.b-cell[data-fx="letterbox"][data-trailer="playing"] .b-bar {
-  animation: b-bars-in 1.4s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-}
-.b-cell[data-fx="letterbox"][data-trailer="leaving"] .b-bar {
-  animation: b-bars-out 0.6s ease forwards;
-}
-.b-cell[data-fx="letterbox"][data-trailer="playing"] .b-med {
-  opacity: 0;
-  transform: scale(0.94);
-  transition-delay: 0.25s;
-}
-@keyframes b-bars-in {
-  0% {
-    height: 0;
-  }
-  34% {
-    height: 50.5%;
-  }
-  100% {
-    height: 11%;
-  }
-}
-@keyframes b-bars-out {
-  0% {
-    height: 11%;
-  }
-  100% {
-    height: 0;
-  }
-}
-
-/* 8 · shield iris: circular reveal from the poster, with an expanding gold ring */
-.b-cell[data-fx="iris"] .b-vid {
-  opacity: 1;
-  clip-path: circle(0% at var(--ox) 50%);
-  transition: clip-path 1.05s cubic-bezier(0.6, 0, 0.2, 1);
-}
-.b-cell[data-fx="iris"][data-trailer="playing"] .b-vid {
-  clip-path: circle(150% at var(--ox) 50%);
-}
-.b-cell[data-fx="iris"][data-trailer="playing"] .b-med {
-  transform: scale(0.7) rotate(calc(var(--pdir) * -14deg));
-  opacity: 0;
-}
-.b-irisring {
-  position: absolute;
-  left: var(--ox);
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  margin: -22px 0 0 -22px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    transparent 56%,
-    var(--gold) 58%,
-    var(--gold) 62%,
-    transparent 64%
-  );
-  opacity: 0;
-  transform: scale(0.3);
-}
-.b-cell[data-fx="iris"][data-trailer="playing"] .b-irisring {
-  animation: b-irisring 1.1s cubic-bezier(0.3, 0.6, 0.2, 1) forwards;
-}
-@keyframes b-irisring {
-  0% {
-    opacity: 1;
-    transform: scale(0.3);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(16);
-  }
-}
-
 /* ---- lab (prototype) ---- */
+/* .lab-root is the scroll container itself (body is overflow:hidden, like the timeline) */
 .lab-root {
-  height: auto;
-  min-height: 100vh;
-  overflow: visible;
+  scroll-behavior: auto;
 }
 .lab-main {
   max-width: 1180px;
@@ -2164,24 +2046,53 @@ body {
   }
 }
 
-/* while the trailer buffers / YouTube's own overlay fades: a quiet shimmer across the banner */
-.b-cell[data-trailer="loading"] .b-bscrim::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    100deg,
-    transparent 38%,
-    rgba(255, 255, 255, 0.12) 50%,
-    transparent 62%
-  );
-  animation: b-load 1.7s ease-in-out infinite;
+.lab-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-@keyframes b-load {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(100%);
-  }
+.lab-check {
+  display: flex !important;
+  grid-template-columns: none;
+  align-items: flex-start;
+  gap: 8px !important;
+}
+.lab-phone {
+  margin-top: 46px;
+}
+.lab-phone h2 {
+  margin: 0 0 8px;
+  font-weight: 500;
+  font-size: 26px;
+}
+.lab-phone-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0;
+}
+.lab-phone-bar select {
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #10142a;
+  color: var(--tx);
+  padding: 0 10px;
+  font: inherit;
+}
+.lab-phone-shell {
+  width: fit-content;
+  max-width: 100%;
+  overflow: auto;
+  padding: 14px;
+  border-radius: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: #000;
+}
+.lab-phone-shell iframe {
+  display: block;
+  border: 0;
+  border-radius: 24px;
+  background: var(--ink);
 }
