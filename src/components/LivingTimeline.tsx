@@ -15,6 +15,8 @@ import {
   type Entry,
 } from "./timeline-data";
 import Poster from "./Poster";
+import TimelineCell from "./TimelineCell";
+import FxPanel, { useFx } from "./FxPanel";
 import { useWatchProgress } from "./watch-progress";
 
 const repo = "https://github.com/avizmarlon/verseorder";
@@ -246,6 +248,7 @@ export default function LivingTimeline() {
   const [active, setActive] = useState(0);
   const [selection, setSelection] = useState<Selection | null>(null);
   const resumeTarget = useRef<string | null>(null);
+  const { fx, setFx, showPanel } = useFx();
   const visible = entries.filter(
     (entry) =>
       (filter === "all" ||
@@ -563,49 +566,12 @@ export default function LivingTimeline() {
                     id={`node-${entry.id}`}
                     data-position={entry.position}
                   >
-                    <div className="b-cell">
-                      <div
-                        className="b-glow"
-                        style={{
-                          background: `radial-gradient(90% 120% at 50% 50%,${softOf(entry)},transparent 70%)`,
-                        }}
-                      />
-                      <button
-                        className="b-hit"
-                        onClick={() => setSelection({ entry, mode: "details" })}
-                        aria-label={`Details: ${entry.title}`}
-                      />
-                      <Poster entry={entry} className="b-med" decorative />
-                      <div className="b-ct">
-                        <div className="b-k" style={{ color: colorOf(entry) }}>
-                          {kindLabel(entry)} ·{" "}
-                          {entry.optional ? "Optional" : entry.universe}
-                        </div>
-                        <h3>{entry.title}</h3>
-                        <div className="b-more">
-                          <p>{entry.era}</p>
-                          <div className="b-acts">
-                            <button
-                              className="b-sm"
-                              onClick={() =>
-                                setSelection({ entry, mode: "details" })
-                              }
-                            >
-                              Details
-                            </button>
-                            <button
-                              className="b-sm"
-                              onClick={() =>
-                                setSelection({ entry, mode: "trailer" })
-                              }
-                            >
-                              <Play size={10} />
-                              Trailer
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <TimelineCell
+                      entry={entry}
+                      fx={fx}
+                      onDetails={() => setSelection({ entry, mode: "details" })}
+                      onTrailer={() => setSelection({ entry, mode: "trailer" })}
+                    />
                     <button
                       className={`b-orb ${watched.has(entry.id) ? "lit" : ""}`}
                       aria-label={`${watched.has(entry.id) ? "Mark as unwatched" : "Mark as watched"}: ${entry.title}`}
@@ -703,6 +669,18 @@ export default function LivingTimeline() {
             .
           </p>
           <p>
+            Banner images come from{" "}
+            <a
+              href="https://www.themoviedb.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TMDB
+            </a>
+            . This product uses the TMDB API but is not endorsed or certified
+            by TMDB. Trailers are embedded from YouTube.
+          </p>
+          <p>
             © 2026 <a href="https://github.com/avizmarlon">Marlon Aviz</a> ·{" "}
             <a href={`${repo}/blob/main/LICENSE`}>MIT License</a> (source code
             only)
@@ -712,6 +690,7 @@ export default function LivingTimeline() {
           </p>
         </footer>
       </main>
+      {showPanel && <FxPanel fx={fx} setFx={setFx} />}
       {selection && (
         <TitleDialog
           selection={selection}
