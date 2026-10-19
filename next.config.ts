@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   basePath: isGithubPages ? "/verseorder" : undefined,
   assetPrefix: isGithubPages ? "/verseorder/" : undefined,
   images: { unoptimized: true },
+  env: { NEXT_PUBLIC_BASE_PATH: isGithubPages ? "/verseorder" : "" },
 };
 
 export default nextConfig;

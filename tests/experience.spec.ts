@@ -1,66 +1,269 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+import collection from "../src/data/watch-order.json";
 
-test("browsing experience navigation and content", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
-  const errors: string[] = [];
-  page.on("pageerror", err => errors.push(err.message));
-  await page.goto("/");
+const home = async (page: import("@playwright/test").Page) => {
+  await page.goto("./");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await page.waitForTimeout(700);
-  await page.waitForTimeout(850);
-  await page.screenshot({ path: "docs/previews/archive-desktop.png", fullPage: false });
+};
 
-  await page.getByRole("button", { name: "Watch order", exact: true }).click();
-  await expect(page.locator(".scene-timeline")).toBeVisible();
-  await page.waitForTimeout(850);
-  await page.screenshot({ path: "docs/previews/timeline-desktop.png", fullPage: false });
-
-  await page.getByRole("button", { name: "Universes", exact: true }).click();
-  await expect(page.locator(".scene-multiverse")).toBeVisible();
-  await page.waitForTimeout(850);
-  await page.screenshot({ path: "docs/previews/multiverse-desktop.png", fullPage: false });
-
-  await page.getByRole("button", { name: /LEGACY WORLDS/i }).first().click();
-  await expect(page.locator(".universe-cards .title-card").first()).toBeVisible();
+test("canonical order, English, desktop design, scroll and accessibility", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.addInitScript(() =>
+    localStorage.setItem("verseorder:locale:v1", "pt-BR"),
+  );
+  await home(page);
+  await expect(page.locator("article.b-row")).toHaveCount(112);
+  expect(
+    await page
+      .locator("article.b-row")
+      .evaluateAll((nodes) => nodes.map((node) => node.id)),
+  ).toEqual(collection.entries.map((entry) => `node-${entry.id}`));
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(
+    page.getByRole("heading", { name: "Genesis", exact: true }),
+  ).toHaveCount(1);
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(2400);
+  await page.screenshot({ path: "docs/previews/living-desktop.png" });
+  await page
+    .getByRole("link", { name: "Begin the journey", exact: true })
+    .click();
+  await page.locator("#node-captain-marvel").scrollIntoViewIfNeeded();
+  await expect(page.locator(".b-pip.on")).toHaveAccessibleName("Genesis");
+  await expect
+    .poll(() =>
+      page
+        .locator("#ch1 .b-fill")
+        .evaluate((el) => el.getBoundingClientRect().height),
+    )
+    .toBeGreaterThan(0);
+  await page.waitForTimeout(1100);
+  await page.screenshot({ path: "docs/previews/living-timeline-desktop.png" });
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze()
+    ).violations,
+  ).toEqual([]);
   expect(errors).toEqual([]);
 });
 
-test("search, progress persistence, details, English-only copy and trailer modal", async ({ page }) => {
-  await page.addInitScript(() => localStorage.setItem("verseorder:locale:v1", "pt-BR"));
-  await page.route("https://www.youtube-nocookie.com/**", route => route.fulfill({
-    contentType: "text/html", body: "<title>Trailer lifecycle fixture</title>",
-  }));
-  await page.goto("/");
-  await page.locator(".search-box input").fill("Spider-Man: No Way Home");
-  await expect(page.locator(".cards-grid .title-card")).toHaveCount(1);
-  await page.locator(".cards-grid .card-hit").click();
+test("filters hide entries, keep order slots, search and resume clear filters", async ({
+  page,
+}) => {
+  await home(page);
+  await page.getByRole("button", { name: "Films", exact: true }).click();
+  await expect(page.locator("article.b-row")).toHaveCount(
+    collection.entries.filter((entry) => entry.kind === "movie").length,
+  );
+  await page.getByRole("button", { name: "Legacy", exact: true }).click();
+  await expect(page.locator("article.b-row")).toHaveCount(
+    collection.entries.filter((entry) => entry.external).length,
+  );
+  await page.getByRole("button", { name: "All", exact: true }).click();
+  await page.getByRole("searchbox").fill("Spider-Man: No Way Home");
+  await expect(page.locator("article.b-row")).toHaveCount(1);
+  await expect(page.locator("article.b-row")).toHaveAttribute(
+    "data-position",
+    String(
+      collection.entries.find((entry) => entry.id === "spider-man-no-way-home")!
+        .position,
+    ),
+  );
+  await page
+    .getByRole("button", { name: /watched. Resume at next unwatched/ })
+    .click();
+  await expect(page.getByRole("searchbox")).toHaveValue("");
+  await expect(page.locator("article.b-row")).toHaveCount(112);
+  await page.getByRole("searchbox").fill("no such title xyz");
+  await expect(page.locator("article.b-row")).toHaveCount(0);
+  await expect(page.getByRole("status")).toContainText("0 matching titles");
+});
+
+test("details, keyboard focus, adjacent titles and progress survive reload", async ({
+  page,
+}) => {
+  await home(page);
+  await page
+    .getByRole("button", { name: "Details: Eyes of Wakanda", exact: true })
+    .click();
   await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.locator("#detail-name")).toContainText("No Way Home");
-  await page.getByRole("button", { name: "Mark as watched" }).last().click();
-  await page.getByRole("button", { name: "Watch official trailer" }).last().click();
-  await expect(page.locator(".video-frame")).toHaveCount(1);
+  await page
+    .getByRole("dialog")
+    .evaluate((el) =>
+      Promise.all(el.getAnimations().map((animation) => animation.finished)),
+    );
+  await expect(
+    page
+      .getByRole("dialog")
+      .getByRole("heading", { name: "Eyes of Wakanda", exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Mark as watched", exact: true })
+    .click();
+  await page.getByRole("button", { name: /Next in order/ }).click();
+  await expect(page.locator("#detail-name")).toHaveText(
+    "Captain America: The First Avenger",
+  );
+  for (let i = 0; i < 12; i++) await page.keyboard.press("Tab");
+  expect(
+    await page
+      .getByRole("dialog")
+      .evaluate((el) => el.contains(document.activeElement)),
+  ).toBe(true);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.reload();
-  await expect(page.locator(".header-progress")).toContainText("1");
-  await expect(page.locator("html .site-shell")).toHaveAttribute("lang", "en");
-  await expect(page.getByRole("button", { name: "Toggle site language" })).toHaveCount(0);
+  await expect(page.locator(".b-ring span")).toHaveText("1");
+  await expect(page.locator("#node-eyes-of-wakanda .b-orb")).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
 });
 
-test("mobile navigation and layout are usable", async ({ page }) => {
+test("trailer is opt-in and unverified titles offer search", async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().includes("youtube-nocookie"))
+      requests.push(request.url());
+  });
+  await page.route("https://www.youtube-nocookie.com/**", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<title>Trailer lifecycle fixture</title>",
+    }),
+  );
+  await home(page);
+  expect(requests).toHaveLength(0);
+  await page.getByRole("searchbox").fill("No Way Home");
+  await page.locator(".b-hit").click();
+  await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "Trailer", exact: true })
+    .click();
+  await expect(page.locator("iframe")).toHaveCount(0);
+  await page.getByRole("button", { name: "Load official trailer" }).click();
+  await expect(page.locator("iframe")).toHaveCount(1);
+  await expect.poll(() => requests.length).toBe(1);
+  await page.keyboard.press("Escape");
+  await expect(page.locator("iframe")).toHaveCount(0);
+  await page.getByRole("searchbox").fill("Eyes of Wakanda");
+  await page.locator(".b-hit").click();
+  await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "Trailer", exact: true })
+    .click();
+  await expect(
+    page.getByRole("link", { name: /Find an official trailer/ }),
+  ).toBeVisible();
+  await expect(page.locator("iframe")).toHaveCount(0);
+});
+
+test("mobile composition, touch controls, overflow and accessibility", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
-  await page.waitForTimeout(700);
-  await page.waitForTimeout(850);
-  await page.screenshot({ path: "docs/previews/archive-mobile.png", fullPage: false });
-  await page.getByRole("button", { name: "Toggle navigation" }).click();
-  await page.getByRole("button", { name: "Watch order", exact: true }).click();
-  await expect(page.locator(".scene-timeline")).toBeVisible();
-  await page.waitForTimeout(850);
-  await page.screenshot({ path: "docs/previews/timeline-mobile.png", fullPage: false });
-  await page.getByRole("button", { name: "Toggle navigation" }).click();
-  await page.getByRole("button", { name: "Universes", exact: true }).click();
-  await expect(page.locator(".scene-multiverse")).toBeVisible();
-  await page.waitForTimeout(850);
-  await page.screenshot({ path: "docs/previews/multiverse-mobile.png", fullPage: false });
+  await home(page);
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(2400);
+  await page.screenshot({ path: "docs/previews/living-mobile.png" });
+  expect(
+    await page
+      .locator(".b-root")
+      .evaluate((el) => el.scrollWidth <= el.clientWidth),
+  ).toBe(true);
+  await page
+    .getByRole("link", { name: "Begin the journey", exact: true })
+    .click();
+  await page.locator("#node-captain-marvel").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1100);
+  await page.screenshot({ path: "docs/previews/living-timeline-mobile.png" });
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze()
+    ).violations,
+  ).toEqual([]);
+  await page.getByRole("searchbox").fill("Captain America: The First Avenger");
+  await page.locator(".b-hit").click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page
+    .getByRole("dialog")
+    .evaluate((el) =>
+      Promise.all(el.getAnimations().map((animation) => animation.finished)),
+    );
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze()
+    ).violations,
+  ).toEqual([]);
+  await page.getByRole("button", { name: "Close", exact: true }).click();
+});
+
+test("reduced motion and blocked browser storage still allow progress", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.addInitScript(() => {
+    Object.defineProperty(Storage.prototype, "getItem", {
+      value: () => {
+        throw new Error("Unavailable");
+      },
+    });
+    Object.defineProperty(Storage.prototype, "setItem", {
+      value: () => {
+        throw new Error("Unavailable");
+      },
+    });
+  });
+  await home(page);
+  await expect(page.getByRole("status")).toContainText(
+    "storage is unavailable",
+  );
+  await page
+    .getByRole("button", {
+      name: "Mark as watched: Eyes of Wakanda",
+      exact: true,
+    })
+    .click();
+  await expect(page.locator(".b-ring span")).toHaveText("1");
+  expect(
+    await page
+      .locator(".b-disc i")
+      .first()
+      .evaluate((el) => getComputedStyle(el).animationName),
+  ).toBe("none");
+});
+
+test("malformed progress is ignored and stale IDs cannot inflate progress", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    if (!localStorage.getItem("verseorder:watched:v1"))
+      localStorage.setItem(
+        "verseorder:watched:v1",
+        JSON.stringify([
+          "eyes-of-wakanda",
+          "unknown-id",
+          "eyes-of-wakanda",
+          42,
+        ]),
+      );
+  });
+  await home(page);
+  await expect(page.locator(".b-ring span")).toHaveText("1");
+  await page.evaluate(() => localStorage.setItem("verseorder:watched:v1", "{"));
+  await page.reload();
+  await expect(page.locator(".b-ring span")).toHaveText("0");
 });

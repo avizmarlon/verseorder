@@ -8,7 +8,7 @@ The goal isn't to arrange every story by fictional date. It's to make the **whol
 
 ## Start the journey
 
-**[Explore the watch order](content/watch-order.md)** · **[Get the printable PDF](public/verseorder-watch-order.pdf)**
+**[Start watching with VerseOrder](https://avizmarlon.github.io/verseorder/)** · **[Read the watch order](content/watch-order.md)** · **[Get the printable PDF](public/verseorder-watch-order.pdf)**
 
 The curated sequence currently features **112 entries**, updated October 17, 2026. It includes selected cross-universe stories that enrich later Marvel films and marks optional detours for those who want to explore further.
 
@@ -21,7 +21,7 @@ The order is continuously reviewed as new titles arrive. Some entries, including
 - Optional recommendations alongside the main viewing journey.
 - A growing interactive experience to discover stories and track your progress.
 
-**The website is in development.** Until its public launch, the watch order and printable PDF are available right here.
+Follow the living timeline, search and filter titles, and light up each story as you watch. Your progress stays in your browser, with no account required.
 
 ## Help shape the watch order
 
@@ -34,3 +34,7 @@ You can also read [what's currently outside the curated journey](content/exclude
 VerseOrder is an independent, open-source fan project. It is not affiliated with, sponsored by, or endorsed by Marvel, Disney, Sony, or other rights holders. All associated titles, characters, imagery, and trademarks belong to their respective owners.
 
 The viewing order reflects editorial judgment and is **not an official Marvel chronology**.
+
+## Use and attribution
+
+Created by **[Marlon Aviz](https://github.com/avizmarlon)**. The code is available under the [MIT License](LICENSE): you may use, copy, modify, and redistribute it, including commercially, provided you preserve the copyright and license notice. Third-party imagery, fonts, characters, and trademarks remain subject to their own rights and licenses.

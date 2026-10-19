@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/fraunces/standard-italic.css";
 import "@fontsource/space-grotesk/400.css";
 import "@fontsource/space-grotesk/500.css";
 import "@fontsource/space-grotesk/600.css";
