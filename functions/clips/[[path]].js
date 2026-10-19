@@ -35,23 +35,42 @@ export function parseRange(header, size) {
   return { start, end };
 }
 
-/** Passes through bytes [start, end] of a stream and drops the rest. */
-function slice(body, start, end) {
-  let offset = 0;
-  return body.pipeThrough(
-    new TransformStream({
-      transform(chunk, controller) {
+/**
+ * Streams bytes [start, end] of `body`. A FixedLengthStream (Workers runtime) also gives the
+ * response a real Content-Length. The source is read to the end of the range and then cancelled;
+ * nothing is buffered beyond one chunk.
+ */
+function slice(body, start, end, waitUntil) {
+  const length = end - start + 1;
+  const { readable, writable } =
+    typeof FixedLengthStream === "function"
+      ? new FixedLengthStream(length) // Workers runtime global
+      : new TransformStream();
+  const pump = async () => {
+    const reader = body.getReader();
+    const writer = writable.getWriter();
+    let offset = 0;
+    try {
+      while (offset <= end) {
+        const { done, value } = await reader.read();
+        if (done) break;
         const from = Math.max(start - offset, 0);
-        const to = Math.min(end + 1 - offset, chunk.byteLength);
-        offset += chunk.byteLength;
-        if (to > from) controller.enqueue(chunk.subarray(from, to));
-        if (offset > end) controller.terminate();
-      },
-    }),
-  );
+        const to = Math.min(end + 1 - offset, value.byteLength);
+        offset += value.byteLength;
+        if (to > from) await writer.write(value.subarray(from, to));
+      }
+      await writer.close();
+    } catch (error) {
+      await writer.abort(error).catch(() => {});
+    } finally {
+      reader.cancel().catch(() => {});
+    }
+  };
+  waitUntil(pump());
+  return readable;
 }
 
-export async function onRequest({ request, env }) {
+export async function onRequest({ request, env, waitUntil }) {
   if (request.method !== "GET" && request.method !== "HEAD") {
     return new Response(null, { status: 405, headers: { Allow: "GET, HEAD" } });
   }
@@ -98,5 +117,5 @@ export async function onRequest({ request, env }) {
     asset.body?.cancel();
     return new Response(null, { status: 206, headers });
   }
-  return new Response(slice(asset.body, range.start, range.end), { status: 206, headers });
+  return new Response(slice(asset.body, range.start, range.end, waitUntil), { status: 206, headers });
 }

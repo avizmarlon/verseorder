@@ -1,5 +1,5 @@
 /**
- * Card banner trailer (PROTOTYPE, lazy chunk). The card plays a self-hosted, muted, looping copy
+ * Card banner trailer (lazy chunk). The card plays a self-hosted, muted, looping copy
  * of the official trailer (H.264 MP4 + AV1 WebM, no audio track, faststart) instead of a YouTube
  * embed, so the first hover starts in a few tens of milliseconds.
  *
@@ -9,8 +9,9 @@
  *   gives its buffer back. Save-Data / 2g / 3g: no preload, load on hover only.
  * - Hover / keyboard focus (pointer devices) or the timeline dot on the node (touch) plays it; the
  *   flip-tiles reveal starts on the first presented frame. Leaving reverses the tiles and pauses.
- * - One video decodes at a time: starting a card pauses any other. A card that leaves the
- *   approach zone drops its sources (buffers and decoder freed) and re-arms when it comes back.
+ * - One video decodes at a time: starting a card pauses any other. A card that stops previewing
+ *   or leaves the approach zone drops its sources (download stopped, buffers and decoder freed)
+ *   and re-arms with preload="metadata" when it is near again.
  * - prefers-reduced-motion: never attached (static banner). Hidden tab: paused.
  * Imperative on purpose: no React renders while hovering, only attribute flips.
  */
@@ -96,8 +97,11 @@ function arm(card: Card) {
   );
 }
 
-/** Drop the sources: frees the buffered data and the decoder of a card that is far away. */
-function release(card: Card) {
+/**
+ * Drop the sources: stops the download and frees the buffered data and the decoder. `keepTiles`
+ * leaves the flip tiles in place (a reverse flip may still be finishing on screen).
+ */
+function release(card: Card, keepTiles = false) {
   if (!card.armed) return;
   card.armed = false;
   card.preloaded = false;
@@ -107,9 +111,11 @@ function release(card: Card) {
   card.video.removeAttribute("src");
   card.video.replaceChildren();
   card.video.load();
-  card.tiles?.remove();
-  card.tiles = null;
-  delete card.cell.dataset.tiles;
+  if (!keepTiles) {
+    card.tiles?.remove();
+    card.tiles = null;
+    delete card.cell.dataset.tiles;
+  }
   if (!card.broken) card.cell.dataset.clip = "none";
 }
 
@@ -161,8 +167,14 @@ function stop(card: Card) {
   clearTimeout(card.pauseTimer);
   card.pauseTimer = setTimeout(() => {
     card.pauseTimer = undefined;
-    if (!isActive(card)) card.video.pause();
-    schedule(); // may be releasable now
+    if (!isActive(card)) {
+      card.video.pause();
+      // A paused <video> keeps buffering ahead (Chrome: several MB). Dropping the sources stops
+      // that download, so it neither costs mobile data nor competes with the next card; the
+      // re-armed card re-reads its start from the HTTP cache and plays from the top next time.
+      release(card, true);
+    }
+    schedule(); // re-preloads it if it is still one of the nearest
   }, PAUSE_AFTER_MS);
 }
 
