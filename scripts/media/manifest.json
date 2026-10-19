@@ -453,6 +453,352 @@
       "backdrop": "/gVqB11pK1EUbBiyj7TG4uAwordh.jpg",
       "bannerFocus": "50% 30%",
       "poster": "/3QfQYECgu6DX5UUWCBvv1Fl0BAJ.jpg"
+    },
+    {
+      "id": "daredevil-netflix-t1",
+      "clip": "daredevil-netflix-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 61889,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "jAy6NJ_D5vU",
+        "label": "Marvel's Daredevil - Official Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "jAy6NJ_D5vU",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/6KclfESXQia4BbJNv4xUnBqaWfe.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/QWbPaDxiB6LW2LjASknzYBvjMj.jpg"
+    },
+    {
+      "id": "jessica-jones-t1",
+      "clip": "jessica-jones-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 38472,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "nWHUjuJ8zxE",
+        "label": "Marvel's Jessica Jones - Official Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "nWHUjuJ8zxE",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/nTTQv6XEsBd7dY8LcvD0UKoGwkf.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/oxnWofiE9fHOgUfs9NJa6nG6NTR.jpg"
+    },
+    {
+      "id": "avengers-age-of-ultron",
+      "clip": "avengers-age-of-ultron",
+      "tmdb": {
+        "type": "movie",
+        "id": 99861
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "MZoO8QVMxkk",
+        "label": "Avengers: Age of Ultron - Trailer 2",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "MZoO8QVMxkk",
+      "backdrop": "/kIBK5SKwgqIIuRKhhWrJn3XkbPq.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/5JzVWJvjOe9Y9YOrg8iOsLJDNne.jpg"
+    },
+    {
+      "id": "ant-man",
+      "clip": "ant-man",
+      "tmdb": {
+        "type": "movie",
+        "id": 102899
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "pWdKf3MneyI",
+        "label": "Ant-Man - Trailer 1",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "pWdKf3MneyI",
+      "backdrop": "/1K3JmSNUN8OpjYsCjc0Hy0SYxAb.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/rQRnQfUl3kfp78nCWq8Ks04vnq1.jpg"
+    },
+    {
+      "id": "daredevil-t2",
+      "clip": "daredevil-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 61889,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "IMC7H23-sMs",
+        "label": "Marvel's Daredevil Season 2 - Final Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "IMC7H23-sMs",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/pPALpad1Fh14g7ejyQjqKzlhrBw.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/QWbPaDxiB6LW2LjASknzYBvjMj.jpg"
+    },
+    {
+      "id": "luke-cage-t1",
+      "clip": "luke-cage-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 62126,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "ORa4hPhGrpo",
+        "label": "Marvel's Luke Cage - Official Trailer",
+        "channel": "Marvel UK"
+      },
+      "drawerYouTubeId": "ORa4hPhGrpo",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/bJOmop22SGTHPo1tiuVAFf4U7B9.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/yzM1hMB3PUJqbISX0f421b3xOjB.jpg"
+    },
+    {
+      "id": "iron-fist-t1",
+      "clip": "iron-fist-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 62127,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "f9OKL5no-S0",
+        "label": "Marvel's Iron Fist - Official Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "f9OKL5no-S0",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/1u7WHly60OiKgBxe2qj0eptPPJs.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/xGpd4wMIWAQ9MukvCx5k5xK7jft.jpg"
+    },
+    {
+      "id": "the-defenders",
+      "clip": "the-defenders",
+      "tmdb": {
+        "type": "tv",
+        "id": 62285,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "jYvHxEEgrPA",
+        "label": "Marvel's The Defenders - Official Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "jYvHxEEgrPA",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/n4XLn0wLCxWSFaQgG6queZlFPKi.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/eOW7GzbWl6sgQEProXqpYPSRHo.jpg"
+    },
+    {
+      "id": "captain-america-civil-war",
+      "clip": "captain-america-civil-war",
+      "tmdb": {
+        "type": "movie",
+        "id": 271110
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "43NWzay3W4s",
+        "label": "Captain America: Civil War - The Civil War Begins (1st Trailer)",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "43NWzay3W4s",
+      "backdrop": "/wdwcOBMkt3zmPQuEMxB3FUtMio2.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/nE0Po7FDiTIr7KaplUbewlTx1Ws.jpg"
+    },
+    {
+      "id": "black-widow",
+      "clip": "black-widow",
+      "tmdb": {
+        "type": "movie",
+        "id": 497698
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "ybji16u608U",
+        "label": "Black Widow - Final Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "ybji16u608U",
+      "backdrop": "/keIxh0wPr2Ymj0Btjh4gW7JJ89e.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/m5HGwOz92gKrAAqZHkcMF09nXFm.jpg"
+    },
+    {
+      "id": "black-panther",
+      "clip": "black-panther",
+      "tmdb": {
+        "type": "movie",
+        "id": 284054
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "xjDjIWPwcPU",
+        "label": "Black Panther - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "xjDjIWPwcPU",
+      "backdrop": "/6ELJEzQJ3Y45HczvreC3dg0GV5R.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+    },
+    {
+      "id": "spider-man-homecoming",
+      "clip": "spider-man-homecoming",
+      "tmdb": {
+        "type": "movie",
+        "id": 315635
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "rk-dF1lIbIg",
+        "label": "Spider-Man: Homecoming - Official Trailer",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "rk-dF1lIbIg",
+      "backdrop": "/tPpYGm2mVecue7Bk3gNVoSPA5qn.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/sd1eByiFLL0arwkip6lV6l25cSj.jpg"
+    },
+    {
+      "id": "the-punisher-t1",
+      "clip": "the-punisher-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 67178,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "k2mOTfzIGy8",
+        "label": "Marvel's The Punisher - Official Trailer 2",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "k2mOTfzIGy8",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/j5aOOtsJinQtyRaqiB12TTRHdeX.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/tM6xqRKXoloH9UchaJEyyRE9O1w.jpg"
+    },
+    {
+      "id": "doctor-strange",
+      "clip": "doctor-strange",
+      "tmdb": {
+        "type": "movie",
+        "id": 284052
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "HSzx-zryEgM",
+        "label": "Doctor Strange - Official Trailer 2",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "HSzx-zryEgM",
+      "backdrop": "/qUv51IFUvVRAP2379ThmA3eLJx6.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/uGBVj3bEbCoZbDjjl9wTxcygko1.jpg"
+    },
+    {
+      "id": "jessica-jones-t2",
+      "clip": "jessica-jones-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 38472,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "-u2AV8z_CX0",
+        "label": "Marvel's Jessica Jones Season 2 - Trailer",
+        "channel": "Marvel UK"
+      },
+      "drawerYouTubeId": "-u2AV8z_CX0",
+      "$note": "Crop set above the channel's corner watermark (Netflix / Marvel UK upload).",
+      "backdrop": "/g9ju2o4LioYYOyihBvf9lVX8XL.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/oxnWofiE9fHOgUfs9NJa6nG6NTR.jpg"
     }
   ]
 }
