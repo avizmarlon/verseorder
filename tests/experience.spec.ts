@@ -127,6 +127,9 @@ test("details, keyboard focus, adjacent titles and progress survive reload", asy
   );
 });
 
+// Count only trailer iframes: Cloudflare can inject its own hidden challenge iframe.
+const youtubeFrames = 'iframe[src*="youtube-nocookie.com"]';
+
 test("trailer is opt-in and unverified titles offer search", async ({
   page,
 }) => {
@@ -149,12 +152,12 @@ test("trailer is opt-in and unverified titles offer search", async ({
     .getByRole("dialog")
     .getByRole("button", { name: "Trailer", exact: true })
     .click();
-  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.locator(youtubeFrames)).toHaveCount(0);
   await page.getByRole("button", { name: "Load official trailer" }).click();
-  await expect(page.locator("iframe")).toHaveCount(1);
+  await expect(page.locator(youtubeFrames)).toHaveCount(1);
   await expect.poll(() => requests.length).toBe(1);
   await page.keyboard.press("Escape");
-  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.locator(youtubeFrames)).toHaveCount(0);
   await page.getByRole("searchbox").fill("Eyes of Wakanda");
   await page.locator(".b-hit").click();
   await page
@@ -164,7 +167,7 @@ test("trailer is opt-in and unverified titles offer search", async ({
   await expect(
     page.getByRole("link", { name: /Find an official trailer/ }),
   ).toBeVisible();
-  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.locator(youtubeFrames)).toHaveCount(0);
 });
 
 test("mobile composition, touch controls, overflow and accessibility", async ({
