@@ -158,7 +158,7 @@ test("trailer is opt-in and unverified titles offer search", async ({
   await expect.poll(() => requests.length).toBe(1);
   await page.keyboard.press("Escape");
   await expect(page.locator(youtubeFrames)).toHaveCount(0);
-  await page.getByRole("searchbox").fill("Thor: Ragnarok");
+  await page.getByRole("searchbox").fill("Thor: Love and Thunder");
   await page.locator(".b-hit").click();
   await page
     .getByRole("dialog")
