@@ -14,6 +14,7 @@ import {
   typeOf,
   type Entry,
 } from "./timeline-data";
+import Poster from "./Poster";
 import { useWatchProgress } from "./watch-progress";
 
 const repo = "https://github.com/avizmarlon/verseorder";
@@ -79,15 +80,24 @@ function TitleDialog({
       </button>
       {mode === "details" ? (
         <>
-          <div
-            className="b-medal"
-            aria-hidden="true"
-            style={{ "--mg": softOf(entry) } as CSSProperties}
-          >
-            <i style={{ borderColor: colorOf(entry) }} />
-            <i style={{ borderColor: colorOf(entry) }} />
-            <div className="core" style={{ background: art(entry) }} />
-          </div>
+          {entry.posterPath ? (
+            <Poster
+              key={entry.id}
+              entry={entry}
+              className="b-cover"
+              eager
+            />
+          ) : (
+            <div
+              className="b-medal"
+              aria-hidden="true"
+              style={{ "--mg": softOf(entry) } as CSSProperties}
+            >
+              <i style={{ borderColor: colorOf(entry) }} />
+              <i style={{ borderColor: colorOf(entry) }} />
+              <div className="core" style={{ background: art(entry) }} />
+            </div>
+          )}
           <div className="b-chips">
             <span className="b-chip">{kindLabel(entry)}</span>
             <span className="b-chip">
@@ -145,7 +155,7 @@ function TitleDialog({
                     key={label}
                     onClick={() => select({ entry: value, mode: "details" })}
                   >
-                    <i aria-hidden="true" style={{ background: art(value) }} />
+                    <Poster entry={value} className="b-thumb" decorative />
                     <span>
                       <small>{label}</small>
                       {value.title}
@@ -177,7 +187,14 @@ function TitleDialog({
               }}
             >
               <div className="in">
-                <div className="sc" style={{ background: art(entry) }} />
+                <div
+                  className="sc"
+                  style={{
+                    background: entry.posterPath
+                      ? `url("${entry.posterPath}") center / cover no-repeat, ${art(entry)}`
+                      : art(entry),
+                  }}
+                />
                 <div className="vg" />
               </div>
               {video ? (
@@ -558,11 +575,7 @@ export default function LivingTimeline() {
                         onClick={() => setSelection({ entry, mode: "details" })}
                         aria-label={`Details: ${entry.title}`}
                       />
-                      <div
-                        className="b-med"
-                        style={{ background: art(entry) }}
-                        aria-hidden="true"
-                      />
+                      <Poster entry={entry} className="b-med" decorative />
                       <div className="b-ct">
                         <div className="b-k" style={{ color: colorOf(entry) }}>
                           {kindLabel(entry)} ·{" "}
@@ -669,12 +682,30 @@ export default function LivingTimeline() {
           </p>
           <p>
             An independent fan project. Not affiliated with Marvel, Disney, or
-            Sony. All associated titles, characters, and trademarks belong to
-            their respective owners. Medallions are original abstract artwork.
+            Sony. All titles, characters, cover art, and trademarks belong to
+            their respective owners. Cover art is shown for identification
+            only, sourced from{" "}
+            <a
+              href="https://en.wikipedia.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Wikipedia
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://www.tvmaze.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TVMaze
+            </a>
+            .
           </p>
           <p>
             © 2026 <a href="https://github.com/avizmarlon">Marlon Aviz</a> ·{" "}
-            <a href={`${repo}/blob/main/LICENSE`}>MIT License</a>
+            <a href={`${repo}/blob/main/LICENSE`}>MIT License</a> (source code
+            only)
             <br />
             You may use, copy, and modify the code. Keep the copyright and
             license notice.
