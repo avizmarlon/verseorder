@@ -42,7 +42,8 @@ GOP = 48  # 2 s at 24 fps
 X264 = ["-c:v", "libx264", "-preset", "slow", "-profile:v", "main", "-level", "3.1", "-crf", "27",
         "-maxrate", "450k", "-bufsize", "900k", "-g", str(GOP), "-keyint_min", "24",
         "-sc_threshold", "40", "-x264-params", "open-gop=0", "-movflags", "+faststart", "-tag:v", "avc1"]
-AV1 = ["-c:v", "libsvtav1", "-preset", "6", "-crf", "42", "-g", str(GOP), "-svtav1-params", "tune=0"]
+AV1 = ["-c:v", "libsvtav1", "-preset", "6", "-crf", "42", "-g", str(GOP), "-svtav1-params", "tune=0",
+       "-cues_to_front", "1"]  # seek index up front: one range request for metadata, no tail fetch
 
 
 def log(*a):

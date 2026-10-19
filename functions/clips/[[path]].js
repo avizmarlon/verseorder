@@ -78,7 +78,7 @@ export async function onRequest({ request, env, waitUntil }) {
     method: request.method,
     headers: { "Accept-Encoding": "identity" },
   });
-  let asset = await env.ASSETS.fetch(assetRequest);
+  let asset = await env.ASSETS.fetch(assetRequest.clone());
   let size = Number(asset.headers.get("Content-Length") ?? NaN);
   if (asset.ok && request.method === "GET" && !(size > 0)) {
     // no length from the asset server (local `wrangler pages dev`): read it once to learn it
@@ -117,5 +117,42 @@ export async function onRequest({ request, env, waitUntil }) {
     asset.body?.cancel();
     return new Response(null, { status: 206, headers });
   }
-  return new Response(slice(asset.body, range.start, range.end, waitUntil), { status: 206, headers });
+  const cached = await fromCache(request, asset, etag, size, header);
+  if (cached) return new Response(cached.body, { status: 206, headers });
+  // the cache path may have used the body up: fetch the asset again for the fallback
+  const body = asset.bodyUsed ? (await env.ASSETS.fetch(assetRequest)).body : asset.body;
+  return new Response(slice(body, range.start, range.end, waitUntil), { status: 206, headers });
+}
+
+/**
+ * The range, cut natively by the colo cache (Cache API `match` with a Range header answers 206
+ * from a stored complete file). Copying bytes through JS (slice) costs CPU per byte, and on the
+ * free plan a long range from a large trailer runs out of CPU time and the stream breaks off;
+ * slice stays only as the fallback. Keyed by the asset's ETag, so a redeploy never serves old
+ * bytes. Consumes `asset.body` whenever it returns a response.
+ */
+async function fromCache(request, asset, etag, size, range) {
+  if (typeof caches === "undefined" || !caches.default) return null;
+  try {
+    const url = new URL(request.url);
+    url.search = `?v=${encodeURIComponent(etag ?? String(size))}`;
+    const key = url.toString();
+    const ranged = () => new Request(key, { headers: { Range: range } });
+    let hit = await caches.default.match(ranged());
+    if (!hit) {
+      const stored = new Headers({
+        "Content-Type": asset.headers.get("Content-Type") ?? "application/octet-stream",
+        "Content-Length": String(size),
+        "Cache-Control": "public, max-age=604800",
+      });
+      if (etag) stored.set("ETag", etag);
+      await caches.default.put(key, new Response(asset.body, { status: 200, headers: stored }));
+      hit = await caches.default.match(ranged());
+    } else asset.body?.cancel();
+    if (hit?.status === 206 && hit.body) return hit;
+    hit?.body?.cancel();
+    return null;
+  } catch {
+    return null;
+  }
 }

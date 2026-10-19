@@ -3,12 +3,16 @@
  * of the official trailer (H.264 MP4 + AV1 WebM, no audio track, faststart) instead of a YouTube
  * embed, so the first hover starts in a few tens of milliseconds.
  *
- * - Nothing is fetched until the card approaches the viewport. Then the nearest MAX_PRELOAD cards
- *   get preload="metadata" (Chrome buffers the first few seconds, ~0.1-0.4 MB; preload="auto"
- *   would pull most of the file). It is a hard cap: a card that drops out of the nearest few
- *   gives its buffer back. Save-Data / 2g / 3g: no preload, load on hover only.
+ * - Nothing is fetched on page load. After the first user interaction (scroll, wheel, touch,
+ *   pointer, key), the MAX_PRELOAD cards nearest the viewport centre, favouring the direction of
+ *   scroll and looking up to 2 screens ahead, get preload="metadata" (Chrome buffers the first
+ *   few seconds, ~0.1-0.4 MB; preload="auto" would pull most of the file), so a card is ready
+ *   before it scrolls in. It is a hard cap: a card that drops out of the nearest few gives its
+ *   buffer back. Save-Data / 2g / 3g: no preload, load on hover only.
  * - Hover / keyboard focus (pointer devices) or the timeline dot on the node (touch) plays it; the
  *   flip-tiles reveal starts on the first presented frame. Leaving reverses the tiles and pauses.
+ *   Touch: during a fast fling the dot does not start previews (each would download a trailer);
+ *   they start as soon as the scroll slows down.
  * - One video decodes at a time: starting a card pauses any other. A card that stops previewing
  *   or leaves the approach zone drops its sources (download stopped, buffers and decoder freed)
  *   and re-arms with preload="metadata" when it is near again.
@@ -16,8 +20,10 @@
  * Imperative on purpose: no React renders while hovering, only attribute flips.
  */
 
-const MAX_PRELOAD = 3;
-const APPROACH_MARGIN = "600px 0px";
+/** About one screen of cards plus the next two or three in the scroll direction. */
+const MAX_PRELOAD = 6;
+/** Relative to the scroller (not the viewport, whose clipping would cancel the margin). */
+const APPROACH_MARGIN = "200% 0px";
 /** Pause this long after leaving, so the reverse flip still shows moving video. */
 const PAUSE_AFTER_MS = 1100;
 const TILE_COLS = 6;
@@ -48,8 +54,21 @@ const cards = new Map<string, Card>();
 let ready = false;
 let touchMode = false;
 let dotPos: number | null = null;
-let approachObserver: IntersectionObserver | null = null;
+/** One approach observer per scroller (timeline, lab). */
+const approachObservers = new Map<Element | null, IntersectionObserver>();
 let scheduled = false;
+/** Prefetch only after the user does something: page load (and Lighthouse) stay video-free. */
+let engaged = false;
+/** Last scroll direction of the scroller: 1 down, -1 up. */
+let direction = 1;
+let lastScrollTop = 0;
+let lastScrollTime = 0;
+/** Touch: the timeline is being flung. The dot does not start previews until it slows down. */
+let flinging = false;
+let flingTimer: ReturnType<typeof setTimeout> | undefined;
+/** px/ms; above this the dot crosses a card in well under a second. */
+const FLING_SPEED = 1.2;
+const FLING_SETTLE_MS = 140;
 
 const reducedMotion = () =>
   matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -68,7 +87,8 @@ const lean = () => {
 const isActive = (card: Card) =>
   !card.broken &&
   document.visibilityState === "visible" &&
-  (card.wants.focus || (touchMode ? card.wants.dot === 2 : card.wants.hover));
+  (card.wants.focus ||
+    (touchMode ? card.wants.dot === 2 && !flinging : card.wants.hover));
 
 function setMode(card: Card, mode: Mode) {
   if (card.mode === mode) return;
@@ -189,13 +209,16 @@ function markBroken(card: Card) {
 
 /** Nearest approaching cards (and the dot's neighbours) get their first seconds buffered. */
 function preloadNearest() {
-  if (lean()) return;
+  if (lean() || !engaged) return;
   const centre = innerHeight / 2;
   const ranked = [...cards.values()]
     .filter((card) => !card.broken && (card.approaching || card.wants.dot > 0))
     .map((card) => {
       const rect = card.cell.getBoundingClientRect();
-      const distance = Math.abs(rect.top + rect.height / 2 - centre);
+      const offset = rect.top + rect.height / 2 - centre;
+      // cards behind the scroll direction count triple: the next ones matter more
+      const distance =
+        Math.abs(offset) * (Math.sign(offset) === -direction ? 3 : 1);
       return { card, score: distance - (card.wants.dot ? 10000 : 0) };
     })
     .sort((a, b) => a.score - b.score)
@@ -269,18 +292,75 @@ function ensureGlobals() {
       }
     schedule();
   });
-  approachObserver = new IntersectionObserver(
-    (records) => {
-      for (const record of records)
-        for (const card of cards.values())
-          if (card.cell === record.target)
-            card.approaching = record.isIntersecting;
-      schedule();
+  // already scrolled (resume, deep link, or the chunk loaded after the user started scrolling)
+  if (document.querySelector(".b-root, .lab-root")?.scrollTop) engaged = true;
+  const engage = () => {
+    if (engaged) return;
+    engaged = true;
+    for (const type of ENGAGE_EVENTS) removeEventListener(type, engage, true);
+    schedule();
+  };
+  for (const type of ENGAGE_EVENTS)
+    addEventListener(type, engage, { capture: true, passive: true });
+  // scroll events do not bubble; capture sees the scroller's
+  document.addEventListener(
+    "scroll",
+    (event) => {
+      const target = event.target as HTMLElement;
+      if (!(target instanceof HTMLElement)) return;
+      const now = performance.now();
+      const delta = target.scrollTop - lastScrollTop;
+      if (delta) direction = delta > 0 ? 1 : -1;
+      const speed = Math.abs(delta) / Math.max(now - lastScrollTime, 1);
+      lastScrollTop = target.scrollTop;
+      lastScrollTime = now;
+      if (!touchMode) return;
+      // A fling would start (and download) a trailer at every node it crosses: hold the dot's
+      // previews until the scroll slows down, so the bandwidth goes to the cards ahead.
+      clearTimeout(flingTimer);
+      if (speed > FLING_SPEED) {
+        flinging = true;
+        flingTimer = setTimeout(() => {
+          flinging = false;
+          schedule();
+        }, FLING_SETTLE_MS);
+      } else if (flinging) {
+        flinging = false;
+        schedule();
+      }
     },
-    { rootMargin: APPROACH_MARGIN },
+    { capture: true, passive: true },
   );
   const initial = Number(document.documentElement.dataset.voDot);
   if (initial) setDot(initial);
+}
+
+const ENGAGE_EVENTS = [
+  "scroll",
+  "wheel",
+  "touchstart",
+  "pointerdown",
+  "pointermove",
+  "keydown",
+] as const;
+
+function observerFor(cell: HTMLElement) {
+  const root = cell.closest(".b-root, .lab-root");
+  let observer = approachObservers.get(root);
+  if (!observer) {
+    observer = new IntersectionObserver(
+      (records) => {
+        for (const record of records)
+          for (const card of cards.values())
+            if (card.cell === record.target)
+              card.approaching = record.isIntersecting;
+        schedule();
+      },
+      { root, rootMargin: APPROACH_MARGIN },
+    );
+    approachObservers.set(root, observer);
+  }
+  return observer;
 }
 
 function buildTiles(cell: HTMLElement, banner: HTMLElement) {
@@ -389,7 +469,8 @@ export function attach(options: {
   cell.addEventListener("pointerleave", leave);
   hit?.addEventListener("focus", focusIn);
   hit?.addEventListener("blur", focusOut);
-  approachObserver?.observe(cell);
+  const approach = observerFor(cell);
+  approach.observe(cell);
   if (card.pos !== null && dotPos !== null) {
     const d = Math.abs(card.pos - dotPos);
     card.wants.dot = d === 0 ? 2 : d === 1 ? 1 : 0;
@@ -405,7 +486,7 @@ export function attach(options: {
     cell.removeEventListener("pointerleave", leave);
     hit?.removeEventListener("focus", focusIn);
     hit?.removeEventListener("blur", focusOut);
-    approachObserver?.unobserve(cell);
+    approach.unobserve(cell);
     video.pause();
     video.removeAttribute("src");
     video.replaceChildren();

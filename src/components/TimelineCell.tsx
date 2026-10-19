@@ -12,8 +12,38 @@ import {
   type Entry,
 } from "./timeline-data";
 
-/** Load the (tiny) preview code when a banner card is within this distance of the viewport. */
-const NEAR_MARGIN = "900px 0px";
+/**
+ * How far ahead of the visible area a card counts as "near": its banner and cover load (eagerly,
+ * and get decoded) and its preview is attached. 150% of the scroller's height above and below, so
+ * even a fast fling reaches cards that are already painted. The look-ahead starts once the page
+ * has loaded (pageSettled); before that only on-screen cards load.
+ */
+const NEAR_MARGIN = "150% 0px";
+
+/**
+ * Resolves once the page has loaded and gone idle. Until then only cards actually on screen count
+ * as near, so the look-ahead images never compete with the first paint (LCP, initial weight).
+ */
+let settled: Promise<void> | undefined;
+const pageSettled = () =>
+  (settled ??= new Promise<void>((resolve) => {
+    const idle = () =>
+      (window.requestIdleCallback ?? ((fn: () => void) => setTimeout(fn, 300)))(
+        () => resolve(),
+        { timeout: 2000 },
+      );
+    if (document.readyState === "complete") idle();
+    else addEventListener("load", idle, { once: true });
+  }));
+
+/** The element that actually scrolls the cards (the page body does not scroll). */
+const scrollerOf = (element: HTMLElement) =>
+  element.closest<HTMLElement>(".b-root, .lab-root");
+
+/** Decode a loaded image off the main thread so its first paint does not wait on it. */
+const predecode = (image: HTMLImageElement | null) => {
+  if (image?.complete && image.naturalWidth) image.decode?.().catch(() => {});
+};
 
 /**
  * One timeline card. Cards without a banner keep the original markup and buttons. Cards with a
@@ -41,26 +71,39 @@ export default function TimelineCell({
     // Fetch the small preview code once the page is idle (no video bytes), so a card that is
     // jumped to (search, resume, fast scroll) does not wait for a chunk on its first hover.
     if (!banner) return;
-    const idle = window.requestIdleCallback ?? ((fn: () => void) => setTimeout(fn, 1500));
+    const idle =
+      window.requestIdleCallback ?? ((fn: () => void) => setTimeout(fn, 1500));
     const handle = idle(() => void import("./banner-clip"));
     return () => (window.cancelIdleCallback ?? clearTimeout)(handle as number);
   }, [banner]);
 
   useEffect(() => {
     const element = cell.current;
-    if (!banner || !element || near) return;
-    const observer = new IntersectionObserver(
-      (records) => {
-        if (records.some((record) => record.isIntersecting)) {
-          setNear(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: NEAR_MARGIN },
-    );
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [banner, near]);
+    if (!element || near) return;
+    // root must be the scroller: with the viewport as root, the scroller's clipping cancels the
+    // margin and a card only counted as near once it was already on screen.
+    let observer: IntersectionObserver | undefined;
+    let cancelled = false;
+    const watch = (rootMargin: string) => {
+      observer?.disconnect();
+      observer = new IntersectionObserver(
+        (records) => {
+          if (records.some((record) => record.isIntersecting)) {
+            setNear(true);
+            observer?.disconnect();
+          }
+        },
+        { root: scrollerOf(element), rootMargin },
+      );
+      observer.observe(element);
+    };
+    watch("0px");
+    pageSettled().then(() => !cancelled && watch(NEAR_MARGIN));
+    return () => {
+      cancelled = true;
+      observer?.disconnect();
+    };
+  }, [near]);
 
   useEffect(() => {
     const element = cell.current;
@@ -84,7 +127,7 @@ export default function TimelineCell({
 
   if (!banner) {
     return (
-      <div className="b-cell">
+      <div className="b-cell" ref={cell}>
         <div
           className="b-glow"
           style={{
@@ -96,7 +139,7 @@ export default function TimelineCell({
           onClick={onDetails}
           aria-label={`Details: ${entry.title}`}
         />
-        <Poster entry={entry} className="b-med" decorative />
+        <Poster entry={entry} className="b-med" decorative eager={near} />
         <div className="b-ct">
           <div className="b-k" style={{ color: colorOf(entry) }}>
             {kindLabel(entry)} · {entry.optional ? "Optional" : entry.universe}
@@ -137,8 +180,8 @@ export default function TimelineCell({
           } as CSSProperties
         }
       >
-        {/* Rendered only when the card is near (900px): the browser's own lazy-load margin is
-            much wider and would fetch all the backdrops of the first screens on load. */}
+        {/* Rendered once the card is near (NEAR_MARGIN): loaded eagerly at low priority and
+            decoded before it scrolls in. Not rendered earlier, so far cards cost nothing. */}
         {near && !imageFailed && (
           // eslint-disable-next-line @next/next/no-img-element -- static export, hotlinked backdrop
           <img
@@ -147,15 +190,18 @@ export default function TimelineCell({
               // An image that errored before hydration never fires React's onError.
               if (node && node.complete && node.naturalWidth === 0)
                 setImageFailed(true);
+              else predecode(node);
             }}
             src={entry.bannerUrl!}
             alt=""
             width={1280}
             height={720}
-            loading="lazy"
+            loading="eager"
+            fetchPriority="low"
             decoding="async"
             referrerPolicy="no-referrer"
             draggable={false}
+            onLoad={(event) => predecode(event.currentTarget)}
             onError={() => setImageFailed(true)}
           />
         )}
@@ -174,7 +220,7 @@ export default function TimelineCell({
         onClick={onDetails}
         aria-label={`Details: ${entry.title}`}
       />
-      <Poster entry={entry} className="b-med" decorative />
+      <Poster entry={entry} className="b-med" decorative eager={near} />
       <div className="b-ct">
         <div className="b-k" style={{ color: colorOf(entry) }}>
           {kindLabel(entry)} · {entry.optional ? "Optional" : entry.universe}

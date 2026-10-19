@@ -221,6 +221,238 @@
       "backdrop": "/mWZvcmpIQ1qQeHCWc1jIO8qlHKJ.jpg",
       "bannerFocus": "50% 40%",
       "poster": "/xqNLXUUvBnfVk6m3QFGGU0Grgs7.jpg"
+    },
+    {
+      "id": "the-avengers",
+      "clip": "the-avengers",
+      "tmdb": {
+        "type": "movie",
+        "id": 24428
+      },
+      "trailer": {
+        "source": "brightcove",
+        "account": "5359769168001",
+        "player": "BJemW31x6g",
+        "id": "5806334271001",
+        "label": "Marvel Studios' The Avengers | Official Trailer #1 (marvel.com)",
+        "channel": "marvel.com"
+      },
+      "drawerYouTubeId": "eOrNdBpGMv8",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/yHdPTs239Cqce1s6y9figbeolR1.jpg"
+    },
+    {
+      "id": "marvel-one-shot-item-47",
+      "clip": "marvel-one-shot-item-47",
+      "tmdb": {
+        "type": "movie",
+        "id": 119569
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "Gog0_GKYpIg",
+        "label": "Item 47 - Marvel One Shot Official Clip (no trailer was released)",
+        "channel": "Marvel UK"
+      },
+      "drawerYouTubeId": "Gog0_GKYpIg",
+      "trim": {
+        "start": 11.0,
+        "end": 69.4
+      },
+      "crop": "auto",
+      "backdrop": "/pC36ONAaKMXStlvutYFcAbMemCM.jpg",
+      "bannerFocus": "55% 30%",
+      "poster": "/hnSxG8clwLuAXEkp9emc8HCUcHD.jpg",
+      "$note": "No trailer was released: the official Item 47 clip, trimmed before the channel's end card."
+    },
+    {
+      "id": "thor-the-dark-world",
+      "clip": "thor-the-dark-world",
+      "tmdb": {
+        "type": "movie",
+        "id": 76338
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "npvJ9FTgZbM",
+        "label": "Thor: The Dark World Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "npvJ9FTgZbM",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/5o88bbqcV5STn56jqOeovaaWbAE.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/wp6OxE4poJ4G7c0U2ZIXasTSMR7.jpg"
+    },
+    {
+      "id": "iron-man-3",
+      "clip": "iron-man-3",
+      "tmdb": {
+        "type": "movie",
+        "id": 68721
+      },
+      "trailer": {
+        "source": "brightcove",
+        "account": "5359769168001",
+        "player": "BJemW31x6g",
+        "id": "5806314068001",
+        "label": "Marvel Studios' Iron Man 3 | Official Trailer #1 (marvel.com)",
+        "channel": "marvel.com"
+      },
+      "drawerYouTubeId": "f_h95mEd4TI",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/4TSqtluelcWByj8YZdqwzQVjI0O.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/kwdWTa5wjFGJbFY2mpofgg91xHp.jpg"
+    },
+    {
+      "id": "marvel-one-shot-all-hail-the-king",
+      "clip": "marvel-one-shot-all-hail-the-king",
+      "tmdb": {
+        "type": "movie",
+        "id": 253980
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "Ja5ngzBOziQ",
+        "label": "Marvel One-Shot: All Hail the King - Clip 1 (no trailer was released)",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "Ja5ngzBOziQ",
+      "trim": {
+        "start": "auto",
+        "end": 68.2
+      },
+      "crop": "auto",
+      "backdrop": "/yoigAFjhEhJM6O6hQT9TiKH6EL7.jpg",
+      "bannerFocus": "50% 35%",
+      "poster": "/v1TdYXgc9L5NOUU8QEI1AT7qW7S.jpg",
+      "$note": "No trailer was released (the 'Fan Event' preview is interviews): the official Clip 1, trimmed before its Thor: The Dark World home-release end card."
+    },
+    {
+      "id": "captain-america-the-winter-soldier",
+      "clip": "captain-america-the-winter-soldier",
+      "tmdb": {
+        "type": "movie",
+        "id": 100402
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "tbayiPxkUMM",
+        "label": "Marvel's Captain America: The Winter Soldier - Trailer 1 (OFFICIAL)",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "tbayiPxkUMM",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/1RWLMyC9KcFfcaoViMiJGSSZzzr.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/l79VoTIPEXwo9zCTPTnpqdASvus.jpg"
+    },
+    {
+      "id": "guardians-of-the-galaxy",
+      "clip": "guardians-of-the-galaxy",
+      "tmdb": {
+        "type": "movie",
+        "id": 118340
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "d96cjJhvlMA",
+        "label": "Marvel's Guardians of the Galaxy - Trailer 1 (OFFICIAL)",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "d96cjJhvlMA",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/uLtVbjvS1O7gXL8lUOwsFOH4man.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+    },
+    {
+      "id": "guardians-of-the-galaxy-vol-2",
+      "clip": "guardians-of-the-galaxy-vol-2",
+      "tmdb": {
+        "type": "movie",
+        "id": 283995
+      },
+      "trailer": {
+        "source": "brightcove",
+        "account": "5359769168001",
+        "player": "BJemW31x6g",
+        "id": "5790932955001",
+        "label": "Marvel Studios' Guardians of the Galaxy Vol. 2 | Official Trailer (marvel.com)",
+        "channel": "marvel.com"
+      },
+      "drawerYouTubeId": "wUn05hdkhjM",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/n3gb8oqP9BeRCUsCmZVaT5eltPH.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/bFjcrDJSMmDgnRVKVvEQDVepXZB.jpg"
+    },
+    {
+      "id": "i-am-groot-t1",
+      "clip": "i-am-groot-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 232125,
+        "season": 1
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "D7eFpRf4tac",
+        "label": "I Am Groot | Official Trailer | Disney+",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "D7eFpRf4tac",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/bAnHzJ6AMhOhnV3C0kTxkpCqpgM.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/3QfQYECgu6DX5UUWCBvv1Fl0BAJ.jpg"
+    },
+    {
+      "id": "i-am-groot-t2",
+      "clip": "i-am-groot-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 232125,
+        "season": 2
+      },
+      "trailer": {
+        "source": "youtube",
+        "id": "1k8H2CywVqg",
+        "label": "Marvel Studios' I Am Groot Season 2 | Official Trailer | Disney+",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "1k8H2CywVqg",
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "backdrop": "/gVqB11pK1EUbBiyj7TG4uAwordh.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/3QfQYECgu6DX5UUWCBvv1Fl0BAJ.jpg"
     }
   ]
 }

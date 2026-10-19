@@ -6,8 +6,8 @@ import collection from "../src/data/watch-order.json";
 const hero = collection.entries.find(
   (entry) => entry.id === "captain-america-the-first-avenger",
 )!;
-/** The first 10 titles of the timeline carry a TMDB banner + self-hosted trailer preview. */
-const first10 = collection.entries.slice(0, 10) as Array<
+/** The first 20 titles of the timeline carry a TMDB banner + self-hosted trailer preview. */
+const first20 = collection.entries.slice(0, 20) as Array<
   (typeof collection.entries)[number] & {
     clip?: string;
     bannerUrl?: string;
@@ -19,7 +19,7 @@ const clipPath = (clip: string | undefined, ext: string) =>
 const clipFile = (ext: string) => clipPath(hero.clip, ext);
 /** The trailer files are not committed (large binaries for a separate media host). */
 const hasClip = existsSync(clipFile("webm")) && existsSync(clipFile("mp4"));
-const hasAllClips = first10.every(
+const hasAllClips = first20.every(
   (entry) =>
     existsSync(clipPath(entry.clip, "webm")) &&
     existsSync(clipPath(entry.clip, "mp4")),
@@ -63,14 +63,14 @@ const axe = (page: Page) =>
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
 
-test("data: the first 10 titles have a TMDB banner, a focus point, a clip and a poster", () => {
+test("data: the first 20 titles have a TMDB banner, a focus point, a clip and a poster", () => {
   const withClip = collection.entries.filter(
     (entry) => (entry as { clip?: string }).clip,
   );
   expect(withClip.map((entry) => entry.id)).toEqual(
-    first10.map((entry) => entry.id),
+    first20.map((entry) => entry.id),
   );
-  for (const entry of first10) {
+  for (const entry of first20) {
     expect(entry.bannerUrl, entry.id).toMatch(
       /^https:\/\/image\.tmdb\.org\/t\/p\/w780\/\w+\.jpg$/,
     );
@@ -113,11 +113,13 @@ test("banner card is one accessible button: click / Enter / Space open details",
   await expect(page.locator("#detail-name")).toHaveText(hero.title);
   await page.keyboard.press("Escape");
   await expect(
-    page.locator("#node-the-avengers").getByRole("button", { name: "Trailer" }),
+    page
+      .locator("#node-daredevil-netflix-t1")
+      .getByRole("button", { name: "Trailer" }),
   ).toHaveCount(1);
 });
 
-test("nothing is fetched for the clip while the card is off-screen, and the card never uses YouTube", async ({
+test("no clip bytes on page load (cards near the fold hold an empty video), and the card never uses YouTube", async ({
   page,
 }) => {
   await stubImages(page);
@@ -126,7 +128,8 @@ test("nothing is fetched for the clip while the card is off-screen, and the card
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await page.waitForTimeout(2500); // idle: the preview code may load, the video must not
   expect(media.clips).toEqual([]);
-  await expect(page.locator("video")).toHaveCount(0);
+  // near cards are attached ahead of time, but without sources until the user interacts
+  await expect(page.locator("video source")).toHaveCount(0);
   await centre(page);
   await card(page).hover();
   await page.waitForTimeout(600);
@@ -263,6 +266,9 @@ test.describe("with the trailer file", () => {
       src: `${hero.clip}.webm`,
     });
     expect(media.clips.length).toBeGreaterThan(0);
+    // wait out the card's scroll-in reveal (Playwright will not hover a moving element): only the
+    // hover-to-playing time is measured
+    await expect(cell).toHaveCSS("transform", "none");
     const t0 = Date.now();
     await cell.hover();
     await expect(cell).toHaveAttribute("data-trailer", "playing");
@@ -471,8 +477,8 @@ test.describe("with the trailer file", () => {
   });
 });
 
-test.describe("all 10 trailer files", () => {
-  test.skip(!hasAllClips, "put the 10 clips in public/clips to run these");
+test.describe("all 20 trailer files", () => {
+  test.skip(!hasAllClips, "put the 20 clips in public/clips to run these");
 
   const playing = (page: Page) =>
     page.evaluate(
@@ -480,13 +486,13 @@ test.describe("all 10 trailer files", () => {
         [...document.querySelectorAll("video")].filter((v) => !v.paused).length,
     );
 
-  test("each of the first 10 cards previews its own clip on hover; one video decodes at a time", async ({
+  test("each of the first 20 cards previews its own clip on hover; one video decodes at a time", async ({
     page,
   }) => {
-    test.setTimeout(90_000);
+    test.setTimeout(180_000);
     await stubImages(page);
     await page.goto("./");
-    for (const entry of first10) {
+    for (const entry of first20) {
       await centre(page, entry.id);
       const cell = card(page, entry.id);
       await cell.hover();
@@ -502,12 +508,42 @@ test.describe("all 10 trailer files", () => {
     }
   });
 
+  test("the next cards are fully loaded before they scroll in (banner, cover, clip start)", async ({
+    page,
+  }) => {
+    await stubImages(page);
+    await page.goto("./");
+    const next = first20[5];
+    // park the card just below the visible area (still off screen)
+    await card(page, next.id).evaluate((el) => {
+      const root = document.querySelector(".b-root")!;
+      const r = el.getBoundingClientRect();
+      root.scrollBy({
+        top: r.top - root.clientHeight - 120,
+        behavior: "instant",
+      });
+    });
+    const cell = card(page, next.id);
+    await expect(cell).toHaveAttribute("data-clip", "ready", { timeout: 8000 });
+    const state = await cell.evaluate((el) => {
+      const root = document.querySelector(".b-root")!.getBoundingClientRect();
+      const ok = (img: HTMLImageElement | null) =>
+        Boolean(img && img.complete && img.naturalWidth > 0);
+      return {
+        offscreen: el.getBoundingClientRect().top >= root.bottom,
+        banner: ok(el.querySelector<HTMLImageElement>(".b-bimg")),
+        cover: ok(el.querySelector<HTMLImageElement>(".b-med img")),
+      };
+    });
+    expect(state).toEqual({ offscreen: true, banner: true, cover: true });
+  });
+
   test("moving to the next card pauses the previous one at once", async ({
     page,
   }) => {
     await stubImages(page);
     await page.goto("./");
-    const [a, b] = [first10[3], first10[4]];
+    const [a, b] = [first20[3], first20[4]];
     await centre(page, a.id);
     await card(page, a.id).hover();
     await expect(card(page, a.id)).toHaveAttribute("data-trailer", "playing");
@@ -522,7 +558,7 @@ test.describe("all 10 trailer files", () => {
     expect(await playing(page)).toBe(1);
   });
 
-  test("scrolling through: at most 3 cards hold preloaded media, far cards release theirs", async ({
+  test("scrolling through: at most 6 cards hold preloaded media, far cards release theirs", async ({
     page,
   }) => {
     test.setTimeout(60_000);
@@ -539,7 +575,7 @@ test.describe("all 10 trailer files", () => {
       most = Math.max(most, await armed());
     }
     expect(most).toBeGreaterThan(0);
-    expect(most).toBeLessThanOrEqual(3);
+    expect(most).toBeLessThanOrEqual(6);
     await centre(page);
     await card(page).hover();
     await expect(card(page)).toHaveAttribute("data-trailer", "playing");
