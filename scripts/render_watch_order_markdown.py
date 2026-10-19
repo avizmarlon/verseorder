@@ -15,7 +15,11 @@ assert len({e['id'] for e in items})==len(items)
 lines=[
 '# VerseOrder: The Ultimate Marvel Multiverse Watch Order','',
 '> The order where the story makes the most sense, not strict in-universe chronology. Updated October 17, 2026. Some of the older picks are still getting a second look.', '',
-'**Tags:** [Optional] = nice extra, skip it if you want; [Legacy] = Marvel movie from outside the MCU (Sony, Fox and older ones); [Alternate universe] = MCU story outside the main timeline; [Currently airing] = season still coming out.', '',
+'**What the tags mean**', '',
+'- **Optional**: nice extra, skip it if you want',
+'- **Legacy**: Marvel movie from outside the MCU (Sony, Fox and older ones)',
+'- **Alternate universe**: MCU story outside the main timeline',
+'- **Currently airing**: season still coming out', '',
 '## The list','',
 ]
 last_era=None

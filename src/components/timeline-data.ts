@@ -13,6 +13,7 @@ export type Entry = (typeof collection.entries)[number] & {
   clip?: string | null;
 };
 export const entries = collection.entries;
+export const lastReviewedDate = collection.lastReviewedDate;
 export const chapters = [
   {
     id: 1,

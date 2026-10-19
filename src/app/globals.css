@@ -1515,6 +1515,10 @@ body {
   gap: 20px;
   justify-content: center;
   font-size: 13px;
+  margin-top: 8px;
+}
+.b-end > p + p {
+  margin-top: -4px;
 }
 .b-skip {
   position: absolute;

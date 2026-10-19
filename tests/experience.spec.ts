@@ -336,3 +336,38 @@ test("visit stats load only on the real domain", async ({ page }) => {
     expect(beacons).toEqual([]);
   }
 });
+
+test("footer shows the approved short copy", async ({ page }) => {
+  await home(page);
+  const footer = page.locator("footer.b-end");
+  await footer.scrollIntoViewIfNeeded();
+  await expect(
+    footer.getByRole("link", { name: "Suggest a correction", exact: true }),
+  ).toBeVisible();
+  await expect(
+    footer.getByRole("link", { name: "Source code", exact: true }),
+  ).toBeVisible();
+  await expect(
+    footer.getByRole("link", { name: "Printable watch order" }),
+  ).toHaveCount(0);
+  await expect(footer.getByText(/^Updated /)).toHaveText(
+    "Updated October 17, 2026",
+  );
+  await expect(footer.getByText(/Fan project made by/)).toContainText(
+    "not affiliated with Marvel, Disney or Sony",
+  );
+  await expect(
+    footer.getByRole("link", { name: "Marlon", exact: true }),
+  ).toHaveAttribute("href", "https://github.com/avizmarlon");
+  await expect(
+    footer.getByRole("link", { name: "MIT License", exact: true }),
+  ).toBeVisible();
+  await expect(footer.getByText(/112 curated entries/)).toHaveCount(0);
+  await expect(footer.getByText(/editorial review/)).toHaveCount(0);
+  await expect(footer.getByText(/cookie-free/i)).toHaveCount(0);
+  await expect(footer.getByText(/You may use, copy/)).toHaveCount(0);
+  await expect(footer.getByText(/© 2026/)).toHaveCount(0);
+  await expect(footer.getByText(/Wikipedia|TVMaze/)).toHaveCount(0);
+  // TMDB terms: attribution wherever TMDB data / images are used
+  await expect(footer.getByText(/API but is not endorsed or certified by TMDB/)).toBeVisible();
+});
