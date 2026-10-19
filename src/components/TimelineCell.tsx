@@ -8,38 +8,43 @@ import {
   colorOf,
   kindLabel,
   softOf,
-  trailerOf,
+  clipSources,
   type Entry,
-  type FxId,
 } from "./timeline-data";
 
-/** Start loading the trailer code when a banner card is within this distance of the viewport. */
+/** Load the (tiny) preview code when a banner card is within this distance of the viewport. */
 const NEAR_MARGIN = "900px 0px";
 
 /**
  * One timeline card. Cards without a banner keep the original markup and buttons. Cards with a
  * banner (prototype: Captain America: The First Avenger) are a single big button: the whole card
- * opens the details drawer, and the trailer preview is attached lazily (see banner-fx.ts).
+ * opens the details drawer, and the muted trailer preview is attached lazily (banner-clip.ts).
  */
 export default function TimelineCell({
   entry,
-  fx,
   onDetails,
   onTrailer,
   inTimeline = true,
 }: {
   entry: Entry;
-  fx: FxId;
   onDetails: () => void;
   onTrailer: () => void;
   /** false for lab cards: they are not on the timeline, so no dot-driven playback. */
   inTimeline?: boolean;
 }) {
   const cell = useRef<HTMLDivElement>(null);
-  const trailer = trailerOf(entry);
-  const banner = Boolean(entry.bannerUrl && trailer);
+  const banner = Boolean(entry.bannerUrl && entry.clip);
   const [near, setNear] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    // Fetch the small preview code once the page is idle (no video bytes), so a card that is
+    // jumped to (search, resume, fast scroll) does not wait for a chunk on its first hover.
+    if (!banner) return;
+    const idle = window.requestIdleCallback ?? ((fn: () => void) => setTimeout(fn, 1500));
+    const handle = idle(() => void import("./banner-clip"));
+    return () => (window.cancelIdleCallback ?? clearTimeout)(handle as number);
+  }, [banner]);
 
   useEffect(() => {
     const element = cell.current;
@@ -59,25 +64,23 @@ export default function TimelineCell({
 
   useEffect(() => {
     const element = cell.current;
-    if (!banner || !near || !element || !trailer) return;
+    if (!banner || !near || !element) return;
     let cancelled = false;
     let detach: (() => void) | undefined;
-    import("./banner-fx").then((module) => {
+    import("./banner-clip").then((module) => {
       if (cancelled) return;
       detach = module.attach({
         cell: element,
-        id: `${entry.id}:${fx}:${inTimeline ? "t" : "lab"}`,
+        key: `${entry.id}:${inTimeline ? "t" : "lab"}`,
         pos: inTimeline ? entry.position : null,
-        videoId: trailer,
-        start: entry.trailerStart ?? 0,
-        fx,
+        sources: clipSources(entry),
       });
     });
     return () => {
       cancelled = true;
       detach?.();
     };
-  }, [banner, near, trailer, fx, entry.id, entry.position, entry.trailerStart, inTimeline]);
+  }, [banner, near, entry, inTimeline]);
 
   if (!banner) {
     return (
@@ -121,9 +124,8 @@ export default function TimelineCell({
       className="b-cell"
       ref={cell}
       data-banner=""
-      data-fx={fx}
       data-trailer="idle"
-      data-warm="off"
+      data-clip="none"
     >
       <div
         className="b-banner"

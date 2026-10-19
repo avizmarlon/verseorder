@@ -1,0 +1,326 @@
+/**
+ * Card banner trailer (PROTOTYPE, lazy chunk). The card plays a self-hosted, muted, looping copy
+ * of the official trailer (H.264 MP4 + AV1 WebM, no audio track, faststart) instead of a YouTube
+ * embed, so the first hover starts in a few tens of milliseconds.
+ *
+ * - Nothing is fetched until the card approaches the viewport. Then the nearest MAX_PRELOAD cards
+ *   get preload="metadata" (Chrome buffers the first few seconds, ~0.2-0.4 MB; preload="auto"
+ *   would pull most of the 4-6 MB file). Save-Data / 2g / 3g: no preload, load on hover only.
+ * - Hover / keyboard focus (pointer devices) or the timeline dot on the node (touch) plays it; the
+ *   flip-tiles reveal starts on the first presented frame. Leaving reverses the tiles and pauses.
+ * - prefers-reduced-motion: never attached (static banner). Hidden tab: paused.
+ * Imperative on purpose: no React renders while hovering, only attribute flips.
+ */
+
+const MAX_PRELOAD = 3;
+const APPROACH_MARGIN = "600px 0px";
+/** Pause this long after leaving, so the reverse flip still shows moving video. */
+const PAUSE_AFTER_MS = 1100;
+const TILE_COLS = 6;
+const TILE_ROWS = 3;
+
+type Mode = "idle" | "loading" | "playing";
+type Card = {
+  key: string;
+  cell: HTMLElement;
+  video: HTMLVideoElement;
+  tiles: HTMLElement;
+  pos: number | null;
+  wants: { hover: boolean; focus: boolean; dot: 0 | 1 | 2 };
+  approaching: boolean;
+  preloaded: boolean;
+  broken: boolean;
+  mode: Mode;
+  pauseTimer: ReturnType<typeof setTimeout> | undefined;
+  frameHandle: number;
+};
+
+const cards = new Map<string, Card>();
+let ready = false;
+let touchMode = false;
+let dotPos: number | null = null;
+let approachObserver: IntersectionObserver | null = null;
+let scheduled = false;
+
+const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+type NetInfo = { saveData?: boolean; effectiveType?: string };
+const net = () => (navigator as Navigator & { connection?: NetInfo }).connection;
+/** Save-Data or a slow connection: fetch only when the user actually asks for the preview. */
+const lean = () => {
+  const connection = net();
+  return Boolean(
+    connection?.saveData || /^(slow-2g|2g|3g)$/.test(connection?.effectiveType ?? ""),
+  );
+};
+
+const isActive = (card: Card) =>
+  !card.broken &&
+  document.visibilityState === "visible" &&
+  (card.wants.focus || (touchMode ? card.wants.dot === 2 : card.wants.hover));
+
+function setMode(card: Card, mode: Mode) {
+  if (card.mode === mode) return;
+  card.mode = mode;
+  card.cell.dataset.trailer = mode;
+}
+
+function reveal(card: Card) {
+  if (!isActive(card)) return;
+  setMode(card, "playing");
+}
+
+function start(card: Card) {
+  clearTimeout(card.pauseTimer);
+  card.pauseTimer = undefined;
+  const video = card.video;
+  if (video.preload !== "auto") video.preload = "auto"; // now that it plays, buffer normally
+  const playing = !video.paused && video.readyState >= 3;
+  if (playing) return reveal(card);
+  setMode(card, "loading");
+  // Reveal on the first frame that is actually presented (falls back to the 'playing' event).
+  if (typeof video.requestVideoFrameCallback === "function") {
+    video.cancelVideoFrameCallback(card.frameHandle);
+    card.frameHandle = video.requestVideoFrameCallback(() => reveal(card));
+  } else video.addEventListener("playing", () => reveal(card), { once: true });
+  video.play().catch(() => {
+    // autoplay refused (should not happen for a muted inline video) or source failed
+    if (video.error) markBroken(card);
+    else setMode(card, "idle");
+  });
+}
+
+function stop(card: Card) {
+  if (card.mode === "idle") return;
+  setMode(card, "idle");
+  card.video.cancelVideoFrameCallback?.(card.frameHandle);
+  clearTimeout(card.pauseTimer);
+  card.pauseTimer = setTimeout(() => {
+    card.pauseTimer = undefined;
+    if (!isActive(card)) card.video.pause();
+  }, PAUSE_AFTER_MS);
+}
+
+function markBroken(card: Card) {
+  card.broken = true;
+  card.cell.dataset.clip = "error";
+  setMode(card, "idle");
+  card.video.removeAttribute("src");
+  card.video.replaceChildren();
+}
+
+/** Nearest approaching cards (and the dot's neighbours) get their first seconds buffered. */
+function preloadNearest() {
+  if (lean()) return;
+  const centre = innerHeight / 2;
+  const ranked = [...cards.values()]
+    .filter((card) => !card.broken && (card.approaching || card.wants.dot > 0))
+    .map((card) => {
+      const rect = card.cell.getBoundingClientRect();
+      const distance = Math.abs(rect.top + rect.height / 2 - centre);
+      return { card, score: distance - (card.wants.dot ? 10000 : 0) };
+    })
+    .sort((a, b) => a.score - b.score)
+    .slice(0, MAX_PRELOAD);
+  for (const { card } of ranked) {
+    if (card.preloaded) continue;
+    card.preloaded = true;
+    card.video.preload = "metadata";
+    card.video.load();
+    card.cell.dataset.clip = "loading";
+  }
+}
+
+function evaluate() {
+  scheduled = false;
+  preloadNearest();
+  for (const card of cards.values()) {
+    if (isActive(card)) start(card);
+    else stop(card);
+  }
+}
+
+function schedule() {
+  if (scheduled) return;
+  scheduled = true;
+  requestAnimationFrame(evaluate);
+}
+
+function setDot(pos: number | null) {
+  if (pos === dotPos) return;
+  dotPos = pos;
+  for (const card of cards.values()) {
+    const d = pos === null || card.pos === null ? 99 : Math.abs(card.pos - pos);
+    card.wants.dot = d === 0 ? 2 : d === 1 ? 1 : 0;
+  }
+  schedule();
+}
+
+function ensureGlobals() {
+  if (ready) return;
+  ready = true;
+  touchMode =
+    new URLSearchParams(location.search).get("touch") === "1" ||
+    matchMedia("(hover: none)").matches;
+  document.addEventListener("vo:dot", (event) =>
+    setDot((event as CustomEvent<number | null>).detail),
+  );
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden")
+      for (const card of cards.values()) {
+        card.wants.hover = false;
+        setMode(card, "idle");
+        card.video.pause();
+      }
+    schedule();
+  });
+  approachObserver = new IntersectionObserver(
+    (records) => {
+      for (const record of records)
+        for (const card of cards.values())
+          if (card.cell === record.target) card.approaching = record.isIntersecting;
+      schedule();
+    },
+    { rootMargin: APPROACH_MARGIN },
+  );
+  const initial = Number(document.documentElement.dataset.voDot);
+  if (initial) setDot(initial);
+}
+
+function buildTiles(cell: HTMLElement, banner: HTMLElement) {
+  const src = banner.querySelector<HTMLImageElement>(".b-bimg")?.currentSrc;
+  const wrap = document.createElement("div");
+  wrap.className = "b-tiles";
+  for (let i = 0; i < TILE_COLS * TILE_ROWS; i++) {
+    const tile = document.createElement("i");
+    tile.className = "b-tile";
+    tile.style.setProperty("--c", String(i % TILE_COLS));
+    tile.style.setProperty("--r", String(Math.floor(i / TILE_COLS)));
+    const face = document.createElement("b");
+    face.className = "b-tface";
+    if (src) {
+      const img = document.createElement("img");
+      img.className = "b-timg";
+      img.src = src;
+      img.alt = "";
+      img.decoding = "async";
+      img.referrerPolicy = "no-referrer";
+      img.draggable = false;
+      face.appendChild(img);
+    }
+    tile.appendChild(face);
+    wrap.appendChild(tile);
+  }
+  cell.querySelector(".b-vid")?.after(wrap);
+  cell.dataset.tiles = "";
+  return wrap;
+}
+
+export type ClipSource = { src: string; type: string };
+
+export function attach(options: {
+  cell: HTMLElement;
+  key: string;
+  pos: number | null;
+  sources: ClipSource[];
+}): () => void {
+  const { cell } = options;
+  const slot = cell.querySelector<HTMLElement>(".b-vid");
+  const banner = cell.querySelector<HTMLElement>(".b-banner");
+  if (!slot || !banner || reducedMotion()) {
+    cell.dataset.clip = "off";
+    return () => {};
+  }
+  ensureGlobals();
+  const video = document.createElement("video");
+  video.muted = true;
+  video.defaultMuted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = "none";
+  video.disablePictureInPicture = true;
+  video.disableRemotePlayback = true;
+  video.setAttribute("muted", "");
+  video.setAttribute("playsinline", "");
+  video.setAttribute("aria-hidden", "true");
+  video.tabIndex = -1;
+  for (const source of options.sources) {
+    const element = document.createElement("source");
+    element.src = source.src;
+    element.type = source.type;
+    video.appendChild(element);
+  }
+  slot.appendChild(video);
+  const card: Card = {
+    key: options.key,
+    cell,
+    video,
+    tiles: buildTiles(cell, banner),
+    pos: options.pos,
+    wants: { hover: false, focus: false, dot: 0 },
+    approaching: false,
+    preloaded: false,
+    broken: false,
+    mode: "idle",
+    pauseTimer: undefined,
+    frameHandle: 0,
+  };
+  cards.set(card.key, card);
+  cell.dataset.clip = "none";
+  // the last <source> failing means no playable source at all
+  video.lastElementChild?.addEventListener("error", () => markBroken(card));
+  video.addEventListener("error", () => markBroken(card));
+  video.addEventListener("loadeddata", () => {
+    if (!card.broken) cell.dataset.clip = "ready";
+  });
+
+  const hit = cell.querySelector<HTMLElement>(".b-hit");
+  const enter = (event: PointerEvent) => {
+    if (touchMode || event.pointerType === "touch") return;
+    card.wants.hover = true;
+    // act in the same task: the hover is what the user is waiting on
+    if (isActive(card)) start(card);
+  };
+  const leave = () => {
+    card.wants.hover = false;
+    schedule();
+  };
+  const focusIn = () => {
+    card.wants.focus = true;
+    start(card);
+  };
+  const focusOut = () => {
+    card.wants.focus = false;
+    schedule();
+  };
+  cell.addEventListener("pointerenter", enter);
+  cell.addEventListener("pointerleave", leave);
+  hit?.addEventListener("focus", focusIn);
+  hit?.addEventListener("blur", focusOut);
+  approachObserver?.observe(cell);
+  if (card.pos !== null && dotPos !== null) {
+    const d = Math.abs(card.pos - dotPos);
+    card.wants.dot = d === 0 ? 2 : d === 1 ? 1 : 0;
+  }
+  // the chunk loads lazily: the pointer / focus may already be on the card
+  if (!touchMode && cell.matches(":hover")) card.wants.hover = true;
+  if (hit && document.activeElement === hit) card.wants.focus = true;
+  schedule();
+
+  return () => {
+    clearTimeout(card.pauseTimer);
+    cell.removeEventListener("pointerenter", enter);
+    cell.removeEventListener("pointerleave", leave);
+    hit?.removeEventListener("focus", focusIn);
+    hit?.removeEventListener("blur", focusOut);
+    approachObserver?.unobserve(cell);
+    video.pause();
+    video.removeAttribute("src");
+    video.replaceChildren();
+    video.load();
+    video.remove();
+    card.tiles.remove();
+    delete cell.dataset.tiles;
+    cards.delete(card.key);
+    cell.dataset.trailer = "idle";
+  };
+}

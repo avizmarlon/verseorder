@@ -6,8 +6,11 @@ export type Entry = (typeof collection.entries)[number] & {
   bannerUrl?: string | null;
   /** CSS object-position for the banner crop, e.g. "50% 22%" (keeps faces in frame). */
   bannerFocus?: string | null;
-  /** Seconds to skip at the start of the decorative trailer (rating cards, logos). */
-  trailerStart?: number | null;
+  /**
+   * Self-hosted muted trailer for the card (file stem under the media base): expects
+   * `<clip>.webm` (AV1) and `<clip>.mp4` (H.264, faststart). Prototype: one title only.
+   */
+  clip?: string | null;
 };
 export const entries = collection.entries;
 export const chapters = [
@@ -93,13 +96,19 @@ export const trailerIds: Record<string, string> = {
 export const trailerOf = (entry: Entry): string | null =>
   entry.trailerYouTubeId || trailerIds[entry.id] || null;
 
-/** PROTOTYPE: poster-to-video transition variants for the card banner. */
-export const fxVariants = [
-  { id: "tiles", label: "Flip tiles", blurb: "A grid of panels flips over, Marvel-intro style (flips back on exit)." },
-  { id: "shutter", label: "Comic shutter", blurb: "Diagonal comic-panel slats open to reveal the trailer (and close again)." },
-  { id: "letterbox", label: "Cinematic bars", blurb: "Black bars close, then open on a widescreen trailer (and reverse)." },
-] as const;
-export type FxId = (typeof fxVariants)[number]["id"];
-export const defaultFx: FxId = "tiles";
-export const isFxId = (value: string | null | undefined): value is FxId =>
-  fxVariants.some((variant) => variant.id === value);
+/**
+ * Where card trailer files live. Defaults to same-origin `<basePath>/clips`; set
+ * NEXT_PUBLIC_MEDIA_BASE (e.g. https://media.example.pages.dev/clips) to serve them elsewhere.
+ */
+export const mediaBase = (
+  process.env.NEXT_PUBLIC_MEDIA_BASE || `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/clips`
+).replace(/\/$/, "");
+
+/** Card trailer sources, best codec first. */
+export const clipSources = (entry: Entry) =>
+  entry.clip
+    ? [
+        { src: `${mediaBase}/${entry.clip}.webm`, type: 'video/webm; codecs="av01.0.04M.08"' },
+        { src: `${mediaBase}/${entry.clip}.mp4`, type: 'video/mp4; codecs="avc1.4D401F"' },
+      ]
+    : [];
