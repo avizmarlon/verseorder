@@ -93,18 +93,13 @@ export const trailerIds: Record<string, string> = {
 export const trailerOf = (entry: Entry): string | null =>
   entry.trailerYouTubeId || trailerIds[entry.id] || null;
 
-/** PROTOTYPE: transition variants for the card banner trailer. */
+/** PROTOTYPE: poster-to-video transition variants for the card banner. */
 export const fxVariants = [
-  { id: "crossfade", label: "Crossfade", blurb: "Poster and video simply dissolve into each other." },
-  { id: "slide-wipe", label: "Slide + wipe", blurb: "Poster slides off its side while the video wipes in behind it." },
-  { id: "shutter", label: "Comic shutter", blurb: "Diagonal comic-panel slices open to reveal the trailer." },
-  { id: "tiles", label: "Flip tiles", blurb: "A grid of panels flips over, Marvel-intro style." },
-  { id: "badge", label: "Corner badge", blurb: "Poster shrinks into a corner badge as the video fills the card." },
-  { id: "shine", label: "Zoom + shine", blurb: "Poster zooms and dissolves under a sweeping light flare." },
-  { id: "letterbox", label: "Cinematic bars", blurb: "Black bars close, then open on a widescreen trailer." },
-  { id: "iris", label: "Shield iris", blurb: "A circular iris expands from the poster, with a gold ring." },
+  { id: "tiles", label: "Flip tiles", blurb: "A grid of panels flips over, Marvel-intro style (flips back on exit)." },
+  { id: "shutter", label: "Comic shutter", blurb: "Diagonal comic-panel slats open to reveal the trailer (and close again)." },
+  { id: "letterbox", label: "Cinematic bars", blurb: "Black bars close, then open on a widescreen trailer (and reverse)." },
 ] as const;
 export type FxId = (typeof fxVariants)[number]["id"];
-export const defaultFx: FxId = "crossfade";
+export const defaultFx: FxId = "tiles";
 export const isFxId = (value: string | null | undefined): value is FxId =>
   fxVariants.some((variant) => variant.id === value);
