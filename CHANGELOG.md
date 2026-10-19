@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Give every one of the 112 timeline cards a TMDB backdrop banner (per-title focus point) and a self-hosted, muted, looping trailer preview (AV1 WebM + H.264 MP4, 768x320, no audio) served from `/clips/`. The detail drawer keeps the click-to-load YouTube embed.
+- Preload card media ahead of the viewport. The scroller is the IntersectionObserver root, so the margin applies. Only the start of the next few cards is fetched, nothing loads before the page settles, far cards release their sources, Save-Data is respected, and only one video decodes at a time. On touch, the timeline dot drives playback, held back during flings.
+- Serve `/clips/*` through a Pages Function that answers byte ranges (206) from the Cache API, with an immutable cache policy.
+- WebM clips are muxed with cues at the front so the first range request is enough to start playback.
+- Add `scripts/media/build_media.py` + `scripts/media/manifest.json`: a TMDB lookup (official videos, textless backdrops, posters), fetch, rating-card/black trim, letterbox detection, encode and data apply. Per-title overrides cover the end-card trim (licensed re-uploads) and crops that cut burned-in streaming watermarks (Netflix, Disney+).
+- Fallbacks: titles with no studio trailer upload use an official clip (Luke Cage S2) or a licensed Movieclips / Rotten Tomatoes Classic Trailers upload (pre-2010 Fox/New Line titles), trimmed before the end card. Commentary-only sources (A Funny Thing Happened on the Way to Thor's Hammer) are not offered as the drawer trailer. Iron Man and Iron Man 2 come from marvel.com (Brightcove) and have no YouTube drawer trailer.
+- Remove the `/lab` prototype page, its styles and its test.
 - Move the website to https://verseorder.watch on Cloudflare Pages. The old GitHub Pages address redirects there.
 - Show real cover art for the titles in the timeline, title details and adjacent-title navigation, with the original medallion as a fallback when a cover is missing.
 - Add `scripts/resolve-posters.mjs` to resolve cover links (Wikipedia and TVMaze) into the data file.

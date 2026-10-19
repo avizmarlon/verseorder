@@ -1953,6 +1953,599 @@
       "backdrop": "/qq9ELjoyllBUMkGisZvcj0fCd43.jpg",
       "bannerFocus": "50% 30%",
       "poster": "/4YMcYEFS8sFuW3soP1HVmgR3cSm.jpg"
+    },
+    {
+      "id": "fantastic-four-rise-of-the-silver-surfer-2007",
+      "clip": "fantastic-four-2007",
+      "tmdb": {
+        "type": "movie",
+        "id": 1979
+      },
+      "trim": {
+        "start": "auto",
+        "end": 118.0
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "Wiu5eZ_7vSY",
+        "label": "Fantastic Four: Rise of the Silver Surfer (2007) - Trailer #1",
+        "channel": "Rotten Tomatoes Classic Trailers"
+      },
+      "drawerYouTubeId": "Wiu5eZ_7vSY",
+      "$note": "No studio upload of the trailer exists; uses the licensed Rotten Tomatoes Classic Trailers (Fandango) upload. Trimmed before the end card.",
+      "backdrop": "/o2wYH40zW0JIYiYUTu6L4gsNy7E.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/9wRfzTcMyyzkQxVDqBHv8RwuZOv.jpg"
+    },
+    {
+      "id": "x-men-first-class",
+      "clip": "x-men-first-class",
+      "tmdb": {
+        "type": "movie",
+        "id": 49538
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "UrbHykKUfTM",
+        "label": "X-Men: First Class - Official Trailer",
+        "channel": "X-Men Movies"
+      },
+      "drawerYouTubeId": "UrbHykKUfTM",
+      "backdrop": "/yhp5Pt4GugkCs5mz63qWz5khHXe.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/hNEokmUke0dazoBhttFN0o3L7Xv.jpg"
+    },
+    {
+      "id": "x-men-origins-wolverine",
+      "clip": "x-men-origins-wolverine",
+      "tmdb": {
+        "type": "movie",
+        "id": 2080
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "kd6zYnHwQWA",
+        "label": "X-Men Origins: Wolverine - \"Witness the Origin\" Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "kd6zYnHwQWA",
+      "backdrop": "/p4GzAzjlL7lXIVGvayg7zvzGTSi.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/yj8LbTju1p7CUJg7US2unSBk33s.jpg"
+    },
+    {
+      "id": "x-men-2000",
+      "clip": "x-men-2000",
+      "tmdb": {
+        "type": "movie",
+        "id": 36657
+      },
+      "trim": {
+        "start": "auto",
+        "end": 141.5
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "VNxwlx6etXI",
+        "label": "X-Men (2000) - Trailer #1",
+        "channel": "Rotten Tomatoes Classic Trailers"
+      },
+      "drawerYouTubeId": "VNxwlx6etXI",
+      "$note": "No studio upload of the trailer exists; uses the licensed Rotten Tomatoes Classic Trailers (Fandango) upload. Trimmed before the end card.",
+      "backdrop": "/3QUVzbcNyfGe3ocWkYAT8emK8Co.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/yB6Tui7DU82jRwusjgG00kdV0pM.jpg"
+    },
+    {
+      "id": "x2-x-men-united",
+      "clip": "x2-x-men-united",
+      "tmdb": {
+        "type": "movie",
+        "id": 36658
+      },
+      "trim": {
+        "start": "auto",
+        "end": 97.5
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "KNIdceH7XOw",
+        "label": "X2 - #TBT Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "KNIdceH7XOw",
+      "$note": "Trimmed before the end card.",
+      "backdrop": "/7TYITrR804tLITNur3b8VLCK6tw.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/bst4alFUXCxISwdRUKSMhhkrX1M.jpg"
+    },
+    {
+      "id": "x-men-the-last-stand",
+      "clip": "x-men-the-last-stand",
+      "tmdb": {
+        "type": "movie",
+        "id": 36668
+      },
+      "trim": {
+        "start": "auto",
+        "end": 140.3
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "ZQ0v5dXbw7M",
+        "label": "X-Men: The Last Stand (2006) - Trailer #1",
+        "channel": "Rotten Tomatoes Classic Trailers"
+      },
+      "drawerYouTubeId": "ZQ0v5dXbw7M",
+      "$note": "No studio upload of the trailer exists; uses the licensed Rotten Tomatoes Classic Trailers (Fandango) upload. Trimmed before the end card.",
+      "backdrop": "/nLMXULCGLnzRxz11txPzPqbOHSz.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/rjTCsb3Zn2QelefR48I9ueRnOxa.jpg"
+    },
+    {
+      "id": "the-wolverine",
+      "clip": "the-wolverine",
+      "tmdb": {
+        "type": "movie",
+        "id": 76170
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "u1VCP3O8wG0",
+        "label": "The Wolverine - Official Trailer 1",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "u1VCP3O8wG0",
+      "backdrop": "/bEAQfLTykGg232kJogBlxRYaRqU.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/t2wVAcoRlKvEIVSbiYDb8d0QqqS.jpg"
+    },
+    {
+      "id": "x-men-days-of-future-past",
+      "clip": "x-men-days-of-future-past",
+      "tmdb": {
+        "type": "movie",
+        "id": 127585
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "pK2zYHWDZKo",
+        "label": "X-Men: Days of Future Past - Official Trailer",
+        "channel": "X-Men Movies"
+      },
+      "drawerYouTubeId": "pK2zYHWDZKo",
+      "backdrop": "/fctQU5MoXgJ5pNMljFzlEFXwfSu.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/bvN8iUpHyBIvniUk4e52SUZMA7Z.jpg"
+    },
+    {
+      "id": "x-men-apocalypse",
+      "clip": "x-men-apocalypse",
+      "tmdb": {
+        "type": "movie",
+        "id": 246655
+      },
+      "trim": {
+        "start": "auto",
+        "end": 134.0
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "PfBVIHgQbYk",
+        "label": "X-Men: Apocalypse - Official Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "PfBVIHgQbYk",
+      "$note": "Trimmed before the end card.",
+      "backdrop": "/sTQNRqLbfCXolrb5CizAW1dj528.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/ikA8UhYdTGpqbatFa93nIf6noSr.jpg"
+    },
+    {
+      "id": "dark-phoenix",
+      "clip": "dark-phoenix",
+      "tmdb": {
+        "type": "movie",
+        "id": 320288
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "1-q8C_c-nlM",
+        "label": "Dark Phoenix - Official Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "1-q8C_c-nlM",
+      "backdrop": "/j9ZV0UOagjQ4seR8Hd5N6JfwdTP.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/gUGhbJVZAOBAf5Zg6OHF6JWrABf.jpg"
+    },
+    {
+      "id": "deadpool",
+      "clip": "deadpool",
+      "tmdb": {
+        "type": "movie",
+        "id": 293660
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "ONHBaC-pfsk",
+        "label": "Deadpool - Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "ONHBaC-pfsk",
+      "backdrop": "/rFj9IKlL75B2pXhZA60jkNWvxeW.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/3E53WEZJqP6aM84D8CckXx4pIHw.jpg"
+    },
+    {
+      "id": "deadpool-2",
+      "clip": "deadpool-2",
+      "tmdb": {
+        "type": "movie",
+        "id": 383498
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "D86RtevtfrA",
+        "label": "Deadpool 2 - The Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "D86RtevtfrA",
+      "backdrop": "/3P52oz9HPQWxcwHOwxtyrVV1LKi.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/gyfPKfFYcVW54MoqhYlwwDDIfJR.jpg"
+    },
+    {
+      "id": "the-new-mutants",
+      "clip": "the-new-mutants",
+      "tmdb": {
+        "type": "movie",
+        "id": 340102
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "W_vJhUAOFpI",
+        "label": "The New Mutants - Official Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "W_vJhUAOFpI",
+      "backdrop": "/1MoeNacOltBWojkStjhT3svBTOK.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/xiDGcXJTvu1lazFRYip6g1eLt9c.jpg"
+    },
+    {
+      "id": "logan",
+      "clip": "logan",
+      "tmdb": {
+        "type": "movie",
+        "id": 263115
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "Div0iP65aZo",
+        "label": "Logan - Official Trailer",
+        "channel": "20th Century Studios"
+      },
+      "drawerYouTubeId": "Div0iP65aZo",
+      "backdrop": "/4DZxWNSAyksN6N3JkvpJ53Yq6zU.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/2dBjfntdxZ1A1XjjyAAwhn922cL.jpg"
+    },
+    {
+      "id": "deadpool-wolverine",
+      "clip": "deadpool-wolverine",
+      "tmdb": {
+        "type": "movie",
+        "id": 533535
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "73_1biulkYk",
+        "label": "Deadpool & Wolverine - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "73_1biulkYk",
+      "backdrop": "/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/gKjB6s1sElrjr2giLiXbaUsGOUU.jpg"
+    },
+    {
+      "id": "agatha-all-along",
+      "clip": "agatha-all-along",
+      "tmdb": {
+        "type": "tv",
+        "id": 138501,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "R9pXbNz6Vbw",
+        "label": "Agatha All Along - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "R9pXbNz6Vbw",
+      "backdrop": "/tYLXJW1sZQU09VWY1BhSVPKGIwc.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/mGsxKwXUjojitRv2E9qMTbxbBRd.jpg"
+    },
+    {
+      "id": "what-if-t3",
+      "clip": "what-if-t3",
+      "tmdb": {
+        "type": "tv",
+        "id": 91363,
+        "season": 3
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "umiKiW4En9g",
+        "label": "What If...? Season 3 - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "umiKiW4En9g",
+      "backdrop": "/zKwUBJ95aIBfeKnUxyvsO6rxoLg.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/lztz5XBMG1x6Y5ubz7CxfPFsAcW.jpg"
+    },
+    {
+      "id": "daredevil-born-again-t1",
+      "clip": "daredevil-born-again-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 202555,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1632:680:0:140",
+      "trailer": {
+        "source": "youtube",
+        "id": "7xALolZzhSM",
+        "label": "Daredevil: Born Again - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "7xALolZzhSM",
+      "$note": "Left-anchored crop excludes the Disney+ corner watermark.",
+      "backdrop": "/qrTAc0ZtQ859Qu5O8cixJzNJpQs.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/A46i2ECLE1bVrl9YTWVnfBEWuzh.jpg"
+    },
+    {
+      "id": "captain-america-brave-new-world",
+      "clip": "captain-america-brave-new-world",
+      "tmdb": {
+        "type": "movie",
+        "id": 822119
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "1pHDWnXmK7Y",
+        "label": "Captain America: Brave New World - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "1pHDWnXmK7Y",
+      "backdrop": "/ce3prrjh9ZehEl5JinNqr4jIeaB.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/56mIu1630ALe3F9RP1Szlv0qVyb.jpg"
+    },
+    {
+      "id": "thunderbolts",
+      "clip": "thunderbolts",
+      "tmdb": {
+        "type": "movie",
+        "id": 986056
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "-sAOWhvheK8",
+        "label": "Thunderbolts* - Final Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "-sAOWhvheK8",
+      "backdrop": "/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/zcqZHQE0hVf83NDqvw2nCLgwOgn.jpg"
+    },
+    {
+      "id": "the-fantastic-four-first-steps",
+      "clip": "the-fantastic-four-first-steps",
+      "tmdb": {
+        "type": "movie",
+        "id": 617126
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "pAsmrKyMqaA",
+        "label": "The Fantastic Four: First Steps - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "pAsmrKyMqaA",
+      "backdrop": "/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/63ZbwVdLPG8zjyMCqvhzVtDdL0W.jpg"
+    },
+    {
+      "id": "wonder-man",
+      "clip": "wonder-man",
+      "tmdb": {
+        "type": "tv",
+        "id": 198178,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1632:680:0:140",
+      "trailer": {
+        "source": "youtube",
+        "id": "wHuWmjXsReU",
+        "label": "Wonder Man - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "wHuWmjXsReU",
+      "$note": "Left-anchored crop excludes the Disney+ corner watermark.",
+      "backdrop": "/ldz9THIHaV4orMsUrPT1nlQF51T.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/6yy9nQlFt2l6UVWzrfhszFCaZ5C.jpg"
+    },
+    {
+      "id": "daredevil-born-again-t2",
+      "clip": "daredevil-born-again-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 202555,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1632:680:0:140",
+      "trailer": {
+        "source": "youtube",
+        "id": "U1MqJBVn8Rk",
+        "label": "Daredevil: Born Again Season 2 - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "U1MqJBVn8Rk",
+      "$note": "Left-anchored crop excludes the Disney+ corner watermark.",
+      "backdrop": "/m291MEBjhuRqb0nh9ojnm9gzScq.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/A46i2ECLE1bVrl9YTWVnfBEWuzh.jpg"
+    },
+    {
+      "id": "the-punisher-one-last-kill",
+      "clip": "the-punisher-one-last-kill",
+      "tmdb": {
+        "type": "movie",
+        "id": 1439930
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1632:680:0:140",
+      "trailer": {
+        "source": "youtube",
+        "id": "oSeqs_xeqv4",
+        "label": "The Punisher: One Last Kill - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "oSeqs_xeqv4",
+      "$note": "Left-anchored crop excludes the Disney+ corner watermark.",
+      "backdrop": "/qO55CD8tgVL1T4WKn6zYFFiD6lL.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/qQclTgLMDvGBuUBFGHRipxkEwWR.jpg"
+    },
+    {
+      "id": "visionquest-t1",
+      "clip": "visionquest-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 213375,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1632:680:0:140",
+      "trailer": {
+        "source": "youtube",
+        "id": "sXKnmgmbkoE",
+        "label": "VisionQuest - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "sXKnmgmbkoE",
+      "$note": "Left-anchored crop excludes the Disney+ corner watermark.",
+      "backdrop": "/uoXXbN2PrOxH6UKyP7kYwmGpAAP.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/jfltxthL5nDD14AxOd6gxbBYX6v.jpg"
+    },
+    {
+      "id": "spider-man-brand-new-day",
+      "clip": "spider-man-brand-new-day",
+      "tmdb": {
+        "type": "movie",
+        "id": 969681
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "8TZMtslA3UY",
+        "label": "Spider-Man: Brand New Day - Official Trailer",
+        "channel": "Spider-Man (Sony)"
+      },
+      "drawerYouTubeId": "8TZMtslA3UY",
+      "backdrop": "/r08LxMJCbf1SiJIWeyH9aJmdqwC.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/ghF1JYv7P5BgWHYfq9dqhqqNfz8.jpg"
     }
   ]
 }

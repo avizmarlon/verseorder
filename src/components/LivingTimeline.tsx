@@ -266,11 +266,11 @@ export default function LivingTimeline() {
   const [selection, setSelection] = useState<Selection | null>(null);
   const resumeTarget = useRef<string | null>(null);
   useEffect(() => {
-    // Prototype helper: ?focus=<entry id> centres a card on load (used by the lab phone frame).
+    // Prototype helper: ?focus=<entry id> centres a card on load (handy for testing a single card).
     const id = new URLSearchParams(window.location.search).get("focus");
     if (!id) return;
     const timer = setTimeout(() => {
-      // scroll our own scroller only: scrollIntoView would also scroll a parent page (lab iframe)
+      // scroll our own scroller only: scrollIntoView would also scroll a parent page when embedded
       const scroller = document.querySelector<HTMLElement>(".b-root");
       const node = document.getElementById(`node-${id}`);
       if (!scroller || !node) return;
