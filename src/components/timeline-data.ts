@@ -1,6 +1,17 @@
 import collection from "@/data/watch-order.json";
 
-export type Entry = (typeof collection.entries)[number];
+/** Optional card-banner fields; only entries that opted in (prototype) carry them. */
+export type Entry = (typeof collection.entries)[number] & {
+  /** Horizontal (16:9-ish) backdrop used as the static card banner. Hotlinked. */
+  bannerUrl?: string | null;
+  /** CSS object-position for the banner crop, e.g. "50% 22%" (keeps faces in frame). */
+  bannerFocus?: string | null;
+  /**
+   * Self-hosted muted trailer for the card (file stem under the media base): expects
+   * `<clip>.webm` (AV1) and `<clip>.mp4` (H.264, faststart). Prototype: one title only.
+   */
+  clip?: string | null;
+};
 export const entries = collection.entries;
 export const lastReviewedDate = collection.lastReviewedDate;
 export const chapters = [
@@ -81,3 +92,24 @@ export const trailerIds: Record<string, string> = {
   "avengers-endgame": "TcMBFSGVi1c",
   "spider-man-no-way-home": "JfVOs4VSpmA",
 };
+
+/** YouTube id of the official trailer, if one has been verified for this title. */
+export const trailerOf = (entry: Entry): string | null =>
+  entry.trailerYouTubeId || trailerIds[entry.id] || null;
+
+/**
+ * Where card trailer files live. Defaults to same-origin `<basePath>/clips`; set
+ * NEXT_PUBLIC_MEDIA_BASE (e.g. https://media.example.pages.dev/clips) to serve them elsewhere.
+ */
+export const mediaBase = (
+  process.env.NEXT_PUBLIC_MEDIA_BASE || `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/clips`
+).replace(/\/$/, "");
+
+/** Card trailer sources, best codec first. */
+export const clipSources = (entry: Entry) =>
+  entry.clip
+    ? [
+        { src: `${mediaBase}/${entry.clip}.webm`, type: 'video/webm; codecs="av01.0.04M.08"' },
+        { src: `${mediaBase}/${entry.clip}.mp4`, type: 'video/mp4; codecs="avc1.4D401F"' },
+      ]
+    : [];

@@ -158,7 +158,7 @@ test("trailer is opt-in and unverified titles offer search", async ({
   await expect.poll(() => requests.length).toBe(1);
   await page.keyboard.press("Escape");
   await expect(page.locator(youtubeFrames)).toHaveCount(0);
-  await page.getByRole("searchbox").fill("Eyes of Wakanda");
+  await page.getByRole("searchbox").fill("The Defenders");
   await page.locator(".b-hit").click();
   await page
     .getByRole("dialog")
@@ -271,7 +271,8 @@ test("malformed progress is ignored and stale IDs cannot inflate progress", asyn
   await expect(page.locator(".b-ring span")).toHaveText("0");
 });
 
-const coverHosts = /^https:\/\/(upload\.wikimedia\.org|static\.tvmaze\.com)\//;
+const coverHosts =
+  /^https:\/\/(upload\.wikimedia\.org|static\.tvmaze\.com|image\.tmdb\.org)\//;
 const pixel = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
   "base64",
@@ -283,7 +284,7 @@ test("cover data is complete, https, and only from approved hosts", () => {
   for (const entry of withCover) expect(entry.posterPath).toMatch(coverHosts);
 });
 
-test("covers render lazily with alt text, in details, and a11y holds", async ({
+test("covers load ahead of the viewport (lazy when far) with alt text, in details, and a11y holds", async ({
   page,
 }) => {
   await page.route(coverHosts, (route) =>
@@ -295,7 +296,14 @@ test("covers render lazily with alt text, in details, and a11y holds", async ({
   await row.scrollIntoViewIfNeeded();
   const cover = row.locator(".b-med img");
   await expect(cover).toHaveAttribute("src", first.posterPath!);
-  await expect(cover).toHaveAttribute("loading", "lazy");
+  // a card near the visible area loads its cover eagerly (ahead of scrolling in) ...
+  await expect(cover).toHaveAttribute("loading", "eager");
+  // ... a far one stays lazy
+  const far = collection.entries[80];
+  await expect(page.locator(`#node-${far.id} .b-med img`)).toHaveAttribute(
+    "loading",
+    "lazy",
+  );
   await row.getByRole("button", { name: `Details: ${first.title}` }).click();
   const drawerCover = page.locator("dialog img[alt$='cover art']").first();
   await expect(drawerCover).toHaveAttribute("alt", `${first.title} cover art`);
@@ -325,11 +333,14 @@ test("a cover that fails to load falls back to the medallion art", async ({
 test("visit stats load only on the real domain", async ({ page }) => {
   const beacons: string[] = [];
   page.on("request", (request) => {
-    if (request.url().startsWith("https://static.cloudflareinsights.com/")) beacons.push(request.url());
+    if (request.url().startsWith("https://static.cloudflareinsights.com/"))
+      beacons.push(request.url());
   });
   await home(page);
   await page.waitForLoadState("load");
-  const onRealDomain = await page.evaluate(() => location.hostname === "verseorder.watch");
+  const onRealDomain = await page.evaluate(
+    () => location.hostname === "verseorder.watch",
+  );
   if (onRealDomain) await expect.poll(() => beacons.length).toBe(1);
   else {
     await page.waitForTimeout(1500);
@@ -368,4 +379,8 @@ test("footer shows the approved short copy", async ({ page }) => {
   await expect(footer.getByText(/You may use, copy/)).toHaveCount(0);
   await expect(footer.getByText(/© 2026/)).toHaveCount(0);
   await expect(footer.getByText(/Wikipedia|TVMaze/)).toHaveCount(0);
+  // TMDB terms: attribution wherever TMDB data / images are used
+  await expect(
+    footer.getByText(/API but is not endorsed or certified by TMDB/),
+  ).toBeVisible();
 });

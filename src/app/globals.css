@@ -1674,3 +1674,329 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* ====================================================================== */
+/* Card banner + trailer (PROTOTYPE: Captain America: The First Avenger)  */
+/* Everything below animates transform / opacity only.                  */
+/* ====================================================================== */
+.b-cell[data-banner] {
+  /* no glass blur on banner cards: it would soften the image/video and costs GPU time */
+  backdrop-filter: none;
+  background: #0b0e1c;
+  min-height: 176px;
+}
+.b-row.seen .b-cell[data-banner]:hover {
+  transform: translateY(-3px);
+}
+.b-banner {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  container-type: size;
+  background-color: #0b0e1c;
+}
+.b-bimg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--bpos, 50% 50%);
+  transform: scale(1.06);
+}
+.b-vid {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+.b-vid video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* the file is already cropped to 2.4:1 (letterbox bars removed); cover the card shape */
+  object-fit: cover;
+  pointer-events: none;
+}
+.b-cell[data-tiles] .b-vid {
+  /* the tile layer covers the video until it flips */
+  opacity: 1;
+}
+/* contrast scrim: strong while static (text sits on a bright backdrop) ... */
+.b-bscrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(5, 7, 15, 0.78), rgba(5, 7, 15, 0) 62%),
+    linear-gradient(90deg, rgba(5, 7, 15, 0.7), rgba(5, 7, 15, 0.4) 50%, rgba(5, 7, 15, 0.66));
+  transition: opacity 0.55s ease;
+}
+/* ... and only a light bottom gradient (for the compact caption) while the trailer plays */
+.b-bfade {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(0deg, rgba(5, 7, 15, 0.7), rgba(5, 7, 15, 0) 42%);
+  transition: opacity 0.55s ease;
+}
+.b-cell[data-trailer="playing"] .b-bscrim {
+  opacity: 0;
+}
+.b-cell[data-trailer="playing"] .b-bfade {
+  opacity: 1;
+}
+.b-cell[data-banner] .b-ct {
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
+  transition: opacity 0.5s ease;
+}
+.b-cell[data-banner] .b-era {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #e6e9fb;
+}
+.b-cell[data-banner] .b-med {
+  transition:
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.6s ease;
+}
+/* while playing: poster and the full title block leave, a compact caption stays bottom-left */
+.b-cell[data-banner][data-trailer="playing"] .b-med {
+  opacity: 0;
+  transform: scale(0.92);
+}
+.b-cell[data-banner][data-trailer="playing"] .b-ct {
+  opacity: 0;
+}
+.b-cap {
+  position: absolute;
+  left: 30px;
+  bottom: 12px;
+  right: 30px;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.b-l .b-cap {
+  left: 22px;
+  right: 30px;
+}
+.b-cap b {
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.b-cell[data-trailer="playing"] .b-cap {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.25s;
+}
+/* quiet shimmer while a cold card buffers (hover before it was warmed) */
+.b-cell[data-trailer="loading"] .b-bscrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 38%, rgba(255, 255, 255, 0.12) 50%, transparent 62%);
+  animation: b-load 1.7s ease-in-out infinite;
+}
+@keyframes b-load {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ---- tiles: 6x3 panels flip left→right on enter, right→left on exit ---- */
+.b-tiles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  perspective: 800px;
+}
+.b-tile {
+  position: relative;
+  display: block;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.3, 0.7, 0.3, 1)
+    calc((7 - var(--c) - var(--r)) * 55ms);
+}
+.b-tface {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.b-timg {
+  position: absolute;
+  width: 100cqw;
+  height: 100cqh;
+  left: calc(var(--c) * -100cqw / 6);
+  top: calc(var(--r) * -100cqh / 3);
+  max-width: none;
+  object-fit: cover;
+  object-position: var(--bpos, 50% 50%);
+  transform: scale(1.06);
+}
+.b-cell[data-trailer="playing"] .b-tile {
+  transform: rotateY(180deg);
+  transition-delay: calc((var(--c) + var(--r)) * 55ms);
+}
+
+/* .lab-root is the scroll container itself (body is overflow:hidden, like the timeline) */
+.lab-root {
+  scroll-behavior: auto;
+}
+.lab-main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 36px 20px 80px;
+}
+.lab-flag {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 1px dashed var(--gold);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.lab-main h1 {
+  margin: 6px 0 10px;
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 500;
+}
+.lab-lede {
+  max-width: 70ch;
+  color: #cdd1ea;
+  line-height: 1.6;
+}
+.lab-lede code {
+  color: var(--gold);
+  font-size: 12px;
+}
+.lab-links {
+  margin: 18px 0 28px;
+}
+.lab-links .b-btn {
+  display: inline-flex;
+  text-decoration: none;
+}
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr));
+  gap: 26px 22px;
+}
+.lab-item {
+  min-width: 0;
+}
+.lab-row {
+  display: block;
+  min-height: 0;
+  padding: 0 34px 0 0;
+}
+.lab-row .b-cell {
+  display: flex;
+  width: 100%;
+  opacity: 1;
+  transform: none;
+}
+.lab-row .b-more {
+  max-height: none;
+  opacity: 1;
+  margin-top: 10px;
+}
+@media (max-width: 760px) {
+  .lab-row {
+    padding-right: 0;
+  }
+}
+
+.lab-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.lab-phone {
+  margin-top: 46px;
+}
+.lab-phone h2 {
+  margin: 0 0 8px;
+  font-weight: 500;
+  font-size: 26px;
+}
+.lab-phone-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0;
+}
+.lab-phone-shell {
+  width: fit-content;
+  max-width: 100%;
+  overflow: auto;
+  padding: 14px;
+  border-radius: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: #000;
+}
+.lab-phone-shell iframe {
+  display: block;
+  border: 0;
+  border-radius: 24px;
+  background: var(--ink);
+}
+.lab-one {
+  grid-template-columns: minmax(0, 560px) minmax(220px, 1fr);
+  align-items: start;
+}
+.lab-debug {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: #0d1124;
+  font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.lab-debug dt {
+  color: var(--mu);
+}
+.lab-debug dd {
+  margin: 0;
+  color: var(--tx);
+}
+@media (max-width: 760px) {
+  .lab-one {
+    grid-template-columns: 1fr;
+  }
+}

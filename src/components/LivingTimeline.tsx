@@ -16,6 +16,7 @@ import {
   type Entry,
 } from "./timeline-data";
 import Poster from "./Poster";
+import TimelineCell from "./TimelineCell";
 import { useWatchProgress } from "./watch-progress";
 
 const repo = "https://github.com/avizmarlon/verseorder";
@@ -191,7 +192,7 @@ function TitleDialog({
           {embed && video ? (
             <div className="b-video">
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${video}?rel=0`}
+                src={`https://www.youtube-nocookie.com/embed/${video}?rel=0&cc_load_policy=0`}
                 title={`${entry.title} official trailer`}
                 allow="encrypted-media; picture-in-picture; fullscreen"
                 allowFullScreen
@@ -264,6 +265,24 @@ export default function LivingTimeline() {
   const [active, setActive] = useState(0);
   const [selection, setSelection] = useState<Selection | null>(null);
   const resumeTarget = useRef<string | null>(null);
+  useEffect(() => {
+    // Prototype helper: ?focus=<entry id> centres a card on load (used by the lab phone frame).
+    const id = new URLSearchParams(window.location.search).get("focus");
+    if (!id) return;
+    const timer = setTimeout(() => {
+      // scroll our own scroller only: scrollIntoView would also scroll a parent page (lab iframe)
+      const scroller = document.querySelector<HTMLElement>(".b-root");
+      const node = document.getElementById(`node-${id}`);
+      if (!scroller || !node) return;
+      const rect = node.getBoundingClientRect();
+      // centre the node on the dot's line (55% of the viewport)
+      scroller.scrollTo({
+        top: scroller.scrollTop + rect.top + rect.height / 2 - scroller.clientHeight * 0.55,
+        behavior: "instant",
+      });
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
   const visible = entries.filter(
     (entry) =>
       (filter === "all" ||
@@ -326,6 +345,37 @@ export default function LivingTimeline() {
       { root: element, rootMargin: "0px 0px -8% 0px" },
     );
     element.querySelectorAll(".b-row").forEach((row) => observer.observe(row));
+    // Which node is the glowing dot over? The comet sits on the 55%-height line (see measure); a
+    // hairline IntersectionObserver band on that same line yields the active row without any
+    // layout reads. Published as `vo:dot` for the lazy trailer director.
+    const inside = new Map<Element, number>();
+    let dot: number | null = null;
+    const dotObserver = new IntersectionObserver(
+      (records) => {
+        const line = (records[0]?.rootBounds?.top ?? 0) + (records[0]?.rootBounds?.height ?? 0) / 2;
+        for (const record of records) {
+          if (record.isIntersecting) {
+            const box = record.boundingClientRect;
+            inside.set(record.target, Math.abs(box.top + box.height / 2 - line));
+          } else inside.delete(record.target);
+        }
+        let best: Element | null = null;
+        let bestDistance = Infinity;
+        inside.forEach((distance, row) => {
+          if (distance <= bestDistance) {
+            best = row;
+            bestDistance = distance;
+          }
+        });
+        const pos = best ? Number((best as HTMLElement).dataset.position) : null;
+        if (pos === dot) return;
+        dot = pos;
+        document.documentElement.dataset.voDot = String(pos ?? 0);
+        document.dispatchEvent(new CustomEvent("vo:dot", { detail: pos }));
+      },
+      { root: element, rootMargin: "-54.6% 0px -45% 0px" },
+    );
+    element.querySelectorAll(".b-row").forEach((row) => dotObserver.observe(row));
     const resize = new ResizeObserver(schedule);
     resize.observe(element);
     element.addEventListener("scroll", schedule, { passive: true });
@@ -343,6 +393,7 @@ export default function LivingTimeline() {
     }
     return () => {
       observer.disconnect();
+      dotObserver.disconnect();
       resize.disconnect();
       cancelAnimationFrame(frame);
       element.removeEventListener("scroll", schedule);
@@ -581,49 +632,11 @@ export default function LivingTimeline() {
                     id={`node-${entry.id}`}
                     data-position={entry.position}
                   >
-                    <div className="b-cell">
-                      <div
-                        className="b-glow"
-                        style={{
-                          background: `radial-gradient(90% 120% at 50% 50%,${softOf(entry)},transparent 70%)`,
-                        }}
-                      />
-                      <button
-                        className="b-hit"
-                        onClick={() => setSelection({ entry, mode: "details" })}
-                        aria-label={`Details: ${entry.title}`}
-                      />
-                      <Poster entry={entry} className="b-med" decorative />
-                      <div className="b-ct">
-                        <div className="b-k" style={{ color: colorOf(entry) }}>
-                          {kindLabel(entry)} ·{" "}
-                          {entry.optional ? "Optional" : entry.universe}
-                        </div>
-                        <h3>{entry.title}</h3>
-                        <div className="b-more">
-                          <p>{entry.era}</p>
-                          <div className="b-acts">
-                            <button
-                              className="b-sm"
-                              onClick={() =>
-                                setSelection({ entry, mode: "details" })
-                              }
-                            >
-                              Details
-                            </button>
-                            <button
-                              className="b-sm"
-                              onClick={() =>
-                                setSelection({ entry, mode: "trailer" })
-                              }
-                            >
-                              <Play size={10} />
-                              Trailer
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <TimelineCell
+                      entry={entry}
+                      onDetails={() => setSelection({ entry, mode: "details" })}
+                      onTrailer={() => setSelection({ entry, mode: "trailer" })}
+                    />
                     <button
                       className={`b-orb ${watched.has(entry.id) ? "lit" : ""}`}
                       aria-label={`${watched.has(entry.id) ? "Mark as unwatched" : "Mark as watched"}: ${entry.title}`}
@@ -702,6 +715,17 @@ export default function LivingTimeline() {
             , not affiliated with Marvel, Disney or Sony. All titles,
             characters, cover art, and trademarks belong to their respective
             owners.
+          </p>
+          <p>
+            This product uses the{" "}
+            <a
+              href="https://www.themoviedb.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TMDB
+            </a>{" "}
+            API but is not endorsed or certified by TMDB.
           </p>
           <p>
             <a href={`${repo}/blob/main/LICENSE`}>MIT License</a>
