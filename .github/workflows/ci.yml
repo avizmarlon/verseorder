@@ -14,10 +14,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # Root build, as deployed to Cloudflare Pages (https://verseorder.watch).
       - run: npm run build
-        env:
-          GITHUB_PAGES: "true"
+      - run: npm run typecheck
       - run: npx playwright install --with-deps chromium
+      # Includes tests/redirect.spec.ts, which builds and checks the GitHub Pages redirect stubs.
       - run: npm run test:e2e
-        env:
-          GITHUB_PAGES: "true"
