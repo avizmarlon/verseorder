@@ -1,4 +1,6 @@
 # Cloudflare Pages redirects (https://developers.cloudflare.com/pages/configuration/redirects/).
+# The printable PDF is over the 25 MiB file limit, so it's served from GitHub.
+/verseorder-watch-order.pdf https://raw.githubusercontent.com/avizmarlon/verseorder/main/public/verseorder-watch-order.pdf 302
 # Old GitHub Pages paths (/verseorder/...) pasted onto the new domain land on the same page.
 /verseorder /  301
 /verseorder/* /:splat 301

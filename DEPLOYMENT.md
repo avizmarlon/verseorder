@@ -30,6 +30,9 @@ The [Cloudflare Pages build](.github/workflows/cloudflare-pages.yml) workflow ru
 `main`. It builds and tests the site and checks the Cloudflare Pages limits (25 MiB per file,
 20,000 files), but it doesn't deploy.
 
+The printable PDF is too big for Cloudflare Pages (over 25 MiB). `npm run deploy:cloudflare` leaves
+it out, and `/verseorder-watch-order.pdf` redirects to the copy on GitHub.
+
 Response headers and redirects are in [`public/_headers`](public/_headers) and
 [`public/_redirects`](public/_redirects). HSTS isn't turned on yet. If the clips ever move to
 another host (`NEXT_PUBLIC_MEDIA_BASE`), add that host to `media-src` in the
