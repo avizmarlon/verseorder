@@ -715,6 +715,7 @@ export default function LivingTimeline() {
             </a>
             .
           </p>
+          <p>Anonymous, cookie-free visit stats via Cloudflare Web Analytics.</p>
           <p>
             Banner images and some cover art come from{" "}
             <a

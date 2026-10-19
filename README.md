@@ -38,7 +38,7 @@ Cover art links live in `src/data/watch-order.json`. Run `node scripts/resolve-p
 
 ## The fine print
 
-This is a fan project. It's not affiliated with or endorsed by Marvel, Disney, Sony or any other rights holder, and it's not an official Marvel chronology. All titles, characters, posters and logos belong to their owners. Cover art and banner images are linked from [Wikipedia](https://en.wikipedia.org/), [TVMaze](https://www.tvmaze.com/) and [TMDB](https://www.themoviedb.org/), not stored here, and aren't covered by this project's license. The previews on the cards are muted copies of the official trailers (or an official clip when a title never got a trailer). They're hosted with the site, not in this repo.
+This is a fan project. It's not affiliated with or endorsed by Marvel, Disney, Sony or any other rights holder, and it's not an official Marvel chronology. All titles, characters, posters and logos belong to their owners. Cover art and banner images are linked from [Wikipedia](https://en.wikipedia.org/), [TVMaze](https://www.tvmaze.com/) and [TMDB](https://www.themoviedb.org/), not stored here, and aren't covered by this project's license. The previews on the cards are muted copies of the official trailers (or an official clip when a title never got a trailer). They're hosted with the site, not in this repo. The site collects anonymous, cookie-free visit stats via Cloudflare Web Analytics.
 
 This product uses the TMDB API but is not endorsed or certified by TMDB.
 

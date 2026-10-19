@@ -10,6 +10,7 @@ import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
 import "./globals.css";
 import { siteUrl } from "@/site";
+import Analytics from "@/components/Analytics";
 
 const siteTitle = "VerseOrder — The Ultimate Marvel Multiverse Watch Order";
 const siteDescription =
@@ -35,5 +36,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body>{children}<Analytics /></body></html>;
 }
