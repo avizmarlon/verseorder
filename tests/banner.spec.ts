@@ -6,8 +6,8 @@ import collection from "../src/data/watch-order.json";
 const hero = collection.entries.find(
   (entry) => entry.id === "captain-america-the-first-avenger",
 )!;
-/** The first 86 titles of the timeline carry a TMDB banner + self-hosted trailer preview. */
-const first86 = collection.entries.slice(0, 86) as Array<
+/** Every title of the timeline carries a TMDB banner + self-hosted trailer preview. */
+const all112 = collection.entries.slice(0, 112) as Array<
   (typeof collection.entries)[number] & {
     clip?: string;
     bannerUrl?: string;
@@ -19,7 +19,7 @@ const clipPath = (clip: string | undefined, ext: string) =>
 const clipFile = (ext: string) => clipPath(hero.clip, ext);
 /** The trailer files are not committed (large binaries for a separate media host). */
 const hasClip = existsSync(clipFile("webm")) && existsSync(clipFile("mp4"));
-const hasAllClips = first86.every(
+const hasAllClips = all112.every(
   (entry) =>
     existsSync(clipPath(entry.clip, "webm")) &&
     existsSync(clipPath(entry.clip, "mp4")),
@@ -63,14 +63,14 @@ const axe = (page: Page) =>
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
 
-test("data: the first 86 titles have a TMDB banner, a focus point, a clip and a poster", () => {
+test("data: all 112 titles have a TMDB banner, a focus point, a clip and a poster", () => {
   const withClip = collection.entries.filter(
     (entry) => (entry as { clip?: string }).clip,
   );
   expect(withClip.map((entry) => entry.id)).toEqual(
-    first86.map((entry) => entry.id),
+    all112.map((entry) => entry.id),
   );
-  for (const entry of first86) {
+  for (const entry of all112) {
     expect(entry.bannerUrl, entry.id).toMatch(
       /^https:\/\/image\.tmdb\.org\/t\/p\/w780\/\w+\.jpg$/,
     );
@@ -112,11 +112,6 @@ test("banner card is one accessible button: click / Enter / Space open details",
   await page.keyboard.press("Space");
   await expect(page.locator("#detail-name")).toHaveText(hero.title);
   await page.keyboard.press("Escape");
-  await expect(
-    page
-      .locator("#node-the-new-mutants")
-      .getByRole("button", { name: "Trailer" }),
-  ).toHaveCount(1);
 });
 
 test("no clip bytes on page load (cards near the fold hold an empty video), and the card never uses YouTube", async ({
@@ -195,36 +190,6 @@ test.describe("reduced motion", () => {
     expect(media.clips).toEqual([]);
     await expect(card(page).locator(".b-med")).toHaveCSS("opacity", "1");
   });
-});
-
-test("lab: scrolls, one card with a debug readout, phone frame without yanking the page", async ({
-  page,
-}) => {
-  await stubImages(page);
-  await page.goto("lab/");
-  await expect(page.getByText(/PROTOTYPE/).first()).toBeVisible();
-  await expect(page.locator(".lab-item .b-cell")).toHaveCount(1);
-  await expect(page.locator(".lab-debug")).toBeVisible();
-  const scroller = page.locator(".lab-root");
-  await scroller.evaluate((el) => el.scrollBy(0, el.scrollHeight));
-  await expect(
-    page.getByRole("heading", { name: /Phone preview/ }),
-  ).toBeInViewport();
-  await scroller.evaluate((el) => el.scrollTo({ top: 0, behavior: "instant" }));
-  await page.mouse.move(600, 400);
-  await page.mouse.wheel(0, 600);
-  await expect
-    .poll(() => scroller.evaluate((el) => el.scrollTop))
-    .toBeGreaterThan(50);
-  await page.getByRole("button", { name: "Load phone frame" }).click();
-  const phone = page.locator('iframe[title^="Phone-sized"]');
-  await expect(phone).toHaveAttribute("src", /touch=1/);
-  const box = (await phone.boundingBox())!;
-  expect([Math.round(box.width), Math.round(box.height)]).toEqual([390, 844]);
-  await scroller.evaluate((el) => el.scrollTo({ top: 0, behavior: "instant" }));
-  await page.waitForTimeout(800);
-  expect(await scroller.evaluate((el) => el.scrollTop)).toBe(0);
-  expect((await axe(page)).violations).toEqual([]);
 });
 
 test.describe("with the trailer file", () => {
@@ -477,8 +442,8 @@ test.describe("with the trailer file", () => {
   });
 });
 
-test.describe("all 86 trailer files", () => {
-  test.skip(!hasAllClips, "put the 86 clips in public/clips to run these");
+test.describe("all 112 trailer files", () => {
+  test.skip(!hasAllClips, "put the 112 clips in public/clips to run these");
 
   const playing = (page: Page) =>
     page.evaluate(
@@ -486,13 +451,13 @@ test.describe("all 86 trailer files", () => {
         [...document.querySelectorAll("video")].filter((v) => !v.paused).length,
     );
 
-  test("each of the first 86 cards previews its own clip on hover; one video decodes at a time", async ({
+  test("each of all 112 cards previews its own clip on hover; one video decodes at a time", async ({
     page,
   }) => {
     test.setTimeout(300_000);
     await stubImages(page);
     await page.goto("./");
-    for (const entry of first86) {
+    for (const entry of all112) {
       await centre(page, entry.id);
       const cell = card(page, entry.id);
       await cell.hover();
@@ -513,7 +478,7 @@ test.describe("all 86 trailer files", () => {
   }) => {
     await stubImages(page);
     await page.goto("./");
-    const next = first86[5];
+    const next = all112[5];
     // park the card just below the visible area (still off screen)
     await card(page, next.id).evaluate((el) => {
       const root = document.querySelector(".b-root")!;
@@ -543,7 +508,7 @@ test.describe("all 86 trailer files", () => {
   }) => {
     await stubImages(page);
     await page.goto("./");
-    const [a, b] = [first86[3], first86[4]];
+    const [a, b] = [all112[3], all112[4]];
     await centre(page, a.id);
     await card(page, a.id).hover();
     await expect(card(page, a.id)).toHaveAttribute("data-trailer", "playing");

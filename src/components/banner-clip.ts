@@ -54,7 +54,7 @@ const cards = new Map<string, Card>();
 let ready = false;
 let touchMode = false;
 let dotPos: number | null = null;
-/** One approach observer per scroller (timeline, lab). */
+/** One approach observer per scroller (the timeline). */
 const approachObservers = new Map<Element | null, IntersectionObserver>();
 let scheduled = false;
 /** Prefetch only after the user does something: page load (and Lighthouse) stay video-free. */
@@ -293,7 +293,7 @@ function ensureGlobals() {
     schedule();
   });
   // already scrolled (resume, deep link, or the chunk loaded after the user started scrolling)
-  if (document.querySelector(".b-root, .lab-root")?.scrollTop) engaged = true;
+  if (document.querySelector(".b-root")?.scrollTop) engaged = true;
   const engage = () => {
     if (engaged) return;
     engaged = true;
@@ -345,7 +345,7 @@ const ENGAGE_EVENTS = [
 ] as const;
 
 function observerFor(cell: HTMLElement) {
-  const root = cell.closest(".b-root, .lab-root");
+  const root = cell.closest(".b-root");
   let observer = approachObservers.get(root);
   if (!observer) {
     observer = new IntersectionObserver(

@@ -38,7 +38,7 @@ const pageSettled = () =>
 
 /** The element that actually scrolls the cards (the page body does not scroll). */
 const scrollerOf = (element: HTMLElement) =>
-  element.closest<HTMLElement>(".b-root, .lab-root");
+  element.closest<HTMLElement>(".b-root");
 
 /** Decode a loaded image off the main thread so its first paint does not wait on it. */
 const predecode = (image: HTMLImageElement | null) => {
@@ -59,7 +59,7 @@ export default function TimelineCell({
   entry: Entry;
   onDetails: () => void;
   onTrailer: () => void;
-  /** false for lab cards: they are not on the timeline, so no dot-driven playback. */
+  /** false for cards rendered outside the timeline: no dot-driven playback. */
   inTimeline?: boolean;
 }) {
   const cell = useRef<HTMLDivElement>(null);
@@ -114,7 +114,7 @@ export default function TimelineCell({
       if (cancelled) return;
       detach = module.attach({
         cell: element,
-        key: `${entry.id}:${inTimeline ? "t" : "lab"}`,
+        key: `${entry.id}:${inTimeline ? "t" : "x"}`,
         pos: inTimeline ? entry.position : null,
         sources: clipSources(entry),
       });
