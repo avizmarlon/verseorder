@@ -267,3 +267,54 @@ test("malformed progress is ignored and stale IDs cannot inflate progress", asyn
   await page.reload();
   await expect(page.locator(".b-ring span")).toHaveText("0");
 });
+
+const coverHosts = /^https:\/\/(upload\.wikimedia\.org|static\.tvmaze\.com)\//;
+const pixel = Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+  "base64",
+);
+
+test("cover data is complete, https, and only from approved hosts", () => {
+  const withCover = collection.entries.filter((entry) => entry.posterPath);
+  expect(withCover.length).toBeGreaterThanOrEqual(110);
+  for (const entry of withCover) expect(entry.posterPath).toMatch(coverHosts);
+});
+
+test("covers render lazily with alt text, in details, and a11y holds", async ({
+  page,
+}) => {
+  await page.route(coverHosts, (route) =>
+    route.fulfill({ contentType: "image/png", body: pixel }),
+  );
+  await home(page);
+  const first = collection.entries[1];
+  const row = page.locator(`#node-${first.id}`);
+  await row.scrollIntoViewIfNeeded();
+  const cover = row.locator(".b-med img");
+  await expect(cover).toHaveAttribute("src", first.posterPath!);
+  await expect(cover).toHaveAttribute("loading", "lazy");
+  await row.getByRole("button", { name: `Details: ${first.title}` }).click();
+  const drawerCover = page.locator("dialog img[alt$='cover art']").first();
+  await expect(drawerCover).toHaveAttribute("alt", `${first.title} cover art`);
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze()
+    ).violations,
+  ).toEqual([]);
+});
+
+test("a cover that fails to load falls back to the medallion art", async ({
+  page,
+}) => {
+  await page.route(coverHosts, (route) => route.abort());
+  await home(page);
+  const first = collection.entries[1];
+  const row = page.locator(`#node-${first.id}`);
+  await row.scrollIntoViewIfNeeded();
+  await expect(row.locator(".b-med")).toBeVisible();
+  await expect(row.locator(".b-med img")).toHaveCount(0);
+  await row.getByRole("button", { name: `Details: ${first.title}` }).click();
+  await expect(page.locator("#detail-name")).toHaveText(first.title);
+});

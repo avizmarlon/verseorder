@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Show real cover art for the titles in the timeline, title details and adjacent-title navigation, with the original medallion as a fallback when a cover is missing.
+- Add `scripts/resolve-posters.mjs` to resolve cover links (Wikipedia and TVMaze) into the data file.
+- Use the standard MIT license text and clarify that titles, characters and artwork belong to their respective owners.
+- Add canonical, OpenGraph, robots, sitemap, JSON-LD metadata and a pull-request CI workflow.
+
 ## 0.5.0 — 2026-10-18
 
 - Introduce the living watch-order timeline, four chapters, celestial medallions, and scroll-driven light.
