@@ -799,6 +799,570 @@
       "backdrop": "/g9ju2o4LioYYOyihBvf9lVX8XL.jpg",
       "bannerFocus": "50% 30%",
       "poster": "/oxnWofiE9fHOgUfs9NJa6nG6NTR.jpg"
+    },
+    {
+      "id": "luke-cage-t2",
+      "clip": "luke-cage-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 62126,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "GGkQH867Yqg",
+        "label": "Marvel's Luke Cage: Season 2 - Clip: Luke Cage Carries the Weight of Harlem (official trailer no longer online)",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "GGkQH867Yqg",
+      "$note": "No official season 2 trailer is online anymore: the official Netflix clip; crop above the Netflix watermark.",
+      "backdrop": "/bJOmop22SGTHPo1tiuVAFf4U7B9.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/yzM1hMB3PUJqbISX0f421b3xOjB.jpg"
+    },
+    {
+      "id": "iron-fist-t2",
+      "clip": "iron-fist-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 62127,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1920:800:0:90",
+      "trailer": {
+        "source": "youtube",
+        "id": "kvvWB0GwCek",
+        "label": "Marvel's Iron Fist Season 2 - Official Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "kvvWB0GwCek",
+      "$note": "Crop set above the Netflix corner watermark.",
+      "backdrop": "/cuckn6IFp9OKu9H8AgD0iEANxhc.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/xGpd4wMIWAQ9MukvCx5k5xK7jft.jpg"
+    },
+    {
+      "id": "daredevil-t3",
+      "clip": "daredevil-t3",
+      "tmdb": {
+        "type": "tv",
+        "id": 61889,
+        "season": 3
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "n83s6NO1NE0",
+        "label": "Marvel's Daredevil Season 3 - Official Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "n83s6NO1NE0",
+      "backdrop": "/pPALpad1Fh14g7ejyQjqKzlhrBw.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/QWbPaDxiB6LW2LjASknzYBvjMj.jpg"
+    },
+    {
+      "id": "thor-ragnarok",
+      "clip": "thor-ragnarok",
+      "tmdb": {
+        "type": "movie",
+        "id": 284053
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "ue80QwXMRHg",
+        "label": "Thor: Ragnarok - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "ue80QwXMRHg",
+      "backdrop": "/vLmHH8jAy8Jq8uBsLucd3592WGh.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/8hnNdUFlUkjPWxKDyiE4Kn8h7Q5.jpg"
+    },
+    {
+      "id": "the-punisher-t2",
+      "clip": "the-punisher-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 67178,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "jrLhP5sK2wI",
+        "label": "Marvel's The Punisher Season 2 - Official Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "jrLhP5sK2wI",
+      "backdrop": "/jBGjbSDRxOEudW9rmQbWDzJUKq9.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/tM6xqRKXoloH9UchaJEyyRE9O1w.jpg"
+    },
+    {
+      "id": "jessica-jones-t3",
+      "clip": "jessica-jones-t3",
+      "tmdb": {
+        "type": "tv",
+        "id": 38472,
+        "season": 3
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "7DBKS2qH51I",
+        "label": "Marvel's Jessica Jones Season 3 - Trailer",
+        "channel": "Netflix"
+      },
+      "drawerYouTubeId": "7DBKS2qH51I",
+      "backdrop": "/fjEOQhzZk2Or7VYUBeMx5ZIwU95.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/oxnWofiE9fHOgUfs9NJa6nG6NTR.jpg"
+    },
+    {
+      "id": "ant-man-and-the-wasp",
+      "clip": "ant-man-and-the-wasp",
+      "tmdb": {
+        "type": "movie",
+        "id": 363088
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "8_rTIAOohas",
+        "label": "Ant-Man and the Wasp - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "8_rTIAOohas",
+      "backdrop": "/iYdgEUE2W2aJkgqfSjf1x3gFfuV.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/oSeG3qqCZggWqJX2PL5wjFb5ltv.jpg"
+    },
+    {
+      "id": "avengers-infinity-war",
+      "clip": "avengers-infinity-war",
+      "tmdb": {
+        "type": "movie",
+        "id": 299536
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "6ZfuNTqbHE8",
+        "label": "Avengers: Infinity War - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "6ZfuNTqbHE8",
+      "backdrop": "/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/dW88Lx1nwaUQgXIvjg2kRrbIOH1.jpg"
+    },
+    {
+      "id": "avengers-endgame",
+      "clip": "avengers-endgame",
+      "tmdb": {
+        "type": "movie",
+        "id": 299534
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "hA6hldpSTF8",
+        "label": "Avengers: Endgame - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "hA6hldpSTF8",
+      "backdrop": "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/3YBoaKqcCl5FEVPFgycG5jWw3ky.jpg"
+    },
+    {
+      "id": "loki-t1",
+      "clip": "loki-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 84958,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "nW948Va-l10",
+        "label": "Loki - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "nW948Va-l10",
+      "backdrop": "/q3jHCb4dMfYF6ojikKuHd6LscxC.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/rX1wQMTKFqF0gvZyS0DDQqgnQPB.jpg"
+    },
+    {
+      "id": "what-if-t1",
+      "clip": "what-if-t1",
+      "tmdb": {
+        "type": "tv",
+        "id": 91363,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "x9D0uUKJ5KI",
+        "label": "What If...? - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "x9D0uUKJ5KI",
+      "backdrop": "/jnzoh5qoxRLFRIQAxnl6D3RStPC.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/lztz5XBMG1x6Y5ubz7CxfPFsAcW.jpg"
+    },
+    {
+      "id": "marvel-zombies",
+      "clip": "marvel-zombies",
+      "tmdb": {
+        "type": "tv",
+        "id": 138505,
+        "season": 1
+      },
+      "trim": {
+        "start": 8.0
+      },
+      "crop": "1632:680:0:140",
+      "trailer": {
+        "source": "youtube",
+        "id": "twHYF506-9Y",
+        "label": "Marvel Zombies - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "twHYF506-9Y",
+      "$note": "Left-anchored crop excludes the Disney+ corner watermark; rating card trimmed.",
+      "backdrop": "/lxQMxqao3vs2ehxESrkQU6acU86.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/mwKj9ERGFXsWot0nXgQ5yMQf9I7.jpg"
+    },
+    {
+      "id": "wandavision",
+      "clip": "wandavision",
+      "tmdb": {
+        "type": "tv",
+        "id": 85271,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "sj9J2ecsSpo",
+        "label": "WandaVision - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "sj9J2ecsSpo",
+      "backdrop": "/cq62fLH3vwOmiaLKMqkDI86tPtH.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/ijWWwINc8h71NQ8j1LTJMFSj5wr.jpg"
+    },
+    {
+      "id": "shang-chi-and-the-legend-of-the-ten-rings",
+      "clip": "shang-chi",
+      "tmdb": {
+        "type": "movie",
+        "id": 566525
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "8YjFbMbfXaQ",
+        "label": "Shang-Chi and the Legend of the Ten Rings - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "8YjFbMbfXaQ",
+      "backdrop": "/r7K6Xt0RX4Mw0cAbZVw5cyb1Tux.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/9f2Q0U3IOsLgrI2HkvldwSABZy5.jpg"
+    },
+    {
+      "id": "the-falcon-and-the-winter-soldier",
+      "clip": "the-falcon-and-the-winter-soldier",
+      "tmdb": {
+        "type": "tv",
+        "id": 88396,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "IWBsDaFWyTE",
+        "label": "The Falcon and the Winter Soldier - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "IWBsDaFWyTE",
+      "backdrop": "/aTjbqMONy77fHJrIYu14g1F0d5h.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/6kbAMLteGO8yyewYau6bJ683sw7.jpg"
+    },
+    {
+      "id": "spider-man-far-from-home",
+      "clip": "spider-man-far-from-home",
+      "tmdb": {
+        "type": "movie",
+        "id": 429617
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "LFoz8ZJWmPs",
+        "label": "Spider-Man: Far From Home - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "LFoz8ZJWmPs",
+      "backdrop": "/wqBW5ltBJu0gs26yCc8shQQV82d.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/lcq8dVxeeOqHvvgcte707K0KVx5.jpg"
+    },
+    {
+      "id": "eternals",
+      "clip": "eternals",
+      "tmdb": {
+        "type": "movie",
+        "id": 524434
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "x_me3xsvDgk",
+        "label": "Eternals - Final Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "x_me3xsvDgk",
+      "backdrop": "/c6H7Z4u73ir3cIoCteuhJh7UCAR.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/lFByFSLV5WDJEv3KabbdAF959F2.jpg"
+    },
+    {
+      "id": "spider-man-2002-sam-raimi",
+      "clip": "spider-man-2002-sam-raimi",
+      "tmdb": {
+        "type": "movie",
+        "id": 557
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "nwyO5Ue6JUQ",
+        "label": "Spider-Man (2002) - Official Trailer",
+        "channel": "Spider-Man (Sony)"
+      },
+      "drawerYouTubeId": "nwyO5Ue6JUQ",
+      "backdrop": "/zQ8AxTPiCiS5nnwXpwTBPBHSaa5.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/or6XJBVpcEbIkma0V9zshnbEtx4.jpg"
+    },
+    {
+      "id": "spider-man-2-2004",
+      "clip": "spider-man-2-2004",
+      "tmdb": {
+        "type": "movie",
+        "id": 558
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "3jBFwltrxJw",
+        "label": "Spider-Man 2 - Trailer",
+        "channel": "Sony Pictures Home Entertainment"
+      },
+      "drawerYouTubeId": "3jBFwltrxJw",
+      "$note": "Sony's official upload is the 2.1 extended-cut home-video trailer.",
+      "backdrop": "/6al048Lat3eLVQOuKtc9h6Tu94d.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/aGuvNAaaZuWXYQQ6N2v7DeuP6mB.jpg"
+    },
+    {
+      "id": "spider-man-3-2007",
+      "clip": "spider-man-3-2007",
+      "tmdb": {
+        "type": "movie",
+        "id": 559
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "wPosLpgMtTY",
+        "label": "Spider-Man 3 - Official Trailer",
+        "channel": "Sony Pictures Home Entertainment"
+      },
+      "drawerYouTubeId": "wPosLpgMtTY",
+      "backdrop": "/FfAU0PUs8AJkMU2VbkVNFtRXR4.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg"
+    },
+    {
+      "id": "the-amazing-spider-man-2012",
+      "clip": "the-amazing-spider-man-2012",
+      "tmdb": {
+        "type": "movie",
+        "id": 1930
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "-tnxzJ0SSOw",
+        "label": "The Amazing Spider-Man - Official Trailer",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "-tnxzJ0SSOw",
+      "backdrop": "/a92L1Zm4vGlXOD0f2CEsfqnNDhc.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/jexoNYnPd6vVrmygwF6QZmWPFdu.jpg"
+    },
+    {
+      "id": "the-amazing-spider-man-2-2014",
+      "clip": "the-amazing-spider-man-2-2014",
+      "tmdb": {
+        "type": "movie",
+        "id": 102382
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "nbp3Ra3Yp74",
+        "label": "The Amazing Spider-Man 2 - Official Trailer",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "nbp3Ra3Yp74",
+      "backdrop": "/k0hlAzTryCYX1O1LyC6P8tAa8s0.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/bU7nTmvmy0h3VUP01v1T2imgH6N.jpg"
+    },
+    {
+      "id": "venom-2018",
+      "clip": "venom-2018",
+      "tmdb": {
+        "type": "movie",
+        "id": 335983
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "u9Mv98Gr5pY",
+        "label": "Venom - Official Trailer",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "u9Mv98Gr5pY",
+      "backdrop": "/VuukZLgaCrho2Ar8Scl9HtV3yD.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/p4if93blsrhU5NUlHxUlEySTPak.jpg"
+    },
+    {
+      "id": "venom-let-there-be-carnage-2021",
+      "clip": "venom-let-there-be-carnage-2021",
+      "tmdb": {
+        "type": "movie",
+        "id": 580489
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "-ezfi6FQ8Ds",
+        "label": "Venom: Let There Be Carnage - Official Trailer",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "-ezfi6FQ8Ds",
+      "backdrop": "/eENEf62tMXbhyVvdcXlnQz2wcuT.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/pzKsRuKLFmYrW5Q0q8E8G78Tcgo.jpg"
+    },
+    {
+      "id": "spider-man-no-way-home",
+      "clip": "spider-man-no-way-home",
+      "tmdb": {
+        "type": "movie",
+        "id": 634649
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "JfVOs4VSpmA",
+        "label": "Spider-Man: No Way Home - Official Trailer",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "JfVOs4VSpmA",
+      "backdrop": "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/lf9ipxkVSWRcfYDnkla2ojpsxPz.jpg"
     }
   ]
 }
