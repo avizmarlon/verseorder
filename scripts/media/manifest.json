@@ -1363,6 +1363,596 @@
       "backdrop": "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
       "bannerFocus": "50% 30%",
       "poster": "/lf9ipxkVSWRcfYDnkla2ojpsxPz.jpg"
+    },
+    {
+      "id": "venom-the-last-dance-2024",
+      "clip": "venom-the-last-dance-2024",
+      "tmdb": {
+        "type": "movie",
+        "id": 912649
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "HyIyd9joTTc",
+        "label": "Venom: The Last Dance - Final Trailer",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "HyIyd9joTTc",
+      "backdrop": "/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/vGXptEdgZIhPg3cGlc7e8sNPC2e.jpg"
+    },
+    {
+      "id": "spider-man-into-the-spider-verse",
+      "clip": "spider-man-into-the-spider-verse",
+      "tmdb": {
+        "type": "movie",
+        "id": 324857
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "tg52up16eq0",
+        "label": "Spider-Man: Into the Spider-Verse - Official Trailer #2",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "tg52up16eq0",
+      "backdrop": "/1ntePsIqeklfmrQJqZPncCydsqY.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/l6eM38XDOO0IqsntxkOGJUkiKdA.jpg"
+    },
+    {
+      "id": "spider-man-across-the-spider-verse",
+      "clip": "spider-man-across-the-spider-verse",
+      "tmdb": {
+        "type": "movie",
+        "id": 569094
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "shW9i6k8cB0",
+        "label": "Spider-Man: Across the Spider-Verse - Official Trailer #2",
+        "channel": "Sony Pictures Entertainment"
+      },
+      "drawerYouTubeId": "shW9i6k8cB0",
+      "backdrop": "/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/uc5U4GCZu9Z2Zb3yqk5fZfLwawR.jpg"
+    },
+    {
+      "id": "doctor-strange-in-the-multiverse-of-madness",
+      "clip": "doctor-strange-mom",
+      "tmdb": {
+        "type": "movie",
+        "id": 453395
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "aWzlQ2N6qqg",
+        "label": "Doctor Strange in the Multiverse of Madness - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "aWzlQ2N6qqg",
+      "backdrop": "/lv3TXqhpaIxkclIHbhN2MRMOemQ.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/ddJcSKbcp4rKZTmuyWaMhuwcfMz.jpg"
+    },
+    {
+      "id": "hawkeye",
+      "clip": "hawkeye",
+      "tmdb": {
+        "type": "tv",
+        "id": 88329,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "5VYb3B1ETlk",
+        "label": "Hawkeye - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "5VYb3B1ETlk",
+      "backdrop": "/uHESULlKh7VSc0MRcqfyIf9Alk4.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/ct5pNE5dDHryHLDnxyZPYcqO1sz.jpg"
+    },
+    {
+      "id": "moon-knight",
+      "clip": "moon-knight",
+      "tmdb": {
+        "type": "tv",
+        "id": 92749,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "x7Krla_UxRg",
+        "label": "Moon Knight - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "x7Krla_UxRg",
+      "backdrop": "/1uegR4uAxRxiMyX4nQnpzbXhrTw.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/9K3lbMf8TKvL9xGEbzi7TggWCNQ.jpg"
+    },
+    {
+      "id": "black-panther-wakanda-forever",
+      "clip": "black-panther-wakanda-forever",
+      "tmdb": {
+        "type": "movie",
+        "id": 505642
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "_Z3QKkl1WyM",
+        "label": "Black Panther: Wakanda Forever - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "_Z3QKkl1WyM",
+      "backdrop": "/83H0C66AcvkwpG2738VCTHMY9uv.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"
+    },
+    {
+      "id": "echo",
+      "clip": "echo",
+      "tmdb": {
+        "type": "tv",
+        "id": 122226,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "AFUKnherhuw",
+        "label": "Echo - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "AFUKnherhuw",
+      "backdrop": "/u3ySnWqSjM3jedYgJZTR7RWRDDm.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/vFyJH630cF68LohVYjQW49074Sy.jpg"
+    },
+    {
+      "id": "she-hulk-attorney-at-law",
+      "clip": "she-hulk-attorney-at-law",
+      "tmdb": {
+        "type": "tv",
+        "id": 92783,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "u7JsKhI2An0",
+        "label": "She-Hulk: Attorney at Law - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "u7JsKhI2An0",
+      "backdrop": "/eljErfkQUcFUgQkI4I1soZcH8MW.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/5xz2orV8f0usyrfGNshcoXHmiaV.jpg"
+    },
+    {
+      "id": "ms-marvel",
+      "clip": "ms-marvel",
+      "tmdb": {
+        "type": "tv",
+        "id": 92782,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "m9EX0f6V11Y",
+        "label": "Ms. Marvel - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "m9EX0f6V11Y",
+      "backdrop": "/mfcLUWASJghU8MTNK38eYktfE83.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/3HWWh92kZbD7odwJX7nKmXNZsYo.jpg"
+    },
+    {
+      "id": "thor-love-and-thunder",
+      "clip": "thor-love-and-thunder",
+      "tmdb": {
+        "type": "movie",
+        "id": 616037
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "Go8nTmfrQd8",
+        "label": "Thor: Love and Thunder - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "Go8nTmfrQd8",
+      "backdrop": "/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
+    },
+    {
+      "id": "ironheart",
+      "clip": "ironheart",
+      "tmdb": {
+        "type": "tv",
+        "id": 114471,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "1632:680:0:140",
+      "trailer": {
+        "source": "youtube",
+        "id": "WpW36ldAqnM",
+        "label": "Ironheart - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "WpW36ldAqnM",
+      "$note": "Left-anchored crop excludes the Disney+ corner watermark.",
+      "backdrop": "/vno2LrEQr3lTOk3U1G1ihZsy64b.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/dOh6MJpdlQhYpLBhzhNQeYGKTZ5.jpg"
+    },
+    {
+      "id": "werewolf-by-night",
+      "clip": "werewolf-by-night",
+      "tmdb": {
+        "type": "movie",
+        "id": 894205
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "bLEFqhS5WmI",
+        "label": "Werewolf by Night - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "bLEFqhS5WmI",
+      "backdrop": "/l1ORpdYr8uFZ9MNYKoq1p6fIc4M.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/jmv7EbqBuEk4V1U7OoSBaxkwawO.jpg"
+    },
+    {
+      "id": "the-guardians-of-the-galaxy-holiday-special",
+      "clip": "the-guardians-of-the-galaxy-holiday-special",
+      "tmdb": {
+        "type": "movie",
+        "id": 774752
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "OYhFFQl4fLs",
+        "label": "The Guardians of the Galaxy Holiday Special - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "OYhFFQl4fLs",
+      "backdrop": "/rfnmMYuZ6EKOBvQLp2wqP21v7sI.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/8dqXyslZ2hv49Oiob9UjlGSHSTR.jpg"
+    },
+    {
+      "id": "ant-man-and-the-wasp-quantumania",
+      "clip": "ant-man-and-the-wasp-quantumania",
+      "tmdb": {
+        "type": "movie",
+        "id": 640146
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "ZlNFpri-Y40",
+        "label": "Ant-Man and the Wasp: Quantumania - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "ZlNFpri-Y40",
+      "backdrop": "/m8JTwHFwX7I7JY5fPe4SjqejWag.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/5JcuLWpKf85q5oy1NbzyFAGkhqx.jpg"
+    },
+    {
+      "id": "guardians-of-the-galaxy-vol-3",
+      "clip": "guardians-of-the-galaxy-vol-3",
+      "tmdb": {
+        "type": "movie",
+        "id": 447365
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "u3V5KDHRQvk",
+        "label": "Guardians of the Galaxy Vol. 3 - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "u3V5KDHRQvk",
+      "backdrop": "/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/bVpTTg0NvaS905U2oXVr0awgCbM.jpg"
+    },
+    {
+      "id": "secret-invasion",
+      "clip": "secret-invasion",
+      "tmdb": {
+        "type": "tv",
+        "id": 114472,
+        "season": 1
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "Tp_YZNqNBhw",
+        "label": "Secret Invasion - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "Tp_YZNqNBhw",
+      "backdrop": "/6mOK9j99OFlxGc3ird2jWUeUha9.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/3rINdUPSy9AklJg74jWHOyUXuZd.jpg"
+    },
+    {
+      "id": "the-marvels",
+      "clip": "the-marvels",
+      "tmdb": {
+        "type": "movie",
+        "id": 609681
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "wS_qbDztgVY",
+        "label": "The Marvels - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "wS_qbDztgVY",
+      "backdrop": "/feSiISwgEpVzR1v3zv2n2AU4ANJ.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/xxh6CFgwzYW29dSOsRjRBTpfqWT.jpg"
+    },
+    {
+      "id": "loki-t2",
+      "clip": "loki-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 84958,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "dug56u8NN7g",
+        "label": "Loki Season 2 - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "dug56u8NN7g",
+      "backdrop": "/71kjcn5PYnNz3bMOZnGyuR4RH1V.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/rX1wQMTKFqF0gvZyS0DDQqgnQPB.jpg"
+    },
+    {
+      "id": "what-if-t2",
+      "clip": "what-if-t2",
+      "tmdb": {
+        "type": "tv",
+        "id": 91363,
+        "season": 2
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "TiEVqZ2Bc_c",
+        "label": "What If...? Season 2 - Official Trailer",
+        "channel": "Marvel Entertainment"
+      },
+      "drawerYouTubeId": "TiEVqZ2Bc_c",
+      "backdrop": "/4N6zEMfZ57zNEQcM8gWeERFupMv.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/lztz5XBMG1x6Y5ubz7CxfPFsAcW.jpg"
+    },
+    {
+      "id": "blade-1998",
+      "clip": "blade-1998",
+      "tmdb": {
+        "type": "movie",
+        "id": 36647
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "O2Y3FFFIvRI",
+        "label": "Blade - 4K Trailer",
+        "channel": "Warner Bros. Entertainment"
+      },
+      "drawerYouTubeId": "O2Y3FFFIvRI",
+      "backdrop": "/7NKfxJrQn053UJeLftlx4m4NTzo.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/oWT70TvbsmQaqyphCZpsnQR7R32.jpg"
+    },
+    {
+      "id": "blade-ii-2002",
+      "clip": "blade-ii-2002",
+      "tmdb": {
+        "type": "movie",
+        "id": 36586
+      },
+      "trim": {
+        "start": "auto",
+        "end": 110.0
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "vAUB7dcUn8o",
+        "label": "Blade II - Official Trailer #1",
+        "channel": "Movieclips"
+      },
+      "drawerYouTubeId": "vAUB7dcUn8o",
+      "$note": "No studio upload of the trailer exists; uses the licensed Movieclips (Fandango) upload. Trimmed before the Movieclips end card.",
+      "backdrop": "/86b0NGY1i0bt3ckhkcHxiCSMxk1.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/wAn6VYamKbnOtfyTZ6arVtkMzDv.jpg"
+    },
+    {
+      "id": "daredevil-2003-ben-affleck",
+      "clip": "daredevil-2003-ben-affleck",
+      "tmdb": {
+        "type": "movie",
+        "id": 9480
+      },
+      "trim": {
+        "start": "auto",
+        "end": 100.2
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "muPX9Oi7-EE",
+        "label": "Daredevil (2003) - Trailer #1",
+        "channel": "Rotten Tomatoes Classic Trailers"
+      },
+      "drawerYouTubeId": "muPX9Oi7-EE",
+      "$note": "No studio upload of the trailer exists; uses the licensed Rotten Tomatoes Classic Trailers (Fandango) upload. Trimmed before the subscribe end card.",
+      "backdrop": "/e7jIX02GiSwsgkU5lMpeKjwq2Zc.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/oCDBwSkntYamuw8VJIxMRCtDBmi.jpg"
+    },
+    {
+      "id": "blade-trinity-2004",
+      "clip": "blade-trinity-2004",
+      "tmdb": {
+        "type": "movie",
+        "id": 36648
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "fPcNbsW69Eg",
+        "label": "Blade: Trinity (2004) - Official Trailer",
+        "channel": "Rotten Tomatoes Classic Trailers"
+      },
+      "drawerYouTubeId": "qcHEDGs7eAY",
+      "$note": "Warner's own upload (qcHEDGs7eAY) is 270p only; the preview uses the licensed Rotten Tomatoes Classic Trailers HD upload, the drawer plays Warner's.",
+      "backdrop": "/63eAFgJtN6ZTyFFzlAOoZLhlYqc.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/6f7iXvPOnf83MaLB1JmPzUor1rr.jpg"
+    },
+    {
+      "id": "elektra-2005",
+      "clip": "elektra-2005",
+      "tmdb": {
+        "type": "movie",
+        "id": 9947
+      },
+      "trim": {
+        "start": "auto"
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "etfIjKxKzqw",
+        "label": "Elektra - Trailer",
+        "channel": "YouTube Movies"
+      },
+      "drawerYouTubeId": "etfIjKxKzqw",
+      "$note": "Official upload on the YouTube Movies channel (TMDB official).",
+      "backdrop": "/rLMQvYhl6DU6QZVNcJTbs87gVPs.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/Z4dAOxjAHTUZO6DJ2WVAsxzwe3.jpg"
+    },
+    {
+      "id": "fantastic-four-2005-chris-evans-como-johnny-storm",
+      "clip": "fantastic-four-2005",
+      "tmdb": {
+        "type": "movie",
+        "id": 9738
+      },
+      "trim": {
+        "start": "auto",
+        "end": 68.8
+      },
+      "crop": "auto",
+      "trailer": {
+        "source": "youtube",
+        "id": "YP-UetX2qX0",
+        "label": "Fantastic Four (2005) - Trailer #1",
+        "channel": "Rotten Tomatoes Classic Trailers"
+      },
+      "drawerYouTubeId": "YP-UetX2qX0",
+      "$note": "20th Century Studios' upload titled Fantastic Four is the 2015 film; no studio upload of the 2005 trailer exists, so this uses the licensed Rotten Tomatoes Classic Trailers (Fandango) upload. Trimmed before the subscribe end card.",
+      "backdrop": "/qq9ELjoyllBUMkGisZvcj0fCd43.jpg",
+      "bannerFocus": "50% 30%",
+      "poster": "/4YMcYEFS8sFuW3soP1HVmgR3cSm.jpg"
     }
   ]
 }
