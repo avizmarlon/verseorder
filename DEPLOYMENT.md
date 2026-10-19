@@ -53,4 +53,4 @@ disappear from the live site and the cards show their still banners instead.
 
 The [GitHub Pages](.github/workflows/pages.yml) workflow keeps publishing
 https://avizmarlon.github.io/verseorder/. By default it publishes the full site there. When the
-repository variable `GITHUB_PAGES_REDIRECT` is `true`, it publishes only the redirect pages.
+repository variable `PAGES_REDIRECT` is `true`, it publishes only the redirect pages.
