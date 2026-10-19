@@ -37,4 +37,8 @@ The viewing order reflects editorial judgment and is **not an official Marvel ch
 
 ## Use and attribution
 
-Created by **[Marlon Aviz](https://github.com/avizmarlon)**. The code is available under the [MIT License](LICENSE): you may use, copy, modify, and redistribute it, including commercially, provided you preserve the copyright and license notice. Third-party imagery, fonts, characters, and trademarks remain subject to their own rights and licenses.
+Created by **[Marlon Aviz](https://github.com/avizmarlon)**. The source code is available under the [MIT License](LICENSE): you may use, copy, modify, and redistribute it, including commercially, provided you preserve the copyright and license notice.
+
+## Credits and ownership
+
+VerseOrder is a fan project and is not affiliated with Marvel or Disney. All titles, characters, posters, cover art, logos, and other artwork belong to their respective owners and are shown for identification only. They are not covered by this project's license. Cover art is linked from [Wikipedia](https://en.wikipedia.org/) (films, shorts, and specials) and [TVMaze](https://www.tvmaze.com/) (series); it is not stored in this repository. Run `node scripts/resolve-posters.mjs` to refresh the cover links in `src/data/watch-order.json`.
