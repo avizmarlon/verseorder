@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Move the website to https://verseorder.watch on Cloudflare Pages. The old GitHub Pages address redirects there.
 - Show real cover art for the titles in the timeline, title details and adjacent-title navigation, with the original medallion as a fallback when a cover is missing.
 - Add `scripts/resolve-posters.mjs` to resolve cover links (Wikipedia and TVMaze) into the data file.
 - Use the standard MIT license text and clarify that titles, characters and artwork belong to their respective owners.

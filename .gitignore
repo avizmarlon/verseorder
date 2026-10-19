@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+/out-redirect/
+.wrangler/
 
 # production
 /build
@@ -71,3 +73,8 @@ docs/*.md
 docs/**/*.md
 
 docs/previews/
+
+# Card trailer media (prototype). Not committed: large binaries, and they are meant to live on a
+# separate static media host (NEXT_PUBLIC_MEDIA_BASE). See public/clips/README.md.
+public/clips/*.mp4
+public/clips/*.webm

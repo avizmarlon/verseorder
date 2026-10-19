@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects (https://developers.cloudflare.com/pages/configuration/redirects/).
+# Old GitHub Pages paths (/verseorder/...) pasted onto the new domain land on the same page.
+/verseorder /  301
+/verseorder/* /:splat 301
