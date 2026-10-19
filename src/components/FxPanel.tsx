@@ -24,7 +24,10 @@ export function useFx() {
     // Reading the URL only exists on the client, so this runs after hydration.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isFxId(requested)) setFxState(requested);
-    setShowPanel(params.has("lab") || params.has("fx"));
+    setShowPanel(
+      (params.has("lab") || params.has("fx") || params.has("touch")) &&
+        !params.has("embed"),
+    );
   }, []);
   const setFx = (value: FxId) => {
     setFxState(value);
@@ -57,6 +60,22 @@ export default function FxPanel({
             </option>
           ))}
         </select>
+      </label>
+      <label className="lab-check">
+        <input
+          type="checkbox"
+          defaultChecked={
+            typeof window !== "undefined" &&
+            new URLSearchParams(window.location.search).get("touch") === "1"
+          }
+          onChange={(event) => {
+            const url = new URL(window.location.href);
+            if (event.target.checked) url.searchParams.set("touch", "1");
+            else url.searchParams.delete("touch");
+            window.location.href = url.toString();
+          }}
+        />
+        <span>Force touch behaviour (trailer follows the timeline dot)</span>
       </label>
       <a href={`${assetBase}/lab/`}>Open the lab (all variants side by side)</a>
       <button
