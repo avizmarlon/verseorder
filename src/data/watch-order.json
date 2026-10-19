@@ -34,7 +34,10 @@
       "alternateUniverse": false,
       "note": "",
       "whyHere": null,
-      "trailerYouTubeId": null,
+      "trailerYouTubeId": "W4DlMggBPvc",
+      "bannerUrl": "https://image.tmdb.org/t/p/w1280/9EXAJgW1Q5gr8vE2jmkaIxcMsdZ.jpg",
+      "bannerFocus": "50% 22%",
+      "trailerStart": 5,
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/37/Captain_America_The_First_Avenger_poster.jpg",
       "verification": "original-curation-unreviewed"
     },

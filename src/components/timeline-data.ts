@@ -1,6 +1,14 @@
 import collection from "@/data/watch-order.json";
 
-export type Entry = (typeof collection.entries)[number];
+/** Optional card-banner fields; only entries that opted in (prototype) carry them. */
+export type Entry = (typeof collection.entries)[number] & {
+  /** Horizontal (16:9-ish) backdrop used as the static card banner. Hotlinked. */
+  bannerUrl?: string | null;
+  /** CSS object-position for the banner crop, e.g. "50% 22%" (keeps faces in frame). */
+  bannerFocus?: string | null;
+  /** Seconds to skip at the start of the decorative trailer (rating cards, logos). */
+  trailerStart?: number | null;
+};
 export const entries = collection.entries;
 export const chapters = [
   {
@@ -80,3 +88,23 @@ export const trailerIds: Record<string, string> = {
   "avengers-endgame": "TcMBFSGVi1c",
   "spider-man-no-way-home": "JfVOs4VSpmA",
 };
+
+/** YouTube id of the official trailer, if one has been verified for this title. */
+export const trailerOf = (entry: Entry): string | null =>
+  entry.trailerYouTubeId || trailerIds[entry.id] || null;
+
+/** PROTOTYPE: transition variants for the card banner trailer. */
+export const fxVariants = [
+  { id: "crossfade", label: "Crossfade", blurb: "Poster and video simply dissolve into each other." },
+  { id: "slide-wipe", label: "Slide + wipe", blurb: "Poster slides off its side while the video wipes in behind it." },
+  { id: "shutter", label: "Comic shutter", blurb: "Diagonal comic-panel slices open to reveal the trailer." },
+  { id: "tiles", label: "Flip tiles", blurb: "A grid of panels flips over, Marvel-intro style." },
+  { id: "badge", label: "Corner badge", blurb: "Poster shrinks into a corner badge as the video fills the card." },
+  { id: "shine", label: "Zoom + shine", blurb: "Poster zooms and dissolves under a sweeping light flare." },
+  { id: "letterbox", label: "Cinematic bars", blurb: "Black bars close, then open on a widescreen trailer." },
+  { id: "iris", label: "Shield iris", blurb: "A circular iris expands from the poster, with a gold ring." },
+] as const;
+export type FxId = (typeof fxVariants)[number]["id"];
+export const defaultFx: FxId = "crossfade";
+export const isFxId = (value: string | null | undefined): value is FxId =>
+  fxVariants.some((variant) => variant.id === value);
