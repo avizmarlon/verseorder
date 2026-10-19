@@ -38,6 +38,6 @@ Cover art links live in `src/data/watch-order.json`. Run `node scripts/resolve-p
 
 ## The fine print
 
-This is a fan project. It's not affiliated with or endorsed by Marvel, Disney, Sony or any other rights holder, and it's not an official Marvel chronology. All titles, characters, posters and logos belong to their owners. Cover art is linked from [Wikipedia](https://en.wikipedia.org/) and [TVMaze](https://www.tvmaze.com/), not stored here, and isn't covered by this project's license.
+This is a fan project. It's not affiliated with or endorsed by Marvel, Disney, Sony or any other rights holder, and it's not an official Marvel chronology. All titles, characters, posters and logos belong to their owners. Cover art is linked from [Wikipedia](https://en.wikipedia.org/) and [TVMaze](https://www.tvmaze.com/), not stored here, and isn't covered by this project's license. The site collects anonymous, cookie-free visit stats via Cloudflare Web Analytics.
 
 Made by [Marlon](https://github.com/avizmarlon). The code is [MIT licensed](LICENSE).
