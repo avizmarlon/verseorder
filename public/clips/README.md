@@ -12,12 +12,22 @@ One pair of files per title, named by the entry's `clip`:
 - `<clip>.webm`: AV1 (SVT-AV1 CRF 42), 768x320, no audio, keyframe every 2 s, cues at the front
 - `<clip>.mp4`: H.264 Main 3.1 (CRF 27, max 450 kbps), 768x320, no audio, keyframe every 2 s, `+faststart`
 
-The video files are not committed (see `.gitignore`). They are served same-origin from `/clips/` by the
-Cloudflare Pages project. A Pages Function (`functions/clips/[[path]].js`) answers byte-range requests
-from the Cache API. Put the files here before `npm run build`, and `npm run deploy:cloudflare` uploads
-them with the rest of `out/` (each file must stay under 25 MiB). `NEXT_PUBLIC_MEDIA_BASE` can point at a
-different media host instead (CSP `media-src` in `public/_headers` must then allow it). If a file is
-missing, the card falls back to the static banner.
+The video files are not committed (see `.gitignore`) and are not deployed to Cloudflare Pages. They live
+in the R2 bucket `verseorder-media` under `clips/`, served at `https://media.verseorder.watch/clips/`
+(an R2 custom domain on the verseorder.watch zone). R2 answers byte ranges itself (206, `Accept-Ranges`,
+`Content-Range`) and the Cloudflare edge caches the objects, so playing a clip runs no Worker or Pages
+Function. The bucket's CORS policy allows GET/HEAD with `Range` from verseorder.watch (a plain `<video>`
+doesn't need it). Upload new or changed files with:
+
+    set -a; . /path/to/cloudflare.env; set +a   # CLOUDFLARE_API_TOKEN (R2 edit), CLOUDFLARE_ACCOUNT_ID
+    node scripts/media/upload_clips.mjs --dry-run   # list what would be sent
+    node scripts/media/upload_clips.mjs             # upload (compares MD5s, sends only changes)
+
+Objects carry `Cache-Control: public, max-age=31536000, immutable`, so a re-encoded clip needs a new file
+name (the entry's `clip`), not an overwrite. The site reads the base URL from `mediaBase` in
+`site.config.json`; build with `NEXT_PUBLIC_MEDIA_BASE=/clips` to play the local files here instead. The
+CSP `media-src` in `public/_headers` must allow the media host. If a file is missing, the card falls back
+to the static banner.
 
 They are produced by `scripts/media/build_media.py` from `scripts/media/manifest.json`. Per title it
 records the source upload, the rating-card / black trim (`trim.start`, plus `trim.end` to cut a

@@ -7,16 +7,11 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Cross-Origin-Opener-Policy: same-origin
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://upload.wikimedia.org https://static.tvmaze.com https://image.tmdb.org; media-src 'self' blob:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://upload.wikimedia.org https://static.tvmaze.com https://image.tmdb.org; media-src 'self' blob: https://media.verseorder.watch; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 # Content-hashed build output never changes.
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
-
-# Card trailers: large, rarely change. Give a re-encoded clip a new file name to bust caches.
-/clips/*
-  Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
 
 # Keep the pages.dev mirrors and preview deployments out of search results.
 https://:project.pages.dev/*

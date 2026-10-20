@@ -21,10 +21,13 @@ query string and `#hash` are kept, and it works without JavaScript too.
 
 Deploys run from the maintainer's machine, not from GitHub Actions:
 
-1. Put the card trailer clips in `public/clips/` (see below).
-2. Run `npm run build`.
-3. Run `npm run deploy:cloudflare` with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set.
+1. Run `npm run build`.
+2. Run `npm run deploy:cloudflare` with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set.
    The token needs the Cloudflare Pages edit permission.
+
+The site is fully static: there is no `functions/` directory, so no request runs a Pages Function
+or Worker (the Workers free plan caps CPU time per request). `scripts/prepare-cloudflare.mjs`
+refuses to deploy if a `functions/` directory shows up.
 
 The [Cloudflare Pages build](.github/workflows/cloudflare-pages.yml) workflow runs on every push to
 `main`. It builds and tests the site and checks the Cloudflare Pages limits (25 MiB per file,
@@ -34,20 +37,25 @@ The printable PDF is too big for Cloudflare Pages (over 25 MiB). `npm run deploy
 it out, and `/verseorder-watch-order.pdf` redirects to the copy on GitHub.
 
 Response headers and redirects are in [`public/_headers`](public/_headers) and
-[`public/_redirects`](public/_redirects). HSTS isn't turned on yet. If the clips ever move to
-another host (`NEXT_PUBLIC_MEDIA_BASE`), add that host to `media-src` in the
-Content-Security-Policy.
+[`public/_redirects`](public/_redirects). HSTS isn't turned on yet. The clip host
+(`https://media.verseorder.watch`) is allowed in `media-src` of the Content-Security-Policy; if it
+ever changes, update both `mediaBase` in `site.config.json` and the CSP.
 
 ## Card trailer clips
 
-The cards play short trailer clips from `/clips/`. The video files aren't in this repository
-(`public/clips/*.mp4` and `*.webm` are in `.gitignore`), so keep them on the machine you deploy
-from. `npm run build` copies them into `out/clips/`.
+The cards play short trailer clips from `https://media.verseorder.watch/clips/`, an R2 bucket
+(`verseorder-media`) with a custom domain on the verseorder.watch zone. R2 serves byte ranges
+natively (Safari needs 206 responses) and the edge caches the files, so they cost no Worker CPU
+and stay within the R2 free tier (10 GB storage, 1M Class A and 10M Class B operations per month,
+free egress; the 224 files are about 0.9 GB).
 
-Each Cloudflare Pages deploy replaces the whole site. If you deploy without the clips, they
-disappear from the live site and the cards show their still banners instead.
+The video files aren't in this repository (`public/clips/*.mp4` and `*.webm` are in `.gitignore`)
+and they aren't part of the Pages deploy: `scripts/prepare-cloudflare.mjs` removes `out/clips/`.
+Deploying the site without them is safe. To add or change clips, run
+`node scripts/media/upload_clips.mjs` (see [public/clips/README.md](public/clips/README.md)); the
+token needs R2 edit access.
 
-`/clips/*` is cached for a year. If you re-encode a clip, give it a new file name.
+Clips are cached for a year (`immutable`). If you re-encode a clip, give it a new file name.
 
 ## GitHub Pages
 
