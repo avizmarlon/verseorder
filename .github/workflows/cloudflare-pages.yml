@@ -1,7 +1,7 @@
 name: Cloudflare Pages build
 # Builds and tests exactly what gets deployed to Cloudflare Pages. It does not deploy: deploys run
-# from the maintainer's machine with `npm run deploy:cloudflare`, because the card trailer clips
-# are not in this repository and a deploy without them would remove them from the live site.
+# from the maintainer's machine with `npm run deploy:cloudflare`. The card trailer clips live in R2
+# (media.verseorder.watch), not in this repository or the Pages deploy.
 on:
   push:
     branches: [main]

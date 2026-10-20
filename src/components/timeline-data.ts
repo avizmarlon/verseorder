@@ -98,8 +98,9 @@ export const trailerOf = (entry: Entry): string | null =>
   entry.trailerYouTubeId || trailerIds[entry.id] || null;
 
 /**
- * Where card trailer files live. Defaults to same-origin `<basePath>/clips`; set
- * NEXT_PUBLIC_MEDIA_BASE (e.g. https://media.example.pages.dev/clips) to serve them elsewhere.
+ * Where card trailer files live: `mediaBase` in site.config.json (the R2 bucket behind
+ * https://media.verseorder.watch), or NEXT_PUBLIC_MEDIA_BASE at build time (`/clips` serves a
+ * local public/clips from the same origin).
  */
 export const mediaBase = (
   process.env.NEXT_PUBLIC_MEDIA_BASE || `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/clips`

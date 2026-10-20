@@ -1,7 +1,9 @@
-// Gets out/ ready for Cloudflare Pages: removes files that are served from elsewhere (see
-// public/_redirects) and checks the Pages limits (25 MiB per file, 20,000 files).
+// Gets out/ ready for Cloudflare Pages: removes files that are served from elsewhere (the PDF via
+// public/_redirects, the card trailer clips from R2 at media.verseorder.watch) and checks the
+// Pages limits (25 MiB per file, 20,000 files). The site is fully static: no Pages Functions.
 //
 //   npm run build && node scripts/prepare-cloudflare.mjs
+import { existsSync } from "node:fs";
 import { readdir, rm, stat } from "node:fs/promises";
 import { join, relative } from "node:path";
 
@@ -12,6 +14,14 @@ const maxFiles = 20_000;
 // The printable PDF is too big for Cloudflare Pages; _redirects sends it to GitHub instead.
 const offloaded = ["verseorder-watch-order.pdf"];
 for (const file of offloaded) await rm(join(root, file), { force: true });
+// `next build` copies a local public/clips into out/; the live clips come from R2
+// (scripts/media/upload_clips.mjs), so they never go to Pages.
+await rm(join(root, "clips"), { recursive: true, force: true });
+// A functions/ directory would turn requests into billed Worker invocations; keep the site static.
+if (existsSync("functions")) {
+  console.error("functions/ exists: VerseOrder deploys as a static site with no Pages Functions.");
+  process.exit(1);
+}
 
 const files = [];
 const walk = async (dir) => {
