@@ -55,7 +55,10 @@ Deploying the site without them is safe. To add or change clips, run
 `node scripts/media/upload_clips.mjs` (see [public/clips/README.md](public/clips/README.md)); the
 token needs R2 edit access.
 
-Clips are cached for a year (`immutable`). If you re-encode a clip, give it a new file name.
+Clips are cached for a year (`immutable`). If you re-encode a clip, give it a new file name and
+update its `clip` in the data. The upload script refuses (exit 1) to replace an existing object
+with different bytes; `--overwrite` forces it and purges the edge cache, but browsers keep the
+old copy.
 
 ## GitHub Pages
 
