@@ -3,23 +3,29 @@
 // bucket listing), so re-running it is cheap. The clips are never committed or deployed to Pages.
 //
 //   set -a; . /path/to/cloudflare.env; set +a   # CLOUDFLARE_API_TOKEN (R2 edit), CLOUDFLARE_ACCOUNT_ID
-//   node scripts/media/upload_clips.mjs [--dry-run]
+//   node scripts/media/upload_clips.mjs [--dry-run] [--overwrite]
 //
 // Objects get a one-year immutable Cache-Control, so a re-encoded clip needs a new file name
-// (the `clip` field in src/data/watch-order.json), never an overwrite.
+// (the `clip` field in scripts/media/manifest.json and src/data/watch-order.json). If a local file
+// differs from the object under the same key, the script uploads nothing and exits 1, also with
+// --dry-run. --overwrite replaces those objects anyway and then purges their URLs from the
+// Cloudflare cache; browsers that already cached a clip keep the old file for up to a year.
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { promisify } from "node:util";
+import { planUploads } from "./upload_plan.mjs";
 
 const run = promisify(execFile);
 const bucket = process.env.VERSEORDER_MEDIA_BUCKET || "verseorder-media";
 const prefix = "clips/";
-const dir = "public/clips";
+const dir = process.env.VERSEORDER_CLIPS_DIR || "public/clips";
 const cacheControl = "public, max-age=31536000, immutable";
 const types = { mp4: "video/mp4", webm: "video/webm" };
 const dryRun = process.argv.includes("--dry-run");
+const overwrite = process.argv.includes("--overwrite");
+const { mediaBase } = JSON.parse(await readFile("site.config.json", "utf8"));
 const { CLOUDFLARE_API_TOKEN: token, CLOUDFLARE_ACCOUNT_ID: account } = process.env;
 if (!token || !account) {
   console.error("Set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID first.");
@@ -45,15 +51,51 @@ async function listBucket() {
   return objects;
 }
 
+// Single-file purge on the zone that serves mediaBase (token needs Zone > Cache Purge).
+async function purge(urls) {
+  const api = "https://api.cloudflare.com/client/v4";
+  const headers = { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
+  const host = new URL(mediaBase).hostname;
+  const zones = await (await fetch(`${api}/zones?name=${host.split(".").slice(-2).join(".")}`, { headers })).json();
+  const zone = zones.result?.[0]?.id;
+  if (!zone) throw new Error(`zone for ${host} not found: ${JSON.stringify(zones.errors)}`);
+  for (let i = 0; i < urls.length; i += 30) {
+    const res = await fetch(`${api}/zones/${zone}/purge_cache`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ files: urls.slice(i, i + 30) }),
+    });
+    const body = await res.json();
+    if (!body.success) throw new Error(`purge failed: ${JSON.stringify(body.errors)}`);
+  }
+  return true;
+}
+
 const remote = await listBucket();
 const files = (await readdir(dir)).filter((f) => /\.(mp4|webm)$/.test(f)).sort();
-const todo = [];
+const local = [];
 for (const name of files) {
-  const md5 = createHash("md5").update(await readFile(join(dir, name))).digest("hex");
-  const have = remote.get(prefix + name);
-  if (!have || have.etag !== md5 || have.http_metadata?.cacheControl !== cacheControl) todo.push(name);
+  local.push({ name, md5: createHash("md5").update(await readFile(join(dir, name))).digest("hex") });
 }
-console.log(`${files.length} local clips, ${remote.size} in r2://${bucket}/${prefix}, ${todo.length} to upload.`);
+const { upload, conflicts } = planUploads(local, remote, { prefix, cacheControl });
+const todo = overwrite ? [...upload, ...conflicts.map((c) => c.name)].sort() : upload;
+console.log(
+  `${files.length} local clips, ${remote.size} in r2://${bucket}/${prefix}, ` +
+    `${upload.length} to upload, ${conflicts.length} changed under an existing key.`,
+);
+if (conflicts.length) {
+  const lines = conflicts.map((c) => `  ${c.name}  (local md5 ${c.md5}, r2 etag ${c.etag})`).join("\n");
+  if (!overwrite) {
+    console.error(
+      `\nRefusing to overwrite (objects are cached for a year, immutable):\n${lines}\n\n` +
+        "Give the re-encoded clip a new name (e.g. <clip>-v2.mp4 / .webm), set that `clip` in\n" +
+        "scripts/media/manifest.json and src/data/watch-order.json, deploy the site, then re-run.\n" +
+        "--overwrite replaces them and purges the edge cache, but browsers keep the old file.",
+    );
+    process.exit(1);
+  }
+  console.warn(`\n--overwrite: replacing these objects:\n${lines}`);
+}
 if (dryRun) {
   for (const name of todo) console.log(`  would upload ${name}`);
   process.exit(0);
@@ -77,7 +119,16 @@ const worker = async () => {
   }
 };
 await Promise.all(Array.from({ length: 4 }, worker));
-const local = new Set(files.map((f) => prefix + f));
-const extra = [...remote.keys()].filter((k) => !local.has(k));
+const localKeys = new Set(files.map((f) => prefix + f));
+const extra = [...remote.keys()].filter((k) => !localKeys.has(k));
 if (extra.length) console.log(`In the bucket but not in ${dir} (left alone): ${extra.join(", ")}`);
+if (overwrite && conflicts.length) {
+  const urls = conflicts.map((c) => `${mediaBase}/${c.name}`);
+  const purged = await purge(urls).catch((e) => (console.warn(`  ${e.message}`), false));
+  console.warn(
+    purged
+      ? `Purged ${urls.length} overwritten URLs from the Cloudflare cache. Browsers that already have them keep the old file.`
+      : `Overwritten, but not purged. Purge these from the Cloudflare cache by hand:\n${urls.join("\n")}`,
+  );
+}
 console.log("Done.");

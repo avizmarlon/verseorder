@@ -21,10 +21,16 @@ doesn't need it). Upload new or changed files with:
 
     set -a; . /path/to/cloudflare.env; set +a   # CLOUDFLARE_API_TOKEN (R2 edit), CLOUDFLARE_ACCOUNT_ID
     node scripts/media/upload_clips.mjs --dry-run   # list what would be sent
-    node scripts/media/upload_clips.mjs             # upload (compares MD5s, sends only changes)
+    node scripts/media/upload_clips.mjs             # upload (compares MD5s, sends only new files)
 
 Objects carry `Cache-Control: public, max-age=31536000, immutable`, so a re-encoded clip needs a new file
-name (the entry's `clip`), not an overwrite. The site reads the base URL from `mediaBase` in
+name, not an overwrite: name it e.g. `<clip>-v2`, set that `clip` in `scripts/media/manifest.json` and
+`src/data/watch-order.json`, upload, then deploy the site. If a local file differs (MD5 vs. R2 ETag) from
+the object under the same key, the script uploads nothing and exits 1, with or without `--dry-run`.
+`--overwrite` replaces those objects anyway and purges their URLs from the Cloudflare cache (the token
+needs Zone > Cache Purge, otherwise it prints the URLs to purge by hand); browsers that already cached
+the old file keep it. Same-bytes objects with a wrong `Cache-Control` are re-put. The decision logic is
+in `scripts/media/upload_plan.mjs`, tested with `npm run test:scripts`. The site reads the base URL from `mediaBase` in
 `site.config.json`; build with `NEXT_PUBLIC_MEDIA_BASE=/clips` to play the local files here instead. The
 CSP `media-src` in `public/_headers` must allow the media host. If a file is missing, the card falls back
 to the static banner.

@@ -17,6 +17,7 @@ jobs:
       # Root build, as deployed to Cloudflare Pages (https://verseorder.watch).
       - run: npm run build
       - run: npm run typecheck
+      - run: npm run test:scripts
       - run: npx playwright install --with-deps chromium
       # Includes tests/redirect.spec.ts, which builds and checks the GitHub Pages redirect stubs.
       - run: npm run test:e2e
