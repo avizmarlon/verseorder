@@ -39,8 +39,9 @@ The [Cloudflare Pages build](.github/workflows/cloudflare-pages.yml) workflow ru
 `main`. It builds and tests the site and checks the Cloudflare Pages limits (25 MiB per file,
 20,000 files), but it doesn't deploy.
 
-The printable PDF is too big for Cloudflare Pages (over 25 MiB). `npm run deploy:cloudflare` leaves
-it out, and `/verseorder-watch-order.pdf` redirects to the copy on GitHub.
+The old printable PDF (`public/verseorder-watch-order.pdf`) is out of date and isn't published:
+`npm run deploy:cloudflare` leaves it out (it's also over the 25 MiB Pages limit), and
+`/verseorder-watch-order.pdf` returns a plain 404. Nothing redirects to it for now.
 
 Response headers and redirects are in [`public/_headers`](public/_headers) and
 [`public/_redirects`](public/_redirects). HSTS isn't turned on yet. The clip host
