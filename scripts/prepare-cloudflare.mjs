@@ -3,6 +3,8 @@
 // Pages limits (25 MiB per file, 20,000 files). The site is fully static: no Pages Functions.
 //
 //   npm run build && node scripts/prepare-cloudflare.mjs
+//
+// `npm run deploy:cloudflare` (scripts/deploy-cloudflare.mjs) runs both before uploading.
 import { existsSync } from "node:fs";
 import { readdir, rm, stat } from "node:fs/promises";
 import { join, relative } from "node:path";

@@ -13,7 +13,8 @@ export type Entry = (typeof collection.entries)[number] & {
   clip?: string | null;
 };
 export const entries = collection.entries;
-export const lastReviewedDate = collection.lastReviewedDate;
+/** Date (YYYY-MM-DD) of the last commit that changed the watch order, set in next.config.ts. */
+export const contentUpdated = process.env.NEXT_PUBLIC_CONTENT_UPDATED ?? "";
 /**
  * Chapters group the order into blocks by `position` (inclusive `end`); the finer `era` labels
  * in the data stay as they are. `slug` is the URL hash; `legacy` lists the old #chN hashes

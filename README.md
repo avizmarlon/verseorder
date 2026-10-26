@@ -6,7 +6,7 @@ Want to watch all of Marvel but have no idea where to start? Same. VerseOrder is
 
 **[Open the watch order](https://verseorder.watch/)** or [read it as a plain list](content/watch-order.md).
 
-Right now it has 112 entries (last updated October 17, 2026). Some are marked optional, so you can skip them or take the detour. A few shows, like *VisionQuest*, are still airing.
+Right now it has 112 entries. Some are marked optional, so you can skip them or take the detour. A few shows, like *VisionQuest*, are still airing.
 
 ## How to use it
 

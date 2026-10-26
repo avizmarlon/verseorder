@@ -15,7 +15,7 @@ import {
   colorOf,
   entries,
   kindLabel,
-  lastReviewedDate,
+  contentUpdated,
   softOf,
   trailerIds,
   typeOf,
@@ -47,7 +47,8 @@ const months = [
   "December",
 ] as const;
 const updatedLabel = (() => {
-  const [year, month, day] = lastReviewedDate.split("-").map(Number);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(contentUpdated)) return "";
+  const [year, month, day] = contentUpdated.split("-").map(Number);
   return `Updated ${months[month - 1]} ${day}, ${year}`;
 })();
 const filters = [
@@ -934,7 +935,7 @@ export default function LivingTimeline() {
               </a>
               <a href={`${repo}/blob/main/LICENSE`}>MIT License</a>
             </div>
-            <p>{updatedLabel}</p>
+            {updatedLabel && <p>{updatedLabel}</p>}
             <p>
               Not affiliated with Marvel, Disney or Sony. All titles,
               characters, cover art and trademarks belong to their respective

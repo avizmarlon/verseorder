@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
     "test:scripts": "node --test scripts/*/*.test.mjs",
-    "deploy:cloudflare": "node scripts/prepare-cloudflare.mjs && npx --yes wrangler@4 pages deploy out --project-name=verseorder --branch=main"
+    "deploy:cloudflare": "node scripts/deploy-cloudflare.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",

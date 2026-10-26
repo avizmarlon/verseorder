@@ -19,11 +19,17 @@ query string and `#hash` are kept, and it works without JavaScript too.
 
 ## Deploying to Cloudflare Pages
 
-Deploys run from the maintainer's machine, not from GitHub Actions:
+Deploys run from the maintainer's machine, not from GitHub Actions. Check out `main`, pull, and
+run `npm run deploy:cloudflare` with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set (the
+token needs the Cloudflare Pages edit permission). [`scripts/deploy-cloudflare.mjs`](scripts/deploy-cloudflare.mjs):
 
-1. Run `npm run build`.
-2. Run `npm run deploy:cloudflare` with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set.
-   The token needs the Cloudflare Pages edit permission.
+1. Prints the commit being deployed and warns if the branch isn't `main` or the working tree has
+   uncommitted changes. Both still deploy to production, so stop it (Ctrl+C) if that isn't intended.
+2. Always runs `npm run build`, so `out/` matches the checkout. An `out/` left over from another
+   branch or commit is never uploaded. It stops if `HEAD` changes during the build.
+3. Runs `scripts/prepare-cloudflare.mjs` (below).
+4. Runs `wrangler pages deploy out --branch=main` with the commit hash, subject and dirty flag, so
+   the Cloudflare dashboard shows which commit each deployment came from.
 
 The site is fully static: there is no `functions/` directory, so no request runs a Pages Function
 or Worker (the Workers free plan caps CPU time per request). `scripts/prepare-cloudflare.mjs`

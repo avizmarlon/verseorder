@@ -20,13 +20,24 @@ def load_chapters() -> list[tuple[str, int]]:
 def chapter_of(position: int, chapters: list[tuple[str, int]]) -> str:
     return next(name for name, end in chapters if position <= end)
 
+def content_updated() -> str:
+    """Date of the last commit that changed the watch order, like the site footer."""
+    import datetime, subprocess
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", "src/data", "src/components/timeline-data.ts"],
+                             cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+        day = datetime.date.fromisoformat(out)
+    except (OSError, subprocess.CalledProcessError, ValueError):
+        day = datetime.date.today()
+    return f"{day:%B} {day.day}, {day.year}"
+
 CHAPTERS=load_chapters()
 assert CHAPTERS and CHAPTERS[-1][1]==len(items)
 assert all(e['position']==i for i,e in enumerate(items,1))
 assert len({e['id'] for e in items})==len(items)
 lines=[
 '# VerseOrder: A Marvel Multiverse Watch Order','',
-'> The order where the story makes the most sense, not strict in-universe chronology. Updated October 17, 2026. Some of the older picks are still getting a second look.', '',
+f'> The order where the story makes the most sense, not strict in-universe chronology. Updated {content_updated()}. Some of the older picks are still getting a second look.', '',
 '**What the tags mean**', '',
 '- **Optional**: nice extra, skip it if you want',
 '- **Legacy**: Marvel movie from outside the MCU (Sony, Fox and older ones)',
