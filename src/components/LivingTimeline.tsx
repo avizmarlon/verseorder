@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { Search, Play, X, Check } from "lucide-react";
 import {
   art,
@@ -138,10 +144,6 @@ function TitleDialog({
                 : "Part of the curated viewing journey."}
             </p>
           </div>
-          <p className="b-editorial">
-            This is a narrative viewing order, not an official chronology.
-            Detailed placement notes are under editorial review.
-          </p>
           {(entry.note || entry.whyHere) && (
             <details className="b-notes">
               <summary>Show editorial notes · may contain spoilers</summary>
@@ -283,6 +285,10 @@ export default function LivingTimeline() {
     }, 300);
     return () => clearTimeout(timer);
   }, []);
+  const needle = query.trim().toLowerCase();
+  // Searching or filtering switches to a compact result view: no hero, no empty chapters and slim
+  // chapter labels, so the first match sits right under the controls.
+  const filtering = needle !== "" || filter !== "all";
   const visible = entries.filter(
     (entry) =>
       (filter === "all" ||
@@ -293,9 +299,39 @@ export default function LivingTimeline() {
             : typeOf(entry) === filter)) &&
       `${entry.title} ${entry.universe} ${entry.era}`
         .toLowerCase()
-        .includes(query.trim().toLowerCase()),
+        .includes(needle),
   );
   const visibleIds = new Set(visible.map((entry) => entry.id));
+  const shownChapters = new Set(visible.map((entry) => chapterOf(entry).id));
+  const firstChapter = chapters.find((chapter) => shownChapters.has(chapter.id));
+  // Results start at the top whenever the result set changes (typing that keeps the same matches
+  // does not move anything); leaving the result view restores where the reader was.
+  const resultKey = filtering ? visible.map((entry) => entry.id).join() : "";
+  const savedScroll = useRef(0);
+  const wasFiltering = useRef(false);
+  // Read before the result view renders: by layout-effect time the shorter page has clamped it.
+  const rememberScroll = () => {
+    if (!filtering) savedScroll.current = root.current?.scrollTop ?? 0;
+  };
+  useLayoutEffect(() => {
+    const element = root.current;
+    if (!element) return;
+    if (filtering) element.scrollTo({ top: 0, behavior: "instant" });
+    else if (wasFiltering.current && !resumeTarget.current)
+      element.scrollTo({ top: savedScroll.current, behavior: "instant" });
+    wasFiltering.current = filtering;
+  }, [filtering, resultKey]);
+  useEffect(() => {
+    // The HUD overlays the page (height 0); the result view pads by its real height.
+    const element = root.current;
+    const hud = element?.querySelector<HTMLElement>(".b-hudin");
+    if (!element || !hud) return;
+    const observer = new ResizeObserver(() =>
+      element.style.setProperty("--hud-h", `${hud.offsetHeight}px`),
+    );
+    observer.observe(hud);
+    return () => observer.disconnect();
+  }, []);
   const next = entries.find((entry) => !watched.has(entry.id));
   useEffect(() => {
     const element = root.current;
@@ -418,8 +454,8 @@ export default function LivingTimeline() {
   };
   const progress = (watched.size / entries.length) * 360;
   return (
-    <div className="b-root" ref={root}>
-      <a className="b-skip" href="#ch1">
+    <div className={`b-root${filtering ? " b-filtering" : ""}`} ref={root}>
+      <a className="b-skip" href={`#ch${firstChapter?.id ?? 1}`}>
         Skip to watch order
       </a>
       <div className="b-bgs" aria-hidden="true">
@@ -474,6 +510,7 @@ export default function LivingTimeline() {
                 href={`#ch${chapter.id}`}
                 aria-label={chapter.name}
                 aria-current={active === chapter.id ? "location" : undefined}
+                hidden={!shownChapters.has(chapter.id)}
               >
                 <i
                   style={{
@@ -492,7 +529,10 @@ export default function LivingTimeline() {
                 key={item.id}
                 className={filter === item.id ? "on" : ""}
                 aria-pressed={filter === item.id}
-                onClick={() => setFilter(item.id)}
+                onClick={() => {
+                  rememberScroll();
+                  setFilter(item.id);
+                }}
               >
                 {item.label}
               </button>
@@ -505,7 +545,10 @@ export default function LivingTimeline() {
               placeholder="Search titles…"
               aria-label="Search titles"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                rememberScroll();
+                setQuery(event.target.value);
+              }}
             />
           </label>
           <button
@@ -521,7 +564,7 @@ export default function LivingTimeline() {
         </div>
       </header>
       <main className="b-main">
-        <section className="b-hero" id="top">
+        <section className="b-hero" id="top" hidden={filtering}>
           <div className="b-disc" aria-hidden="true">
             <i />
             <i />
@@ -550,9 +593,13 @@ export default function LivingTimeline() {
           </div>
         </section>
         <div className="b-results" role="status" aria-live="polite">
-          {query || filter !== "all" ? (
+          {filtering ? (
             <>
-              {visible.length} matching titles{" "}
+              {visible.length
+                ? `${visible.length} matching ${visible.length === 1 ? "title" : "titles"}`
+                : needle
+                  ? `Nothing matches “${query.trim()}”${filter === "all" ? "" : " in this filter"}.`
+                  : "Nothing matches this filter."}{" "}
               <button
                 onClick={() => {
                   setQuery("");
@@ -579,6 +626,7 @@ export default function LivingTimeline() {
             (entry) => chapterOf(entry).id === chapter.id,
           );
           const items = all.filter((entry) => visibleIds.has(entry.id));
+          if (!items.length) return null;
           const count = all.filter((entry) => watched.has(entry.id)).length;
           const color = `hsl(${chapter.hue} 90% 64%)`;
           return (
@@ -661,9 +709,6 @@ export default function LivingTimeline() {
                     </button>
                   </article>
                 ))}
-                {!items.length && (
-                  <p className="b-empty">No titles match in this chapter.</p>
-                )}
               </div>
             </section>
           );

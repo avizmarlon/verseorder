@@ -1475,10 +1475,6 @@ body {
   font-size: 13px;
   padding: 12px 0;
 }
-.b-drawer .b-editorial {
-  font-size: 13px;
-  color: var(--mu);
-}
 .b-results {
   position: relative;
   z-index: 2;
@@ -1497,13 +1493,6 @@ body {
 .b-results span {
   display: block;
   padding: 12px;
-}
-.b-empty {
-  position: relative;
-  text-align: center;
-  background: #090c1c;
-  color: var(--mu);
-  padding: 28px;
 }
 .b-end a {
   color: var(--gold);
@@ -1864,4 +1853,64 @@ body {
 .b-cell[data-trailer="playing"] .b-tile {
   transform: rotateY(180deg);
   transition-delay: calc((var(--c) + var(--r)) * 55ms);
+}
+
+/* result view: active search or filter (see LivingTimeline) */
+.b-hero[hidden],
+.b-pip[hidden] {
+  display: none;
+}
+.b-filtering .b-main {
+  padding-top: var(--hud-h, 80px);
+}
+.b-filtering .b-results {
+  min-height: 0;
+  padding: 6px 24px 0;
+}
+.b-filtering .b-results button {
+  min-height: 36px;
+}
+.b-filtering .b-ch {
+  padding: 18px 0 8px;
+}
+.b-filtering .b-intro {
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 0;
+}
+.b-filtering .b-sigil,
+.b-filtering .b-cden,
+.b-filtering .b-cprog {
+  display: none;
+}
+.b-filtering .b-cl {
+  font-size: 11px;
+}
+.b-filtering .b-cname {
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+.b-filtering .b-rows {
+  padding-top: 12px;
+}
+@media (max-width: 760px) {
+  .b-filtering .b-results {
+    padding-inline: 16px;
+  }
+  .b-filtering .b-ch {
+    padding-top: 10px;
+  }
+  .b-filtering .b-intro {
+    justify-content: flex-start;
+    padding-inline: 16px;
+  }
+  .b-filtering .b-cname {
+    font-size: 21px;
+  }
+  .b-filtering .b-rows {
+    padding-top: 4px;
+  }
 }
