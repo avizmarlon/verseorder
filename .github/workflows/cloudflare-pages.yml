@@ -11,8 +11,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # A normal run takes about 2 minutes. The apt part of the Playwright install has taken 13 on a
-    # slow mirror; past 25 something is stuck, so stop instead of holding the runner for 6 hours.
+    # A normal run takes about 2 minutes; past 25 something is stuck, so stop instead of holding
+    # the runner for 6 hours.
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v6
@@ -24,7 +24,18 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run typecheck
-      - run: npx playwright install --with-deps chromium
+      # Browsers are cached per Playwright version and OS; on a miss the download takes ~10s.
+      # No --with-deps / install-deps: ubuntu-latest already has Chromium's libraries (apt only
+      # adds fonts and upgrades), and that apt step is what took 11-13 minutes on slow mirrors.
+      - id: pw
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+      - id: pw-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}
+      - if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium
       - run: npm run test:e2e
       - name: Check Cloudflare Pages limits (25 MiB per file, 20,000 files)
         run: node scripts/prepare-cloudflare.mjs
