@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import collection from "../src/data/watch-order.json";
@@ -19,8 +20,12 @@ test("canonical order, English, desktop design, scroll and accessibility", async
   );
   await home(page);
   await expect(page.locator("article.b-row")).toHaveCount(112);
-  await expect(page.getByRole("heading", { name: "Why this order?" })).toBeVisible();
-  await expect(page.getByText(/not an official Marvel chronology/)).toHaveCount(1);
+  await expect(
+    page.getByRole("heading", { name: "Why this order?" }),
+  ).toBeVisible();
+  await expect(page.getByText(/not an official Marvel chronology/)).toHaveCount(
+    1,
+  );
   expect(
     await page
       .locator("article.b-row")
@@ -144,9 +149,8 @@ test("filters hide entries, keep order slots, search and resume clear filters", 
         .position,
     ),
   );
-  await page
-    .getByRole("button", { name: /watched. Resume at next unwatched/ })
-    .click();
+  await page.getByRole("button", { name: /watched. Progress menu/ }).click();
+  await page.getByRole("button", { name: /^Up next: / }).click();
   await expect(page.getByRole("searchbox")).toHaveValue("");
   await expect(page.locator("article.b-row")).toHaveCount(112);
   await page.getByRole("searchbox").fill("no such title xyz");
@@ -257,7 +261,7 @@ test("details, keyboard focus, adjacent titles and progress survive reload", asy
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.reload();
-  await expect(page.locator(".b-ring span")).toHaveText("1");
+  await expect(page.locator(".b-plab")).toHaveText("1/112 watched");
   await expect(page.locator("#node-eyes-of-wakanda .b-orb")).toHaveAttribute(
     "aria-pressed",
     "true",
@@ -422,7 +426,7 @@ test("reduced motion and blocked browser storage still allow progress", async ({
       exact: true,
     })
     .click();
-  await expect(page.locator(".b-ring span")).toHaveText("1");
+  await expect(page.locator(".b-plab")).toHaveText("1/112 watched");
   expect(
     await page
       .locator(".b-disc i")
@@ -447,10 +451,83 @@ test("malformed progress is ignored and stale IDs cannot inflate progress", asyn
       );
   });
   await home(page);
-  await expect(page.locator(".b-ring span")).toHaveText("1");
+  await expect(page.locator(".b-plab")).toHaveText("1/112 watched");
   await page.evaluate(() => localStorage.setItem("verseorder:watched:v1", "{"));
   await page.reload();
-  await expect(page.locator(".b-ring span")).toHaveText("0");
+  await expect(page.locator(".b-plab")).toHaveText("0/112 watched");
+});
+
+test("progress: first-visit hint, marking, export, import and a bad file", async ({
+  page,
+}, testInfo) => {
+  await home(page);
+  const hint = page.locator(".b-hint");
+  await expect(hint).toContainText("mark it as watched");
+  await hint.getByRole("button", { name: "Got it" }).click();
+  await expect(hint).toHaveCount(0);
+  await page.reload();
+  await expect(page.locator(".b-plab")).toHaveText("0/112 watched");
+  await expect(hint).toHaveCount(0);
+
+  const orb = page.locator("#node-eyes-of-wakanda .b-orb");
+  await expect(orb).toHaveAttribute("title", "Mark as watched");
+  await orb.click();
+  await expect(orb).toHaveAttribute("aria-pressed", "true");
+  await expect(orb).toHaveAttribute("title", /^Watched/);
+  await page.locator("#node-captain-america-the-first-avenger .b-orb").click();
+  await expect(page.locator(".b-plab")).toHaveText("2/112 watched");
+  await expect(page.locator(".b-cprog").first()).toContainText(
+    "2 of 10 watched",
+  );
+
+  await page.getByRole("button", { name: /watched. Progress menu/ }).click();
+  const menu = page.getByRole("group", { name: "Progress" });
+  await expect(menu).toBeVisible();
+  const [download] = await Promise.all([
+    page.waitForEvent("download"),
+    menu.getByRole("button", { name: "Export progress" }).click(),
+  ]);
+  expect(download.suggestedFilename()).toBe("verseorder-progress.json");
+  const file = testInfo.outputPath("progress.json");
+  await download.saveAs(file);
+  const exported = JSON.parse(readFileSync(file, "utf8"));
+  expect(exported).toMatchObject({
+    app: "verseorder",
+    version: 1,
+    watched: ["eyes-of-wakanda", "captain-america-the-first-avenger"],
+  });
+
+  // a fresh browser imports it; unknown IDs are skipped
+  await page.evaluate(() => localStorage.removeItem("verseorder:watched:v1"));
+  await page.reload();
+  await expect(page.locator(".b-plab")).toHaveText("0/112 watched");
+  await page.getByRole("button", { name: /watched. Progress menu/ }).click();
+  await menu.getByLabel("Progress file").setInputFiles({
+    name: "progress.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(
+      JSON.stringify({
+        ...exported,
+        watched: [...exported.watched, "not-a-real-title"],
+      }),
+    ),
+  });
+  await expect(menu.getByRole("status")).toHaveText(
+    "Imported 2 watched titles (2 new), skipped 1 unknown.",
+  );
+  await expect(page.locator(".b-plab")).toHaveText("2/112 watched");
+
+  await menu.getByLabel("Progress file").setInputFiles({
+    name: "notes.json",
+    mimeType: "application/json",
+    buffer: Buffer.from('{"watched": "everything"}'),
+  });
+  await expect(menu.getByRole("status")).toContainText("Nothing changed.");
+  await expect(page.locator(".b-plab")).toHaveText("2/112 watched");
+  await page.keyboard.press("Escape");
+  await expect(menu).toBeHidden();
+  await page.reload();
+  await expect(orb).toHaveAttribute("aria-pressed", "true");
 });
 
 const coverHosts =
