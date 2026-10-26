@@ -831,6 +831,40 @@
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
+.b-hold {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 6px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #f3d58a;
+}
+.b-hold svg {
+  flex: none;
+}
+.b-holdD {
+  margin: 10px 0 0;
+  padding: 8px 11px;
+  border-radius: 10px;
+  border: 1px solid rgba(243, 213, 138, 0.35);
+  background: rgba(243, 213, 138, 0.08);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.b-drawer p.b-holdD {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #f3d58a;
+}
+.b-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 .b-more {
   max-height: 0;
   overflow: hidden;

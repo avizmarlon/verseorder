@@ -109,7 +109,7 @@ export const chapters = [
     hue: 168,
     end: 112,
     description:
-      "Back to the main sequence. Deadpool & Wolverine pulls the Fox era in, then the latest releases, from Agatha All Along and Thunderbolts* to Spider-Man: Brand New Day.",
+      "Back to the main sequence. Deadpool & Wolverine pulls the Fox era in, then the MCU picks up with Agatha All Along and Thunderbolts* and runs through VisionQuest and Spider-Man: Brand New Day.",
   },
 ] as const;
 export type Chapter = (typeof chapters)[number];

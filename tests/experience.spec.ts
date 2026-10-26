@@ -696,3 +696,21 @@ test("cards show kind, universe and title, not the sub-era label", async ({
   await expect(card).not.toContainText(avengers.era);
   await expect(page.locator(".b-cell .b-ct p")).toHaveCount(0);
 });
+
+test("credits scenes that spoil a later title say when to watch them", async ({
+  page,
+}) => {
+  await home(page);
+  const card = page.locator("#node-captain-marvel");
+  await expect(card.locator(".b-hold")).toContainText(
+    "Mid-credits scene: watch after #43",
+  );
+  await expect(page.locator("#node-black-widow .b-hold")).toContainText(
+    "Post-credits scene: watch after #44",
+  );
+  await expect(page.locator(".b-hold")).toHaveCount(3);
+  await card.getByRole("button", { name: "Details: Captain Marvel" }).click();
+  await expect(page.getByTestId("credits-hold")).toHaveText(
+    "Save the mid-credits scene for after Avengers: Infinity War (#43).",
+  );
+});
