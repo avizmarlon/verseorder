@@ -39,7 +39,7 @@ test("canonical order, English, desktop design, scroll and accessibility", async
   await page.waitForTimeout(2400);
   await page.screenshot({ path: "docs/previews/living-desktop.png" });
   await page
-    .getByRole("link", { name: "Begin the journey", exact: true })
+    .getByRole("link", { name: "Explore the watch order", exact: true })
     .click();
   await page.locator("#node-captain-marvel").scrollIntoViewIfNeeded();
   await expect(page.locator(".b-pip.on")).toHaveAccessibleName(
@@ -325,7 +325,7 @@ test("mobile composition, touch controls, overflow and accessibility", async ({
       .evaluate((el) => el.scrollWidth <= el.clientWidth),
   ).toBe(true);
   await page
-    .getByRole("link", { name: "Begin the journey", exact: true })
+    .getByRole("link", { name: "Explore the watch order", exact: true })
     .click();
   await page.locator("#node-captain-marvel").scrollIntoViewIfNeeded();
   await page.waitForTimeout(1100);
@@ -607,12 +607,23 @@ test("visit stats load only on the real domain", async ({ page }) => {
   }
 });
 
-test("footer shows the approved short copy", async ({ page }) => {
+test("footer leads with who made it; legal and technical lines below", async ({
+  page,
+}) => {
   await home(page);
   const footer = page.locator("footer.b-end");
   await footer.scrollIntoViewIfNeeded();
+  await expect(footer.locator(".b-made")).toHaveText(
+    "Made by Marlon, a Marvel fan, for Marvel fans.",
+  );
+  await expect(footer.locator(".b-legal")).toContainText(
+    "This product uses the TMDB API but is not endorsed or certified by TMDB.",
+  );
   await expect(
-    footer.getByRole("link", { name: "Suggest a correction", exact: true }),
+    footer.getByRole("link", {
+      name: "Think I got something wrong?",
+      exact: true,
+    }),
   ).toBeVisible();
   await expect(
     footer.getByRole("link", { name: "Source code", exact: true }),
@@ -623,8 +634,12 @@ test("footer shows the approved short copy", async ({ page }) => {
   await expect(footer.getByText(/^Updated /)).toHaveText(
     "Updated October 17, 2026",
   );
-  await expect(footer.getByText(/Fan project made by/)).toContainText(
-    "not affiliated with Marvel, Disney or Sony",
+  await expect(footer.getByText(/^Not affiliated/)).toHaveText(
+    "Not affiliated with Marvel, Disney or Sony. All titles, characters, cover art and trademarks belong to their respective owners.",
+  );
+  // the site copy stays plain: no "curated", "editorial", "journey" or "lit"
+  expect(await page.locator("body").innerText()).not.toMatch(
+    /curat|editorial|journey|\blit\b|ultimate/i,
   );
   await expect(
     footer.getByRole("link", { name: "Marlon", exact: true }),
