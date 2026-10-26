@@ -1,5 +1,5 @@
-// Gets out/ ready for Cloudflare Pages: removes files that are served from elsewhere (the PDF via
-// public/_redirects, the card trailer clips from R2 at media.verseorder.watch) and checks the
+// Gets out/ ready for Cloudflare Pages: removes files that aren't published there (the out-of-date
+// PDF, the card trailer clips served from R2 at media.verseorder.watch) and checks the
 // Pages limits (25 MiB per file, 20,000 files). The site is fully static: no Pages Functions.
 //
 //   npm run build && node scripts/prepare-cloudflare.mjs
@@ -13,7 +13,8 @@ const root = "out";
 const maxBytes = 25 * 1024 * 1024;
 const maxFiles = 20_000;
 
-// The printable PDF is too big for Cloudflare Pages; _redirects sends it to GitHub instead.
+// The old printable PDF is out of date (and over the 25 MiB limit). It stays in the repo but isn't
+// published, so /verseorder-watch-order.pdf is a plain 404 (no redirect in public/_redirects).
 const offloaded = ["verseorder-watch-order.pdf"];
 for (const file of offloaded) await rm(join(root, file), { force: true });
 // `next build` copies a local public/clips into out/; the live clips come from R2

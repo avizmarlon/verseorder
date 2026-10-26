@@ -51,7 +51,7 @@ const landing = async (page: import("@playwright/test").Page, path: string) => {
 for (const [from, to] of [
   [`${base}/`, ""],
   [`${base}/?ref=readme#node-loki`, "?ref=readme#node-loki"],
-  [`${base}/verseorder-watch-order.pdf`, "verseorder-watch-order.pdf"],
+  [`${base}/old-file.png`, "old-file.png"],
   [`${base}/some/deep/path/?q=1`, "some/deep/path/?q=1"],
 ]) {
   test(`redirects ${from} to the same path on the new domain`, async ({ page }) => {
@@ -77,4 +77,10 @@ test("redirect works without JavaScript via meta refresh", async ({ browser }) =
   const url = await landing(page, `${base}/`);
   expect(url).toBe(target);
   await context.close();
+});
+
+test("the out-of-date PDF isn't redirected anywhere on verseorder.watch", async () => {
+  const rules = await readFile("public/_redirects", "utf8");
+  const active = rules.split("\n").filter((line) => line.trim() && !line.startsWith("#"));
+  expect(active.join("\n")).not.toMatch(/\.pdf/i);
 });
