@@ -83,8 +83,58 @@ test("filters hide entries, keep order slots, search and resume clear filters", 
   await expect(page.locator("article.b-row")).toHaveCount(112);
   await page.getByRole("searchbox").fill("no such title xyz");
   await expect(page.locator("article.b-row")).toHaveCount(0);
-  await expect(page.getByRole("status")).toContainText("0 matching titles");
+  await expect(page.getByRole("status")).toContainText(
+    "Nothing matches “no such title xyz”.",
+  );
+  await expect(page.locator("section.b-ch")).toHaveCount(0);
 });
+
+for (const [name, viewport] of [
+  ["desktop", { width: 1440, height: 900 }],
+  ["mobile", { width: 390, height: 844 }],
+] as const)
+  test(`${name}: search and filters show results right under the controls, clearing restores the page`, async ({
+    page,
+  }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.setViewportSize(viewport);
+    await home(page);
+    const scroller = page.locator(".b-root");
+    await scroller.evaluate((el) => el.scrollTo({ top: 6000, behavior: "instant" }));
+    const firstResult = () =>
+      page.evaluate(() => {
+        const hud = document.querySelector(".b-hudin")!.getBoundingClientRect();
+        const row = document.querySelector("article.b-row")!.getBoundingClientRect();
+        return { gap: row.top - hud.bottom, bottom: row.bottom };
+      });
+    const cases: (() => Promise<void>)[] = [
+      () => page.getByRole("searchbox").fill("No Way Home"),
+      () => page.getByRole("searchbox").fill("loki"),
+      async () => {
+        await page.getByRole("searchbox").fill("");
+        await page.getByRole("button", { name: "Legacy", exact: true }).click();
+      },
+    ];
+    for (const act of cases) {
+      await act();
+      await expect(page.locator(".b-hero")).toBeHidden();
+      // no empty chapters: every rendered chapter holds a match
+      for (const section of await page.locator("section.b-ch").all())
+        await expect(section.locator("article.b-row").first()).toBeAttached();
+      const { gap, bottom } = await firstResult();
+      expect(gap).toBeGreaterThanOrEqual(0);
+      expect(gap).toBeLessThan(120);
+      expect(bottom).toBeLessThan(viewport.height);
+    }
+    await page.getByRole("searchbox").fill("spider");
+    await expect(page.getByRole("searchbox")).toBeFocused();
+    await page.getByRole("button", { name: "Clear filters" }).click();
+    await expect(page.locator("article.b-row")).toHaveCount(112);
+    await expect(page.locator(".b-hero")).toBeVisible();
+    expect(await scroller.evaluate((el) => el.scrollTop)).toBe(6000);
+    expect(errors).toEqual([]);
+  });
 
 test("details, keyboard focus, adjacent titles and progress survive reload", async ({
   page,
@@ -104,6 +154,9 @@ test("details, keyboard focus, adjacent titles and progress survive reload", asy
       .getByRole("dialog")
       .getByRole("heading", { name: "Eyes of Wakanda", exact: true }),
   ).toBeVisible();
+  await expect(page.getByRole("dialog")).not.toContainText(
+    "not an official chronology",
+  );
   await page
     .getByRole("button", { name: "Mark as watched", exact: true })
     .click();
