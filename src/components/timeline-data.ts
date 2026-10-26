@@ -58,7 +58,7 @@ export const chapters = [
     hue: 300,
     end: 52,
     description:
-      "Endgame changed everything. Wanda, Sam, Peter and a stray Loki deal with what it left behind, Shang-Chi and the Eternals show up, and What If...? starts bending reality.",
+      "After the Blip: Wanda, Sam, Peter and a stray Loki deal with what Endgame left behind, Shang-Chi and the Eternals show up, and What If...? starts bending reality.",
   },
   {
     id: 5,
@@ -68,7 +68,7 @@ export const chapters = [
     hue: 354,
     end: 63,
     description:
-      "Yes, we're going back to 2002. Tobey Maguire's and Andrew Garfield's films plus Venom come first, so No Way Home and the Spider-Verse films hit the way they should.",
+      "Yes, we're going back to 2002. Tobey Maguire's and Andrew Garfield's films plus Venom come first, so No Way Home and the Spider-Verse films have their full context.",
   },
   {
     id: 6,
@@ -88,7 +88,7 @@ export const chapters = [
     hue: 4,
     end: 87,
     description:
-      "A deliberate jump back to pre-MCU films from other studios: Wesley Snipes' Blade, Ben Affleck's Daredevil, Elektra and the 2000s Fantastic Four. Not all of them aged well. They're here for a reason.",
+      "A deliberate jump back to pre-MCU films from other studios: Wesley Snipes' Blade, Ben Affleck's Daredevil, Elektra and the 2000s Fantastic Four, so you'll know a few faces that turn up in Deadpool & Wolverine.",
   },
   {
     id: 8,

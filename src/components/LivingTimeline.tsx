@@ -326,9 +326,14 @@ export default function LivingTimeline() {
     const element = root.current;
     const hud = element?.querySelector<HTMLElement>(".b-hudin");
     if (!element || !hud) return;
-    const observer = new ResizeObserver(() =>
-      element.style.setProperty("--hud-h", `${hud.offsetHeight}px`),
-    );
+    // Use the expanded height: the mobile bar collapses while scrolling down.
+    let width = 0,
+      tallest = 0;
+    const observer = new ResizeObserver(() => {
+      if (innerWidth !== width) [width, tallest] = [innerWidth, 0];
+      tallest = Math.max(tallest, hud.offsetHeight);
+      element.style.setProperty("--hud-h", `${tallest}px`);
+    });
     observer.observe(hud);
     return () => observer.disconnect();
   }, []);
@@ -344,12 +349,31 @@ export default function LivingTimeline() {
     document.getElementById(chapter.slug)?.scrollIntoView();
   }, []);
   useEffect(() => {
+    // Keep the current chapter chip in view when the chip row scrolls (mobile).
+    const nav = root.current?.querySelector<HTMLElement>(".b-pips");
+    const chip = nav?.querySelector<HTMLElement>(".b-pip.on");
+    if (!nav || !chip || nav.scrollWidth <= nav.clientWidth) return;
+    nav.scrollTo({
+      left: chip.offsetLeft - (nav.clientWidth - chip.offsetWidth) / 2,
+      behavior: "smooth",
+    });
+  }, [active]);
+  useEffect(() => {
     const element = root.current;
     if (!element) return;
-    let frame = 0;
+    let frame = 0,
+      lastY = element.scrollTop;
     const media = matchMedia("(prefers-reduced-motion: reduce)");
+    const hud = element.querySelector<HTMLElement>(".b-hud");
     const measure = () => {
       frame = 0;
+      // Mobile bar: collapse on scroll down, expand on scroll up or near the top.
+      const y = element.scrollTop,
+        dy = y - lastY;
+      if (hud && (y < 60 || dy < -8)) delete hud.dataset.min;
+      else if (hud && dy > 8 && !hud.querySelector("input:focus"))
+        hud.dataset.min = "";
+      if (y < 60 || Math.abs(dy) > 8) lastY = y;
       const top = element.getBoundingClientRect().top,
         height = element.clientHeight;
       element.style.setProperty(

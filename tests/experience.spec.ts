@@ -333,6 +333,10 @@ test("mobile composition, touch controls, overflow and accessibility", async ({
         .analyze()
     ).violations,
   ).toEqual([]);
+  // The bar folds search away while scrolling down; scrolling up brings it back.
+  await expect(page.getByRole("searchbox")).toBeHidden();
+  await page.locator(".b-root").evaluate((el) => el.scrollBy(0, -200));
+  await expect(page.getByRole("searchbox")).toBeVisible();
   await page.getByRole("searchbox").fill("Captain America: The First Avenger");
   await page.locator(".b-hit").click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -349,6 +353,47 @@ test("mobile composition, touch controls, overflow and accessibility", async ({
     ).violations,
   ).toEqual([]);
   await page.getByRole("button", { name: "Close", exact: true }).click();
+});
+
+test("mobile bar collapses while scrolling down and chapter chips jump", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await home(page);
+  const root = page.locator(".b-root");
+  const hud = page.locator(".b-hudin");
+  const height = () => hud.evaluate((el) => el.getBoundingClientRect().height);
+  const chips = page.getByRole("navigation", { name: "Chapters" });
+  await expect(chips).toBeVisible();
+  expect(await height()).toBeGreaterThan(150);
+  await root.evaluate((el) => el.scrollBy({ top: 2000, behavior: "instant" }));
+  await expect.poll(height).toBeLessThanOrEqual(72);
+  await expect(page.getByRole("searchbox")).toBeHidden();
+  await expect(
+    chips.getByRole("link", { name: "Before the Avengers" }),
+  ).toHaveAttribute("aria-current", "location");
+  await root.evaluate((el) => el.scrollBy({ top: -300, behavior: "instant" }));
+  await expect.poll(height).toBeGreaterThan(150);
+  await chips.getByRole("link", { name: "Marvel Before the MCU" }).click();
+  await expect
+    .poll(() =>
+      page
+        .locator("#marvel-before-the-mcu")
+        .evaluate((el) => Math.round(el.getBoundingClientRect().top)),
+    )
+    .toBeLessThan(140);
+  await expect(
+    chips.getByRole("link", { name: "Marvel Before the MCU" }),
+  ).toHaveAttribute("aria-current", "location");
+  await expect.poll(height).toBeLessThanOrEqual(72);
+  expect(await root.evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(
+    true,
+  );
+  await root.evaluate((el) => el.scrollTo({ top: 0, behavior: "instant" }));
+  await expect.poll(height).toBeGreaterThan(150);
+  expect(errors).toEqual([]);
 });
 
 test("reduced motion and blocked browser storage still allow progress", async ({
