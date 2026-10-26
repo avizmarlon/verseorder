@@ -24,7 +24,12 @@ import {
 import { placementOf, whyThisOrder } from "./placement";
 import Poster from "./Poster";
 import TimelineCell from "./TimelineCell";
-import { useWatchProgress } from "./watch-progress";
+import {
+  exportProgress,
+  parseProgress,
+  useFirstVisitHint,
+  useWatchProgress,
+} from "./watch-progress";
 
 const repo = "https://github.com/avizmarlon/verseorder";
 const months = [
@@ -255,7 +260,56 @@ export default function LivingTimeline() {
     watched,
     unavailable: storageUnavailable,
     toggle,
+    importIds,
   } = useWatchProgress();
+  const hint = useFirstVisitHint();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuNote, setMenuNote] = useState("");
+  const progressMenu = useRef<HTMLDivElement>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (event: Event) => {
+      if (
+        event instanceof KeyboardEvent
+          ? event.key === "Escape"
+          : !progressMenu.current?.contains(event.target as Node)
+      )
+        setMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", close);
+    document.addEventListener("keydown", close);
+    return () => {
+      document.removeEventListener("pointerdown", close);
+      document.removeEventListener("keydown", close);
+    };
+  }, [menuOpen]);
+  const downloadProgress = () => {
+    const url = URL.createObjectURL(
+      new Blob([exportProgress(watched)], { type: "application/json" }),
+    );
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "verseorder-progress.json";
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setMenuNote(
+      `Exported ${watched.size} watched ${watched.size === 1 ? "title" : "titles"}.`,
+    );
+  };
+  const loadProgress = async (file: File) => {
+    const parsed = parseProgress(await file.text());
+    if (!parsed) {
+      setMenuNote(
+        "That file isn’t a VerseOrder progress export. Nothing changed.",
+      );
+      return;
+    }
+    const added = importIds(parsed.ids);
+    setMenuNote(
+      `Imported ${parsed.ids.length} watched ${parsed.ids.length === 1 ? "title" : "titles"} (${added} new)${parsed.unknown ? `, skipped ${parsed.unknown} unknown` : ""}.`,
+    );
+  };
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("all");
   const [active, setActive] = useState(0);
@@ -591,16 +645,71 @@ export default function LivingTimeline() {
               }}
             />
           </label>
-          <button
-            className="b-ring"
-            style={{
-              background: `conic-gradient(#ffc56b ${progress}deg,rgba(255,255,255,.14) 0)`,
-            }}
-            onClick={resume}
-            aria-label={`${watched.size} of ${entries.length} watched. Resume at next unwatched`}
-          >
-            <span>{watched.size}</span>
-          </button>
+          <div className="b-progress" ref={progressMenu}>
+            <button
+              className="b-pbtn"
+              aria-expanded={menuOpen}
+              aria-controls="progress-menu"
+              aria-label={`${watched.size} of ${entries.length} watched. Progress menu`}
+              onClick={() => {
+                setMenuNote("");
+                setMenuOpen(!menuOpen);
+              }}
+            >
+              <span
+                className="b-ring"
+                aria-hidden="true"
+                style={{
+                  background: `conic-gradient(#ffc56b ${progress}deg,rgba(255,255,255,.14) 0)`,
+                }}
+              >
+                <span />
+              </span>
+              <span className="b-plab">
+                {watched.size}/{entries.length}
+                <span> watched</span>
+              </span>
+            </button>
+            <div
+              className="b-pmenu"
+              id="progress-menu"
+              role="group"
+              aria-label="Progress"
+              hidden={!menuOpen}
+            >
+              <p>
+                {watched.size} of {entries.length} watched. Saved in this
+                browser only.
+              </p>
+              {next && (
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    resume();
+                  }}
+                >
+                  Up next: {next.title}
+                </button>
+              )}
+              <button onClick={downloadProgress}>Export progress</button>
+              <button onClick={() => fileInput.current?.click()}>
+                Import progress
+              </button>
+              <input
+                ref={fileInput}
+                type="file"
+                accept="application/json,.json"
+                hidden
+                aria-label="Progress file"
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  event.target.value = "";
+                  if (file) void loadProgress(file);
+                }}
+              />
+              {menuNote && <p role="status">{menuNote}</p>}
+            </div>
+          </div>
         </div>
       </header>
       <main className="b-main">
@@ -622,9 +731,11 @@ export default function LivingTimeline() {
               <a className="b-btn b-btnP" href={`#${chapters[0].slug}`}>
                 Begin the journey
               </a>
-              <button className="b-btn" onClick={resume}>
-                {watched.size ? "Resume your journey" : "Find your next story"}
-              </button>
+              {watched.size > 0 && next && (
+                <button className="b-btn" onClick={resume}>
+                  Pick up where you left off
+                </button>
+              )}
             </div>
           </div>
           <div className="b-scroll" aria-hidden="true">
@@ -632,7 +743,11 @@ export default function LivingTimeline() {
             <i />
           </div>
         </section>
-        <section className="b-why" aria-labelledby="why-order" hidden={filtering}>
+        <section
+          className="b-why"
+          aria-labelledby="why-order"
+          hidden={filtering}
+        >
           <h2 id="why-order">Why this order?</h2>
           {whyThisOrder.map((line) => (
             <p key={line}>{line}</p>
@@ -657,10 +772,14 @@ export default function LivingTimeline() {
               </button>
             </>
           ) : (
-            <>
-              {watched.size} of {entries.length} watched · Progress stays in
-              this browser
-            </>
+            !hint.dismissed &&
+            !watched.size && (
+              <span className="b-hint">
+                Click or tap a title’s number to mark it as watched. Progress is
+                saved in this browser.{" "}
+                <button onClick={hint.dismiss}>Got it</button>
+              </span>
+            )
           )}
           {storageUnavailable && (
             <span>
@@ -713,7 +832,7 @@ export default function LivingTimeline() {
                       }}
                     />
                   </span>
-                  {count} of {all.length} lit
+                  {count} of {all.length} watched
                 </div>
               </div>
               <div className="b-rows">
@@ -736,6 +855,11 @@ export default function LivingTimeline() {
                       className={`b-orb ${watched.has(entry.id) ? "lit" : ""}`}
                       aria-label={`${watched.has(entry.id) ? "Mark as unwatched" : "Mark as watched"}: ${entry.title}`}
                       aria-pressed={watched.has(entry.id)}
+                      title={
+                        watched.has(entry.id)
+                          ? "Watched · select to unmark"
+                          : "Mark as watched"
+                      }
                       onClick={() => toggle(entry.id)}
                       style={{
                         borderColor: colorOf(entry),
@@ -764,12 +888,12 @@ export default function LivingTimeline() {
           <h2 className="b-serif">
             {next ? (
               <>
-                Continue at
+                Up next
                 <br />
                 {next.title}
               </>
             ) : (
-              "Every chapter lit"
+              "You’ve watched everything!"
             )}
           </h2>
           <button
@@ -780,7 +904,7 @@ export default function LivingTimeline() {
                 : () => document.getElementById("top")?.scrollIntoView()
             }
           >
-            {next ? "Continue the journey" : "Back to the beginning"}
+            {next ? "Go to this title" : "Back to the top"}
           </button>
           <div className="b-footer-links">
             <a
