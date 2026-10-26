@@ -1914,3 +1914,28 @@ body {
     padding-top: 4px;
   }
 }
+
+/* nine chapter pips: names only on wide screens, dots below, hidden when space runs out */
+@media (max-width: 1520px) {
+  .b-pip.on span {
+    max-width: 0;
+    opacity: 0;
+  }
+  .b-pip {
+    gap: 0;
+  }
+}
+@media (max-width: 1100px) {
+  .b-pips {
+    display: none;
+  }
+}
+.b-pip.on span {
+  max-width: 150px;
+  text-overflow: ellipsis;
+}
+@media (max-width: 1520px) {
+  .b-pip.on span {
+    max-width: 0;
+  }
+}

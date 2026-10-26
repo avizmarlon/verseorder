@@ -14,41 +14,105 @@ export type Entry = (typeof collection.entries)[number] & {
 };
 export const entries = collection.entries;
 export const lastReviewedDate = collection.lastReviewedDate;
+/**
+ * Chapters group the order into blocks by `position` (inclusive `end`); the finer `era` labels
+ * in the data stay as they are. `slug` is the URL hash; `legacy` lists the old #chN hashes
+ * (four chapters, until 2026-10) that now land on this chapter.
+ */
 export const chapters = [
   {
     id: 1,
-    name: "Genesis",
+    slug: "before-the-avengers",
+    legacy: ["ch1"],
+    name: "Before the Avengers",
     hue: 24,
-    end: 24,
+    end: 10,
     description:
-      "Origins, first alliances, and a world growing larger with every story.",
+      "Steve Rogers goes to war, Carol Danvers crash-lands in the '90s and Tony Stark builds his first suit. Each hero gets a solo start before Nick Fury brings them together.",
   },
   {
     id: 2,
-    name: "Assembly",
+    slug: "the-avengers-era",
+    legacy: [],
+    name: "The Avengers Era",
     hue: 214,
-    end: 44,
+    end: 24,
     description:
-      "Cosmic horizons and extraordinary alliances. Follow the road to Infinity.",
+      "The team assembles in New York, then goes separate ways: Cap digs into S.H.I.E.L.D., the Guardians form in space, and Daredevil and Jessica Jones work the streets. Ends with Ultron and Ant-Man.",
   },
   {
     id: 3,
-    name: "Fracture",
-    hue: 282,
-    end: 80,
+    slug: "the-road-to-endgame",
+    legacy: ["ch2"],
+    name: "The Road to Endgame",
+    hue: 262,
+    end: 44,
     description:
-      "New perspectives, familiar faces, and stories from beyond a single reality.",
+      "The Avengers split over the Sokovia Accords while the Defenders, Black Panther, Spider-Man and Doctor Strange arrive. Then Thanos comes for the Infinity Stones.",
   },
   {
     id: 4,
-    name: "Echoes",
+    slug: "after-endgame",
+    legacy: ["ch3"],
+    name: "After Endgame",
+    hue: 300,
+    end: 52,
+    description:
+      "Endgame changed everything. Wanda, Sam, Peter and a stray Loki deal with what it left behind, Shang-Chi and the Eternals show up, and What If...? starts bending reality.",
+  },
+  {
+    id: 5,
+    slug: "the-spider-man-multiverse",
+    legacy: [],
+    name: "The Spider-Man Multiverse",
+    hue: 354,
+    end: 63,
+    description:
+      "Yes, we're going back to 2002. Tobey Maguire's and Andrew Garfield's films plus Venom come first, so No Way Home and the Spider-Verse films hit the way they should.",
+  },
+  {
+    id: 6,
+    slug: "beyond-the-avengers",
+    legacy: [],
+    name: "Beyond the Avengers",
+    hue: 190,
+    end: 80,
+    description:
+      "No team to call: Doctor Strange takes on the multiverse and new heroes step up, from Moon Knight and Ms. Marvel to She-Hulk and Ironheart. Closes with Quantumania, The Marvels and Loki S2.",
+  },
+  {
+    id: 7,
+    slug: "marvel-before-the-mcu",
+    legacy: ["ch4"],
+    name: "Marvel Before the MCU",
+    hue: 4,
+    end: 87,
+    description:
+      "A deliberate jump back to pre-MCU films from other studios: Wesley Snipes' Blade, Ben Affleck's Daredevil, Elektra and the 2000s Fantastic Four. Not all of them aged well. They're here for a reason.",
+  },
+  {
+    id: 8,
+    slug: "x-men-wolverine-deadpool",
+    legacy: [],
+    name: "X-Men, Wolverine & Deadpool",
+    hue: 46,
+    end: 100,
+    description:
+      "The whole Fox mutant run in one block, from First Class and the original trilogy to Days of Future Past, Deadpool and Logan.",
+  },
+  {
+    id: 9,
+    slug: "back-to-the-mcu",
+    legacy: [],
+    name: "Back to the MCU",
     hue: 168,
     end: 112,
     description:
-      "Explore the legacies, converging worlds, and next chapters of the multiverse.",
+      "Back to the main sequence. Deadpool & Wolverine pulls the Fox era in, then the latest releases, from Agatha All Along and Thunderbolts* to Spider-Man: Brand New Day.",
   },
 ] as const;
-export const chapterOf = (entry: Entry) =>
+export type Chapter = (typeof chapters)[number];
+export const chapterOf = (entry: Entry): Chapter =>
   chapters.find((chapter) => entry.position <= chapter.end)!;
 export const typeOf = (entry: Entry) =>
   entry.kind === "movie"
@@ -103,14 +167,21 @@ export const trailerOf = (entry: Entry): string | null =>
  * local public/clips from the same origin).
  */
 export const mediaBase = (
-  process.env.NEXT_PUBLIC_MEDIA_BASE || `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/clips`
+  process.env.NEXT_PUBLIC_MEDIA_BASE ||
+  `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/clips`
 ).replace(/\/$/, "");
 
 /** Card trailer sources, best codec first. */
 export const clipSources = (entry: Entry) =>
   entry.clip
     ? [
-        { src: `${mediaBase}/${entry.clip}.webm`, type: 'video/webm; codecs="av01.0.04M.08"' },
-        { src: `${mediaBase}/${entry.clip}.mp4`, type: 'video/mp4; codecs="avc1.4D401F"' },
+        {
+          src: `${mediaBase}/${entry.clip}.webm`,
+          type: 'video/webm; codecs="av01.0.04M.08"',
+        },
+        {
+          src: `${mediaBase}/${entry.clip}.mp4`,
+          type: 'video/mp4; codecs="avc1.4D401F"',
+        },
       ]
     : [];
