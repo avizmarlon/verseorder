@@ -14,7 +14,7 @@ import Analytics from "@/components/Analytics";
 
 const siteTitle = "VerseOrder — A Marvel Multiverse Watch Order";
 const siteDescription =
-  "A watch order for 112 Marvel films, series and specials across the MCU, the legacy films and the multiverse, with progress you can track. An independent fan project.";
+  "A Marvel watch order that mixes chronology with storytelling: 112 films, series and specials. An independent fan project.";
 // Rendered before every build by scripts/og/build-og-image.mjs.
 const ogImage = {
   url: new URL("og/verseorder.png", siteUrl).href,

@@ -5,11 +5,11 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "VerseOrder",
-  alternateName: "The Ultimate Marvel Multiverse Watch Order",
+  alternateName: "A Marvel Multiverse Watch Order",
   url: siteUrl,
   inLanguage: "en",
   description:
-    "An independent, open-source fan project: a curated narrative watch order for the MCU, legacy Marvel films, series and the multiverse. Not affiliated with Marvel or Disney.",
+    "A Marvel watch order that mixes chronology with storytelling: 112 films, series and specials. An independent fan project. Not affiliated with Marvel, Disney or Sony.",
   license: "https://opensource.org/licenses/MIT",
   codeRepository: "https://github.com/avizmarlon/verseorder",
 };

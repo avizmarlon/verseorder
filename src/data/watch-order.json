@@ -1,10 +1,8 @@
 {
   "name": "VerseOrder",
-  "subtitle": "The Ultimate Marvel Multiverse Watch Order",
+  "subtitle": "A Marvel Multiverse Watch Order",
   "sourceDate": "2026-07-07",
   "importedDate": "2026-10-17",
-  "editorialStatus": "partially-reviewed-2026-10-17",
-  "editorialNotice": "112-entry narrative watch order updated through October 17, 2026. New additions are source-checked; the older 110-entry baseline still awaits a comprehensive editorial audit.",
   "entries": [
     {
       "id": "eyes-of-wakanda",
@@ -20,7 +18,7 @@
       "whyHere": null,
       "trailerYouTubeId": "ODHh6oe4MlE",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/580/1451968.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/3vD7swDFYkctqAHbK7NeQaVnEBI.jpg",
       "bannerFocus": "50% 28%",
       "clip": "eyes-of-wakanda"
@@ -42,7 +40,7 @@
       "bannerFocus": "50% 22%",
       "clip": "captain-america-the-first-avenger",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/37/Captain_America_The_First_Avenger_poster.jpg",
-      "verification": "original-curation-unreviewed"
+      "verification": "original-placement-unreviewed"
     },
     {
       "id": "marvel-one-shot-agent-carter",
@@ -58,7 +56,7 @@
       "whyHere": null,
       "trailerYouTubeId": "Sxw2PCdqN1U",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/a/a7/Agent_Carter_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/kv8KDbi2I4F4MNBbBMCR4LDqP6H.jpg",
       "bannerFocus": "62% 30%",
       "clip": "marvel-one-shot-agent-carter"
@@ -77,7 +75,7 @@
       "whyHere": null,
       "trailerYouTubeId": "Z1BCujX3pw8",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/4/4e/Captain_Marvel_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/nBS1vONGYrsL2C68C2oDQ3eKJR1.jpg",
       "bannerFocus": "50% 24%",
       "clip": "captain-marvel"
@@ -96,7 +94,7 @@
       "whyHere": null,
       "trailerYouTubeId": null,
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/02/Iron_Man_%282008_film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/35zMyj13eAXn1X7B27mr9jQSQQb.jpg",
       "bannerFocus": "50% 30%",
       "clip": "iron-man"
@@ -115,7 +113,7 @@
       "whyHere": null,
       "trailerYouTubeId": null,
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/e/ed/Iron_Man_2_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/hCVQPB77eXBGh9abVdrWtKpKgkN.jpg",
       "bannerFocus": "55% 22%",
       "clip": "iron-man-2"
@@ -134,7 +132,7 @@
       "whyHere": null,
       "trailerYouTubeId": "dz6eBeW19Lg",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/f/f0/The_Incredible_Hulk_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/xfBnQ4mgf1jYZsscJGJjr6ce0Ar.jpg",
       "bannerFocus": "50% 26%",
       "clip": "the-incredible-hulk"
@@ -153,7 +151,7 @@
       "whyHere": null,
       "trailerYouTubeId": null,
       "posterPath": "https://image.tmdb.org/t/p/w342/njrOqsmFH4pxBrhcoslqLfw2OGk.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/yuIsNfHZTn3nkSsatzM0298wA67.jpg",
       "bannerFocus": "62% 28%",
       "clip": "marvel-one-shot-a-funny-thing"
@@ -172,7 +170,7 @@
       "whyHere": null,
       "trailerYouTubeId": "JOddp-nlNvQ",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/95/Thor_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/1wOu8rdvPxU1ObHi20VcRhfNpbo.jpg",
       "bannerFocus": "50% 30%",
       "clip": "thor"
@@ -191,7 +189,7 @@
       "whyHere": null,
       "trailerYouTubeId": "TBJMq-isHU4",
       "posterPath": "https://image.tmdb.org/t/p/w342/xqNLXUUvBnfVk6m3QFGGU0Grgs7.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/mWZvcmpIQ1qQeHCWc1jIO8qlHKJ.jpg",
       "bannerFocus": "50% 40%",
       "clip": "marvel-one-shot-the-consultant"
@@ -210,7 +208,7 @@
       "whyHere": null,
       "trailerYouTubeId": "eOrNdBpGMv8",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/8/8a/The_Avengers_%282012_film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-avengers"
@@ -229,7 +227,7 @@
       "whyHere": null,
       "trailerYouTubeId": "Gog0_GKYpIg",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/9e/Item_47_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/pC36ONAaKMXStlvutYFcAbMemCM.jpg",
       "bannerFocus": "55% 30%",
       "clip": "marvel-one-shot-item-47"
@@ -248,7 +246,7 @@
       "whyHere": null,
       "trailerYouTubeId": "npvJ9FTgZbM",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/7/7f/Thor_The_Dark_World_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/5o88bbqcV5STn56jqOeovaaWbAE.jpg",
       "bannerFocus": "50% 30%",
       "clip": "thor-the-dark-world"
@@ -267,7 +265,7 @@
       "whyHere": null,
       "trailerYouTubeId": "f_h95mEd4TI",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/1/19/Iron_Man_3_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/4TSqtluelcWByj8YZdqwzQVjI0O.jpg",
       "bannerFocus": "50% 30%",
       "clip": "iron-man-3"
@@ -286,7 +284,7 @@
       "whyHere": null,
       "trailerYouTubeId": "Ja5ngzBOziQ",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/95/All_Hail_the_King_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/yoigAFjhEhJM6O6hQT9TiKH6EL7.jpg",
       "bannerFocus": "50% 35%",
       "clip": "marvel-one-shot-all-hail-the-king"
@@ -305,7 +303,7 @@
       "whyHere": null,
       "trailerYouTubeId": "tbayiPxkUMM",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/9e/Captain_America_The_Winter_Soldier_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/1RWLMyC9KcFfcaoViMiJGSSZzzr.jpg",
       "bannerFocus": "50% 30%",
       "clip": "captain-america-the-winter-soldier"
@@ -324,7 +322,7 @@
       "whyHere": null,
       "trailerYouTubeId": "d96cjJhvlMA",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/33/Guardians_of_the_Galaxy_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/uLtVbjvS1O7gXL8lUOwsFOH4man.jpg",
       "bannerFocus": "50% 30%",
       "clip": "guardians-of-the-galaxy"
@@ -343,7 +341,7 @@
       "whyHere": null,
       "trailerYouTubeId": "wUn05hdkhjM",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/32/Guardians_of_the_Galaxy_Vol._2_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/n3gb8oqP9BeRCUsCmZVaT5eltPH.jpg",
       "bannerFocus": "50% 30%",
       "clip": "guardians-of-the-galaxy-vol-2"
@@ -362,7 +360,7 @@
       "whyHere": null,
       "trailerYouTubeId": "D7eFpRf4tac",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/416/1041836.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/bAnHzJ6AMhOhnV3C0kTxkpCqpgM.jpg",
       "bannerFocus": "50% 30%",
       "clip": "i-am-groot-t1"
@@ -381,7 +379,7 @@
       "whyHere": null,
       "trailerYouTubeId": "1k8H2CywVqg",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/472/1182458.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/gVqB11pK1EUbBiyj7TG4uAwordh.jpg",
       "bannerFocus": "50% 30%",
       "clip": "i-am-groot-t2"
@@ -400,7 +398,7 @@
       "whyHere": null,
       "trailerYouTubeId": "jAy6NJ_D5vU",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/24/60850.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/6KclfESXQia4BbJNv4xUnBqaWfe.jpg",
       "bannerFocus": "50% 30%",
       "clip": "daredevil-netflix-t1"
@@ -419,7 +417,7 @@
       "whyHere": null,
       "trailerYouTubeId": "nWHUjuJ8zxE",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/48/120767.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/nTTQv6XEsBd7dY8LcvD0UKoGwkf.jpg",
       "bannerFocus": "50% 30%",
       "clip": "jessica-jones-t1"
@@ -438,7 +436,7 @@
       "whyHere": null,
       "trailerYouTubeId": "MZoO8QVMxkk",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/f/ff/Avengers_Age_of_Ultron_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/kIBK5SKwgqIIuRKhhWrJn3XkbPq.jpg",
       "bannerFocus": "50% 30%",
       "clip": "avengers-age-of-ultron"
@@ -457,7 +455,7 @@
       "whyHere": null,
       "trailerYouTubeId": "pWdKf3MneyI",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/1/12/Ant-Man_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/1K3JmSNUN8OpjYsCjc0Hy0SYxAb.jpg",
       "bannerFocus": "50% 30%",
       "clip": "ant-man"
@@ -476,7 +474,7 @@
       "whyHere": null,
       "trailerYouTubeId": "IMC7H23-sMs",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/49/123156.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/pPALpad1Fh14g7ejyQjqKzlhrBw.jpg",
       "bannerFocus": "50% 30%",
       "clip": "daredevil-t2"
@@ -495,7 +493,7 @@
       "whyHere": null,
       "trailerYouTubeId": "ORa4hPhGrpo",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/159/397945.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/bJOmop22SGTHPo1tiuVAFf4U7B9.jpg",
       "bannerFocus": "50% 30%",
       "clip": "luke-cage-t1"
@@ -514,7 +512,7 @@
       "whyHere": null,
       "trailerYouTubeId": "f9OKL5no-S0",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/162/407337.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/1u7WHly60OiKgBxe2qj0eptPPJs.jpg",
       "bannerFocus": "50% 30%",
       "clip": "iron-fist-t1"
@@ -533,7 +531,7 @@
       "whyHere": null,
       "trailerYouTubeId": "jYvHxEEgrPA",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/122/307234.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/n4XLn0wLCxWSFaQgG6queZlFPKi.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-defenders"
@@ -552,7 +550,7 @@
       "whyHere": null,
       "trailerYouTubeId": "43NWzay3W4s",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/5/53/Captain_America_Civil_War_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/wdwcOBMkt3zmPQuEMxB3FUtMio2.jpg",
       "bannerFocus": "50% 30%",
       "clip": "captain-america-civil-war"
@@ -571,7 +569,7 @@
       "whyHere": null,
       "trailerYouTubeId": "ybji16u608U",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/e/e9/Black_Widow_%282021_film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/keIxh0wPr2Ymj0Btjh4gW7JJ89e.jpg",
       "bannerFocus": "50% 30%",
       "clip": "black-widow"
@@ -590,7 +588,7 @@
       "whyHere": null,
       "trailerYouTubeId": "xjDjIWPwcPU",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/d/d6/Black_Panther_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/6ELJEzQJ3Y45HczvreC3dg0GV5R.jpg",
       "bannerFocus": "50% 30%",
       "clip": "black-panther"
@@ -609,7 +607,7 @@
       "whyHere": null,
       "trailerYouTubeId": "rk-dF1lIbIg",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/f/f9/Spider-Man_Homecoming_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/tPpYGm2mVecue7Bk3gNVoSPA5qn.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-homecoming"
@@ -628,7 +626,7 @@
       "whyHere": null,
       "trailerYouTubeId": "k2mOTfzIGy8",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/214/536287.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/j5aOOtsJinQtyRaqiB12TTRHdeX.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-punisher-t1"
@@ -647,7 +645,7 @@
       "whyHere": null,
       "trailerYouTubeId": "HSzx-zryEgM",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/a/a1/Doctor_Strange_%282016_film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/qUv51IFUvVRAP2379ThmA3eLJx6.jpg",
       "bannerFocus": "50% 30%",
       "clip": "doctor-strange"
@@ -666,7 +664,7 @@
       "whyHere": null,
       "trailerYouTubeId": "-u2AV8z_CX0",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/214/536295.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/g9ju2o4LioYYOyihBvf9lVX8XL.jpg",
       "bannerFocus": "50% 30%",
       "clip": "jessica-jones-t2"
@@ -685,7 +683,7 @@
       "whyHere": null,
       "trailerYouTubeId": "GGkQH867Yqg",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/159/397944.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/bJOmop22SGTHPo1tiuVAFf4U7B9.jpg",
       "bannerFocus": "50% 30%",
       "clip": "luke-cage-t2"
@@ -704,7 +702,7 @@
       "whyHere": null,
       "trailerYouTubeId": "kvvWB0GwCek",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/166/417191.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/cuckn6IFp9OKu9H8AgD0iEANxhc.jpg",
       "bannerFocus": "50% 30%",
       "clip": "iron-fist-t2"
@@ -723,7 +721,7 @@
       "whyHere": null,
       "trailerYouTubeId": "n83s6NO1NE0",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/214/536297.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/pPALpad1Fh14g7ejyQjqKzlhrBw.jpg",
       "bannerFocus": "50% 30%",
       "clip": "daredevil-t3"
@@ -742,7 +740,7 @@
       "whyHere": null,
       "trailerYouTubeId": "ue80QwXMRHg",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/7/7d/Thor_Ragnarok_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/vLmHH8jAy8Jq8uBsLucd3592WGh.jpg",
       "bannerFocus": "50% 30%",
       "clip": "thor-ragnarok"
@@ -761,7 +759,7 @@
       "whyHere": null,
       "trailerYouTubeId": "jrLhP5sK2wI",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/214/536288.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/jBGjbSDRxOEudW9rmQbWDzJUKq9.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-punisher-t2"
@@ -780,7 +778,7 @@
       "whyHere": null,
       "trailerYouTubeId": "7DBKS2qH51I",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/214/536296.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/fjEOQhzZk2Or7VYUBeMx5ZIwU95.jpg",
       "bannerFocus": "50% 30%",
       "clip": "jessica-jones-t3"
@@ -799,7 +797,7 @@
       "whyHere": null,
       "trailerYouTubeId": "8_rTIAOohas",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/2/2c/Ant-Man_and_the_Wasp_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/iYdgEUE2W2aJkgqfSjf1x3gFfuV.jpg",
       "bannerFocus": "50% 30%",
       "clip": "ant-man-and-the-wasp"
@@ -818,7 +816,7 @@
       "whyHere": null,
       "trailerYouTubeId": "6ZfuNTqbHE8",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg",
       "bannerFocus": "50% 30%",
       "clip": "avengers-infinity-war"
@@ -837,7 +835,7 @@
       "whyHere": null,
       "trailerYouTubeId": "hA6hldpSTF8",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
       "bannerFocus": "50% 30%",
       "clip": "avengers-endgame"
@@ -856,7 +854,7 @@
       "whyHere": null,
       "trailerYouTubeId": "nW948Va-l10",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/363/909018.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/q3jHCb4dMfYF6ojikKuHd6LscxC.jpg",
       "bannerFocus": "50% 30%",
       "clip": "loki-t1"
@@ -875,7 +873,7 @@
       "whyHere": null,
       "trailerYouTubeId": "x9D0uUKJ5KI",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/363/909034.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/jnzoh5qoxRLFRIQAxnl6D3RStPC.jpg",
       "bannerFocus": "50% 30%",
       "clip": "what-if-t1"
@@ -894,7 +892,7 @@
       "whyHere": null,
       "trailerYouTubeId": "twHYF506-9Y",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/586/1466484.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/lxQMxqao3vs2ehxESrkQU6acU86.jpg",
       "bannerFocus": "50% 30%",
       "clip": "marvel-zombies"
@@ -913,7 +911,7 @@
       "whyHere": null,
       "trailerYouTubeId": "sj9J2ecsSpo",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/295/738028.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/cq62fLH3vwOmiaLKMqkDI86tPtH.jpg",
       "bannerFocus": "50% 30%",
       "clip": "wandavision"
@@ -932,7 +930,7 @@
       "whyHere": null,
       "trailerYouTubeId": "8YjFbMbfXaQ",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/7/74/Shang-Chi_and_the_Legend_of_the_Ten_Rings_poster.jpeg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/r7K6Xt0RX4Mw0cAbZVw5cyb1Tux.jpg",
       "bannerFocus": "50% 30%",
       "clip": "shang-chi"
@@ -951,7 +949,7 @@
       "whyHere": null,
       "trailerYouTubeId": "IWBsDaFWyTE",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/295/739854.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/aTjbqMONy77fHJrIYu14g1F0d5h.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-falcon-and-the-winter-soldier"
@@ -970,7 +968,7 @@
       "whyHere": null,
       "trailerYouTubeId": "LFoz8ZJWmPs",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/b/bd/Spider-Man_Far_From_Home_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/wqBW5ltBJu0gs26yCc8shQQV82d.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-far-from-home"
@@ -989,7 +987,7 @@
       "whyHere": null,
       "trailerYouTubeId": "x_me3xsvDgk",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/9b/Eternals_%28film%29_poster.jpeg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/c6H7Z4u73ir3cIoCteuhJh7UCAR.jpg",
       "bannerFocus": "50% 30%",
       "clip": "eternals"
@@ -1008,7 +1006,7 @@
       "whyHere": null,
       "trailerYouTubeId": "nwyO5Ue6JUQ",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/6/6c/Spider-Man_%282002_film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/zQ8AxTPiCiS5nnwXpwTBPBHSaa5.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-2002-sam-raimi"
@@ -1027,7 +1025,7 @@
       "whyHere": null,
       "trailerYouTubeId": "3jBFwltrxJw",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/4/4e/Spider-Man_2_USA_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/6al048Lat3eLVQOuKtc9h6Tu94d.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-2-2004"
@@ -1046,7 +1044,7 @@
       "whyHere": null,
       "trailerYouTubeId": "wPosLpgMtTY",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/7/7a/Spider-Man_3%2C_International_Poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/FfAU0PUs8AJkMU2VbkVNFtRXR4.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-3-2007"
@@ -1065,7 +1063,7 @@
       "whyHere": null,
       "trailerYouTubeId": "-tnxzJ0SSOw",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/e/e0/The_Amazing_Spider-Man_%28film%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/a92L1Zm4vGlXOD0f2CEsfqnNDhc.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-amazing-spider-man-2012"
@@ -1084,7 +1082,7 @@
       "whyHere": "This story does not resolve every arc on its own; the later multiverse films provide additional context.",
       "trailerYouTubeId": "nbp3Ra3Yp74",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/2/24/The_Amazing_Spider-Man_2_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/k0hlAzTryCYX1O1LyC6P8tAa8s0.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-amazing-spider-man-2-2014"
@@ -1103,7 +1101,7 @@
       "whyHere": null,
       "trailerYouTubeId": "u9Mv98Gr5pY",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/1/10/Venom_%282018_film%29_poster.png",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/VuukZLgaCrho2Ar8Scl9HtV3yD.jpg",
       "bannerFocus": "50% 30%",
       "clip": "venom-2018"
@@ -1122,7 +1120,7 @@
       "whyHere": null,
       "trailerYouTubeId": "-ezfi6FQ8Ds",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/a/a7/Venom_Let_There_Be_Carnage_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/eENEf62tMXbhyVvdcXlnQz2wcuT.jpg",
       "bannerFocus": "50% 30%",
       "clip": "venom-let-there-be-carnage-2021"
@@ -1141,7 +1139,7 @@
       "whyHere": "The earlier Spider-Man and Venom stories are placed just before this entry so the multiverse payoff carries more weight.",
       "trailerYouTubeId": "JfVOs4VSpmA",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-no-way-home"
@@ -1160,7 +1158,7 @@
       "whyHere": null,
       "trailerYouTubeId": "HyIyd9joTTc",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/a/a3/Venom_The_Last_Dance_Poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
       "bannerFocus": "50% 30%",
       "clip": "venom-the-last-dance-2024"
@@ -1179,7 +1177,7 @@
       "whyHere": "An optional companion that offers a fresh perspective on parallel realities before the next multiverse stories.",
       "trailerYouTubeId": "tg52up16eq0",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/f/fa/Spider-Man_Into_the_Spider-Verse_poster.png",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/1ntePsIqeklfmrQJqZPncCydsqY.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-into-the-spider-verse"
@@ -1198,7 +1196,7 @@
       "whyHere": null,
       "trailerYouTubeId": "shW9i6k8cB0",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/b/b4/Spider-Man-_Across_the_Spider-Verse_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
       "bannerFocus": "50% 30%",
       "clip": "spider-man-across-the-spider-verse"
@@ -1217,7 +1215,7 @@
       "whyHere": null,
       "trailerYouTubeId": "aWzlQ2N6qqg",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/1/17/Doctor_Strange_in_the_Multiverse_of_Madness_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/lv3TXqhpaIxkclIHbhN2MRMOemQ.jpg",
       "bannerFocus": "50% 30%",
       "clip": "doctor-strange-mom"
@@ -1236,7 +1234,7 @@
       "whyHere": null,
       "trailerYouTubeId": "5VYb3B1ETlk",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/383/959105.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/uHESULlKh7VSc0MRcqfyIf9Alk4.jpg",
       "bannerFocus": "50% 30%",
       "clip": "hawkeye"
@@ -1255,7 +1253,7 @@
       "whyHere": null,
       "trailerYouTubeId": "x7Krla_UxRg",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/407/1019370.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/1uegR4uAxRxiMyX4nQnpzbXhrTw.jpg",
       "bannerFocus": "50% 30%",
       "clip": "moon-knight"
@@ -1274,7 +1272,7 @@
       "whyHere": null,
       "trailerYouTubeId": "_Z3QKkl1WyM",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/3b/Black_Panther_Wakanda_Forever_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/83H0C66AcvkwpG2738VCTHMY9uv.jpg",
       "bannerFocus": "50% 30%",
       "clip": "black-panther-wakanda-forever"
@@ -1293,7 +1291,7 @@
       "whyHere": null,
       "trailerYouTubeId": "AFUKnherhuw",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/499/1247624.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/u3ySnWqSjM3jedYgJZTR7RWRDDm.jpg",
       "bannerFocus": "50% 30%",
       "clip": "echo"
@@ -1312,7 +1310,7 @@
       "whyHere": null,
       "trailerYouTubeId": "u7JsKhI2An0",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/486/1215646.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/eljErfkQUcFUgQkI4I1soZcH8MW.jpg",
       "bannerFocus": "50% 30%",
       "clip": "she-hulk-attorney-at-law"
@@ -1331,7 +1329,7 @@
       "whyHere": null,
       "trailerYouTubeId": "m9EX0f6V11Y",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/405/1013952.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/mfcLUWASJghU8MTNK38eYktfE83.jpg",
       "bannerFocus": "50% 30%",
       "clip": "ms-marvel"
@@ -1350,7 +1348,7 @@
       "whyHere": null,
       "trailerYouTubeId": "Go8nTmfrQd8",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/8/88/Thor_Love_and_Thunder_poster.jpeg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg",
       "bannerFocus": "50% 30%",
       "clip": "thor-love-and-thunder"
@@ -1369,7 +1367,7 @@
       "whyHere": null,
       "trailerYouTubeId": "WpW36ldAqnM",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/571/1428213.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/vno2LrEQr3lTOk3U1G1ihZsy64b.jpg",
       "bannerFocus": "50% 30%",
       "clip": "ironheart"
@@ -1388,7 +1386,7 @@
       "whyHere": null,
       "trailerYouTubeId": "bLEFqhS5WmI",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/06/Werewolf_by_Night_%28TV_special%29_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/l1ORpdYr8uFZ9MNYKoq1p6fIc4M.jpg",
       "bannerFocus": "50% 30%",
       "clip": "werewolf-by-night"
@@ -1407,7 +1405,7 @@
       "whyHere": null,
       "trailerYouTubeId": "OYhFFQl4fLs",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/e/e3/The_Guardians_of_the_Galaxy_Holiday_Special_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/rfnmMYuZ6EKOBvQLp2wqP21v7sI.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-guardians-of-the-galaxy-holiday-special"
@@ -1426,7 +1424,7 @@
       "whyHere": null,
       "trailerYouTubeId": "ZlNFpri-Y40",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/30/Ant-Man_and_the_Wasp_Quantumania_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/m8JTwHFwX7I7JY5fPe4SjqejWag.jpg",
       "bannerFocus": "50% 30%",
       "clip": "ant-man-and-the-wasp-quantumania"
@@ -1445,7 +1443,7 @@
       "whyHere": null,
       "trailerYouTubeId": "u3V5KDHRQvk",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/7/74/Guardians_of_the_Galaxy_Vol._3_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
       "bannerFocus": "50% 30%",
       "clip": "guardians-of-the-galaxy-vol-3"
@@ -1464,7 +1462,7 @@
       "whyHere": null,
       "trailerYouTubeId": "Tp_YZNqNBhw",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/465/1163819.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/6mOK9j99OFlxGc3ird2jWUeUha9.jpg",
       "bannerFocus": "50% 30%",
       "clip": "secret-invasion"
@@ -1483,7 +1481,7 @@
       "whyHere": null,
       "trailerYouTubeId": "wS_qbDztgVY",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/7/7a/The_Marvels_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/feSiISwgEpVzR1v3zv2n2AU4ANJ.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-marvels"
@@ -1502,7 +1500,7 @@
       "whyHere": null,
       "trailerYouTubeId": "dug56u8NN7g",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/477/1193470.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/71kjcn5PYnNz3bMOZnGyuR4RH1V.jpg",
       "bannerFocus": "50% 30%",
       "clip": "loki-t2"
@@ -1521,7 +1519,7 @@
       "whyHere": null,
       "trailerYouTubeId": "TiEVqZ2Bc_c",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/487/1217726.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/4N6zEMfZ57zNEQcM8gWeERFupMv.jpg",
       "bannerFocus": "50% 30%",
       "clip": "what-if-t2"
@@ -1540,7 +1538,7 @@
       "whyHere": null,
       "trailerYouTubeId": "O2Y3FFFIvRI",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/1/19/Blade_movie.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/7NKfxJrQn053UJeLftlx4m4NTzo.jpg",
       "bannerFocus": "50% 30%",
       "clip": "blade-1998"
@@ -1559,7 +1557,7 @@
       "whyHere": null,
       "trailerYouTubeId": "vAUB7dcUn8o",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/6/6d/Blade_II_movie.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/86b0NGY1i0bt3ckhkcHxiCSMxk1.jpg",
       "bannerFocus": "50% 30%",
       "clip": "blade-ii-2002"
@@ -1578,7 +1576,7 @@
       "whyHere": null,
       "trailerYouTubeId": "muPX9Oi7-EE",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/04/Daredevil_poster.JPG",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/e7jIX02GiSwsgkU5lMpeKjwq2Zc.jpg",
       "bannerFocus": "50% 30%",
       "clip": "daredevil-2003-ben-affleck"
@@ -1597,7 +1595,7 @@
       "whyHere": null,
       "trailerYouTubeId": "qcHEDGs7eAY",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/8/86/Blade_Trinity_poster.JPG",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/63eAFgJtN6ZTyFFzlAOoZLhlYqc.jpg",
       "bannerFocus": "50% 30%",
       "clip": "blade-trinity-2004"
@@ -1616,7 +1614,7 @@
       "whyHere": null,
       "trailerYouTubeId": "etfIjKxKzqw",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/2/21/Elektra_teaser.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/rLMQvYhl6DU6QZVNcJTbs87gVPs.jpg",
       "bannerFocus": "50% 30%",
       "clip": "elektra-2005"
@@ -1635,7 +1633,7 @@
       "whyHere": null,
       "trailerYouTubeId": "YP-UetX2qX0",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/4/4a/Fantastic_Four_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/qq9ELjoyllBUMkGisZvcj0fCd43.jpg",
       "bannerFocus": "50% 30%",
       "clip": "fantastic-four-2005"
@@ -1654,7 +1652,7 @@
       "whyHere": null,
       "trailerYouTubeId": "Wiu5eZ_7vSY",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/e/e6/Fantastic_Four_2_Poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/o2wYH40zW0JIYiYUTu6L4gsNy7E.jpg",
       "bannerFocus": "50% 30%",
       "clip": "fantastic-four-2007"
@@ -1673,7 +1671,7 @@
       "whyHere": null,
       "trailerYouTubeId": "UrbHykKUfTM",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/5/55/X-MenFirstClassMoviePoster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/yhp5Pt4GugkCs5mz63qWz5khHXe.jpg",
       "bannerFocus": "50% 30%",
       "clip": "x-men-first-class"
@@ -1692,7 +1690,7 @@
       "whyHere": null,
       "trailerYouTubeId": "kd6zYnHwQWA",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/08/X-Men_Origins_Wolverine_theatrical_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/p4GzAzjlL7lXIVGvayg7zvzGTSi.jpg",
       "bannerFocus": "50% 30%",
       "clip": "x-men-origins-wolverine"
@@ -1711,7 +1709,7 @@
       "whyHere": null,
       "trailerYouTubeId": "VNxwlx6etXI",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/8/81/X-MenfilmPoster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/3QUVzbcNyfGe3ocWkYAT8emK8Co.jpg",
       "bannerFocus": "50% 30%",
       "clip": "x-men-2000"
@@ -1730,7 +1728,7 @@
       "whyHere": null,
       "trailerYouTubeId": "KNIdceH7XOw",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/3e/X2_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/7TYITrR804tLITNur3b8VLCK6tw.jpg",
       "bannerFocus": "50% 30%",
       "clip": "x2-x-men-united"
@@ -1749,7 +1747,7 @@
       "whyHere": null,
       "trailerYouTubeId": "ZQ0v5dXbw7M",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/5/5b/X-Men_The_Last_Stand_theatrical_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/nLMXULCGLnzRxz11txPzPqbOHSz.jpg",
       "bannerFocus": "50% 30%",
       "clip": "x-men-the-last-stand"
@@ -1768,7 +1766,7 @@
       "whyHere": null,
       "trailerYouTubeId": "u1VCP3O8wG0",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/7/74/The_Wolverine_posterUS.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/bEAQfLTykGg232kJogBlxRYaRqU.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-wolverine"
@@ -1787,7 +1785,7 @@
       "whyHere": "Watching the original story first makes the consequences of this turning point more meaningful.",
       "trailerYouTubeId": "pK2zYHWDZKo",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/0c/X-Men_Days_of_Future_Past_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/fctQU5MoXgJ5pNMljFzlEFXwfSu.jpg",
       "bannerFocus": "50% 30%",
       "clip": "x-men-days-of-future-past"
@@ -1806,7 +1804,7 @@
       "whyHere": null,
       "trailerYouTubeId": "PfBVIHgQbYk",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/0/04/X-Men_-_Apocalypse.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/sTQNRqLbfCXolrb5CizAW1dj528.jpg",
       "bannerFocus": "50% 30%",
       "clip": "x-men-apocalypse"
@@ -1825,7 +1823,7 @@
       "whyHere": null,
       "trailerYouTubeId": "1-q8C_c-nlM",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/9e/Dark_Phoenix_%28film%29.png",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/j9ZV0UOagjQ4seR8Hd5N6JfwdTP.jpg",
       "bannerFocus": "50% 30%",
       "clip": "dark-phoenix"
@@ -1844,7 +1842,7 @@
       "whyHere": null,
       "trailerYouTubeId": "ONHBaC-pfsk",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/2/23/Deadpool_%282016_poster%29.png",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/rFj9IKlL75B2pXhZA60jkNWvxeW.jpg",
       "bannerFocus": "50% 30%",
       "clip": "deadpool"
@@ -1863,7 +1861,7 @@
       "whyHere": null,
       "trailerYouTubeId": "D86RtevtfrA",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/c/cf/Deadpool_2_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/3P52oz9HPQWxcwHOwxtyrVV1LKi.jpg",
       "bannerFocus": "50% 30%",
       "clip": "deadpool-2"
@@ -1882,7 +1880,7 @@
       "whyHere": null,
       "trailerYouTubeId": "W_vJhUAOFpI",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/1/1a/TheNewMutantsPoster.jpeg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/1MoeNacOltBWojkStjhT3svBTOK.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-new-mutants"
@@ -1898,10 +1896,10 @@
       "external": true,
       "alternateUniverse": false,
       "note": "",
-      "whyHere": "Placed immediately before Deadpool & Wolverine to preserve the emotional weight of the characters' journey.",
+      "whyHere": "Placed immediately before Deadpool & Wolverine so the Fox-era history of Wade and Logan is fresh when they meet.",
       "trailerYouTubeId": "Div0iP65aZo",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/3/37/Logan_2017_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/4DZxWNSAyksN6N3JkvpJ53Yq6zU.jpg",
       "bannerFocus": "50% 30%",
       "clip": "logan"
@@ -1920,7 +1918,7 @@
       "whyHere": null,
       "trailerYouTubeId": "73_1biulkYk",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/4/4c/Deadpool_%26_Wolverine_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
       "bannerFocus": "50% 30%",
       "clip": "deadpool-wolverine"
@@ -1939,7 +1937,7 @@
       "whyHere": null,
       "trailerYouTubeId": "R9pXbNz6Vbw",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/536/1340567.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/tYLXJW1sZQU09VWY1BhSVPKGIwc.jpg",
       "bannerFocus": "50% 30%",
       "clip": "agatha-all-along"
@@ -1958,7 +1956,7 @@
       "whyHere": null,
       "trailerYouTubeId": "umiKiW4En9g",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/543/1358423.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/zKwUBJ95aIBfeKnUxyvsO6rxoLg.jpg",
       "bannerFocus": "50% 30%",
       "clip": "what-if-t3"
@@ -1977,7 +1975,7 @@
       "whyHere": null,
       "trailerYouTubeId": "7xALolZzhSM",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/552/1380878.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/qrTAc0ZtQ859Qu5O8cixJzNJpQs.jpg",
       "bannerFocus": "50% 30%",
       "clip": "daredevil-born-again-t1"
@@ -1996,7 +1994,7 @@
       "whyHere": null,
       "trailerYouTubeId": "1pHDWnXmK7Y",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/a/a4/Captain_America_Brave_New_World_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/ce3prrjh9ZehEl5JinNqr4jIeaB.jpg",
       "bannerFocus": "50% 30%",
       "clip": "captain-america-brave-new-world"
@@ -2015,7 +2013,7 @@
       "whyHere": null,
       "trailerYouTubeId": "-sAOWhvheK8",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/9/90/Thunderbolts%2A_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg",
       "bannerFocus": "50% 30%",
       "clip": "thunderbolts"
@@ -2034,7 +2032,7 @@
       "whyHere": null,
       "trailerYouTubeId": "pAsmrKyMqaA",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/1/13/The_Fantastic_Four_First_Steps_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/s94NjfKkcSczZ1FembwmQZwsuwY.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-fantastic-four-first-steps"
@@ -2053,7 +2051,7 @@
       "whyHere": null,
       "trailerYouTubeId": "wHuWmjXsReU",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/613/1532943.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/ldz9THIHaV4orMsUrPT1nlQF51T.jpg",
       "bannerFocus": "50% 30%",
       "clip": "wonder-man"
@@ -2072,7 +2070,7 @@
       "whyHere": null,
       "trailerYouTubeId": "U1MqJBVn8Rk",
       "posterPath": "https://static.tvmaze.com/uploads/images/medium_portrait/611/1528800.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/m291MEBjhuRqb0nh9ojnm9gzScq.jpg",
       "bannerFocus": "50% 30%",
       "clip": "daredevil-born-again-t2"
@@ -2091,7 +2089,7 @@
       "whyHere": null,
       "trailerYouTubeId": "oSeqs_xeqv4",
       "posterPath": "https://upload.wikimedia.org/wikipedia/en/a/a0/The_Punisher_One_Last_Kill_poster.jpg",
-      "verification": "original-curation-unreviewed",
+      "verification": "original-placement-unreviewed",
       "bannerUrl": "https://image.tmdb.org/t/p/w780/qO55CD8tgVL1T4WKn6zYFFiD6lL.jpg",
       "bannerFocus": "50% 30%",
       "clip": "the-punisher-one-last-kill"

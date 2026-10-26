@@ -721,15 +721,19 @@ export default function LivingTimeline() {
           </div>
           <div className="b-thread0" aria-hidden="true" />
           <div className="b-hc">
-            <div className="b-kick">One journey · {entries.length} titles</div>
+            <div className="b-kick">
+              {entries.length} titles across the Marvel multiverse
+            </div>
             <h1 className="b-title" aria-label="VerseOrder">
               <span>Verse</span>
               <span>Order</span>
             </h1>
-            <p className="b-tag">The Ultimate Marvel Multiverse Watch Order</p>
+            <p className="b-tag">
+              A Marvel watch order that mixes chronology with storytelling
+            </p>
             <div className="b-cta">
               <a className="b-btn b-btnP" href={`#${chapters[0].slug}`}>
-                Begin the journey
+                Explore the watch order
               </a>
               {watched.size > 0 && next && (
                 <button className="b-btn" onClick={resume}>
@@ -739,7 +743,6 @@ export default function LivingTimeline() {
             </div>
           </div>
           <div className="b-scroll" aria-hidden="true">
-            <span>Scroll to travel</span>
             <i />
           </div>
         </section>
@@ -906,21 +909,8 @@ export default function LivingTimeline() {
           >
             {next ? "Go to this title" : "Back to the top"}
           </button>
-          <div className="b-footer-links">
-            <a
-              href={`${repo}/issues/new`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Suggest a correction
-            </a>
-            <a href={repo} target="_blank" rel="noopener noreferrer">
-              Source code
-            </a>
-          </div>
-          <p>{updatedLabel}</p>
-          <p>
-            Fan project made by{" "}
+          <p className="b-made">
+            Made by{" "}
             <a
               href="https://github.com/avizmarlon"
               target="_blank"
@@ -928,24 +918,40 @@ export default function LivingTimeline() {
             >
               Marlon
             </a>
-            , not affiliated with Marvel, Disney or Sony. All titles,
-            characters, cover art, and trademarks belong to their respective
-            owners.
+            , a Marvel fan, for Marvel fans.
           </p>
-          <p>
-            This product uses the{" "}
-            <a
-              href="https://www.themoviedb.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              TMDB
-            </a>{" "}
-            API but is not endorsed or certified by TMDB.
-          </p>
-          <p>
-            <a href={`${repo}/blob/main/LICENSE`}>MIT License</a>
-          </p>
+          <div className="b-legal">
+            <div className="b-footer-links">
+              <a
+                href={`${repo}/issues/new`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Think I got something wrong?
+              </a>
+              <a href={repo} target="_blank" rel="noopener noreferrer">
+                Source code
+              </a>
+              <a href={`${repo}/blob/main/LICENSE`}>MIT License</a>
+            </div>
+            <p>{updatedLabel}</p>
+            <p>
+              Not affiliated with Marvel, Disney or Sony. All titles,
+              characters, cover art and trademarks belong to their respective
+              owners.
+            </p>
+            <p>
+              This product uses the{" "}
+              <a
+                href="https://www.themoviedb.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                TMDB
+              </a>{" "}
+              API but is not endorsed or certified by TMDB.
+            </p>
+          </div>
         </footer>
       </main>
       {selection && (

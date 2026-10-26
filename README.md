@@ -1,6 +1,6 @@
 # VerseOrder
 
-The Ultimate Marvel Multiverse Watch Order.
+A Marvel Multiverse Watch Order.
 
 Want to watch all of Marvel but have no idea where to start? Same. VerseOrder is one list that puts the MCU, some older Marvel movies, series, specials and a few multiverse stories in an order that makes the story click. It's not strict in-universe chronology. It's the order where the callbacks, cameos and reveals hit hardest.
 

@@ -4,6 +4,7 @@ Run: python scripts/render_watch_order_pdf.py
 """
 from __future__ import annotations
 import json
+import re
 from pathlib import Path
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
@@ -15,6 +16,14 @@ from reportlab.lib.utils import simpleSplit
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads((ROOT / "src/data/watch-order.json").read_text(encoding="utf-8"))
 OUTPUT = ROOT / "public/verseorder-watch-order.pdf"
+
+def load_chapters() -> list[tuple[str, int]]:
+    """(name, last position) per chapter, read from src/components/timeline-data.ts."""
+    source = (ROOT / "src/components/timeline-data.ts").read_text(encoding="utf-8")
+    return [(name, int(end)) for name, end in re.findall(r'name: "([^"]+)",\s*hue: \d+,\s*end: (\d+)', source)]
+
+def chapter_of(position: int, chapters: list[tuple[str, int]]) -> str:
+    return next(name for name, end in chapters if position <= end)
 
 def register_fonts() -> tuple[str, str]:
     fonts_dir = Path("C:/Windows/Fonts")
@@ -28,7 +37,7 @@ def main() -> None:
     regular, bold = register_fonts()
     W, H = A4
     c = canvas.Canvas(str(OUTPUT), pagesize=A4, pageCompression=1)
-    c.setTitle("VerseOrder - The Ultimate Marvel Multiverse Watch Order")
+    c.setTitle("VerseOrder - A Marvel Multiverse Watch Order")
     c.setAuthor("VerseOrder")
     page = 0
     y = 0
@@ -48,7 +57,7 @@ def main() -> None:
         c.drawString(58, H - 45, "VERSEORDER")
         c.setFont(regular, 8)
         c.setFillColor(HexColor("#9C9FAE"))
-        c.drawRightString(W - 44, H - 43, "THE ULTIMATE MARVEL MULTIVERSE WATCH ORDER")
+        c.drawRightString(W - 44, H - 43, "A MARVEL MULTIVERSE WATCH ORDER")
         c.setStrokeColor(HexColor("#3A4156"))
         c.line(42, H - 59, W - 42, H - 59)
         y = H - 85
@@ -59,11 +68,11 @@ def main() -> None:
             y -= 53
             c.setFont(regular, 10)
             c.setFillColor(HexColor("#ABB0C1"))
-            c.drawString(42, y, f"One journey. {len(DATA['entries'])} entries. Narrative curation, not an absolute chronology.")
+            c.drawString(42, y, f"{len(DATA['entries'])} titles. A Marvel watch order that mixes chronology with storytelling.")
             y -= 22
             c.setFont(regular, 8.3)
             c.setFillColor(HexColor("#9BA1B0"))
-            c.drawString(42, y, "Reviewed October 17, 2026. Earlier entries remain under editorial review.")
+            c.drawString(42, y, "Updated October 17, 2026.")
             y -= 27
             c.setFillColor(HexColor("#DBB7B8"))
             c.setFont(regular, 8)
@@ -75,7 +84,7 @@ def main() -> None:
         c.line(42, 46, W - 42, 46)
         c.setFont(regular, 8)
         c.setFillColor(HexColor("#888E9F"))
-        c.drawString(42, 31, "Independent fan-curated guide · verseorder")
+        c.drawString(42, 31, "Independent fan project · verseorder.watch")
         c.drawRightString(W - 42, 31, f"PAGE {page:02d}")
 
     def ensure(space: float) -> None:
@@ -122,11 +131,13 @@ def main() -> None:
         c.line(44, y + 5, W - 44, y + 5)
 
     paint_page(first=True)
+    chapters = load_chapters()
     previous = None
     for row in DATA["entries"]:
-        if row["era"] != previous:
-            section(row["era"])
-            previous = row["era"]
+        chapter = chapter_of(row["position"], chapters)
+        if chapter != previous:
+            section(chapter)
+            previous = chapter
         entry(row)
     finish_page()
     c.save()

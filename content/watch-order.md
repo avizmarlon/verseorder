@@ -1,4 +1,4 @@
-# VerseOrder: The Ultimate Marvel Multiverse Watch Order
+# VerseOrder: A Marvel Multiverse Watch Order
 
 > The order where the story makes the most sense, not strict in-universe chronology. Updated October 17, 2026. Some of the older picks are still getting a second look.
 
@@ -12,29 +12,26 @@
 ## The list
 
 
-### Origins
+### Before the Avengers
 
 1. Eyes of Wakanda
 2. Captain America: The First Avenger
 3. Marvel One-Shot: Agent Carter [Optional]
 4. Captain Marvel
-
-### The Avengers Initiative
-
 5. Iron Man
 6. Iron Man 2
 7. The Incredible Hulk
 8. Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer [Optional]
 9. Thor
 10. Marvel One-Shot: The Consultant [Optional]
+
+### The Avengers Era
+
 11. The Avengers
 12. Marvel One-Shot: Item 47 [Optional]
 13. Thor: The Dark World
 14. Iron Man 3
 15. Marvel One-Shot: All Hail the King [Optional]
-
-### The World Expands
-
 16. Captain America: The Winter Soldier
 17. Guardians of the Galaxy
 18. Guardians of the Galaxy Vol. 2
@@ -45,7 +42,7 @@
 23. Avengers: Age of Ultron
 24. Ant-Man
 
-### Road to Infinity
+### The Road to Endgame
 
 25. Daredevil S2
 26. Luke Cage S1
@@ -68,7 +65,7 @@
 43. Avengers: Infinity War
 44. Avengers: Endgame
 
-### A Fractured Reality
+### After Endgame
 
 45. Loki S1
 46. What If...? S1 [Optional]
@@ -79,7 +76,7 @@
 51. Spider-Man: Far From Home
 52. Eternals
 
-### The Spider-Man Legacy
+### The Spider-Man Multiverse
 
 53. Spider-Man (2002, Sam Raimi) [Legacy]
 54. Spider-Man 2 (2004) [Legacy]
@@ -88,18 +85,12 @@
 57. The Amazing Spider-Man 2 (2014) [Legacy]
 58. Venom (2018) [Legacy]
 59. Venom: Let There Be Carnage (2021) [Legacy]
-
-### Converging Worlds
-
 60. Spider-Man: No Way Home
 61. Venom: The Last Dance (2024) [Legacy]
-
-### Beyond the Spider-Verse
-
 62. Spider-Man: Into the Spider-Verse [Optional · Legacy]
 63. Spider-Man: Across the Spider-Verse [Optional · Legacy]
 
-### After the Rift
+### Beyond the Avengers
 
 64. Doctor Strange in the Multiverse of Madness
 65. Hawkeye
@@ -112,9 +103,6 @@
 72. Ironheart
 73. Werewolf by Night
 74. The Guardians of the Galaxy Holiday Special
-
-### A New Era
-
 75. Ant-Man and the Wasp: Quantumania
 76. Guardians of the Galaxy Vol. 3
 77. Secret Invasion
@@ -122,7 +110,7 @@
 79. Loki S2
 80. What If...? S2 [Optional]
 
-### Legacy Heroes
+### Marvel Before the MCU
 
 81. Blade (1998) [Legacy]
 82. Blade II (2002) [Legacy]
@@ -132,7 +120,7 @@
 86. Fantastic Four (2005, Chris Evans as Johnny Storm) [Legacy]
 87. Fantastic Four: Rise of the Silver Surfer (2007) [Legacy]
 
-### The Mutant Legacy
+### X-Men, Wolverine & Deadpool
 
 88. X-Men: First Class [Legacy]
 89. X-Men Origins: Wolverine [Legacy]
@@ -148,16 +136,13 @@
 99. The New Mutants [Optional · Legacy]
 100. Logan [Legacy]
 
-### The Multiverse Collides
+### Back to the MCU
 
 101. Deadpool & Wolverine
 102. Agatha All Along
 103. What If...? S3 [Optional]
 104. Daredevil: Born Again S1
 105. Captain America: Brave New World
-
-### What Comes Next
-
 106. Thunderbolts*
 107. The Fantastic Four: First Steps [Alternate universe]
 108. Wonder Man
