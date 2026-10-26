@@ -146,7 +146,6 @@ export default function TimelineCell({
           </div>
           <h3>{entry.title}</h3>
           <div className="b-more">
-            <p>{entry.era}</p>
             <div className="b-acts">
               <button className="b-sm" onClick={onDetails}>
                 Details
@@ -226,7 +225,6 @@ export default function TimelineCell({
           {kindLabel(entry)} · {entry.optional ? "Optional" : entry.universe}
         </div>
         <h3>{entry.title}</h3>
-        <p className="b-era">{entry.era}</p>
       </div>
       <div className="b-cap" aria-hidden="true">
         <b style={{ color: colorOf(entry) }}>{kindLabel(entry)}</b>

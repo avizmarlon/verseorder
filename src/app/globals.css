@@ -845,12 +845,6 @@
   opacity: 1;
   margin-top: 10px;
 }
-.b-more p {
-  margin: 0 0 12px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #cdd1ea;
-}
 .b-acts {
   display: flex;
   gap: 8px;
@@ -1353,10 +1347,39 @@
     font-size: 16px;
   }
   .b-ch {
-    padding-top: 90px;
+    padding-top: 56px;
+  }
+  /* compact chapter intro: same pieces, about half the height of the desktop one */
+  .b-intro {
+    gap: 8px;
+    padding-bottom: 14px;
+  }
+  .b-sigil {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+  .b-sigil:before,
+  .b-sigil:after {
+    inset: -8px;
+  }
+  .b-cl {
+    font-size: 11px;
+  }
+  .b-cname {
+    font-size: 42px;
+    line-height: 0.95;
+  }
+  .b-cden {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .b-cprog {
+    font-size: 11px;
   }
   .b-rows {
-    padding: 30px 14px 10px;
+    padding: 18px 14px 10px;
   }
   .b-row {
     grid-template-columns: 46px minmax(0, 1fr);
@@ -1401,9 +1424,6 @@
     max-height: none;
     opacity: 1;
     margin-top: 8px;
-  }
-  .b-more p {
-    display: none;
   }
   .b-l .b-acts {
     justify-content: flex-start;
@@ -1868,11 +1888,6 @@ body {
 .b-cell[data-banner] .b-ct {
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
   transition: opacity 0.5s ease;
-}
-.b-cell[data-banner] .b-era {
-  margin: 8px 0 0;
-  font-size: 13px;
-  color: #e6e9fb;
 }
 .b-cell[data-banner] .b-med {
   transition:

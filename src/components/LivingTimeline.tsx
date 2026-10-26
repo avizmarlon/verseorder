@@ -350,9 +350,7 @@ export default function LivingTimeline() {
           : filter === "legacy"
             ? entry.external
             : typeOf(entry) === filter)) &&
-      `${entry.title} ${entry.universe} ${entry.era}`
-        .toLowerCase()
-        .includes(needle),
+      `${entry.title} ${entry.universe}`.toLowerCase().includes(needle),
   );
   const visibleIds = new Set(visible.map((entry) => entry.id));
   const shownChapters = new Set(visible.map((entry) => chapterOf(entry).id));
@@ -919,7 +917,6 @@ export default function LivingTimeline() {
             >
               Marlon
             </a>
-            , a Marvel fan, for Marvel fans.
           </p>
           <div className="b-legal">
             <div className="b-footer-links">

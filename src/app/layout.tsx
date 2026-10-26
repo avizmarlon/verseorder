@@ -9,19 +9,18 @@ import "@fontsource/dm-sans/400.css";
 import "@fontsource/dm-sans/500.css";
 import "@fontsource/dm-sans/700.css";
 import "./globals.css";
-import { siteUrl } from "@/site";
+import { siteDescription, siteUrl } from "@/site";
 import Analytics from "@/components/Analytics";
+import { entries } from "@/components/timeline-data";
 
 const siteTitle = "VerseOrder — A Marvel Multiverse Watch Order";
-const siteDescription =
-  "A Marvel watch order that mixes chronology with storytelling: 112 films, series and specials. An independent fan project.";
 // Rendered before every build by scripts/og/build-og-image.mjs.
 const ogImage = {
   url: new URL("og/verseorder.png", siteUrl).href,
   width: 1200,
   height: 630,
   type: "image/png",
-  alt: "VerseOrder wordmark over a glowing gold disc: A Marvel Multiverse Watch Order, an independent fan project.",
+  alt: `VerseOrder wordmark over a glowing gold disc: ${entries.length} Marvel titles, A Marvel Multiverse Watch Order.`,
 };
 
 export const metadata: Metadata = {
