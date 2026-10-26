@@ -96,7 +96,7 @@ test("nine chapters split the order where the content changes; old hashes still 
       "Blade (1998)",
       "Fantastic Four: Rise of the Silver Surfer (2007)",
     ],
-    ["X-Men, Wolverine & Deadpool", 88, "X-Men: First Class", "Logan"],
+    ["X-Men, Wolverine & Deadpool", 88, "X-Men: First Class", "Deadpool 2"],
     [
       "Back to the MCU",
       101,
@@ -713,4 +713,12 @@ test("credits scenes that spoil a later title say when to watch them", async ({
   await expect(page.getByTestId("credits-hold")).toHaveText(
     "Save the mid-credits scene for after Avengers: Infinity War (#43).",
   );
+});
+
+test("Logan comes before Deadpool 2, which leads straight into Deadpool & Wolverine", () => {
+  const at = (id: string) =>
+    collection.entries.find((entry) => entry.id === id)!.position;
+  expect(at("the-new-mutants")).toBeLessThan(at("logan"));
+  expect(at("logan")).toBeLessThan(at("deadpool-2"));
+  expect(at("deadpool-wolverine")).toBe(at("deadpool-2") + 1);
 });
