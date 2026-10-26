@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import collection from "../src/data/watch-order.json";
+import placementNotes from "../src/data/placement-notes.json";
 
 const home = async (page: import("@playwright/test").Page) => {
   await page.goto("./");
@@ -18,6 +19,8 @@ test("canonical order, English, desktop design, scroll and accessibility", async
   );
   await home(page);
   await expect(page.locator("article.b-row")).toHaveCount(112);
+  await expect(page.getByRole("heading", { name: "Why this order?" })).toBeVisible();
+  await expect(page.getByText(/not an official Marvel chronology/)).toHaveCount(1);
   expect(
     await page
       .locator("article.b-row")
@@ -229,6 +232,12 @@ test("details, keyboard focus, adjacent titles and progress survive reload", asy
   await expect(page.getByRole("dialog")).not.toContainText(
     "not an official chronology",
   );
+  await expect(page.getByRole("dialog").locator(".b-place p")).toHaveText(
+    placementNotes["eyes-of-wakanda"],
+  );
+  await expect(page.getByRole("dialog")).not.toContainText(
+    /curated|editorial|journey/i,
+  );
   await page
     .getByRole("button", { name: "Mark as watched", exact: true })
     .click();
@@ -236,6 +245,9 @@ test("details, keyboard focus, adjacent titles and progress survive reload", asy
   await expect(page.locator("#detail-name")).toHaveText(
     "Captain America: The First Avenger",
   );
+  // obvious spots carry no note, and then no empty "Why this spot?" heading
+  await expect(page.getByRole("dialog").locator(".b-place")).toHaveCount(0);
+  await expect(page.getByRole("dialog")).not.toContainText("Why this spot?");
   for (let i = 0; i < 12; i++) await page.keyboard.press("Tab");
   expect(
     await page

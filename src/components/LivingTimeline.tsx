@@ -21,6 +21,7 @@ import {
   typeOf,
   type Entry,
 } from "./timeline-data";
+import { placementOf, whyThisOrder } from "./placement";
 import Poster from "./Poster";
 import TimelineCell from "./TimelineCell";
 import { useWatchProgress } from "./watch-progress";
@@ -75,6 +76,7 @@ function TitleDialog({
   };
   const { entry, mode } = selection;
   const chapter = chapterOf(entry);
+  const placement = placementOf(entry.id);
   const video = entry.trailerYouTubeId || trailerIds[entry.id];
   useEffect(() => {
     dialog.current?.showModal();
@@ -120,28 +122,25 @@ function TitleDialog({
           )}
           <div className="b-chips">
             <span className="b-chip">{kindLabel(entry)}</span>
-            <span className="b-chip">
-              {entry.optional ? "Optional" : "Main journey"}
-            </span>
+            {entry.optional && <span className="b-chip">Optional</span>}
             <span className="b-chip">{chapter.name}</span>
             <span className="b-chip">{entry.universe}</span>
           </div>
           <h2 id="detail-name">{entry.title}</h2>
           <div>
             <div className="b-sub">
-              Order slot {String(entry.position).padStart(2, "0")} /{" "}
-              {entries.length}
+              #{String(entry.position).padStart(2, "0")} of {entries.length}
             </div>
-            <p>
-              {entry.era} ·{" "}
-              {entry.optional
-                ? "An optional detour in the curated journey."
-                : "Part of the curated viewing journey."}
-            </p>
+            {placement && (
+              <section className="b-place" aria-labelledby="detail-why">
+                <h3 id="detail-why">Why this spot?</h3>
+                <p>{placement}</p>
+              </section>
+            )}
           </div>
           {(entry.note || entry.whyHere) && (
             <details className="b-notes">
-              <summary>Show editorial notes · may contain spoilers</summary>
+              <summary>More notes · may contain spoilers</summary>
               <p>{entry.whyHere || entry.note}</p>
             </details>
           )}
@@ -236,7 +235,7 @@ function TitleDialog({
           <p className="b-trailer-note">
             {video
               ? "YouTube loads only when you choose to load the trailer. Playback uses YouTube’s controls."
-              : "A verified trailer embed is not available for this title. Search YouTube to find one."}
+              : "Couldn’t find a trailer for this one."}
           </p>
           <button
             className="b-btn"
@@ -608,6 +607,13 @@ export default function LivingTimeline() {
             <span>Scroll to travel</span>
             <i />
           </div>
+        </section>
+        <section className="b-why" aria-labelledby="why-order" hidden={filtering}>
+          <h2 id="why-order">Why this order?</h2>
+          {whyThisOrder.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+          <p className="b-sign">Marlon</p>
         </section>
         <div className="b-results" role="status" aria-live="polite">
           {filtering ? (
