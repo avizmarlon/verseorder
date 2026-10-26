@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
@@ -631,9 +632,32 @@ test("footer leads with who made it; legal and technical lines below", async ({
   await expect(
     footer.getByRole("link", { name: "Printable watch order" }),
   ).toHaveCount(0);
-  await expect(footer.getByText(/^Updated /)).toHaveText(
-    "Updated October 17, 2026",
+  // the date comes from the last commit touching the watch order (next.config.ts); a shallow
+  // checkout without that commit falls back to the build date, so only the format is checked
+  const updated = footer.getByText(/^Updated /);
+  await expect(updated).toHaveText(
+    /^Updated (January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4}$/,
   );
+  const commitDate = execFileSync(
+    "git",
+    [
+      "log",
+      "-1",
+      "--format=%cs",
+      "--",
+      "src/data",
+      "src/components/timeline-data.ts",
+    ],
+    { encoding: "utf8" },
+  ).trim();
+  if (commitDate) {
+    const [y, m, d] = commitDate.split("-").map(Number);
+    const month = new Date(Date.UTC(y, m - 1, 1)).toLocaleString("en-US", {
+      month: "long",
+      timeZone: "UTC",
+    });
+    await expect(updated).toHaveText(`Updated ${month} ${d}, ${y}`);
+  }
   await expect(footer.getByText(/^Not affiliated/)).toHaveText(
     "Not affiliated with Marvel, Disney or Sony. All titles, characters, cover art and trademarks belong to their respective owners.",
   );

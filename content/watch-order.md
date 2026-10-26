@@ -1,6 +1,6 @@
 # VerseOrder: A Marvel Multiverse Watch Order
 
-> The order where the story makes the most sense, not strict in-universe chronology. Updated October 17, 2026. Some of the older picks are still getting a second look.
+> The order where the story makes the most sense, not strict in-universe chronology. Updated October 26, 2026. Some of the older picks are still getting a second look.
 
 **What the tags mean**
 

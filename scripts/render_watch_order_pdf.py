@@ -22,6 +22,17 @@ def load_chapters() -> list[tuple[str, int]]:
     source = (ROOT / "src/components/timeline-data.ts").read_text(encoding="utf-8")
     return [(name, int(end)) for name, end in re.findall(r'name: "([^"]+)",\s*hue: \d+,\s*end: (\d+)', source)]
 
+def content_updated() -> str:
+    """Date of the last commit that changed the watch order, like the site footer."""
+    import datetime, subprocess
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", "src/data", "src/components/timeline-data.ts"],
+                             cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+        day = datetime.date.fromisoformat(out)
+    except (OSError, subprocess.CalledProcessError, ValueError):
+        day = datetime.date.today()
+    return f"{day:%B} {day.day}, {day.year}"
+
 def chapter_of(position: int, chapters: list[tuple[str, int]]) -> str:
     return next(name for name, end in chapters if position <= end)
 
@@ -72,7 +83,7 @@ def main() -> None:
             y -= 22
             c.setFont(regular, 8.3)
             c.setFillColor(HexColor("#9BA1B0"))
-            c.drawString(42, y, "Updated October 17, 2026.")
+            c.drawString(42, y, f"Updated {content_updated()}.")
             y -= 27
             c.setFillColor(HexColor("#DBB7B8"))
             c.setFont(regular, 8)
