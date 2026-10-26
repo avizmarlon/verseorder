@@ -6,6 +6,9 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
+    # A normal run takes about 2 minutes. The apt part of the Playwright install has taken 13 on a
+    # slow mirror; past 25 something is stuck, so stop instead of holding the runner for 6 hours.
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
