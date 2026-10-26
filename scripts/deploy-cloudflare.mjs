@@ -17,6 +17,13 @@ const git = (...args) => {
   }
   return result.stdout.trim();
 };
+// npm and npx are .cmd shims on Windows, which spawnSync can't start without a shell. When this
+// runs through `npm run`, npm_execpath points at npm's own CLI script, so run that with this
+// Node binary instead: no shell, so arguments such as the commit message stay intact.
+const npm = (args) =>
+  process.env.npm_execpath?.endsWith(".js")
+    ? [process.execPath, [process.env.npm_execpath, ...args]]
+    : ["npm", args];
 const run = (command, args) => {
   console.log(`\n> ${command} ${args.join(" ")}`);
   const result = spawnSync(command, args, { stdio: "inherit" });
@@ -42,7 +49,7 @@ if (dirty) {
   );
 }
 
-run("npm", ["run", "build"]);
+run(...npm(["run", "build"]));
 
 if (git("rev-parse", "HEAD") !== head) {
   console.error(
@@ -51,16 +58,20 @@ if (git("rev-parse", "HEAD") !== head) {
   process.exit(1);
 }
 
-run("node", ["scripts/prepare-cloudflare.mjs"]);
-run("npx", [
-  "--yes",
-  "wrangler@4",
-  "pages",
-  "deploy",
-  "out",
-  "--project-name=verseorder",
-  "--branch=main",
-  `--commit-hash=${head}`,
-  `--commit-message=${subject}`,
-  `--commit-dirty=${dirty}`,
-]);
+run(process.execPath, ["scripts/prepare-cloudflare.mjs"]);
+run(
+  ...npm([
+    "exec",
+    "--yes",
+    "--",
+    "wrangler@4",
+    "pages",
+    "deploy",
+    "out",
+    "--project-name=verseorder",
+    "--branch=main",
+    `--commit-hash=${head}`,
+    `--commit-message=${subject}`,
+    `--commit-dirty=${dirty}`,
+  ]),
+);

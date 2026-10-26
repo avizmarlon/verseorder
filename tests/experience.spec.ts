@@ -174,9 +174,22 @@ for (const [name, viewport] of [
     await page.setViewportSize(viewport);
     await home(page);
     const scroller = page.locator(".b-root");
-    await scroller.evaluate((el) =>
-      el.scrollTo({ top: 6000, behavior: "instant" }),
-    );
+    await scroller.evaluate((el) => {
+      el.scrollTo({ top: 6000, behavior: "instant" });
+      // Where the reader is each time they act from the full page. Playwright may scroll a little
+      // to reach the sticky controls when the page is busy, so compare against this, not 6000.
+      const w = window as unknown as { readerAt: number };
+      w.readerAt = el.scrollTop;
+      for (const type of ["click", "input"])
+        document.addEventListener(
+          type,
+          () => {
+            if (!el.classList.contains("b-filtering"))
+              w.readerAt = el.scrollTop;
+          },
+          true,
+        );
+    });
     const firstResult = () =>
       page.evaluate(() => {
         const hud = document.querySelector(".b-hudin")!.getBoundingClientRect();
@@ -212,12 +225,33 @@ for (const [name, viewport] of [
     await page.getByRole("button", { name: "Clear filters" }).click();
     await expect(page.locator("article.b-row")).toHaveCount(112);
     await expect(page.locator(".b-hero")).toBeVisible();
+    const readerAt = await page.evaluate(
+      () => (window as unknown as { readerAt: number }).readerAt,
+    );
+    expect(readerAt).toBeGreaterThan(4000);
     // Scroll anchoring may nudge it by a few px while late layout settles.
     expect(
-      Math.abs((await scroller.evaluate((el) => el.scrollTop)) - 6000),
+      Math.abs((await scroller.evaluate((el) => el.scrollTop)) - readerAt),
     ).toBeLessThan(40);
     expect(errors).toEqual([]);
   });
+
+test("the logo goes back to the top in the result view too", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await home(page);
+  const scroller = page.locator(".b-root");
+  await page.getByRole("button", { name: "Series", exact: true }).click();
+  await scroller.evaluate((el) =>
+    el.scrollTo({ top: 1500, behavior: "instant" }),
+  );
+  await page.locator(".b-brand").click();
+  await expect.poll(() => scroller.evaluate((el) => el.scrollTop)).toBe(0);
+  await expect(
+    page.getByRole("button", { name: "Series", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+});
 
 test("details, keyboard focus, adjacent titles and progress survive reload", async ({
   page,
@@ -528,8 +562,13 @@ test("progress: first-visit hint, marking, export, import and a bad file", async
   });
   await expect(menu.getByRole("status")).toContainText("Nothing changed.");
   await expect(page.locator(".b-plab")).toHaveText("2/112 watched");
+  await menu.getByRole("button", { name: "Export progress" }).focus();
   await page.keyboard.press("Escape");
   await expect(menu).toBeHidden();
+  // focus goes back to the button that opened the menu
+  await expect(
+    page.getByRole("button", { name: /watched. Progress menu/ }),
+  ).toBeFocused();
   await page.reload();
   await expect(orb).toHaveAttribute("aria-pressed", "true");
 });
@@ -618,6 +657,9 @@ test("footer leads with who made it; legal and technical lines below", async ({
   const footer = page.locator("footer.b-end");
   await footer.scrollIntoViewIfNeeded();
   await expect(footer.locator(".b-made")).toHaveText("Made by Marlon");
+  // a quiet top line, close to the 12px links below it, not heading-sized
+  await expect(footer.locator(".b-made")).toHaveCSS("font-size", "15px");
+  await expect(footer.locator(".b-made")).toHaveCSS("font-style", "italic");
   await expect(footer.locator(".b-legal")).toContainText(
     "This product uses the TMDB API but is not endorsed or certified by TMDB.",
   );

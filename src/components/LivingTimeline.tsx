@@ -275,15 +275,17 @@ export default function LivingTimeline() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuNote, setMenuNote] = useState("");
   const progressMenu = useRef<HTMLDivElement>(null);
+  const progressButton = useRef<HTMLButtonElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!menuOpen) return;
     const close = (event: Event) => {
-      if (
-        event instanceof KeyboardEvent
-          ? event.key === "Escape"
-          : !progressMenu.current?.contains(event.target as Node)
-      )
+      if (event instanceof KeyboardEvent) {
+        if (event.key !== "Escape") return;
+        // Escape hides the focused menu item, so hand focus back to the button that opened it.
+        setMenuOpen(false);
+        progressButton.current?.focus();
+      } else if (!progressMenu.current?.contains(event.target as Node))
         setMenuOpen(false);
     };
     document.addEventListener("pointerdown", close);
@@ -416,7 +418,9 @@ export default function LivingTimeline() {
     if (!nav || !chip || nav.scrollWidth <= nav.clientWidth) return;
     nav.scrollTo({
       left: chip.offsetLeft - (nav.clientWidth - chip.offsetWidth) / 2,
-      behavior: "smooth",
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
     });
   }, [active]);
   useEffect(() => {
@@ -552,6 +556,14 @@ export default function LivingTimeline() {
           : "smooth",
       });
   };
+  // The #top hero is hidden in the result view, so scroll the timeline itself to its start.
+  const toTop = () =>
+    root.current?.scrollTo({
+      top: 0,
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
   const progress = (watched.size / entries.length) * 360;
   return (
     <div className={`b-root${filtering ? " b-filtering" : ""}`} ref={root}>
@@ -598,7 +610,15 @@ export default function LivingTimeline() {
       </div>
       <header className="b-hud">
         <div className="b-hudin">
-          <a className="b-brand" href="#top">
+          <a
+            className="b-brand"
+            href="#top"
+            onClick={(event) => {
+              if (!filtering) return;
+              event.preventDefault();
+              toTop();
+            }}
+          >
             <i />
             VerseOrder
           </a>
@@ -654,6 +674,7 @@ export default function LivingTimeline() {
           </label>
           <div className="b-progress" ref={progressMenu}>
             <button
+              ref={progressButton}
               className="b-pbtn"
               aria-expanded={menuOpen}
               aria-controls="progress-menu"
@@ -906,14 +927,7 @@ export default function LivingTimeline() {
               "You’ve watched everything!"
             )}
           </h2>
-          <button
-            className="b-btn b-btnP"
-            onClick={
-              next
-                ? resume
-                : () => document.getElementById("top")?.scrollIntoView()
-            }
-          >
+          <button className="b-btn b-btnP" onClick={next ? resume : toTop}>
             {next ? "Go to this title" : "Back to the top"}
           </button>
           <p className="b-made">
