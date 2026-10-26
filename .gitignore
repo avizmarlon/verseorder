@@ -84,3 +84,6 @@ public/clips/*.webm
 
 # Python bytecode (scripts/media)
 __pycache__/
+
+# Social preview image, rendered on every build by scripts/og/build-og-image.mjs
+/public/og/

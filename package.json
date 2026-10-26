@@ -6,6 +6,7 @@
   "author": "Marlon Aviz",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/og/build-og-image.mjs",
     "build": "next build",
     "build:github-pages": "GITHUB_PAGES=true next build",
     "build:redirect": "next build && node scripts/build-redirect.mjs",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@fontsource/fraunces": "^5.3.0",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
@@ -35,6 +37,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
