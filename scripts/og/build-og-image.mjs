@@ -61,10 +61,10 @@ const scene = h(
   abs({ left: cx - 1, top: 0, width: 2, height: 150, backgroundImage: "linear-gradient(180deg, rgba(255, 197, 107, 0), #ffc56b 75%, #ffffff)", boxShadow: "0 0 24px 2px rgba(255, 180, 80, 0.8)" }),
   abs(
     { inset: 0, flexDirection: "column", alignItems: "center", justifyContent: "center" },
-    h("div", { fontSize: 17, letterSpacing: 6.5, color: "#ffc56b", fontWeight: 500, marginBottom: 14 }, `ONE JOURNEY · ${entries.length} TITLES`),
+    h("div", { fontSize: 17, letterSpacing: 6.5, color: "#ffc56b", fontWeight: 500, marginBottom: 14 }, `${entries.length} FILMS, SERIES & SPECIALS`),
     h("div", { fontFamily: "Fraunces", fontStyle: "italic", fontWeight: 300, fontSize: 138, lineHeight: 0.9, letterSpacing: -4, color: "#eef0ff", textShadow: "0 0 60px rgba(255, 190, 110, 0.45)" }, "Verse"),
     h("div", { fontFamily: "Fraunces", fontWeight: 700, fontSize: 158, lineHeight: 1, letterSpacing: -4, marginTop: -22, paddingBottom: 10, backgroundImage: "linear-gradient(180deg, #ffffff, #ffcf8a 70%, #ff9a52)", backgroundClip: "text", color: "transparent" }, "Order"),
-    h("div", { fontSize: 25, color: "#d6d9ee", marginTop: 6 }, "The Ultimate Marvel Multiverse Watch Order"),
+    h("div", { fontSize: 25, color: "#d6d9ee", marginTop: 6 }, "A Marvel Multiverse Watch Order"),
   ),
   abs({ left: 0, right: 0, bottom: 26, justifyContent: "center", fontSize: 16, letterSpacing: 2.5, color: "#7f86a8" }, "VERSEORDER.WATCH · INDEPENDENT FAN PROJECT"),
 );

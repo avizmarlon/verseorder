@@ -12,16 +12,16 @@ import "./globals.css";
 import { siteUrl } from "@/site";
 import Analytics from "@/components/Analytics";
 
-const siteTitle = "VerseOrder — The Ultimate Marvel Multiverse Watch Order";
+const siteTitle = "VerseOrder — A Marvel Multiverse Watch Order";
 const siteDescription =
-  "Explore a carefully curated narrative watch order connecting the MCU, legacy Marvel films, series and the multiverse. An independent fan project.";
+  "A watch order for 112 Marvel films, series and specials across the MCU, the legacy films and the multiverse, with progress you can track. An independent fan project.";
 // Rendered before every build by scripts/og/build-og-image.mjs.
 const ogImage = {
   url: new URL("og/verseorder.png", siteUrl).href,
   width: 1200,
   height: 630,
   type: "image/png",
-  alt: "VerseOrder wordmark over a glowing gold disc: The Ultimate Marvel Multiverse Watch Order, an independent fan project.",
+  alt: "VerseOrder wordmark over a glowing gold disc: A Marvel Multiverse Watch Order, an independent fan project.",
 };
 
 export const metadata: Metadata = {
