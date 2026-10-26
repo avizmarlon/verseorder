@@ -7,7 +7,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
-import { Search, Play, X, Check } from "lucide-react";
+import { Search, Play, X, Check, Clock } from "lucide-react";
 import {
   art,
   chapterOf,
@@ -22,6 +22,7 @@ import {
   type Entry,
 } from "./timeline-data";
 import { placementOf, whyThisOrder } from "./placement";
+import { creditsHoldOf, creditsHoldText } from "./credits";
 import Poster from "./Poster";
 import TimelineCell from "./TimelineCell";
 import {
@@ -83,6 +84,7 @@ function TitleDialog({
   const { entry, mode } = selection;
   const chapter = chapterOf(entry);
   const placement = placementOf(entry.id);
+  const hold = creditsHoldOf(entry);
   const video = entry.trailerYouTubeId || trailerIds[entry.id];
   useEffect(() => {
     dialog.current?.showModal();
@@ -137,6 +139,12 @@ function TitleDialog({
             <div className="b-sub">
               #{String(entry.position).padStart(2, "0")} of {entries.length}
             </div>
+            {hold && (
+              <p className="b-hold b-holdD" data-testid="credits-hold">
+                <Clock size={13} aria-hidden="true" />
+                {creditsHoldText(hold)}
+              </p>
+            )}
             {placement && (
               <section className="b-place" aria-labelledby="detail-why">
                 <h3 id="detail-why">Why this spot?</h3>

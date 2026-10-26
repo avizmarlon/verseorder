@@ -1,0 +1,5 @@
+{
+  "captain-marvel": { "scene": "mid", "watchAfter": "avengers-infinity-war" },
+  "black-widow": { "scene": "post", "watchAfter": "avengers-endgame" },
+  "ant-man-and-the-wasp": { "scene": "both", "watchAfter": "avengers-infinity-war" }
+}

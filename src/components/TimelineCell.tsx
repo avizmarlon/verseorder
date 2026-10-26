@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { Play } from "lucide-react";
+import { Clock, Play } from "lucide-react";
 import Poster from "./Poster";
+import { creditsHoldOf, creditsHoldShort, creditsHoldText } from "./credits";
 import {
   art,
   colorOf,
@@ -145,6 +146,7 @@ export default function TimelineCell({
             {kindLabel(entry)} · {entry.optional ? "Optional" : entry.universe}
           </div>
           <h3>{entry.title}</h3>
+          <CreditsBadge entry={entry} />
           <div className="b-more">
             <div className="b-acts">
               <button className="b-sm" onClick={onDetails}>
@@ -225,11 +227,25 @@ export default function TimelineCell({
           {kindLabel(entry)} · {entry.optional ? "Optional" : entry.universe}
         </div>
         <h3>{entry.title}</h3>
+        <CreditsBadge entry={entry} />
       </div>
       <div className="b-cap" aria-hidden="true">
         <b style={{ color: colorOf(entry) }}>{kindLabel(entry)}</b>
         {entry.title}
       </div>
+    </div>
+  );
+}
+
+/** Small card line for a credits scene to hold back; the full sentence is its accessible name. */
+function CreditsBadge({ entry }: { entry: Entry }) {
+  const hold = creditsHoldOf(entry);
+  if (!hold) return null;
+  return (
+    <div className="b-hold" title={creditsHoldText(hold)}>
+      <Clock size={11} aria-hidden="true" />
+      <span aria-hidden="true">{creditsHoldShort(hold)}</span>
+      <span className="b-sr">{creditsHoldText(hold)}</span>
     </div>
   );
 }
