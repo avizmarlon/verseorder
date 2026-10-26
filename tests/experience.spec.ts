@@ -199,9 +199,12 @@ for (const [name, viewport] of [
       // no empty chapters: every rendered chapter holds a match
       for (const section of await page.locator("section.b-ch").all())
         await expect(section.locator("article.b-row").first()).toBeAttached();
+      // the mobile bar may still be expanding (it collapsed during the scroll to 6000)
+      await expect
+        .poll(async () => (await firstResult()).gap)
+        .toBeLessThan(120);
       const { gap, bottom } = await firstResult();
       expect(gap).toBeGreaterThanOrEqual(0);
-      expect(gap).toBeLessThan(120);
       expect(bottom).toBeLessThan(viewport.height);
     }
     await page.getByRole("searchbox").fill("spider");
