@@ -617,9 +617,7 @@ test("footer leads with who made it; legal and technical lines below", async ({
   await home(page);
   const footer = page.locator("footer.b-end");
   await footer.scrollIntoViewIfNeeded();
-  await expect(footer.locator(".b-made")).toHaveText(
-    "Made by Marlon, a Marvel fan, for Marvel fans.",
-  );
+  await expect(footer.locator(".b-made")).toHaveText("Made by Marlon");
   await expect(footer.locator(".b-legal")).toContainText(
     "This product uses the TMDB API but is not endorsed or certified by TMDB.",
   );
@@ -684,4 +682,17 @@ test("footer leads with who made it; legal and technical lines below", async ({
   await expect(
     footer.getByText(/API but is not endorsed or certified by TMDB/),
   ).toBeVisible();
+});
+
+test("cards show kind, universe and title, not the sub-era label", async ({
+  page,
+}) => {
+  await home(page);
+  const avengers = collection.entries.find(
+    (entry) => entry.id === "the-avengers",
+  )!;
+  const card = page.locator(`#node-${avengers.id} .b-cell`);
+  await expect(card).toContainText(avengers.title);
+  await expect(card).not.toContainText(avengers.era);
+  await expect(page.locator(".b-cell .b-ct p")).toHaveCount(0);
 });

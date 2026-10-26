@@ -17,6 +17,17 @@ test("social preview tags point at a 1200x630 PNG", async ({ request }) => {
   expect(meta(html, "twitter:card")).toBe("summary_large_image");
   expect(meta(html, "twitter:image")).toBe(image);
 
+  // one description everywhere, and it does not repeat the title
+  const description = meta(html, "description");
+  expect(description).toBeTruthy();
+  expect(meta(html, "og:description")).toBe(description);
+  expect(meta(html, "twitter:description")).toBe(description);
+  expect(description).not.toContain("Multiverse Watch Order");
+  const jsonLd = JSON.parse(
+    html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)![1],
+  );
+  expect(jsonLd.description).toBe(description);
+
   const response = await request.get("og/verseorder.png");
   expect(response.status()).toBe(200);
   const png = await response.body();
