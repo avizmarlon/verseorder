@@ -404,6 +404,30 @@
   color: #d6d9ee;
   animation: b-in 1.2s 0.9s both;
 }
+.b-why {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 28px 24px 8px;
+  color: #d6d9ee;
+}
+.b-why h2 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mu);
+}
+.b-why p {
+  margin: 0 0 10px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.b-why .b-sign {
+  color: var(--mu);
+  font-style: italic;
+}
 .b-cta {
   display: flex;
   flex-wrap: wrap;
@@ -973,6 +997,14 @@
   text-transform: uppercase;
   color: var(--mu);
   margin-bottom: 8px;
+}
+.b-place h3 {
+  margin: 14px 0 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mu);
 }
 .b-drawer p {
   margin: 0;
