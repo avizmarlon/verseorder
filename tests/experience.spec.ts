@@ -25,7 +25,7 @@ test("canonical order, English, desktop design, scroll and accessibility", async
   ).toEqual(collection.entries.map((entry) => `node-${entry.id}`));
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(
-    page.getByRole("heading", { name: "Genesis", exact: true }),
+    page.getByRole("heading", { name: "Before the Avengers", exact: true }),
   ).toHaveCount(1);
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(2400);
@@ -34,11 +34,13 @@ test("canonical order, English, desktop design, scroll and accessibility", async
     .getByRole("link", { name: "Begin the journey", exact: true })
     .click();
   await page.locator("#node-captain-marvel").scrollIntoViewIfNeeded();
-  await expect(page.locator(".b-pip.on")).toHaveAccessibleName("Genesis");
+  await expect(page.locator(".b-pip.on")).toHaveAccessibleName(
+    "Before the Avengers",
+  );
   await expect
     .poll(() =>
       page
-        .locator("#ch1 .b-fill")
+        .locator("#before-the-avengers .b-fill")
         .evaluate((el) => el.getBoundingClientRect().height),
     )
     .toBeGreaterThan(0);
@@ -52,6 +54,69 @@ test("canonical order, English, desktop design, scroll and accessibility", async
     ).violations,
   ).toEqual([]);
   expect(errors).toEqual([]);
+});
+
+test("nine chapters split the order where the content changes; old hashes still land", async ({
+  page,
+}) => {
+  const expected = [
+    [
+      "Before the Avengers",
+      1,
+      "Eyes of Wakanda",
+      "Marvel One-Shot: The Consultant",
+    ],
+    ["The Avengers Era", 11, "The Avengers", "Ant-Man"],
+    ["The Road to Endgame", 25, "Daredevil S2", "Avengers: Endgame"],
+    ["After Endgame", 45, "Loki S1", "Eternals"],
+    [
+      "The Spider-Man Multiverse",
+      53,
+      "Spider-Man (2002, Sam Raimi)",
+      "Spider-Man: Across the Spider-Verse",
+    ],
+    [
+      "Beyond the Avengers",
+      64,
+      "Doctor Strange in the Multiverse of Madness",
+      "What If...? S2",
+    ],
+    [
+      "Marvel Before the MCU",
+      81,
+      "Blade (1998)",
+      "Fantastic Four: Rise of the Silver Surfer (2007)",
+    ],
+    ["X-Men, Wolverine & Deadpool", 88, "X-Men: First Class", "Logan"],
+    [
+      "Back to the MCU",
+      101,
+      "Deadpool & Wolverine",
+      "Spider-Man: Brand New Day",
+    ],
+  ] as const;
+  await home(page);
+  const sections = page.locator("section.b-ch");
+  await expect(sections).toHaveCount(9);
+  const titleAt = (position: number) =>
+    collection.entries.find((entry) => entry.position === position)!.title;
+  for (const [index, [name, start, first, last]] of expected.entries()) {
+    const section = sections.nth(index);
+    await expect(section.locator("h2")).toHaveText(name);
+    const end = index < 8 ? expected[index + 1][1] - 1 : 112;
+    expect([titleAt(start), titleAt(end)]).toEqual([first, last]);
+    await expect(section.locator("article.b-row")).toHaveCount(end - start + 1);
+  }
+  await page.goto("about:blank");
+  await page.goto("./#ch4");
+  await expect
+    .poll(() =>
+      page
+        .locator("#marvel-before-the-mcu")
+        .evaluate((el) => Math.abs(el.getBoundingClientRect().top) < 300),
+    )
+    .toBe(true);
+  expect(new URL(page.url()).hash).toBe("#marvel-before-the-mcu");
 });
 
 test("filters hide entries, keep order slots, search and resume clear filters", async ({
@@ -101,11 +166,15 @@ for (const [name, viewport] of [
     await page.setViewportSize(viewport);
     await home(page);
     const scroller = page.locator(".b-root");
-    await scroller.evaluate((el) => el.scrollTo({ top: 6000, behavior: "instant" }));
+    await scroller.evaluate((el) =>
+      el.scrollTo({ top: 6000, behavior: "instant" }),
+    );
     const firstResult = () =>
       page.evaluate(() => {
         const hud = document.querySelector(".b-hudin")!.getBoundingClientRect();
-        const row = document.querySelector("article.b-row")!.getBoundingClientRect();
+        const row = document
+          .querySelector("article.b-row")!
+          .getBoundingClientRect();
         return { gap: row.top - hud.bottom, bottom: row.bottom };
       });
     const cases: (() => Promise<void>)[] = [
@@ -132,7 +201,10 @@ for (const [name, viewport] of [
     await page.getByRole("button", { name: "Clear filters" }).click();
     await expect(page.locator("article.b-row")).toHaveCount(112);
     await expect(page.locator(".b-hero")).toBeVisible();
-    expect(await scroller.evaluate((el) => el.scrollTop)).toBe(6000);
+    // Scroll anchoring may nudge it by a few px while late layout settles.
+    expect(
+      Math.abs((await scroller.evaluate((el) => el.scrollTop)) - 6000),
+    ).toBeLessThan(40);
     expect(errors).toEqual([]);
   });
 

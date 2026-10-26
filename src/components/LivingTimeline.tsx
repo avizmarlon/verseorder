@@ -106,12 +106,7 @@ function TitleDialog({
       {mode === "details" ? (
         <>
           {entry.posterPath ? (
-            <Poster
-              key={entry.id}
-              entry={entry}
-              className="b-cover"
-              eager
-            />
+            <Poster key={entry.id} entry={entry} className="b-cover" eager />
           ) : (
             <div
               className="b-medal"
@@ -279,7 +274,11 @@ export default function LivingTimeline() {
       const rect = node.getBoundingClientRect();
       // centre the node on the dot's line (55% of the viewport)
       scroller.scrollTo({
-        top: scroller.scrollTop + rect.top + rect.height / 2 - scroller.clientHeight * 0.55,
+        top:
+          scroller.scrollTop +
+          rect.top +
+          rect.height / 2 -
+          scroller.clientHeight * 0.55,
         behavior: "instant",
       });
     }, 300);
@@ -303,7 +302,9 @@ export default function LivingTimeline() {
   );
   const visibleIds = new Set(visible.map((entry) => entry.id));
   const shownChapters = new Set(visible.map((entry) => chapterOf(entry).id));
-  const firstChapter = chapters.find((chapter) => shownChapters.has(chapter.id));
+  const firstChapter = chapters.find((chapter) =>
+    shownChapters.has(chapter.id),
+  );
   // Results start at the top whenever the result set changes (typing that keeps the same matches
   // does not move anything); leaving the result view restores where the reader was.
   const resultKey = filtering ? visible.map((entry) => entry.id).join() : "";
@@ -333,6 +334,16 @@ export default function LivingTimeline() {
     return () => observer.disconnect();
   }, []);
   const next = entries.find((entry) => !watched.has(entry.id));
+  useEffect(() => {
+    // Old four-chapter links (#ch1–#ch4) land on the chapter that now starts there.
+    const hash = location.hash.slice(1);
+    const chapter = chapters.find((item) =>
+      (item.legacy as readonly string[]).includes(hash),
+    );
+    if (!chapter) return;
+    history.replaceState(null, "", `#${chapter.slug}`);
+    document.getElementById(chapter.slug)?.scrollIntoView();
+  }, []);
   useEffect(() => {
     const element = root.current;
     if (!element) return;
@@ -388,11 +399,16 @@ export default function LivingTimeline() {
     let dot: number | null = null;
     const dotObserver = new IntersectionObserver(
       (records) => {
-        const line = (records[0]?.rootBounds?.top ?? 0) + (records[0]?.rootBounds?.height ?? 0) / 2;
+        const line =
+          (records[0]?.rootBounds?.top ?? 0) +
+          (records[0]?.rootBounds?.height ?? 0) / 2;
         for (const record of records) {
           if (record.isIntersecting) {
             const box = record.boundingClientRect;
-            inside.set(record.target, Math.abs(box.top + box.height / 2 - line));
+            inside.set(
+              record.target,
+              Math.abs(box.top + box.height / 2 - line),
+            );
           } else inside.delete(record.target);
         }
         let best: Element | null = null;
@@ -403,7 +419,9 @@ export default function LivingTimeline() {
             bestDistance = distance;
           }
         });
-        const pos = best ? Number((best as HTMLElement).dataset.position) : null;
+        const pos = best
+          ? Number((best as HTMLElement).dataset.position)
+          : null;
         if (pos === dot) return;
         dot = pos;
         document.documentElement.dataset.voDot = String(pos ?? 0);
@@ -411,7 +429,9 @@ export default function LivingTimeline() {
       },
       { root: element, rootMargin: "-54.6% 0px -45% 0px" },
     );
-    element.querySelectorAll(".b-row").forEach((row) => dotObserver.observe(row));
+    element
+      .querySelectorAll(".b-row")
+      .forEach((row) => dotObserver.observe(row));
     const resize = new ResizeObserver(schedule);
     resize.observe(element);
     element.addEventListener("scroll", schedule, { passive: true });
@@ -419,12 +439,10 @@ export default function LivingTimeline() {
     measure();
     document.fonts.ready.then(schedule);
     if (resumeTarget.current) {
-      document
-        .getElementById(`node-${resumeTarget.current}`)
-        ?.scrollIntoView({
-          block: "center",
-          behavior: media.matches ? "instant" : "smooth",
-        });
+      document.getElementById(`node-${resumeTarget.current}`)?.scrollIntoView({
+        block: "center",
+        behavior: media.matches ? "instant" : "smooth",
+      });
       resumeTarget.current = null;
     }
     return () => {
@@ -443,19 +461,17 @@ export default function LivingTimeline() {
       setQuery("");
       setFilter("all");
     } else
-      document
-        .getElementById(`node-${next.id}`)
-        ?.scrollIntoView({
-          block: "center",
-          behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "instant"
-            : "smooth",
-        });
+      document.getElementById(`node-${next.id}`)?.scrollIntoView({
+        block: "center",
+        behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "instant"
+          : "smooth",
+      });
   };
   const progress = (watched.size / entries.length) * 360;
   return (
     <div className={`b-root${filtering ? " b-filtering" : ""}`} ref={root}>
-      <a className="b-skip" href={`#ch${firstChapter?.id ?? 1}`}>
+      <a className="b-skip" href={`#${(firstChapter ?? chapters[0]).slug}`}>
         Skip to watch order
       </a>
       <div className="b-bgs" aria-hidden="true">
@@ -507,8 +523,9 @@ export default function LivingTimeline() {
               <a
                 key={chapter.id}
                 className={`b-pip ${active === chapter.id ? "on" : ""}`}
-                href={`#ch${chapter.id}`}
+                href={`#${chapter.slug}`}
                 aria-label={chapter.name}
+                title={chapter.name}
                 aria-current={active === chapter.id ? "location" : undefined}
                 hidden={!shownChapters.has(chapter.id)}
               >
@@ -579,7 +596,7 @@ export default function LivingTimeline() {
             </h1>
             <p className="b-tag">The Ultimate Marvel Multiverse Watch Order</p>
             <div className="b-cta">
-              <a className="b-btn b-btnP" href="#ch1">
+              <a className="b-btn b-btnP" href={`#${chapters[0].slug}`}>
                 Begin the journey
               </a>
               <button className="b-btn" onClick={resume}>
@@ -633,7 +650,7 @@ export default function LivingTimeline() {
             <section
               key={chapter.id}
               className="b-ch"
-              id={`ch${chapter.id}`}
+              id={chapter.slug}
               data-chapter={chapter.id}
               aria-labelledby={`chapter-${chapter.id}`}
               style={{ "--chapter-color": color } as CSSProperties}
