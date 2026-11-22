@@ -132,9 +132,9 @@
 95. X-Men: Apocalypse [Legacy]
 96. Dark Phoenix [Legacy]
 97. Deadpool [Legacy]
-98. Deadpool 2 [Legacy]
-99. The New Mutants [Optional · Legacy]
-100. Logan [Legacy]
+98. The New Mutants [Optional · Legacy]
+99. Logan [Legacy]
+100. Deadpool 2 [Legacy]
 
 ### Back to the MCU
 
